@@ -1,0 +1,17 @@
+{% extends 'SKITCBundle::DBAL/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+
+	<h2>
+		{% trans %}Entity Manager{% endtrans %}
+	</h2>
+
+	<a href="{{ path('itc_dbal_em', {
+		'entityManager': model.entityManager
+		}) }}">
+		{{ model.entityManager }}
+	</a>
+		
+	{{ parent() }}
+
+{% endblock %}

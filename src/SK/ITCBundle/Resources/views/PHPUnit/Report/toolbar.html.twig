@@ -1,0 +1,31 @@
+{% extends 'SKITCBundle::PHPUnit/TestSuite/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+
+	{% set groups=model.groups %}
+	{% set group=model.group %}
+	{% set suites=groups[group] %}
+	{% set suite=model.suite %}
+	{% set test=model.test %}
+
+	<h2>
+		{% trans %}Report{% endtrans %}
+	</h2>
+
+	<a href="{{ path('itc_phpunit_run', {
+		'group':group,
+		'suite':suite,
+		'test':test}) }}">
+		{% trans %}Run{% endtrans %}
+	</a>
+
+	<a href="{{ path('itc_phpunit_report', {
+		'group':group,
+		'suite':suite,
+		'test':test}) }}">
+		{% trans %}Report{% endtrans %}
+	</a>
+
+	{{ parent() }}
+
+{% endblock %}

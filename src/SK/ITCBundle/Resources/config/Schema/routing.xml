@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes
+	xmlns="http://symfony.com/schema/routing"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+	<route
+		id="itc_schema"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_toolbar"
+		path="/toolbar/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:toolbar</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_workspace"
+		path="/workspace/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:workspace</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_bundle"
+		path="/bundle/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:bundle</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_explorer"
+		path="/explorer/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:explorer</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_interchange"
+		path="/interchange/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:interchange</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_documentation"
+		path="/documentation/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:documentation</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_help"
+		path="/help/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:help</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+</routes>

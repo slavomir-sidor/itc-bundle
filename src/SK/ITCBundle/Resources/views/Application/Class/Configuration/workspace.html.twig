@@ -1,0 +1,27 @@
+{% block workspace %}
+
+	{% set bundle=model.bundle %}
+	{% set namespace=model.namespace %}
+	{% set class=model.class %}
+	{% set fileReflection=class.getDeclaringFile() %}
+	
+	<div id="itc_application_class_configuration">
+
+		<fieldset class="left">
+			<legend>{% trans %}Parametres{% endtrans %}</legend>
+		</fieldset>
+
+		<fieldset class="right">
+			<legend>{% trans %}Services{% endtrans %}</legend>
+		</fieldset>
+
+		<fieldset class="left">
+			<legend>{% trans %}Routing{% endtrans %}</legend>
+		</fieldset>
+
+		<fieldset class="right">
+			<legend>{% trans %}Security{% endtrans %}</legend>
+		</fieldset>
+
+	</div>
+{% endblock %}

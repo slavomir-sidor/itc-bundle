@@ -1,0 +1,28 @@
+{% extends 'SKITCBundle::Filesystem/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+
+	<h2>
+		{% trans %}Detail{% endtrans %}
+	</h2>
+
+	<a href="{{ path('itc_filesystem_edit', {
+			'path': model.path
+		})}}">
+		{% trans %}Save{% endtrans %}
+	</a>
+
+	<a href="{{ path('itc_filesystem_edit', {
+			'path': model.path
+		})}}">
+		{% trans %}Close{% endtrans %}
+	</a>
+
+	<a href="{{ path('itc_filesystem_delete', {
+			'path': model.path
+		})}}">
+		{% trans %}Delete{% endtrans %}
+	</a>
+
+	{{ parent() }}
+{% endblock %}

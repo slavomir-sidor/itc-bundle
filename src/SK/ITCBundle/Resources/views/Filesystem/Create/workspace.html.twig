@@ -1,0 +1,5 @@
+{% extends 'SKITCBundle::Filesystem/workspace.html.twig' %}
+
+{% block workspace %}
+	<div class="ui-layout-center">{% autoescape false %}{{ model.highlight}}{% endautoescape %}</div>
+{% endblock %}

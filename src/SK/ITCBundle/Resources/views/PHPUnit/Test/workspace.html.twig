@@ -1,0 +1,85 @@
+{% extends 'SKITCBundle::PHPUnit/workspace.html.twig' %}
+
+{% block workspace %}
+
+	{% set group=model.group %}
+	{% set suite=model.suite %}
+	{% set test=model.test %}
+	{% set testSuites=model.groups[group] %}
+	{% set testSuite=testSuites[suite] %}
+	{% set testCase=testSuite.tests[test] %}
+	
+	<div class="ui-layout-center">
+		{% block southPane %}
+		{% include "SKITCBundle::Application:Class/namespaceNameHeader.twig.html" with {
+			'namespace': testCase.getName()
+		} %}
+		{% endblock %}
+
+		{% for caseIndex,case in testCase.tests %}
+
+			<div class="ui-widget-content ui-widget-filesystem ui-widget-phpunit-case">
+
+				<h4 class="ui-widget-header">
+					<a href="{{ path('itc_phpunit_case',{
+						'group': group,
+						'suite': suite,
+						'test' : test,
+						'case' : caseIndex
+						}) }}">
+						{{ case.getName() }}
+					</a>
+				</h4>
+
+				<div class="ui-widget-content">
+
+					{% block bundleFooter %}
+						<div class="ui-buttonset">
+
+							<a
+								class="ui-widget-header"
+								title="Open {{ case.getName() }}"
+								href="{{ path('itc_phpunit_case',{
+									'group': group,
+									'suite': suite,
+									'test' : test,
+									'case' : caseIndex
+								}) }}">
+								{% trans %}Open{% endtrans %}
+							</a>
+
+							<a
+								class="ui-widget-header"
+								title="Run {{ case.getName() }}"
+								href="{{ path('itc_phpunit_run', {
+									'group': group,
+									'suite': suite,
+									'test' : test,
+									'case' : caseIndex
+								}) }}">
+								{% trans %}Run{% endtrans %}
+							</a>
+
+							<a
+								class="ui-widget-header"
+								title="Report {{ case.getName() }}"
+								href="{{ path('itc_phpunit_report', {
+									'group': group,
+									'suite': suite,
+									'test' : test,
+									'case' : caseIndex
+								}) }}">
+								{% trans %}Report{% endtrans %}
+							</a>
+
+						</div>
+					{% endblock %}
+
+				</div>
+
+			</div>
+
+		{% endfor %}
+
+	</div>
+{% endblock %}

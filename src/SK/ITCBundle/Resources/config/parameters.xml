@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container
+	xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<imports>
+		<import resource="Assetic/parameters.xml" />
+		<import resource="Application/parameters.xml" />
+		<import resource="Console/parameters.xml" />
+		<import resource="PHPUnit/parameters.xml" />
+		<import resource="Filesystem/parameters.xml" />
+		<import resource="Google/parameters.xml" />
+		<import resource="Translation/parameters.xml" />
+		<import resource="Help/parameters.xml" />
+		<import resource="ITC/parameters.xml" />
+		<import resource="Maven/parameters.xml" />
+		<import resource="Menu/parameters.xml" />
+		<import resource="PHPCR/parameters.xml" />
+		<import resource="PHPUnit/parameters.xml" />
+		<import resource="Schema/parameters.xml" />
+		<import resource="WS/parameters.xml" />
+	</imports>
+
+</container>

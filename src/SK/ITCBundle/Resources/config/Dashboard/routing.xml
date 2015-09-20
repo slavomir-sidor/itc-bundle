@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes
+	xmlns="http://symfony.com/schema/routing"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+	<route
+		id="itc_ci"
+		path="">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:index</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci_jenkins"
+		path="/jenkins">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:jenkins</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci_tomcat"
+		path="/tomcat">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:tomcat</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci_nexus"
+		path="/nexus">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:nexus</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci_sonar"
+		path="/sonar">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:sonar</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci_admin"
+		path="/admin">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:admin</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci_git"
+		path="/git">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:git</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+</routes>

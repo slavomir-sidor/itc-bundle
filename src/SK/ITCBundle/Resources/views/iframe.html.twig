@@ -1,0 +1,27 @@
+{% extends 'SKITCBundle::base.html.twig' %}
+
+{% block body %}
+	<body class="ui-layout perspectives ui-state-working">
+
+		{% block toolbar %}
+		{% include "SKITCBundle::Filesystem:toolbar.html.twig" with {'model':model} %}
+		{% endblock %}
+
+		{% block workspace %}
+		{% include "SKITCBundle::Filesystem:workspace.html.twig" with {'model':model} %}
+		{% endblock %}
+
+		{% block westPane %}
+		{% endblock %}
+
+		{% block eastPane %}
+		{% endblock %}
+
+		{% block southPane %}
+		{% endblock %}
+
+	</body>
+{% endblock %}
+
+{% block locale %}
+{% endblock %}

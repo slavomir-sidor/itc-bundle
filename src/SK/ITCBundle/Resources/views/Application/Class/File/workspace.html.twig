@@ -1,0 +1,44 @@
+{% block workspace %}
+
+	{% set bundle=model.bundle %}
+	{% set namespace=model.namespace %}
+	{% set class=model.class %}
+	{% set fileReflection=class.getDeclaringFile() %}
+	
+	<div id="itc_application_class_file">
+		<fieldset class="left">
+
+			<legend>{% trans %}Class{% endtrans %}</legend>
+
+					<div>
+						<label>{% trans %}File Path{% endtrans %}</label>
+						<input type="text" readonly="true" value="{{ fileReflection.getFileName() }}" />
+					</div>
+
+					<div>
+						<label>{% trans %}Start Line{% endtrans %}</label>
+						<input type="text" readonly="true" value="{{ fileReflection.getStartLine() }}" />
+					</div>
+					
+					<div>
+						<label>{% trans %}End Line{% endtrans %}</label>
+						{{ fileReflection.getEndLine() }}
+					</div>
+
+					<div>
+						<label>{% trans %}Classes{% endtrans %}</label>
+						{% for fileClasses in fileReflection.getClasses() %}
+						<input type="text" value="{{ fileClasses.getName() }}" />
+						{% endfor %}
+					</div>
+
+					<div>
+						<label>{% trans %}Functions{% endtrans %}</label>
+						{% for fileFunctions in fileReflection.getFunctions() %}
+						<input type="text" value="{{ fileFunctions.getName() }}" />
+						{% endfor %}
+					</div>
+
+				</fieldset>
+			</div>
+{% endblock %}

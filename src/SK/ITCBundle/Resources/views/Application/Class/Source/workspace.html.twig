@@ -1,0 +1,8 @@
+{% block workspace %}
+
+	{% set bundle=model.bundle %}
+	{% set namespace=model.namespace %}
+	{% set class=model.class %}
+	{% set fileReflection=class.getDeclaringFile() %}
+	<pre id="itc_application_class_source">{{ fileReflection.getContents() }}</pre>
+{% endblock %}

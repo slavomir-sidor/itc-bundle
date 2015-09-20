@@ -1,0 +1,49 @@
+{% block workspace %}
+
+	{% set bundle=model.bundle %}
+	{% set namespace=model.namespace %}
+	{% set class=model.class %}
+	{% set fileReflection=class.getDeclaringFile() %}
+	
+	<div id="itc_application_class_documentation">
+
+		{% set docblock=class.getDocBlock() %}
+		
+		<fieldset class="left">
+			<legend>{% trans %}Class{% endtrans %}</legend>
+			{% if docblock %}
+			<textarea>{{ docblock.getShortDescription() }}</textarea>
+			<textarea>{{ docblock.getLongDescription() }}</textarea>
+			{% endif %}
+		</fieldset>
+
+		{% set properties=class.getProperties() %}
+		<fieldset class="right">
+
+			<legend>{% trans %}Properties{% endtrans %}</legend>
+
+			{% for property in properties %}
+				<div>
+					<label>{{ property.getName() }}</label>
+					<textarea>{{ property.getDocComment() }}</textarea>
+				</div>
+			{% endfor %}
+
+		</fieldset>
+
+		{% set methods=class.getMethods() %}
+		<fieldset class="left">
+
+			<legend>{% trans %}Methods{% endtrans %}</legend>
+
+			{% for method in methods %}
+				<div>
+					<label>{{ method.getName() }}</label>
+					<textarea>{{ method.getDocComment() }}</textarea>
+				</div>
+			{% endfor %}
+
+		</fieldset>
+
+	</div>
+{% endblock %}

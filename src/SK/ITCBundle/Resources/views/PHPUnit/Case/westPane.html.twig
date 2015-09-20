@@ -1,0 +1,16 @@
+{% block westPane %}
+
+	{% set group=model.group %}
+	{% set suite=model.suite %}
+	{% set test=model.test %}
+	{% set case=model.case %}
+	{% set testSuites=model.groups[group] %}
+	{% set testSuite=testSuites[suite] %}
+	{% set testSuiteCase=testSuite.tests[test] %}
+	{% set testCase=testSuiteCase.tests[case] %}
+	
+	<div class="ui-layout-west">
+		{{ dump(testCase) }}
+	</div>
+
+{% endblock %}

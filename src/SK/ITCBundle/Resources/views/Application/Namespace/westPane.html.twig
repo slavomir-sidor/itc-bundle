@@ -1,0 +1,24 @@
+{% extends 'SKITCBundle::Application/westPane.html.twig' %}
+
+{% block westPane %}
+
+	{% set bundle=model.bundle %}
+	{% set bundles=model.bundles %}
+	{% set namespace=model.namespace %}
+
+	<div class="ui-layout-west">
+
+		<a href="{{ path('itc_application_namespace', {
+			'bundle': bundle.getName(),
+			'namespace': namespace.getName()
+			}) }}#{{ namespace.getName() }}">
+			{{ namespace.getShortName() }}
+		</a>
+
+		{% include "SKITCBundle::Application/Namespace/westPaneNamespace.html.twig" with {
+			'bundle':bundle.getBundle(),
+			'namespaces': namespace
+			} %}
+
+	</div>
+{% endblock %}

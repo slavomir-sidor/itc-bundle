@@ -1,0 +1,89 @@
+{% block toolbar %}
+
+	<div class="ui-layout-north toolbar">
+
+		{% block toolbarTitle %}{% endblock %}
+
+		{% block toolbarButtonSet %}
+
+			<div class="buttonset left">
+
+				<h1>
+					<a href="/">
+						{% trans %}Web{% endtrans %}
+					</a>
+				</h1>
+
+				<h1 class="green">
+					<a href="{{ path('itc_application') }}">
+						{% trans %}Application{% endtrans %}
+					</a>
+				</h1>
+
+				<h1 class="orange">
+					<a href="{{ path('itc_phpcr') }}">
+						{% trans %}Workspace{% endtrans %}
+					</a>
+				</h1>
+
+				<h1 class="blue">
+					<a href="{{ path('itc_saas') }}">
+						{% trans %}ITC{% endtrans %}
+					</a>
+				</h1>
+
+				<h1 class="red">
+					<a href="{{ path('itc_help') }}">
+						{% trans %}Documentation{% endtrans %}
+					</a>
+				</h1>
+
+			</div>
+		{% endblock %}
+
+		{% set route=model.request.get('_route') %}
+
+		{% block locale %}
+			<div class="_locale right">
+
+				<a href="{{ path(route, {
+					'_locale':'en_US'
+				}) }}">
+					{% trans %}English{% endtrans %}
+				</a>
+	
+				<a href="{{ path(route, {
+					'_locale':'cs_CZ'
+				}) }}">
+					{% trans %}Česky{% endtrans %}
+				</a>
+	
+				<a href="{{ path(route, {
+					'_locale':'sk_SK'
+				}) }}">
+					{% trans %}Slovensky{% endtrans %}
+				</a>
+	
+				<a href="{{ path(route, {
+					'_locale':'de_DE'
+				}) }}">
+					{% trans %}Deutch{% endtrans %}
+				</a>
+	
+				<a href="{{ path(route, {
+					'_locale':'pl_PL'
+				}) }}">
+					{% trans %}Polsky{% endtrans %}
+				</a>
+	
+				<a href="{{ path(route, {
+					'_locale':'hu_HU'
+				}) }}">
+					{% trans %}Maďarsky{% endtrans %}
+				</a>
+	
+			</div>
+		{% endblock %}
+
+	</div>
+{% endblock %}

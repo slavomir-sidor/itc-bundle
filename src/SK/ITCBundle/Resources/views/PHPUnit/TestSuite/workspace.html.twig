@@ -1,0 +1,90 @@
+{% extends 'SKITCBundle::PHPUnit/workspace.html.twig' %}
+
+{% block workspace %}
+
+	{% set group=model.group %}
+	{% set testSuites=model.groups[model.group] %}
+	{% set suite = model.suite %}
+	{% set tests=testSuites[suite] %}
+
+	<div class="ui-layout-center">
+
+		{% for testClassIndex,testClass in tests %}
+
+			<div class="ui-widget-content ui-widget-filesystem ui-widget-testsuite">
+
+				<h4 class="ui-widget-header">
+					<a href="{{ path('itc_phpunit_test',{
+						'group': group,
+						'suite': suite,
+						'test' : testClassIndex
+						}) }}"
+						title="{% trans %}Test Suite Configuration{% endtrans %} {{ testClass.getName() }}">
+						{{ testClass.getName() }}
+					</a>
+				</h4>
+
+				<div class="ui-widget-content">
+
+					{% for caseIndex,case in testClass.tests %}
+
+						<div>
+							<a href="{{ path('itc_phpunit_case', {
+								'group': group,
+								'suite': suite,
+								'test' : testClassIndex,
+								'case' : caseIndex
+								}) }}">
+								{{ case.getName() }}
+							</a>
+						</div>
+
+					{% endfor %}
+
+					{% block bundleFooter %}
+
+						<div class="ui-buttonset">
+
+							<a
+								class="ui-widget-header"
+								title="Open Test {{ testClass.getName() }}"
+								href="{{ path('itc_phpunit_test',{
+									'group': group,
+									'suite': suite,
+									'test' : testClassIndex
+								}) }}">
+								{% trans %}Open{% endtrans %}
+							</a>
+
+							<a
+								class="ui-widget-header"
+								title="Run {{ testClass.getName() }}"
+								href="{{ path('itc_phpunit_run', {
+									'group': group,
+									'suite': suite,
+									'test' : testClassIndex
+								}) }}">
+								{% trans %}Run{% endtrans %}
+							</a>
+
+							<a
+								class="ui-widget-header"
+								title="Report {{ testClass.getName() }}"
+								href="{{ path('itc_phpunit_report', {
+									'group': group,
+									'suite': suite,
+									'test' : testClassIndex
+								}) }}">
+								{% trans %}Report{% endtrans %}
+							</a>
+
+						</div>
+
+					{% endblock %}
+				</div>
+			</div>
+		{% endfor %}
+
+	</div>
+
+{% endblock %}

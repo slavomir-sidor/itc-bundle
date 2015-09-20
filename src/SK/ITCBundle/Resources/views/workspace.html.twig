@@ -1,0 +1,35 @@
+{% extends 'SKITCBundle::iframe.html.twig' %}
+
+{% block body %}
+	<body>
+		<form class="ui-layout perspectives blue ui-state-loading">
+
+		{% block toolbar %}
+		{% endblock %}
+
+		{% block workspace %}
+		{% endblock %}
+
+		{% block westPane %}
+		{% endblock %}
+
+		{% block eastPane %}
+		{% endblock %}
+
+		{% block southPane %}
+		{% endblock %}
+
+		</form>
+	</body>
+{% endblock %}
+
+{% block javaScriptHeaderCode %}
+
+	{{ parent() }}
+
+	<script type="text/javascript">
+		$(document).bind('ready', function(e) {
+			$('.perspectives').perspective_form();
+		});
+	</script>
+{% endblock %}

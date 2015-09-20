@@ -1,0 +1,31 @@
+{% extends 'SKITCBundle::Default/toolbar.html.twig' %}
+
+{% block toolbarTitle %}
+	<h2>
+		{% trans %}Workspace{% endtrans %}
+	</h2>
+{% endblock %}
+
+{% block toolbarInput %}
+	<input id="path" type="hidden" name="path" value="{{ path }}" />
+{% endblock %}
+
+{% block toolbarButtonSet %}
+
+	<a href="{{ path('itc_filesystem', {'path':pathInfo.getPath()})}}">
+		{% trans %}List{% endtrans %}
+	</a>
+
+	<a href="{{ path('itc_filesystem', {'path':pathInfo.getPath()})}}">
+		{% trans %}Reload{% endtrans %}
+	</a>
+
+	<a href="{{ path('itc_filesystem_create') }}">
+		{% trans %}Create{% endtrans %}
+	</a>
+
+	<a href="{{ path('itc_filesystem_delete') }}">
+		{% trans %}Delete{% endtrans %}
+	</a>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'SKITCBundle::PHPUnit/workspace.html.twig' %}
+
+{% block workspace %}
+
+	{% set group=model.group %}
+	{% set suite=model.suite %}
+	{% set test=model.test %}
+	{% set case=model.case %}
+	{% set testSuites=model.groups[group] %}
+	{% set testSuite=testSuites[suite] %}
+	{% set testSuiteCase=testSuite.tests[test] %}
+	{% set testCase=testSuiteCase.tests[case] %}
+	
+	<div class="ui-layout-center">
+
+		<h3>Test: {{ testSuiteCase.getName() }}</h3>
+		<h4>Case: {{ testCase.getName() }}</h4>
+
+	</div>
+{% endblock %}

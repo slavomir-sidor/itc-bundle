@@ -1,0 +1,108 @@
+{% extends 'SKITCBundle::Application/workspace.html.twig' %}
+
+{% block workspace %}
+
+	{% set finder=model.finder %}
+	{% set bundles=model.bundles %}
+	{% set bundlesPhpunit=model.bundlesPhpunit %}
+
+	<div class="ui-layout-center">
+
+		{% for iterator in finder %}
+
+			{% block configFile %}
+				<div class="ui-widget-content ui-widget-filesystem ui-widget-phpunit">
+
+					{% block configFileHeader %}
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_configuration') }}">
+						{{ iterator.relativePathname }}
+					</a>
+					{% endblock %}
+
+					{% block configFileContent %}
+						<div class="ui-widget-content"></div>
+					{% endblock %}
+
+					{% block configFileFooter %}
+					<div class="ui-widget-footer ui-buttonset">
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_phpunit_configuration') }}">
+							{% trans %}Open{% endtrans %}
+						</a>
+
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_phpunit_run') }}">
+							{% trans %}Run{% endtrans %}
+						</a>
+
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_phpunit_report') }}">
+							{% trans %}Reports{% endtrans %}
+						</a>
+
+					</div>
+					{% endblock %}
+
+				</div>
+			{% endblock %}
+
+		{% endfor %}
+
+		{% for bundleName,bundle in bundles %}
+
+			{% block bundle %}
+			{% set bundlePhpunit=bundlesPhpunit[bundleName] %}
+
+			<div class="ui-widget-content ui-widget-filesystem ui-widget-bundle">
+
+				{% block bundleHeader %}
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_group', {'bundle': bundleName}) }}">
+					{{ bundleName }}
+				</a>
+				{% endblock %}
+
+				{% block bundleContent %}
+					<div class="ui-widget-content">
+
+					</div>
+				{% endblock %}
+			
+				{% block bundleFooter %}
+				<div class="ui-widget-footer ui-buttonset">
+
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_configuration', {'bundle': bundleName}) }}">
+						{% trans %}Open{% endtrans %}
+					</a>
+
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_run', {'bundle': bundleName}) }}">
+						{% trans %}Run{% endtrans %}
+					</a>
+
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_report', {'bundle': bundleName}) }}">
+						{% trans %}Report{% endtrans %}
+					</a>
+
+				</div>
+				{% endblock %}
+			
+			</div>
+			{% endblock %}
+
+		{% endfor %}
+
+	</div>
+
+{% endblock %}

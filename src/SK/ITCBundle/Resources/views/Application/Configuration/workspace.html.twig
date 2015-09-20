@@ -1,0 +1,6 @@
+{% extends 'SKITCBundle::Application/workspace.html.twig' %}
+
+{% block workspace %}
+	{% set dom=model.dom %}
+	<pre class="ui-layout-center">{{ dom.saveXML() }}</pre>
+{% endblock %}

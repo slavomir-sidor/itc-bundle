@@ -1,0 +1,67 @@
+{% block workspace %}
+
+	{% set bundle=model.bundle %}
+	{% set namespace=model.namespace %}
+	{% set class=model.class %}
+	{% set fileReflection=class.getDeclaringFile() %}
+	
+	<div id="itc_application_class_schema">
+
+		<fieldset class="left">
+
+			<legend>{% trans %}Namespaces{% endtrans %}</legend>
+	
+			{% for namespace in fileReflection.getNamespaces() %}
+			<div>
+				<label>{{namespace}}</label>
+			</div>
+			{% endfor %}
+
+		</fieldset>
+
+		<fieldset class="right">
+
+			<legend>{% trans %}Uses{% endtrans %}</legend>
+	
+			{% for use in fileReflection.getUses() %}
+			<div>
+				{{use.use}} {% if use.as %}as {{use.as}}{% endif %}
+			</div>
+			{% endfor %}
+
+		</fieldset>
+
+		{% set properties=class.getProperties() %}
+		<fieldset class="left">
+
+			<legend>{% trans %}Properties{% endtrans %}</legend>
+	
+			{% for property in properties %}
+			<div>
+				<label>{{ property.getName() }}</label>
+			</div>
+			<div>
+				<label>Visibility</label>
+			</div>
+			<div>
+				<label>Static</label>
+			</div>
+			{% endfor %}
+
+		</fieldset>
+
+		{% set methods=class.getMethods() %}
+		<fieldset class="right">
+
+			<legend>{% trans %}Methods{% endtrans %}</legend>
+
+			{% for method in methods %}
+			<div>
+				<label>{{ method.getName() }}</label>
+			</div>
+			{% endfor %}
+
+		</fieldset>
+
+	</div>
+{% endblock %}

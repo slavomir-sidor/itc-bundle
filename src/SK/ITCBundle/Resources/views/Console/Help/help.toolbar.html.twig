@@ -1,0 +1,15 @@
+{% extends 'SKITCBundle::Default/toolbar.html.twig' %}
+
+{% block toolbarTitle %}
+	<h2>
+		{% trans %}Command Help{% endtrans %}
+	</h2>
+{% endblock %}
+
+{% block toolbarButtonSet %}
+
+	<a href="{{ path('itc_console_command', { 'command':command.getName() }) }}">
+		{% trans %}Back{% endtrans %}
+	</a>
+
+{% endblock %}

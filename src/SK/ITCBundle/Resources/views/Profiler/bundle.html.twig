@@ -1,0 +1,81 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+	{% set icon %}
+	<img
+		width="16"
+		height="28"
+		alt="SOAP"
+		src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAfCAAAAABM//tuAAAAAnRSTlMAAHaTzTgAAAACYktHRAAgkeMD+gAAAAlwSFlzAAAASAAAAEgARslrPgAAAjVJREFUOMt1UyGr6zAUPj/l+qeueTC46sHMYGKuZqbMTFQMqgqFqVBVMxh1g5qKQqgKdRWJiQqUmIqYiIhCTH/BS9q7cffedkySc76cnO98JwAvTTa4HOCtKXLjbmnaN/GuFCCYcjsiXsVZqWxHx9vFH0r7X3woB8MH2/pHSE2h+BeAhWYauiV5z4Ba/hRv6dTpSd6d2jLD6U9+xdRz6y4OotEA+TFQRhFgD0DNpx44H6kspTtmtzah0E7ijtAFyEHTERosZ4c9lPlci13OEgPlnethLXwfcESB7qin5qr1AF5BPtfXO5AZoYpDDNnJO1zQLSJ0WdT3e0mWD22xCvfmWxaHmL7IvVwhxqzKr3xbmG52EA0ueD0zwLU/pwWyMZkO/We/3JgaqhAAkgxY7VjxDJMGldVuuCvG8fj7Aqx1XcHgkpigbCp8RV40y4qeYmbDzw4q4wg10JmZ9nbuECtIo5iQYh98WKicwp0VLg3AcbUU6NKQnptLGK0cZ0+EuCTsMXRtNXLaKxadzsGXuz/4urHt4CG0EkxTne3z82k1k/JE6aB6Wy5d68jIBQ+SJImCRbdmgam2HH2tnVbMZvv0EiehvAs/j+QyhRerqbkdTihFQTo+Zs/vxnn0J0lNe4qSHMXRz7+QzyMyE9VlcLzEcbpDT2NuHGTqh2MaB5v9OkiC3VHCs/WVk7/NENqv19vNn82Lz6ZvkiGURuFu/evrBi+tzs8IhauPI4G31l6zNH/x3/8CZYlPkSLmq5UAAAAwdEVYdGNvbW1lbnQARWRpdGVkIHdpdGggTHVuYVBpYzogaHR0cDovL2x1bmFwaWMuY29tL70KMtwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTMtMTItMTBUMDU6MjI6MzItMDg6MDCePwOsAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDEzLTEyLTEwVDA1OjIyOjMyLTA4OjAw72K7EAAAAABJRU5ErkJggg==" />
+	{% if collector.getSoap|length == 0 %}
+		<span class="sf-toolbar-status sf-toolbar-status-red">0</span>
+	{% else %}
+		<span class="sf-toolbar-status sf-toolbar-status-green">
+			{{ collector.getSoap|length }}
+		</span>
+	{% endif %}
+	{% endset %}
+
+	{% set text %}
+		<div class="sf-toolbar-info-piece">
+			<b>SOAP calls:</b> <span>{{ collector.getSoap|length }}</span>
+		</div>
+	{% endset %}
+
+	{% include '@WebProfiler/Profiler/toolbar_item.html.twig' with {
+		'link': profiler_url
+	} %}
+{% endblock %}
+
+{% block menu %}
+	<span class="label">
+		<span class="icon">
+			<img
+				src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAfCAAAAABM//tuAAAAAnRSTlMAAHaTzTgAAAACYktHRAAgkeMD+gAAAAlwSFlzAAAASAAAAEgARslrPgAAAjVJREFUOMt1UyGr6zAUPj/l+qeueTC46sHMYGKuZqbMTFQMqgqFqVBVMxh1g5qKQqgKdRWJiQqUmIqYiIhCTH/BS9q7cffedkySc76cnO98JwAvTTa4HOCtKXLjbmnaN/GuFCCYcjsiXsVZqWxHx9vFH0r7X3woB8MH2/pHSE2h+BeAhWYauiV5z4Ba/hRv6dTpSd6d2jLD6U9+xdRz6y4OotEA+TFQRhFgD0DNpx44H6kspTtmtzah0E7ijtAFyEHTERosZ4c9lPlci13OEgPlnethLXwfcESB7qin5qr1AF5BPtfXO5AZoYpDDNnJO1zQLSJ0WdT3e0mWD22xCvfmWxaHmL7IvVwhxqzKr3xbmG52EA0ueD0zwLU/pwWyMZkO/We/3JgaqhAAkgxY7VjxDJMGldVuuCvG8fj7Aqx1XcHgkpigbCp8RV40y4qeYmbDzw4q4wg10JmZ9nbuECtIo5iQYh98WKicwp0VLg3AcbUU6NKQnptLGK0cZ0+EuCTsMXRtNXLaKxadzsGXuz/4urHt4CG0EkxTne3z82k1k/JE6aB6Wy5d68jIBQ+SJImCRbdmgam2HH2tnVbMZvv0EiehvAs/j+QyhRerqbkdTihFQTo+Zs/vxnn0J0lNe4qSHMXRz7+QzyMyE9VlcLzEcbpDT2NuHGTqh2MaB5v9OkiC3VHCs/WVk7/NENqv19vNn82Lz6ZvkiGURuFu/evrBi+tzs8IhauPI4G31l6zNH/x3/8CZYlPkSLmq5UAAAAwdEVYdGNvbW1lbnQARWRpdGVkIHdpdGggTHVuYVBpYzogaHR0cDovL2x1bmFwaWMuY29tL70KMtwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTMtMTItMTBUMDU6MjI6MzItMDg6MDCePwOsAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDEzLTEyLTEwVDA1OjIyOjMyLTA4OjAw72K7EAAAAABJRU5ErkJggg=="
+				alt="SOAP" />
+		</span> 
+		<strong>Bundle</strong>
+	</span>
+{% endblock %}
+
+{% block panel %}
+	{% if collector.getSoap == false %}
+		<p>
+			<em>No Bundle</em>
+		</p>
+	{% else %}
+
+	{% for soapCall in collector.getSoap %}
+<h2>Service: {{ soapCall.soapName }}</h2>
+<h3>SOAP Request</h3>
+<h3>Headers</h3>
+<p>
+<pre>{{ soapCall.requestHeaders }}</pre>
+</p>
+<br />
+<h3>Body</h3>
+{% if soapCall.soapRequest == false %}
+<p>
+	<em>No SOAP request</em>
+</p>
+{% elseif soapCall.soapRequest %}
+<pre>
+                    {{ soapCall.soapRequest }}
+                </pre>
+{% endif %}
+
+<h3>SOAP Response</h3>
+<h3>Headers</h3>
+<p>
+<pre>{{ soapCall.responseHeaders }}</pre>
+</p>
+<h3>Body</h3>
+{% if soapCall.soapResponse == false %}
+<p>
+	<em>No SOAP response</em>
+</p>
+{% elseif soapCall.soapResponse %}
+<pre>
+                    {{ soapCall.soapResponse }}
+                </pre>
+{% endif %} {% endfor %} {% endif %} {% endblock %}

@@ -1,0 +1,58 @@
+{% block workspaceNamespaces %}
+
+	{% set namespaceClassReflections=namespace.getClassReflections() %}
+	
+	{% if namespace|length > 0 or namespaceClassReflections|length > 0 %}
+	<div class="ui-widget-filesystem ui-widget-namespace">
+
+		{% block namespaceHeader %}
+			{% if namespace.getName()!='' %}
+				<a class="ui-widget-header"
+					name="{{ namespace.getName() }}"
+					href="{{ path('itc_application_namespace', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName()
+					}) }}">
+					{{ namespace.getShortName() }}
+				</a>
+			{% endif %}
+		{% endblock %}
+
+		{% block namespaceContent %}
+		<div class="ui-widget-content">
+
+			{% for workspaceNamespace in namespace %}
+				{% include "SKITCBundle::Application/Namespace/workspaceNamespace.html.twig" with {
+					'bundle':bundle,
+					'namespace': workspaceNamespace
+				} %}
+			{% endfor  %}
+
+			{% for namespaceClass in namespaceClassReflections %}
+				{% include "SKITCBundle::Application/Namespace/workspaceNamespaceClass.html.twig" with {
+					'bundle':bundle,
+					'namespace': namespace,
+					'namespaceClass': namespaceClass
+				} %}
+			{% endfor  %}
+
+			{% block namespaceButtonSet %}
+			<div class="ui-buttonset">
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_application_namespace', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName()
+					}) }}">
+					{% trans %}Open{% endtrans %}
+				</a>
+			</div>
+			{% endblock %}
+
+		</div>
+		{% endblock %}
+
+	</div>
+	{% endif %}
+
+{% endblock %}

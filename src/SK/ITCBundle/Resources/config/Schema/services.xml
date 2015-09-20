@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container
+	xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<services>
+
+		<!-- IT Cloud XSD ORM Generator -->
+		<service
+			id="sk.itcbundle.code.generator.xmlschema.orm"
+			class="%sk.itcbundle.code.generator.xmlschema.orm.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.xmlschema.form"
+			class="%sk.itcbundle.code.generator.xmlschema.form.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.xmlschema.view"
+			class="%sk.itcbundle.code.generator.xmlschema.view.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.xmlschema.config"
+			class="%sk.itcbundle.code.generator.xmlschema.config.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.xmlschema.route"
+			class="%sk.itcbundle.code.generator.xmlschema.route.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.xmlschema.security"
+			class="%sk.itcbundle.code.generator.xmlschema.security.class%" />
+
+		<!-- IT Cloud DTD Generator -->
+		<service
+			id="sk.itcbundle.code.generator.dtd.document"
+			class="%sk.itcbundle.code.generator.dtd.document.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.dtd.entity"
+			class="%sk.itcbundle.code.generator.dtd.entity.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.dtd.attribute_list"
+			class="%sk.itcbundle.code.generator.dtd.attribute_list.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.dtd.element"
+			class="%sk.itcbundle.code.generator.dtd.element.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.dtd.route"
+			class="%sk.itcbundle.code.generator.dtd.route.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.dtd.security"
+			class="%sk.itcbundle.code.generator.dtd.security.class%" />
+
+		<!-- IT Cloud DTD XMI Generator -->
+		<service
+			id="sk.itcbundle.code.generator.xmi.export"
+			class="%sk.itcbundle.code.generator.xmi.export.class%" />
+
+	</services>
+
+</container>

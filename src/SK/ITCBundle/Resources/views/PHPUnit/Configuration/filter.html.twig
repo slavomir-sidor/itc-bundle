@@ -1,0 +1,10 @@
+{% extends 'SKITCBundle::workspace.html.twig' %}
+
+{% block toolbar %}
+{% endblock %}
+
+{% block workspace %}
+	<div class="ui-layout-center">
+		{{ dump(configuration.getFilterConfiguration()) }}
+	</div>
+{% endblock %}

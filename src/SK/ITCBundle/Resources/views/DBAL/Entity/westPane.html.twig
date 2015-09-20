@@ -1,0 +1,7 @@
+{% extends 'SKITCBundle::DBAL/westPane.html.twig' %}
+
+{% block westPane %}
+	<div class="ui-layout-west">
+		{{ dump(model.doctrine.getEntityManager(model.entityManager)) }}
+	</div>
+{% endblock %}

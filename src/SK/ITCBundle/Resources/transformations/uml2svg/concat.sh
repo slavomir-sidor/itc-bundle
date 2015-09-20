@@ -1,0 +1,1 @@
+java -cp java/bin:java/lib/jdom.jar net.sourceforge.uml2svg.Concatenator xsl/Main.xsl uml2svg.xsl

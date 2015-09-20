@@ -1,0 +1,22 @@
+{% extends 'SKITCBundle::Application/Bundle/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+
+	{% set bundleReflection=model.bundle %}
+	{% set bundle=bundleReflection.getBundle() %}
+	{% set namespace=model.namespace %}
+
+	<h2>
+		{% trans %}Namespace{% endtrans %}
+	</h2>
+
+	<a href="{{ path('itc_application_bundle', {
+			'bundle':bundle.getName(),
+			'namespace':namespace.getName()
+		}) }}">
+		{{ namespace.getName() }}
+	</a>
+
+	{{ parent() }}
+
+{% endblock %}

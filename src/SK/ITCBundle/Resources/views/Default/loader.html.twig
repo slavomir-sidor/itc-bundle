@@ -1,0 +1,17 @@
+{% extends 'SKITCBundle::base.html.twig' %}
+
+{% block body %}
+	<body class="ui-layout perspectives brand">
+		<div class="ui-layout-center ui-state-loading">
+		</div>
+	</body>
+{% endblock %}
+
+{% block javaScriptHeaderCode %}
+	{% set url='/' %}
+	<script type="text/javascript">
+		$(document).bind('ready', function(e) {
+			document.location=url;
+		});
+	</script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'SKITCBundle::Filesystem/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+
+	<h2>
+		{% trans %}Help{% endtrans %}
+	</h2>
+
+	<a href="{{ path('itc_help') }}">
+		{% trans %}Application{% endtrans %}
+	</a>
+
+	<a href="{{ path('itc_help_schema') }}">
+		{% trans %}Schema{% endtrans %}
+	</a>
+
+	<a href="{{ path('itc_help_ws') }}">
+		{% trans %}WS{% endtrans %}
+	</a>
+
+	<a href="{{ path('itc_help_phpunit') }}">
+		{% trans %}Tests{% endtrans %}
+	</a>
+
+	{{ parent() }}
+
+{% endblock %}

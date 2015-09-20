@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container
+	xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+	<parameters>
+
+		<parameter key="sk.itcbundle.code.generator.xmlschema.orm.class">SK\ITCBundle\Code\Generator\XMLSchema\ORM</parameter>
+		<parameter key="sk.itcbundle.code.generator.xmlschema.form.class">SK\ITCBundle\Code\Generator\XMLSchema\Form</parameter>
+		<parameter key="sk.itcbundle.code.generator.xmlschema.view.class">SK\ITCBundle\Code\Generator\XMLSchema\View</parameter>
+		<parameter key="sk.itcbundle.code.generator.xmlschema.config.class">SK\ITCBundle\Code\Generator\XMLSchema\Config</parameter>
+		<parameter key="sk.itcbundle.code.generator.xmlschema.route.class">SK\ITCBundle\Code\Generator\XMLSchema\Route</parameter>
+		<parameter key="sk.itcbundle.code.generator.xmlschema.security.class">SK\ITCBundle\Code\Generator\XMLSchema\Security</parameter>
+
+		<parameter key="sk.itcbundle.code.generator.dtd.entity.class">SK\ITCBundle\Code\Generator\DTD\Entity</parameter>
+		<parameter key="sk.itcbundle.code.generator.dtd.attribute_list.class">SK\ITCBundle\Code\Generator\DTD\AttributeList</parameter>
+		<parameter key="sk.itcbundle.code.generator.dtd.element.class">SK\ITCBundle\Code\Generator\DTD\Element</parameter>
+		<parameter key="sk.itcbundle.code.generator.dtd.document.class">SK\ITCBundle\Code\Generator\DTD\Document</parameter>
+		<parameter key="sk.itcbundle.code.generator.dtd.route.class">SK\ITCBundle\Code\Generator\DTD\Route</parameter>
+		<parameter key="sk.itcbundle.code.generator.dtd.security.class">SK\ITCBundle\Code\Generator\DTD\Security</parameter>
+
+		<parameter key="sk.itcbundle.code.generator.xmi.export.class">SK\ITCBundle\Code\Generator\XMI\Export</parameter>
+
+	</parameters>
+
+</container>

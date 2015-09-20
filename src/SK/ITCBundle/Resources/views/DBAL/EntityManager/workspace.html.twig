@@ -1,0 +1,27 @@
+{% extends 'SKITCBundle::DBAL/workspace.html.twig' %}
+
+{% block workspace %}
+	{% set entityManager=model.doctrine.getEntityManager(model.entityManager) %}
+	{% set entities=entityManager.getConnection().getSchemaManager().listTables() %}
+
+	<div class="ui-layout-center">
+
+		{% for entity in entities %}
+		<div class="ui-widget-content ui-widget-filesystem ui-widget-entity">
+
+			{% block entityManagerHeader %}
+			<a
+				class="ui-widget-header"
+				href="{{ path('itc_dbal_entity', {
+					'entityManager': model.entityManager,
+					'entity': entity.getName()
+				}) }}">
+				{% trans %}Entity: {% endtrans %}<b>{{ entity.getName() }}</b>
+			</a>
+			{% endblock %}
+
+		</div>
+		{% endfor %}
+	</div>
+
+{% endblock %}

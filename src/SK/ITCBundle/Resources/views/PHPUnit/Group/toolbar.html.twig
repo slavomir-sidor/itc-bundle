@@ -1,0 +1,24 @@
+{% extends 'SKITCBundle::PHPUnit/Configuration/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+
+	{% set group=model.group %}
+	<h2>
+		{% trans %}Group{% endtrans %}
+	</h2>
+
+	<a href="{{ path('itc_phpunit_group', {'group':group}) }}">
+		{{ group }}
+	</a>
+
+	<a href="{{ path('itc_phpunit_run', {'group':group}) }}">
+		{% trans %}Run{% endtrans %}
+	</a>
+
+	<a href="{{ path('itc_phpunit_report', {'group':group}) }}">
+		{% trans %}Report{% endtrans %}
+	</a>
+
+	{{ parent() }}
+
+{% endblock %}

@@ -1,0 +1,526 @@
+<?xml version="1.0" ?>
+<container
+	xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<services>
+
+		<!-- PHPUnit -->
+		<service
+			id="sk.itcbundle.command.code.generator.phpunit.functional"
+			class="%sk.itcbundle.command.code.generator.phpunit.functional.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.phpunit.functional.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.phpunit.functional.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.phpunit.functional" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.phpunit.performance"
+			class="%sk.itcbundle.command.code.generator.phpunit.performance.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.phpunit.performance.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.phpunit.config.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.phpunit.performance" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.phpunit.equal"
+			class="%sk.itcbundle.command.code.generator.phpunit.equal.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.phpunit.equal.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.phpunit.equal.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.phpunit.equal" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.phpunit.config"
+			class="%sk.itcbundle.command.code.generator.phpunit.config.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.phpunit.config.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.phpunit.config.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.phpunit.config" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<!-- DTD Schema -->
+		<service
+			id="sk.itcbundle.command.code.generator.dtd.document"
+			class="%sk.itcbundle.command.code.generator.dtd.document.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.dtd.document.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.dtd.document.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.dtd.document" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.dtd.entity"
+			class="%sk.itcbundle.command.code.generator.dtd.entity.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.dtd.entity.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.dtd.entity.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.dtd.entity" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.dtd.attribute_list"
+			class="%sk.itcbundle.command.code.generator.dtd.attribute_list.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.dtd.attribute_list.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.dtd.attribute_list.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.dtd.attribute_list" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.dtd.element"
+			class="%sk.itcbundle.command.code.generator.dtd.element.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.dtd.element.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.dtd.element.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.dtd.element" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.dtd.route"
+			class="%sk.itcbundle.command.code.generator.dtd.route.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.dtd.route.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.dtd.route.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.dtd.route" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.dtd.security"
+			class="%sk.itcbundle.command.code.generator.dtd.security.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.dtd.security.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.dtd.security.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.dtd.security" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<!-- XSD Schema -->
+		<service
+			id="sk.itcbundle.command.code.generator.xmlschema.orm"
+			class="%sk.itcbundle.command.code.generator.xmlschema.orm.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.xmlschema.orm.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.xmlschema.orm.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.xmlschema.orm" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.xmlschema.form"
+			class="%sk.itcbundle.command.code.generator.xmlschema.form.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.xmlschema.form.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.xmlschema.form.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.xmlschema.form" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.xmlschema.view"
+			class="%sk.itcbundle.command.code.generator.xmlschema.view.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.xmlschema.view.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.xmlschema.view.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.xmlschema.view" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.xmlschema.config"
+			class="%sk.itcbundle.command.code.generator.xmlschema.config.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.xmlschema.config.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.xmlschema.config.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.xmlschema.config" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.xmlschema.route"
+			class="%sk.itcbundle.command.code.generator.xmlschema.route.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.xmlschema.route.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.xmlschema.route.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.xmlschema.route" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.xmlschema.security"
+			class="%sk.itcbundle.command.code.generator.xmlschema.security.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.xmlschema.security.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.xmlschema.security.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.xmlschema.security" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<!-- UML XMI Export -->
+		<service
+			id="sk.itcbundle.command.code.generator.xmi.export"
+			class="%sk.itcbundle.command.code.generator.xmi.export.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.xmi.export.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.xmi.export.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.xmi.export" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<!-- WS -->
+		<service
+			id="sk.itcbundle.command.code.generator.wsdl.bundle"
+			class="%sk.itcbundle.command.code.generator.wsdl.bundle.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.bundle.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.bundle.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.wsdl.bundle" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.wsdl.controller"
+			class="%sk.itcbundle.command.code.generator.wsdl.controller.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.controller.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.controller.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.wsdl.controller" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.wsdl.orm"
+			class="%sk.itcbundle.command.code.generator.wsdl.orm.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.orm.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.orm.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.wsdl.orm" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.wsdl.form"
+			class="%sk.itcbundle.command.code.generator.wsdl.form.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.form.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.form.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.wsdl.form" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.wsdl.client"
+			class="%sk.itcbundle.command.code.generator.wsdl.client.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.client.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.client.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.wsdl.client" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.wsdl.server"
+			class="%sk.itcbundle.command.code.generator.wsdl.server.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.server.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.server.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.wsdl.server" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.wsdl.route"
+			class="%sk.itcbundle.command.code.generator.wsdl.routing.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.routing.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.routing.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.wsdl.route" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.wsdl.service"
+			class="%sk.itcbundle.command.code.generator.wsdl.config.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.config.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.config.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.wsdl.service" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.wsdl.parameters"
+			class="%sk.itcbundle.command.code.generator.wsdl.view.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.view.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.view.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.wsdl.parameters" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.wsdl.route"
+			class="%sk.itcbundle.command.code.generator.wsdl.route.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.route.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.route.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.wsdl.route" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.wsdl.security"
+			class="%sk.itcbundle.command.code.generator.wsdl.security.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.security.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.wsdl.security.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator.wsdl.security" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<!-- Google Translator -->
+		<service
+			id="sk.itcbundle.command.google.translator"
+			class="%sk.itcbundle.command.google.translator.class%">
+
+			<argument type="string">%sk.itcbundle.command.google.translator.name%</argument>
+			<argument type="string">%sk.itcbundle.command.google.translator.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.google.translator" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.translation.translator"
+			class="%sk.itcbundle.command.translation.translator.class%">
+
+			<argument type="string">%sk.itcbundle.command.translation.translator.name%</argument>
+			<argument type="string">%sk.itcbundle.command.translation.translator.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.translation.translator" />
+
+			<tag name="console.command" />
+
+		</service>
+	</services>
+
+</container>

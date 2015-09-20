@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en-US" target-language="cs-CZ" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="94c51f19c37f96ed231f5a0ae512b2a8" resname="Bundle">
+        <source>Bundle</source>
+        <target>__Bundle</target>
+      </trans-unit>
+      <trans-unit id="01cd50b71a060624642d2784e9b48cdc" resname="Parametres">
+        <source>Parametres</source>
+        <target>__Parametres</target>
+      </trans-unit>
+      <trans-unit id="992a0f0542384f1ee5ef51b7cf4ae6c4" resname="Services">
+        <source>Services</source>
+        <target>__Services</target>
+      </trans-unit>
+      <trans-unit id="786c4135070aa1910d2f4ac8b2253235" resname="Routing">
+        <source>Routing</source>
+        <target>__Routing</target>
+      </trans-unit>
+      <trans-unit id="2fae32629d4ef4fc6341f1751b405e45" resname="Security">
+        <source>Security</source>
+        <target>__Security</target>
+      </trans-unit>
+      <trans-unit id="9bd81329febf6efe22788e03ddeaf0af" resname="Class">
+        <source>Class</source>
+        <target>__Class</target>
+      </trans-unit>
+      <trans-unit id="9fc2d28c05ed9eb1d75ba4465abf15a9" resname="Properties">
+        <source>Properties</source>
+        <target>__Properties</target>
+      </trans-unit>
+      <trans-unit id="20c51b5f4e9aeb5334c90ff072e6f928" resname="Methods">
+        <source>Methods</source>
+        <target>__Methods</target>
+      </trans-unit>
+      <trans-unit id="5da9dcd1cb9325e60a8744a544371fd3" resname="File Path">
+        <source>File Path</source>
+        <target>__File Path</target>
+      </trans-unit>
+      <trans-unit id="232be51b9f31cbb789644c9d0bc12a31" resname="Start Line">
+        <source>Start Line</source>
+        <target>__Start Line</target>
+      </trans-unit>
+      <trans-unit id="8148dcaa14667e1369d7a2719bf01b2b" resname="End Line">
+        <source>End Line</source>
+        <target>__End Line</target>
+      </trans-unit>
+      <trans-unit id="e9878b4854d29907146149f695cb1cfb" resname="Classes">
+        <source>Classes</source>
+        <target>__Classes</target>
+      </trans-unit>
+      <trans-unit id="e93acb146e114b5dfa6ce2d12dcb96e4" resname="Functions">
+        <source>Functions</source>
+        <target>__Functions</target>
+      </trans-unit>
+      <trans-unit id="13d28e8dfc702e3456e0767dff9a128a" resname="Namespaces">
+        <source>Namespaces</source>
+        <target>__Namespaces</target>
+      </trans-unit>
+      <trans-unit id="8ae2a5b447f654bd4d75d5ec3c40a4c8" resname="Uses">
+        <source>Uses</source>
+        <target>__Uses</target>
+      </trans-unit>
+      <trans-unit id="1cce456fce60d58aa4b41a5ae13fe06e" resname="Functional Cases">
+        <source>Functional Cases</source>
+        <target>__Functional Cases</target>
+      </trans-unit>
+      <trans-unit id="32b919d18cfaca89383f6000dcc9c031" resname="Generate">
+        <source>Generate</source>
+        <target>__Generate</target>
+      </trans-unit>
+      <trans-unit id="c5301693c4e792bcd5a479ef38fb8f8d" resname="Run">
+        <source>Run</source>
+        <target>__Run</target>
+      </trans-unit>
+      <trans-unit id="4b1b4dc8cf38b3c64b1d657da8f5ac8c" resname="Report">
+        <source>Report</source>
+        <target>__Report</target>
+      </trans-unit>
+      <trans-unit id="f6068daa29dbb05a7ead1e3b5a48bbee" resname="Data">
+        <source>Data</source>
+        <target>__Data</target>
+      </trans-unit>
+      <trans-unit id="2a6e71dc282c242f4143c28507697cb8" resname="Performance Cases">
+        <source>Performance Cases</source>
+        <target>__Performance Cases</target>
+      </trans-unit>
+      <trans-unit id="23ebccfd37939f400e56349eac619294" resname="PHPUnit">
+        <source>PHPUnit</source>
+        <target>__PHPUnit</target>
+      </trans-unit>
+      <trans-unit id="c3bf447eabe632720a3aa1a7ce401274" resname="Open">
+        <source>Open</source>
+        <target>__Open</target>
+      </trans-unit>
+      <trans-unit id="f0be75a4ec60ae349bffba3ad6853c80" resname="Assert Equal Cases">
+        <source>Assert Equal Cases</source>
+        <target>__Assert Equal Cases</target>
+      </trans-unit>
+      <trans-unit id="7146a60667b422e69fd050fe1df6859a" resname="Schema">
+        <source>Schema</source>
+        <target>__Schema</target>
+      </trans-unit>
+      <trans-unit id="254f642527b45bc260048e30704edb39" resname="Configuration">
+        <source>Configuration</source>
+        <target>__Configuration</target>
+      </trans-unit>
+      <trans-unit id="54df3baef130c81e6ae8432a2567320a" resname="WS">
+        <source>WS</source>
+        <target>__WS</target>
+      </trans-unit>
+      <trans-unit id="90792de52961c34118f976ebe4af3a75" resname="Tests">
+        <source>Tests</source>
+        <target>__Tests</target>
+      </trans-unit>
+      <trans-unit id="5b6cf869265c13af8566f192b4ab3d2a" resname="Documentation">
+        <source>Documentation</source>
+        <target>__Documentation</target>
+      </trans-unit>
+      <trans-unit id="f31bbdd1b3e85bccd652680e16935819" resname="Source">
+        <source>Source</source>
+        <target>__Source</target>
+      </trans-unit>
+      <trans-unit id="0b27918290ff5323bea1e3b78a9cf04e" resname="File">
+        <source>File</source>
+        <target>__File</target>
+      </trans-unit>
+      <trans-unit id="b236619824a3c87fdb7b217468424256" resname="model.bundle.getName()">
+        <source>model.bundle.getName()</source>
+        <target>__model.bundle.getName()</target>
+      </trans-unit>
+      <trans-unit id="79a2c54fce4fa88d0f7c21715436c751" resname="Namespace:">
+        <source>Namespace:</source>
+        <target>__Namespace:</target>
+      </trans-unit>
+      <trans-unit id="30a541cfe9324f647ba1045b379e92d8" resname="Implements:">
+        <source>Implements:</source>
+        <target>__Implements:</target>
+      </trans-unit>
+      <trans-unit id="c441ee50c88f6e5e3a7c69fc69dad8b8" resname="Commands">
+        <source>Commands</source>
+        <target>__Commands</target>
+      </trans-unit>
+      <trans-unit id="b3ba0fe968ce39dcfc6fe8cc0f1b02da" resname="Namespace">
+        <source>Namespace</source>
+        <target>__Namespace</target>
+      </trans-unit>
+      <trans-unit id="e498749f3c42246d50b15c81c101d988" resname="Application">
+        <source>Application</source>
+        <target>__Application</target>
+      </trans-unit>
+      <trans-unit id="64dcbcb04950d4f6ddc665d85ef419be" resname="Bundles">
+        <source>Bundles</source>
+        <target>__Bundles</target>
+      </trans-unit>
+      <trans-unit id="a2848db8cf708fbafa2ab45da8ec004b" resname="Continuos Integration">
+        <source>Continuos Integration</source>
+        <target>__Continuos Integration</target>
+      </trans-unit>
+      <trans-unit id="2e54334c0a5ce2e3e5a5845df3ab3ada" resname="Jenkins">
+        <source>Jenkins</source>
+        <target>__Jenkins</target>
+      </trans-unit>
+      <trans-unit id="8c692721fdfc559bf4689567aa48fb47" resname="Nexus">
+        <source>Nexus</source>
+        <target>__Nexus</target>
+      </trans-unit>
+      <trans-unit id="0ca3d6fbf046a5a156b850809755083c" resname="Sonar">
+        <source>Sonar</source>
+        <target>__Sonar</target>
+      </trans-unit>
+      <trans-unit id="e3afed0047b08059d0fada10f400c1e5" resname="Admin">
+        <source>Admin</source>
+        <target>__Admin</target>
+      </trans-unit>
+      <trans-unit id="0bcc70105ad279503e31fe7b3f47b665" resname="Git">
+        <source>Git</source>
+        <target>__Git</target>
+      </trans-unit>
+      <trans-unit id="8f72e28063c30c7468fb6af4653f4f9c" resname="Tomcat">
+        <source>Tomcat</source>
+        <target>__Tomcat</target>
+      </trans-unit>
+      <trans-unit id="ee97be03cb04119af45014d815621ce1" resname="Command">
+        <source>Command</source>
+        <target>__Command</target>
+      </trans-unit>
+      <trans-unit id="6a26f548831e6a8c26bfbbd9f6ec61e0" resname="Help">
+        <source>Help</source>
+        <target>__Help</target>
+      </trans-unit>
+      <trans-unit id="d63f4e6cdc84eeb1009234d0b415f22f" resname="Command Help">
+        <source>Command Help</source>
+        <target>__Command Help</target>
+      </trans-unit>
+      <trans-unit id="0557fa923dcee4d0f86b1409f5c2167f" resname="Back">
+        <source>Back</source>
+        <target>__Back</target>
+      </trans-unit>
+      <trans-unit id="85b2a723a857bed70a06ce2015a39b75" resname="Run Again">
+        <source>Run Again</source>
+        <target>__Run Again</target>
+      </trans-unit>
+      <trans-unit id="bccaa4aa80831b76c11240a16447975f" resname="Console">
+        <source>Console</source>
+        <target>__Console</target>
+      </trans-unit>
+      <trans-unit id="c2cc7082a89c1ad6631a2f66af5f00c0" resname="Connection">
+        <source>Connection</source>
+        <target>__Connection</target>
+      </trans-unit>
+      <trans-unit id="291b4074ebe8f14b08f126d23f041377" resname="Entity Manager">
+        <source>Entity Manager</source>
+        <target>__Entity Manager</target>
+      </trans-unit>
+      <trans-unit id="58e5f5c34a9ee652fc603ccefb1fceec" resname="Entity:">
+        <source>Entity:</source>
+        <target>__Entity:</target>
+      </trans-unit>
+      <trans-unit id="1a434befae3f49ae09347ded52032f6f" resname="Entity">
+        <source>Entity</source>
+        <target>__Entity</target>
+      </trans-unit>
+      <trans-unit id="9fca7fa5e9732b0fea5844126f015c14" resname="Doctrine">
+        <source>Doctrine</source>
+        <target>__Doctrine</target>
+      </trans-unit>
+      <trans-unit id="a3ef54e9542994fdf2081d28318f6906" resname="Connection:">
+        <source>Connection:</source>
+        <target>__Connection:</target>
+      </trans-unit>
+      <trans-unit id="3225a10b07f1580f10dee4abc3779e6c" resname="Parameters">
+        <source>Parameters</source>
+        <target>__Parameters</target>
+      </trans-unit>
+      <trans-unit id="49ee3087348e8d44e1feda1917443987" resname="Name">
+        <source>Name</source>
+        <target>__Name</target>
+      </trans-unit>
+      <trans-unit id="689202409e48743b914713f96d93947c" resname="Value">
+        <source>Value</source>
+        <target>__Value</target>
+      </trans-unit>
+      <trans-unit id="48cf24486d9a8e65a142b25682f19949" resname="Driver">
+        <source>Driver</source>
+        <target>__Driver</target>
+      </trans-unit>
+      <trans-unit id="e307db07b3975fef922a80d07455ee5e" resname="Database">
+        <source>Database</source>
+        <target>__Database</target>
+      </trans-unit>
+      <trans-unit id="c2ca16d048ec66e04bca283eab048ec2" resname="Host">
+        <source>Host</source>
+        <target>__Host</target>
+      </trans-unit>
+      <trans-unit id="60aaf44d4b562252c04db7f98497e9aa" resname="Port">
+        <source>Port</source>
+        <target>__Port</target>
+      </trans-unit>
+      <trans-unit id="8f9bfe9d1345237cb3b2b205864da075" resname="User">
+        <source>User</source>
+        <target>__User</target>
+      </trans-unit>
+      <trans-unit id="dc647eb65e6711e155375218212b3964" resname="Password">
+        <source>Password</source>
+        <target>__Password</target>
+      </trans-unit>
+      <trans-unit id="f594c0052b0886932fe51eedb83fb2c3" resname="Charset">
+        <source>Charset</source>
+        <target>__Charset</target>
+      </trans-unit>
+      <trans-unit id="8b8a92c27c103f10168d764dd799dd9c" resname="ORM">
+        <source>ORM</source>
+        <target>__ORM</target>
+      </trans-unit>
+      <trans-unit id="f9bff35d95b9f72102945e5c3cdf572e" resname="Entity Manager:">
+        <source>Entity Manager:</source>
+        <target>__Entity Manager:</target>
+      </trans-unit>
+      <trans-unit id="c6e190b284633c48e39e55049da3cce8" resname="Web">
+        <source>Web</source>
+        <target>__Web</target>
+      </trans-unit>
+      <trans-unit id="ac52cf637478f3656a1fdee5c02324fd" resname="Filesystem">
+        <source>Filesystem</source>
+        <target>__Filesystem</target>
+      </trans-unit>
+      <trans-unit id="669fc85d3b45674366e8ea5ce6dc5602" resname="DBAL">
+        <source>DBAL</source>
+        <target>__DBAL</target>
+      </trans-unit>
+      <trans-unit id="3ba0f40775d6d6ace27ef929f5be3cdf" resname="CI">
+        <source>CI</source>
+        <target>__CI</target>
+      </trans-unit>
+      <trans-unit id="a254c25adc7d10d7e9c4889484f875a5" resname="Detail">
+        <source>Detail</source>
+        <target>__Detail</target>
+      </trans-unit>
+      <trans-unit id="f2a6c498fb90ee345d997f888fce3b18" resname="Delete">
+        <source>Delete</source>
+        <target>__Delete</target>
+      </trans-unit>
+      <trans-unit id="c9cc8cce247e49bae79f15173ce97354" resname="Save">
+        <source>Save</source>
+        <target>__Save</target>
+      </trans-unit>
+      <trans-unit id="d3d2e617335f08df83599665eef8a418" resname="Close">
+        <source>Close</source>
+        <target>__Close</target>
+      </trans-unit>
+      <trans-unit id="ac70412e939d72a9234cdebb1af5867b" resname="Path">
+        <source>Path</source>
+        <target>__Path</target>
+      </trans-unit>
+      <trans-unit id="8cf04a9734132302f96da8e113e80ce5" resname="Home">
+        <source>Home</source>
+        <target>__Home</target>
+      </trans-unit>
+      <trans-unit id="6bc362dbf494c61ea117fe3c71ca48a5" resname="Move">
+        <source>Move</source>
+        <target>__Move</target>
+      </trans-unit>
+      <trans-unit id="fbaedde498cdead4f2780217646e9ba1" resname="UP">
+        <source>UP</source>
+        <target>__UP</target>
+      </trans-unit>
+      <trans-unit id="686e697538050e4664636337cc3b834f" resname="Create">
+        <source>Create</source>
+        <target>__Create</target>
+      </trans-unit>
+      <trans-unit id="b9987a246a537f4fe86f1f2e3d10dbdb" resname="Display">
+        <source>Display</source>
+        <target>__Display</target>
+      </trans-unit>
+      <trans-unit id="5174d1309f275ba6f275db3af9eb3e18" resname="Grid">
+        <source>Grid</source>
+        <target>__Grid</target>
+      </trans-unit>
+      <trans-unit id="51c45b795d5d18a3e4e0c37e8b20a141" resname="Table">
+        <source>Table</source>
+        <target>__Table</target>
+      </trans-unit>
+      <trans-unit id="a16ca09ec61a8c5574467a7a316b4c6d" resname="PHP Unit">
+        <source>PHP Unit</source>
+        <target>__PHP Unit</target>
+      </trans-unit>
+      <trans-unit id="03a21915504df93cf5dba0636080f62e" resname="Workspace">
+        <source>Workspace</source>
+        <target>__Workspace</target>
+      </trans-unit>
+      <trans-unit id="4ee29ca12c7d126654bd0e5275de6135" resname="List">
+        <source>List</source>
+        <target>__List</target>
+      </trans-unit>
+      <trans-unit id="4d1c8263ba1036754f8db14a98f9f006" resname="Reload">
+        <source>Reload</source>
+        <target>__Reload</target>
+      </trans-unit>
+      <trans-unit id="4aa2af32e8a29547952a85e26aa359ca" resname="Test Case">
+        <source>Test Case</source>
+        <target>__Test Case</target>
+      </trans-unit>
+      <trans-unit id="834d1ee2d3512afcbffbe483e791d6c7" resname="Run All">
+        <source>Run All</source>
+        <target>__Run All</target>
+      </trans-unit>
+      <trans-unit id="c91c7b93c28cd18741b71f727ee81ee3" resname="Reports">
+        <source>Reports</source>
+        <target>__Reports</target>
+      </trans-unit>
+      <trans-unit id="9926427a787bbc7cae19912f2e991a86" resname="Test Suite Configuration">
+        <source>Test Suite Configuration</source>
+        <target>__Test Suite Configuration</target>
+      </trans-unit>
+      <trans-unit id="03937134cedab9078be39a77ee3a48a0" resname="Group">
+        <source>Group</source>
+        <target>__Group</target>
+      </trans-unit>
+      <trans-unit id="58a5432988929811613f047eae8fa329" resname="Test Suite">
+        <source>Test Suite</source>
+        <target>__Test Suite</target>
+      </trans-unit>
+      <trans-unit id="9115c10980645c41313f244ac1a377f7" resname="Maven">
+        <source>Maven</source>
+        <target>__Maven</target>
+      </trans-unit>
+      <trans-unit id="94fbbf67e0c8cea8cbaff55287746f3e" resname="Explorer">
+        <source>Explorer</source>
+        <target>__Explorer</target>
+      </trans-unit>
+      <trans-unit id="5af6b1d368631b62ca4007c7c46efafa" resname="Interchange">
+        <source>Interchange</source>
+        <target>__Interchange</target>
+      </trans-unit>
+      <trans-unit id="e7f674ee60f6ab14c35f6ceb5f62ac00" resname="WSDL">
+        <source>WSDL</source>
+        <target>__WSDL</target>
+      </trans-unit>
+      <trans-unit id="4de91f0fcb9cd3a20b6b1d64610a0a3d" resname="SOAP">
+        <source>SOAP</source>
+        <target>__SOAP</target>
+      </trans-unit>
+      <trans-unit id="50780f47f6839d47d60bc4555ee00c3f" resname="REST">
+        <source>REST</source>
+        <target>__REST</target>
+      </trans-unit>
+      <trans-unit id="0ecd11c1d7a287401d148a23bbd7a2f8" resname="JSON">
+        <source>JSON</source>
+        <target>__JSON</target>
+      </trans-unit>
+      <trans-unit id="e5fd4dd75037fb8296de0fa7857fb208" resname="Application ITC">
+        <source>Application ITC</source>
+        <target>__Application ITC</target>
+      </trans-unit>
+      <trans-unit id="b4f1594c3b535a37e89e184f02d1165c" resname="ITC">
+        <source>ITC</source>
+        <target>__ITC</target>
+      </trans-unit>
+      <trans-unit id="78463a384a5aa4fad5fa73e2f506ecfc" resname="English">
+        <source>English</source>
+        <target>__English</target>
+      </trans-unit>
+      <trans-unit id="a12335ea267b12c4c7e2455d915879ef" resname="Česky">
+        <source>Česky</source>
+        <target>__Česky</target>
+      </trans-unit>
+      <trans-unit id="fa2c56e7efbdd19b84d9e7837704d0f7" resname="Slovensky">
+        <source>Slovensky</source>
+        <target>__Slovensky</target>
+      </trans-unit>
+      <trans-unit id="6570a9db29ac146fe61ff759d7950426" resname="Deutch">
+        <source>Deutch</source>
+        <target>__Deutch</target>
+      </trans-unit>
+      <trans-unit id="7e94be6b4690f0cfdaf9f12a37cd514c" resname="Polsky">
+        <source>Polsky</source>
+        <target>__Polsky</target>
+      </trans-unit>
+      <trans-unit id="59064c09cc14d7242b80f673698dfa79" resname="Maďarsky">
+        <source>Maďarsky</source>
+        <target>__Maďarsky</target>
+      </trans-unit>
+      <trans-unit id="e73cda510e8bb947f7e61089e5581494" resname="Directory">
+        <source>Directory</source>
+        <target>__Directory</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

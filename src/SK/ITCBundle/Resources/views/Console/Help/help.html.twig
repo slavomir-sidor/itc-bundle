@@ -1,0 +1,12 @@
+{% extends 'SKITCBundle::workspace.html.twig' %}
+
+{% block toolbar %}
+	{% include "SKITCBundle::Console:help.toolbar.html.twig" %}
+{% endblock %}
+
+{% block workspace %}
+	<pre class="ui-layout-center">{{ output }}</pre>
+	<div class="ui-layout-south">
+		{{ dump(command) }}
+	</div>
+{% endblock %}

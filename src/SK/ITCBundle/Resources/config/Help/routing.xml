@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes
+	xmlns="http://symfony.com/schema/routing"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+	<route
+		id="itc_help"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:Help:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_help_bundle"
+		path="/bundle/{_locale}">
+
+		<default key="_controller">SKITCBundle:Help:bundle</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_help_schema"
+		path="/schema/{_locale}">
+
+		<default key="_controller">SKITCBundle:Help:schema</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_help_ws"
+		path="/ws/{_locale}">
+
+		<default key="_controller">SKITCBundle:Help:ws</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_help_phpunit"
+		path="/phpunit/{_locale}">
+
+		<default key="_controller">SKITCBundle:Help:phpunit</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+	
+	
+	<route
+		id="itc_help_dbal"
+		path="/dbal/{_locale}">
+
+		<default key="_controller">SKITCBundle:Help:dbal</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+</routes>

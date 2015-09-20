@@ -1,0 +1,15 @@
+{% block namespaceClass %}
+
+	<ul class="ui-widget-tree ui-widget-tree">
+		{% for class in namespaces.getClassReflections() %}
+		<li>
+			{% block westPaneNamespaceClass %}
+			<a href="#{{ class.getName() }}">
+				{{ class.getShortName() }}
+			</a>
+			{% endblock %}
+		</li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}

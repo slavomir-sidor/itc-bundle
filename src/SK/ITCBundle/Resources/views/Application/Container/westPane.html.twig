@@ -1,0 +1,26 @@
+{% extends 'SKITCBundle::Application/westPane.html.twig' %}
+
+{% block westPane %}
+	<div class="ui-layout-west">
+
+		<div class="accordion">
+			{% if model.bundle %}
+			<h3>
+				{% trans %}model.bundle.getName(){% endtrans %}
+			</h3>
+
+			<div>
+				<ul>
+					<li>
+						<a href="{{ path('itc_application_bundle',{
+							'bundle' : model.bundle.getName()
+							}) }}">
+							{{ model.bundle.getName() }}
+						</a>
+					</li>
+				</ul>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'SKITCBundle::Application/workspace.html.twig' %}
+
+{% block bundleHeader %}
+	<a
+		class="ui-widget-header"
+		href="{{ path('itc_ws_bundle', {
+			'bundle': bundleName
+		}) }}">
+		{{ bundleName }}
+	</a>
+{% endblock %}
+
+{% block bundleFooter %}
+	<div class="ui-widget-footer ui-buttonset">
+
+		<a href="{{ path('itc_ws_bundle',{'bundle': bundleName}) }}">
+			{% trans %}Open{% endtrans %}
+		</a>
+
+		<a href="{{ path('itc_ws_wsdl',{'bundle': bundleName}) }}">
+			{% trans %}WSDL{% endtrans %}
+		</a>
+
+		<a href="{{ path('itc_ws_soap',{'bundle': bundleName}) }}">
+			{% trans %}SOAP{% endtrans %}
+		</a>
+
+		<a href="{{ path('itc_ws_rest',{'bundle': bundleName}) }}">
+			{% trans %}REST{% endtrans %}
+		</a>
+
+		<a href="{{ path('itc_ws_json',{'bundle': bundleName}) }}">
+			{% trans %}JSON{% endtrans %}
+		</a>
+	</div>
+{% endblock %}

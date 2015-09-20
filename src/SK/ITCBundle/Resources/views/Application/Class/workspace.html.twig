@@ -1,0 +1,80 @@
+{% block workspace %}
+
+	{% set bundle=model.bundle %}
+	{% set namespace=model.namespace %}
+	{% set class=model.class %}
+	{% set fileReflection=class.getDeclaringFile() %}
+
+	<div class="ui-layout-center ui-tabs">
+
+		{% if class %}
+			<ul>
+				<li>
+					<a href="#itc_application_class_schema">
+						{% trans %}Schema{% endtrans %}
+					</a>
+				</li>
+				<li>
+					<a href="#itc_application_class_configuration">
+						{% trans %}Configuration{% endtrans %}
+					</a>
+				</li>
+				<li>
+					<a href="#itc_application_class_ws">
+						{% trans %}WS{% endtrans %}
+					</a>
+				</li>
+				<li>
+					<a href="#itc_application_class_tests">
+						{% trans %}Tests{% endtrans %}
+					</a>
+				</li>
+				<li>
+					<a href="#itc_application_class_documentation">
+						{% trans %}Documentation{% endtrans %}
+					</a>
+				</li>
+				<li>
+					<a href="#itc_application_class_source">
+						{% trans %}Source{% endtrans %}
+					</a>
+				</li>
+				<li>
+					<a href="#itc_application_class_file">
+						{% trans %}File{% endtrans %}
+					</a>
+				</li>
+			</ul>
+
+			{% include "SKITCBundle::Application/Class/Schema/workspace.html.twig" with {
+				'model':model
+			} %}
+
+			{% include "SKITCBundle::Application/Class/Configuration/workspace.html.twig" with {
+				'model':model
+			} %}
+
+			{% include "SKITCBundle::Application/Class/Source/workspace.html.twig" with {
+				'model':model
+			} %}
+
+			{% include "SKITCBundle::Application/Class/WS/workspace.html.twig" with {
+				'model':model
+			} %}
+
+			{% include "SKITCBundle::Application/Class/Tests/workspace.html.twig" with {
+				'model':model
+			} %}
+
+			{% include "SKITCBundle::Application/Class/Documentation/workspace.html.twig" with {
+				'model':model
+			} %}
+
+			{% include "SKITCBundle::Application/Class/File/workspace.html.twig" with {
+				'model':model
+			} %}
+	
+		{% endif %}
+	
+	</div>
+{% endblock %}

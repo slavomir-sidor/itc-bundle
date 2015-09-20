@@ -1,0 +1,10 @@
+{% block workspace %}
+
+	{% set classWsdlDomDocument=model.classWsdlDomDocument %}
+
+	<div id="itc_application_class_ws">
+		{% if classWsdlDomDocument %}
+		<pre>{% autoescape %}{{ classWsdlDomDocument.saveXML() }}{% endautoescape %}</pre>
+		{% endif %}
+	</div>
+{% endblock %}

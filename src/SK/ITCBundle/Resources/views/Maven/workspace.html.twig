@@ -1,0 +1,65 @@
+{% block workspace %}
+
+	<div class="ui-layout-center">
+		
+		{% for node in finder %}
+
+			{% if node.isDir() %}
+
+				{% block directory %}
+				<div class="ui-widget-content ui-widget-filesystem ui-widget-folder">
+
+					{% block directoryHeader %}
+						<a class="ui-widget-header"
+							href="{{ path('tests_filesystem_homepage', {'path': node.getPathname()}) }}">
+							{{ node.relativePathname }}
+						</a>
+					{% endblock %}
+
+					{% block directoryContent %}
+					<div class="ui-widget-content"></div>
+					{% endblock %}
+	
+					{% block directoryFooter %}
+					<div class="ui-widget-footer">
+						<div>Created: {{ node.getCTime()|date }}</div>
+						<div>Modified: {{ node.getMTime()|date }}</div>
+					</div>
+					{% endblock %}
+	
+				</div>
+				{% endblock %}
+			{% endif %}
+
+			{% if node.isFile() %}
+
+				{% block file %}
+				<div class="ui-widget-content ui-widget-filesystem ui-widget-file">
+
+					{% block fileHeader %}
+						<a class="ui-widget-header"
+							href="{{ path('tests_filesystem_view', {'path': node.getPathname()}) }}">
+							{{ node.getFilename() }}
+						</a>
+					{% endblock %}
+
+					{% block fileContent %}
+					<div class="ui-widget-content">
+					</div>
+					{% endblock %}
+	
+					{% block fileFooter %}
+					<div class="ui-widget-footer">
+						<div>Created: {{ node.getCTime()|date }}</div>
+						<div>Modified: {{ node.getMTime()|date }}</div>
+					</div>
+					{% endblock %}
+	
+				</div>
+				{% endblock %}
+			{% endif %}
+			
+		{% endfor %}
+	</div>
+
+{% endblock %}

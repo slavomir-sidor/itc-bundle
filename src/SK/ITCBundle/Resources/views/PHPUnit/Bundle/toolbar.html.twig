@@ -1,0 +1,9 @@
+{% extends 'SKITCBundle::PHPUnit/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+	<h2>
+		{% trans %}Bundle{% endtrans %}
+		{{ model.bundle.getName() }}
+	</h2>
+	{{ parent() }}
+{% endblock %}

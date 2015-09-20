@@ -1,0 +1,176 @@
+{% extends 'SKITCBundle::Filesystem/workspace.html.twig' %}
+
+{% block workspace %}
+	{% set doctrine=model.doctrine %}
+	
+	<div class="ui-layout-center">
+
+		{% for connectionName,connection in doctrine.getConnections() %}
+		<div class="ui-widget-content ui-widget-filesystem ui-widget-connection">
+
+			{% block connectionHeader %}
+			<a
+				class="ui-widget-header"
+				href="{{ path('itc_dbal_connection', {
+					'connection': connectionName
+				}) }}">
+				{% trans %}Connection:{% endtrans %}<b>{{ connectionName }}</b>
+			</a>
+			{% endblock %}
+
+			{% block connectionContent %}
+			<div class="ui-widget-content">
+				{% set connectionParams=connection.getParams() %}
+				
+				<table>
+					<caption>{% trans %}Parameters{% endtrans %}</caption>
+					<thead>
+						<tr>
+							<th>{% trans %}Name{% endtrans %}</th>
+							<th>{% trans %}Value{% endtrans %}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>{% trans %}Driver{% endtrans %}</th>
+							<td>{{ connectionParams.driver }}</td>
+						</tr>
+						<tr>
+							<th>{% trans %}Database{% endtrans %}</th>
+							<td>{{ connectionParams.dbname }}</td>
+						</tr>
+						<tr>
+							<th>{% trans %}Host{% endtrans %}</th>
+							<td>{{ connectionParams.host }}</td>
+						</tr>
+						<tr>
+							<th>{% trans %}Port{% endtrans %}</th>
+							<td>{{ connectionParams.port }}</td>
+						</tr>
+						<tr>
+							<th>{% trans %}User{% endtrans %}</th>
+							<td>{{ connectionParams.user }}</td>
+						</tr>
+						<tr>
+							<th>{% trans %}Password{% endtrans %}</th>
+							<td>{{ connectionParams.password }}</td>
+						</tr>
+						<tr>
+							<th>{% trans %}Charset{% endtrans %}</th>
+							<td>{{ connectionParams.charset }}</td>
+						</tr>
+					</tbody>
+				</table>
+
+				{% block connectionFooter %}
+					<div class="ui-buttonset">
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_dbal_connection', {
+								'connection': connectionName
+							}) }}">
+							{% trans %}Open{% endtrans %}
+						</a>
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_dbal_orm', {
+								'connection': connectionName
+							}) }}">
+							{% trans %}ORM{% endtrans %}
+						</a>
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_dbal_configuration', {
+								'connection': connectionName
+							}) }}">
+							{% trans %}ORM{% endtrans %}
+						</a>
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_help_bundle', {
+								'connection': connectionName
+							}) }}">
+							{% trans %}Documentation{% endtrans %}
+						</a>
+					</div>
+					{% endblock %}
+			</div>
+			{% endblock %}
+
+		</div>
+		{% endfor %}
+
+		{% for entityManagerName,entityManager in doctrine.getEntityManagers() %}
+		<div class="ui-widget-content ui-widget-filesystem ui-widget-connection">
+
+			{% block entityManagerHeader %}
+			<a
+				class="ui-widget-header"
+				href="{{ path('itc_dbal_em', {
+					'entityManager': entityManagerName
+				}) }}">
+				{% trans %}Entity Manager: {% endtrans %}<b>{{ entityManagerName }}</b>
+			</a>
+			{% endblock %}
+
+			{% block entityManagerContent %}
+			<div class="ui-widget-content">
+				{% set entities=entityManager.getConnection().getSchemaManager().listTables() %}
+				{% set namespaces = entityManager.getConfiguration().getEntityNamespaces()  %}
+				
+				<table>
+					<thead>
+						<tr>
+							<th>{% trans %}Entity{% endtrans %}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for entity in entities %}
+						<tr>
+							<td>
+								<a href="{{ path('itc_dbal_entity', {
+									'entityManager':entityManagerName,
+									'entity': entity.getName()
+									}) }}">
+									{{ entity.getName() }}
+								</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+				{% block entityManagerFooter %}
+					<div class="ui-buttonset">
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_dbal_em', {
+								'entityManager': entityManagerName
+							}) }}">
+							{% trans %}Open{% endtrans %}
+						</a>
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_dbal_orm', {
+								'entityManager': entityManagerName
+							}) }}">
+							{% trans %}ORM{% endtrans %}
+						</a>
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_help_bundle', {
+								'entityManager': entityManagerName
+							}) }}">
+							{% trans %}Documentation{% endtrans %}
+						</a>
+					</div>
+					{% endblock %}
+			</div>
+			{% endblock %}
+
+		</div>
+		{% endfor %}
+
+	</div>
+
+{% endblock %}

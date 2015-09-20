@@ -1,0 +1,73 @@
+{% extends 'SKITCBundle::Filesystem/workspace.html.twig' %}
+
+{% block workspace %}
+
+	<div class="ui-layout-center">
+
+		{% for bundleName,bundle in model.bundles %}
+
+			{% block bundle %}
+			<div class="ui-widget-content ui-widget-filesystem ui-widget-bundle">
+
+				{% block bundleHeader %}
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_application_bundle', {
+							'bundle': bundleName
+						}) }}">
+						{{ bundleName }}
+					</a>
+				{% endblock %}
+
+				{% block bundleContent %}
+				<div class="ui-widget-content">
+					{% block bundleFooter %}
+					<div class="ui-buttonset">
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_application_bundle', {
+								'bundle': bundleName
+							}) }}">
+							{% trans %}Open{% endtrans %}
+						</a>
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_schema_bundle', {
+								'bundle': bundleName
+							}) }}">
+							{% trans %}Schema{% endtrans %}
+						</a>
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_ws_bundle', {
+								'bundle': bundleName
+							}) }}">
+							{% trans %}WS{% endtrans %}
+						</a>
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_phpunit_bundle', {
+								'bundle': bundleName
+							}) }}">
+							{% trans %}Tests{% endtrans %}
+						</a>
+						<a
+							class="ui-widget-header"
+							href="{{ path('itc_help_bundle', {
+								'bundle': bundleName
+							}) }}">
+							{% trans %}Documentation{% endtrans %}
+						</a>
+					</div>
+					{% endblock %}
+
+				</div>
+				{% endblock %}
+
+			</div>
+			{% endblock %}
+
+		{% endfor %}
+	</div>
+
+{% endblock %}

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes
+	xmlns="http://symfony.com/schema/routing"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+	<route
+		id="itc_phpunit"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_toolbar"
+		path="/toolbar/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:toolbar</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_workspace"
+		path="/workspace/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:workspace</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_testsuite"
+		path="/testsuite/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:testsuite</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_test"
+		path="/test/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:test</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_case"
+		path="/case/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:case</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_group"
+		path="/group/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:group</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_run"
+		path="/run/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:run</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_report"
+		path="/report/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:report</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_bundle"
+		path="/bundle/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:bundle</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_generate_data"
+		path="/generate-data/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:generateData</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_generate_fcase"
+		path="/generate-fcase/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:generateFCase</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_generate_ptest"
+		path="/generate-pcase/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:generatePerformaceTest</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_configuration"
+		path="/configuration/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:configuration</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_configuration_filter"
+		path="/configuration/filter/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:configurationFilter</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_configuration_logging"
+		path="/configuration/logging/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:configurationLogging</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_configuration_php"
+		path="/configuration/php/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:configurationPhp</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+</routes>

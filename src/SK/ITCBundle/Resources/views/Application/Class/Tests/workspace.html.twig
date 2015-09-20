@@ -1,0 +1,285 @@
+{% block workspace %}
+
+	{% set bundle=model.bundle %}
+	{% set namespace=model.namespace %}
+	{% set class=model.class %}
+	{% set fileReflection=class.getDeclaringFile() %}
+	
+	<div id="itc_application_class_tests">
+
+		<fieldset class="left">
+
+			<legend class="ui-buttonset">
+				{% trans %}Functional Cases{% endtrans %}
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_run', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':class.getShortName(),
+					}) }}">
+					{% trans %}Generate{% endtrans %}
+				</a>
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_run', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':class.getShortName()
+					}) }}">
+					{% trans %}Run{% endtrans %}
+				</a>
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_report', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':class.getShortName()
+					}) }}">
+					{% trans %}Report{% endtrans %}
+				</a>
+			</legend>
+
+			{% for method in class.getMethods() %}
+				<div class="ui-buttonset">
+					<label>{{ method.getName() }}</label>
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_run', {
+							'bundle': bundle.getName(),
+							'namespace': namespace.getName(),
+							'class':class.getShortName(),
+							'method':method.getName()
+						}) }}">
+						{% trans %}Generate{% endtrans %}
+					</a>
+
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_run', {
+							'bundle': bundle.getName(),
+							'namespace': namespace.getName(),
+							'class':class.getShortName(),
+							'method':method.getName()
+						}) }}">
+						{% trans %}Run{% endtrans %}
+					</a>
+
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_report', {
+							'bundle': bundle.getName(),
+							'namespace': namespace.getName(),
+							'class':class.getShortName(),
+							'method':method.getName()
+						}) }}">
+						{% trans %}Report{% endtrans %}
+					</a>
+				</div>
+			{% endfor %}
+
+		</fieldset>
+
+		<fieldset class="right">
+
+			<legend class="ui-buttonset">
+				{% trans %}Data{% endtrans %}
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_run', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':class.getShortName(),
+					}) }}">
+					{% trans %}Generate{% endtrans %}
+				</a>
+			</legend>
+
+			{% for method in class.getMethods() %}
+				<div class="ui-buttonset">
+					<label>{{ method.getName() }}</label>
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_run', {
+							'bundle': bundle.getName(),
+							'namespace': namespace.getName(),
+							'class':class.getShortName(),
+							'method':method.getName()
+						}) }}">
+						{% trans %}Generate{% endtrans %}
+					</a>
+				</div>
+			{% endfor %}
+
+		</fieldset>
+
+		<fieldset class="left">
+
+			<legend class="ui-buttonset">
+				{% trans %}Performance Cases{% endtrans %}
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_run', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':class.getShortName(),
+					}) }}">
+					{% trans %}Generate{% endtrans %}
+				</a>
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_run', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':class.getShortName()
+					}) }}">
+					{% trans %}Run{% endtrans %}
+				</a>
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_report', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':class.getShortName()
+					}) }}">
+					{% trans %}Report{% endtrans %}
+				</a>
+			</legend>
+
+			{% for method in class.getMethods() %}
+				<div class="ui-buttonset">
+					<label>{{ method.getName() }}</label>
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_run', {
+							'bundle': bundle.getName(),
+							'namespace': namespace.getName(),
+							'class':class.getShortName(),
+							'method':method.getName()
+						}) }}">
+						{% trans %}Generate{% endtrans %}
+					</a>
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_run', {
+							'bundle': bundle.getName(),
+							'namespace': namespace.getName(),
+							'class':class.getShortName(),
+							'method':method.getName()
+						}) }}">
+						{% trans %}Run{% endtrans %}
+					</a>
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_report', {
+							'bundle': bundle.getName(),
+							'namespace': namespace.getName(),
+							'class':class.getShortName(),
+							'method':method.getName()
+						}) }}">
+						{% trans %}Report{% endtrans %}
+					</a>
+				</div>
+			{% endfor %}
+
+		</fieldset>
+
+		<fieldset class="right">
+
+			<legend class="ui-buttonset">
+				{% trans %}PHPUnit{% endtrans %}
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_run', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':class.getShortName(),
+					}) }}">
+					{% trans %}Generate{% endtrans %}
+				</a>
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_run', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':class.getShortName(),
+					}) }}">
+					{% trans %}Open{% endtrans %}
+				</a>
+			</legend>
+
+		</fieldset>
+
+		<fieldset class="left">
+
+			<legend class="ui-buttonset">
+				{% trans %}Assert Equal Cases{% endtrans %}
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_run', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':class.getShortName(),
+					}) }}">
+					{% trans %}Generate{% endtrans %}
+				</a>
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_run', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':class.getShortName()
+					}) }}">
+					{% trans %}Run{% endtrans %}
+				</a>
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_phpunit_report', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':class.getShortName()
+					}) }}">
+					{% trans %}Report{% endtrans %}
+				</a>
+			</legend>
+
+			{% for method in class.getMethods() %}
+				<div class="ui-buttonset">
+					<label>{{ method.getName() }}</label>
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_run', {
+							'bundle': bundle.getName(),
+							'namespace': namespace.getName(),
+							'class':class.getShortName(),
+							'method':method.getName()
+						}) }}">
+						{% trans %}Generate{% endtrans %}
+					</a>
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_run', {
+							'bundle': bundle.getName(),
+							'namespace': namespace.getName(),
+							'class':class.getShortName(),
+							'method':method.getName()
+						}) }}">
+						{% trans %}Run{% endtrans %}
+					</a>
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_report', {
+							'bundle': bundle.getName(),
+							'namespace': namespace.getName(),
+							'class':class.getShortName(),
+							'method':method.getName()
+						}) }}">
+						{% trans %}Report{% endtrans %}
+					</a>
+				</div>
+			{% endfor %}
+
+		</fieldset>
+		
+	</div>
+{% endblock %}

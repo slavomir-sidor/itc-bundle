@@ -1,0 +1,17 @@
+{% extends 'SKITCBundle::workspace.html.twig' %}
+
+{% block toolbar %}
+{% endblock %}
+
+{% block workspace %}
+<div class="ui-layout-center">
+	<table>
+		{% for name, values in configuration.getPhpConfiguration() %}
+		<tr>
+			<th>{{ name }}</th>
+			<td>{{ dump(values) }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'SKITCBundle::PHPUnit/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+
+	<h2>
+		{% trans %}PHPUnit{% endtrans %}
+	</h2>
+
+	<a href="{{ path('itc_phpunit_configuration') }}">
+		{% trans %}Configuration{% endtrans %}
+	</a>
+
+	<a href="{{ path('itc_phpunit_run') }}">
+		{% trans %}Run All{% endtrans %}
+	</a>
+
+	<a href="{{ path('itc_phpunit_report') }}">
+		{% trans %}Reports{% endtrans %}
+	</a>
+
+	{{ parent() }}
+{% endblock %}

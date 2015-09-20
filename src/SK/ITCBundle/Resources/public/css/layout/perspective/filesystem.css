@@ -1,0 +1,232 @@
+.ui-widget-namespace .ui-widget-namespace {
+	width: auto !important;
+	min-width: 98% !important;
+	max-width: 98% !important;
+	min-height: 98% !important;
+	max-height: 98% !important;
+}
+
+.ui-widget-filesystem {
+	overflow: hidden;
+	position: relative;
+	float: left;
+	border: dotted 1px #a4a4a4;
+	width: 17%;
+	padding: 0em 0% 0em 0%;
+	margin: 1% 1% 0px 1%;
+	min-height: 40%;
+	max-height: 49%;
+	background-color: transparent;
+	background-position: bottom right;
+}
+
+.ui-widget-namespace {
+	width: 98%;
+	min-height: 99%;
+	max-height: 99%;
+}
+
+.ui-widget-namespace .ui-widget-content {
+	background-repeat: repeat;
+}
+
+.ui-widget-filesystem .ui-widget-header {
+	float: none;
+	clear: both;
+	overflow: hidden;
+	margin: 0em 0%;
+	border: 0px;
+	max-width: 100%;
+	background-color: transparent;
+	display: inline-block;
+}
+
+.ui-widget-filesystem .ui-widget-content {
+	float: none;
+	clear: both;
+	position: relative;
+	top: -1;
+	overflow: scroll;
+	padding: 0em 1%;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 0px;
+}
+
+.ui-widget-filesystem .ui-widget-content li {
+	list-style-type: none;
+}
+
+.ui-widget-filesystem .ui-button {
+	padding: 0em 0ex;
+	font-size: 0.9em;
+}
+
+.ui-widget-filesystem .ui-button-text {
+	padding: 0.2em 1ex;
+}
+
+.ui-widget-filesystem .ui-buttonset {
+	display: none;
+	background-image: url("../../../images/AEAEAE-0.8.png");
+	background-repeat: repeat;
+	float: none;
+	clear: both;
+	overflow: hidden;
+	text-align: right;
+	padding: 0em 0% 0em 0%;
+	position: absolute;
+	top: 1px;
+	right: 0px;
+	float: none;
+}
+
+.ui-widget-filesystem.ui-state-selected .ui-buttonset {
+	display: none;
+}
+
+.ui-widget-filesystem.ui-state-active {
+	border: dotted 1px #ff0000;
+	background-repeat: repeat;
+	background: transparent none 50% 50%
+}
+
+.ui-widget-filesystem.ui-state-active .ui-widget-header {
+	background-color: transparent;
+}
+
+.ui-widget-filesystem.ui-state-selected {
+	border: solid 1px #ff0000;
+}
+
+.ui-widget-filesystem.ui-state-active>.ui-widget-content>.ui-buttonset {
+	display: block;
+}
+
+.ui-widget-folder {
+	background-image: url("../../../images/FFC540-0.8.png");
+	background-repeat: repeat;
+}
+
+.ui-widget-filesystem.ui-widget-folder>.ui-widget-content {
+	background-image: url("../../../images/EA953B-0.8.png");
+	background-repeat: repeat;
+}
+
+.ui-widget-file {
+	
+}
+
+.filesystem .source {
+	padding: 1em 1%;
+}
+
+.ui-widget-filesystem .ui-widget-content {
+	float: none;
+	clear: both;
+	overflow: auto;
+}
+
+.ui-widget-filesystem>.ui-widget-footer .ui-button-text {
+	font-size: 0.9em;
+}
+
+.ui-widget-filesystem.ui-widget-phpunit {
+	background-image: url("../../../images/filesystem/phpunit.png");
+	background-repeat: no-repeat;
+}
+
+.ui-widget-filesystem.ui-widget-phpunit.ui-widget-testsuite {
+	
+}
+
+.ui-widget-filesystem.ui-widget-phpunit-case {
+	background-image: url("../../../images/filesystem/phpunit-case.png");
+	background-repeat: no-repeat;
+}
+
+.ui-widget-filesystem.ui-widget-connection {
+	background-image: url("../../../images/doctrine/logo.jpg");
+	background-repeat: no-repeat;
+}
+
+.table .ui-widget-filesystem {
+	overflow: hidden;
+	position: relative;
+	float: left;
+	border: dotted 1px #a4a4a4;
+	width: 98%;
+	padding: 0em 0% 0em 0%;
+	margin: 1em 1% 0px 1%;
+	min-height: 5%;
+	max-height: 25%;
+	background-color: transparent;
+}
+
+.table .ui-widget-filesystem>.ui-widget-header {
+	overflow: hidden;
+	border: 0px;
+	width: auto;
+	padding: 0em 1%;
+	margin: 0%;
+	max-width: 28%;
+	min-width: 28%;
+	position: relative;
+}
+
+.table .ui-widget-filesystem>.ui-widget-content {
+	width: auto;
+	max-width: 98%;
+	min-width: 98%;
+	position: relative;
+	overflow: auto;
+	background-image: url("../../../images/AEAEAE-0.8.png");
+	background-repeat: repeat;
+	padding: 0em 1%;
+	margin: 0%;
+	border: 0px;
+}
+
+.table .ui-widget-filesystem>.ui-widget-footer {
+	float: none;
+	clear: both;
+	overflow: hidden;
+	text-align: right;
+	padding: 0em 0% 0em 0%;
+	position: absolute;
+	bottom: 1px;
+	left: 2px;
+	float: none;
+	text-align: left;
+}
+
+.ui-widget-filesystem.ui-widget-bundle {
+	background-position: bottom right;
+	background-image:
+		url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAcCAMAAABIzV/hAAACZFBMVEUwLjL///////////////////////////////////////////////////////////////////+Eg4b///+Ni46Xlpj///////////+op6n///////////////////////////////////////////////////////////9ZWFv///////9qaWz///////+mpaf///////////////9ZWFv///////////////9PTVH///91dHb////////////////////g4OD///9NTE+Ih4r///////+Ni47///////92dHeRkJLk5OTLy8xlY2b///////+cm53///////+5ubr////o6Oj////////U1NT///9DQURsa22rq6ysq61hX2L///+LioxTUVVBP0NEQkZpZ2rGxsf///9ram3////s7O2SkZNfXmFxcHKmpae4uLnKysuXlpiop6l3dXiIh4pYVlmrq6ycm52trK7Nzc48Oj5dW158e36dnJ49Oz/Pz9BiYGPAv8BDQUTQz9BVU1aioaNHRUnBwcJXVVk6ODxJR0t3dnmko6U8Oj6lpKY9Oz+0tLXDwsRQTlF7en1QTlHi4eJhX2LFxcZTUVViYGNwb3J+fX83NTlFQ0dUUlW4t7icm524uLk8Oj5YVlmPjpBLSU2enZ9aWVw/PkFBP0NdW153dnk0MjZQTlE1MzdQT1JdXF9ram15eHqGhYdDQkV5eHo2NThEQkZRUFNFQ0dta244NjpGREhTUVU5NztUUlVhX2JubG9HRUlVU1ZiYGM7OTxIRkk7OT1IR0o8Oj4wLjI9Oz8YdG13AAAAynRSTlMAAAEDBAUGCgsMDQ4QEhMUGRobGx0gISIkJiYnKCktLi8wMjM0NTk6Ozw+P0NFSEpLTE5PUFBTWlteXmBiZGVmaWxtcHBxc3R0dnl5fX+BgoOGi46Pj5CRmZqanZ6eoKeoq6ytsLCwsrO0tbe5urq8vL+/wsTFx8jJycvLy8vM0NHR0tLU1NfX2NnZ2trc3N3d3eHh4uLl5ebm5ubn5+fo6urt7e3u7vDx8/Pz9PT19fX19fX29vf39/j4+fn5+vr6+vv7+/z8/f3+yR5EtwAAAbVJREFUeNpl0mVXVFEYhuF3zhkOFqMjYmCi2MUYYKGIYiJ2YCd2t4IBFqgoKjZ2jg3igI2KyO2f8sTMngGvj/te71r7wyMuk4jofZccAihcMzJKXDYnuYcVotyeYKiktV5LA0faaE7S4s7TyMsBupnMcoH/vO6gmanJaiLV1Py+Xwn5zc0fjCbSi2LI2QdkGdLyFBG+rHwMzz4BD7wyGEfFk8pfsD2TkGmyFNvFHfDj55v02VD6DcteOYylatY8oG7boA2QV4vlklzB8tU3/DIwo+dWv58guY5tRcLMtwSGdi1DkTvAn9Jqsgbu4kafRBqlV4sDFCWuIjdhMsp7yQU49rB28/QPLOu2DuWqLMfmfw6M716GskdGVRMSGDKRsEzpvZ+Qs0lFKDd94s2oArh2F7K3oNQt6ChGr5x6+Dx3J7d2E3Ygqam4PCkngRNnngYIO5cWq4lLb5t+vJ6GiifFR1nbMNqP3fSOCN8PZnQynEW5W/nmHy0PXv79eHpRSjsjtEOtWZcRc9YXlNx7VFKwceGYHjG6s0Ob3iK+X3LqlKnjkvt39rjD6w3W6BhvrCdaVw//ADrWicJIvtkmAAAAAElFTkSuQmCC");
+	background-repeat: no-repeat;
+}
+
+.ui-widget-filesystem.ui-widget-class {
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-image: url("../../../images/filesystem/php.png");
+}
+
+.ui-widget-filesystem.ui-widget-class .ui-widget-content ul {
+	padding: 0px;
+	margin: 0px;
+}
+
+.ui-widget-filesystem.ui-widget-class .ui-widget-content ul li {
+	list-style-type: disc;
+}
+
+pre.sf-dump {
+	background-color: #2e2e2e;
+	color: #FF8400;
+	line-height: 1.2em;
+	font: 12px Menlo, Monaco, Consolas, monospace;
+}

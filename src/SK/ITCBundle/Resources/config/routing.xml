@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes
+	xmlns="http://symfony.com/schema/routing"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+	<route
+		id="itc_homepage"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:Default:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_toolbar"
+		path="/toolbar/{_locale}">
+
+		<default key="_controller">SKITCBundle:Default:toolbar</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_workspace"
+		path="/workspace/{_locale}">
+
+		<default key="_controller">SKITCBundle:Default:workspace</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_switch_locale"
+		path="/switch-locale/{_locale}">
+
+		<default key="_controller">SKITCBundle:Default:switchLocale</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<import
+		resource="@SKITCBundle/Resources/config/Filesystem/routing.xml"
+		prefix="/filesystem"
+		type="xml" />
+
+	<import
+		resource="@SKITCBundle/Resources/config/Console/routing.xml"
+		prefix="/console"
+		type="xml" />
+
+	<import
+		resource="@SKITCBundle/Resources/config/Application/routing.xml"
+		prefix="/application"
+		type="xml" />
+
+	<import
+		resource="@SKITCBundle/Resources/config/Maven/routing.xml"
+		prefix="/maven"
+		type="xml" />
+
+	<import
+		resource="@SKITCBundle/Resources/config/PHPCR/routing.xml"
+		prefix="/phpcr"
+		type="xml" />
+
+	<import
+		resource="@SKITCBundle/Resources/config/PHPUnit/routing.xml"
+		prefix="/phpunit"
+		type="xml" />
+
+	<import
+		resource="@SKITCBundle/Resources/config/WS/routing.xml"
+		prefix="/ws"
+		type="xml" />
+
+	<import
+		resource="@SKITCBundle/Resources/config/Schema/routing.xml"
+		prefix="/schema"
+		type="xml" />
+
+	<import
+		resource="@SKITCBundle/Resources/config/Help/routing.xml"
+		prefix="/help"
+		type="xml" />
+
+	<import
+		resource="@SKITCBundle/Resources/config/ITC/routing.xml"
+		prefix="/saas"
+		type="xml" />
+
+	<import
+		resource="@SKITCBundle/Resources/config/DBAL/routing.xml"
+		prefix="/dbal"
+		type="xml" />
+
+</routes>

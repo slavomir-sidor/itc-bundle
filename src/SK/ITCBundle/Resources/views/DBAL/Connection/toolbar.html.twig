@@ -1,0 +1,15 @@
+{% extends 'SKITCBundle::DBAL/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+
+	<h2>
+		{% trans %}Connection{% endtrans %}
+	</h2>
+
+	<a href="{{ path('itc_dbal') }}">
+		{{ model.connection }}
+	</a>
+		
+	{{ parent() }}
+
+{% endblock %}

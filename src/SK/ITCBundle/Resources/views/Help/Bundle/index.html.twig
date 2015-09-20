@@ -1,0 +1,21 @@
+{% extends 'SKITCBundle::Help/index.html.twig' %}
+
+{% block toolbar %}
+{% include "SKITCBundle::Help/Bundle/toolbar.html.twig" with {'model':model} %}
+{% endblock %}
+
+{% block westPane %}
+{% include "SKITCBundle::Help/Bundle/westPane.html.twig" with {'model':model}%}
+{% endblock %}
+
+{% block workspace %}
+{% include "SKITCBundle::Help/Bundle/workspace.html.twig" with {'model':model} %}
+{% endblock %}
+
+{% block eastPane %}
+{% include "SKITCBundle::Help/Bundle/eastPane.html.twig" with {'model':model} %}
+{% endblock %}
+
+{% block southPane %}
+{% include "SKITCBundle::Help/Bundle/southPane.html.twig" with {'model':model} %}
+{% endblock %}

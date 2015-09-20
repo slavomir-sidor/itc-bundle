@@ -1,0 +1,39 @@
+{% extends 'SKITCBundle::Filesystem/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+
+	<div class="buttonset left">
+
+		<h2>
+			{% trans %}Continuos Integration{% endtrans %}
+		</h2>
+
+		<a href="{{ path('itc_saas_jenkins') }}">
+			{% trans %}Jenkins{% endtrans %}
+		</a>
+
+		<a href="{{ path('itc_saas_nexus') }}">
+			{% trans %}Nexus{% endtrans %}
+		</a>
+
+		<a href="{{ path('itc_saas_sonar') }}">
+			{% trans %}Sonar{% endtrans %}
+		</a>
+
+		<a href="{{ path('itc_saas_admin') }}">
+			{% trans %}Admin{% endtrans %}
+		</a>
+
+		<a href="{{ path('itc_saas_git') }}">
+			{% trans %}Git{% endtrans %}
+		</a>
+
+		<a href="{{ path('itc_saas_tomcat') }}">
+			{% trans %}Tomcat{% endtrans %}
+		</a>
+
+	</div>
+
+	{{ parent() }}
+
+{% endblock %}

@@ -1,0 +1,46 @@
+<input type="hidden"
+	name="command"
+	value="{{ command.getName() }}" />
+
+{% set arguments=command.getDefinition().getArguments() %}
+{% if arguments|length > 0 %}
+<fieldset class="left">
+
+	<legend>Arguments</legend>
+
+	{% for argument in arguments %}
+	<div class="ui-helper-cleaner">
+		<label for="{{ argument.getName() }}">{{ argument.getName() }}</label> <input
+			type="text"
+			id="{{ argument.getName() }}"
+			name="arguments[{{ argument.getName() }}]"
+			value="{{ argument.getDefault() }}" />
+		<p>{{ argument.getDescription() }}</p>
+	</div>
+	{% endfor %}
+
+</fieldset>
+{% endif %}
+
+{% set options=command.getDefinition().getOptions() %}
+{% if options|length > 0 %}
+<fieldset class="right">
+	<legend>Options</legend>
+
+	{% for option in options %}
+		<div class="ui-helper-cleaner">
+			
+			<label for="{{ option.getName() }}"> {{ option.getName() }} </label> <input
+				type="text"
+				id="{{ option.getName() }}"
+				name="options[{{ option.getName() }}]"
+				value="" />
+			<pre>
+				{{ dump(option.getDefault()) }}
+			</pre>
+			<p>{{ option.getDescription() }}</p>
+	
+		</div>
+	{% endfor %}
+</fieldset>
+{% endif %}

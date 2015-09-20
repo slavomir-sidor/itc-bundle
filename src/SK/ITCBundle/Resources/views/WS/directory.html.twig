@@ -1,0 +1,28 @@
+{% extends 'SKITCBundle::Filesystem/directory.html.twig' %}
+
+{% block directory %}
+<div class="ui-widget-content ui-widget-filesystem ui-widget-folder">
+
+	{% block directoryHeader %}
+	<a
+		class="ui-widget-header"
+		href="{{ path('itc_filesystem', {'path': iterator.getPathname()}) }}">
+		{{ iterator.relativePathname }}
+	</a>
+	{% endblock %}
+
+	{% block directoryContent %}
+	<div class="ui-widget-content">
+		
+	</div>
+	{% endblock %}
+
+	{% block directoryFooter %}
+	<div class="ui-widget-footer">
+		<div>Created: {{ iterator.getCTime()|date }}</div>
+		<div>Modified: {{ iterator.getMTime()|date }}</div>
+	</div>
+	{% endblock %}
+
+</div>
+{% endblock %}

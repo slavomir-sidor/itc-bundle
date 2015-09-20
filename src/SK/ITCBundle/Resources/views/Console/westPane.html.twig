@@ -1,0 +1,33 @@
+{% block westPane %}
+<div class="ui-layout-west accordion">
+
+	{% block consoleWestPaneheader %}
+	<h3>
+		<a
+			class="ui-widget-header"
+			href="{{ path('itc_console_namespace', {
+					'namespace': model.namespace
+				}) }}"> {{ model.namespace }} </a>
+	</h3>
+	{% endblock %}
+
+	{% block consoleWestPaneContent %}
+	<div>
+		<ul>
+		{% for command in model.cli.all(model.namespace) %}
+			<li>
+				<a
+					href="{{ path('itc_console_command', {
+							'command': command.getName()
+							}) }}">{{ command.getName() }}</a>
+			</li>
+		{% endfor %}
+		</ul>
+	</div>
+	{% endblock %}
+
+	{% block consoleWestPaneFooter %}
+	{% endblock %}
+
+</div>
+{% endblock %}

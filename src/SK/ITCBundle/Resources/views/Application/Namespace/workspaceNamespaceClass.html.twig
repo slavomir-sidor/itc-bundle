@@ -1,0 +1,76 @@
+{% block namespaceClass %}
+
+	{% set declaringFile=namespaceClass.getDeclaringFile() %}
+
+	<div class="ui-widget-filesystem ui-widget-class">
+
+		{% block namespaceClassHeader %}
+		<a class="ui-widget-header"
+			title="{{ declaringFile.getFileName() }}"
+			name="{{ namespaceClass.getName() }}"
+			href="{{ path('itc_application_class', {
+				'bundle': bundle.getName(),
+				'namespace': namespace.getName(),
+				'class':namespaceClass.getShortName()
+			}) }}">
+			{{ namespaceClass.getShortName() }}
+		</a>
+		{% endblock %}
+
+		{% block namespaceClassContent %}
+		<div class="ui-widget-content">
+
+			{% block namespaceClassButtonsSet %}
+			<div class="ui-buttonset">
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_application_class', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':namespaceClass.getShortName()
+					}) }}">
+					{% trans %}Open{% endtrans %}
+				</a>
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_application_class', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':namespaceClass.getShortName()
+					}) }}">
+					{% trans %}Schema{% endtrans %}
+				</a>
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_application_class', {
+						'bundle': bundle.getName(),
+						'namespace': namespace.getName(),
+						'class':namespaceClass.getShortName()
+					}) }}">
+					{% trans %}Schema{% endtrans %}
+				</a>
+			</div>
+			{% endblock %}
+
+			<ul>
+				{% for property in namespaceClass.getProperties() %}
+				<li>
+					<a href="">+ {{ property.getName() }}</a>
+				</li>
+				{% endfor %}
+			</ul>
+
+			<ul>
+				{% for property in namespaceClass.getProperties() %}
+				<li>
+					<a href="">+ {{ property.getName() }}</a>
+				</li>
+				{% endfor %}
+			</ul>
+
+		</div>
+		{% endblock %}
+
+	</div>
+
+{% endblock %}

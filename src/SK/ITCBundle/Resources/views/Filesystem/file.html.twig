@@ -1,0 +1,30 @@
+{% block filesystemFile %}
+
+{% set path=path ~ '/' ~ iterator.relativePathname %}
+
+<div class="ui-widget-content ui-widget-filesystem ui-widget-file">
+
+	{% block fileHeader %}
+	<a
+		class="ui-widget-header"
+		title="{{ path }}"
+		href="{{ path('itc_filesystem_detail', {'path': path }) }}">
+		{{ iterator.relativePathname }}
+	</a>
+	{% endblock %}
+
+	{% block fileContent %}
+	<div class="ui-widget-content">
+		
+	</div>
+	{% endblock %}
+
+	{% block fileFooter %}
+	<div class="ui-widget-footer">
+		<div>Created: {{ iterator.getCTime()|date }}</div>
+		<div>Modified: {{ iterator.getMTime()|date }}</div>
+	</div>
+	{% endblock %}
+
+</div>
+{% endblock %}

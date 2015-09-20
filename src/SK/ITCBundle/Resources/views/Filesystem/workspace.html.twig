@@ -1,0 +1,32 @@
+{% block workspace %}
+<div class="ui-layout-center">
+	{% set finder=model.finder %}
+
+	{% for iterator in finder %}
+
+		{% if iterator.isDir() %}
+
+			{% include "SKITCBundle::Filesystem/directory.html.twig" with { 
+				'iterator': iterator,
+				'path': model.path
+			} %}
+
+		{% endif %}
+
+	{% endfor %}
+
+	{% for iterator in finder %}
+
+		{% if iterator.isFile() %}
+
+			{% include "SKITCBundle::Filesystem/file.html.twig" with {
+				'iterator': iterator,
+				'path': model.path
+			} %}
+
+		{% endif %}
+
+	{% endfor %}
+
+</div>
+{% endblock %}

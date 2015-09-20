@@ -1,0 +1,24 @@
+{% block namespaceNameHeader %}
+
+	<div class="application-namespace-name-header">
+		{% set namespaces=namespace|split('\\') %}
+		{% set currentNamespace='' %}
+		{% set path='itc_phpunit_case' %}
+		
+		{% for namespace in namespaces %}
+			{% set currentNamespace=concat(currentNamespace, namespace) %}
+			{% set options={
+				'group': group,
+				'suite': suite,
+				'test' : test,
+				'namespace' : currentNamespace
+			} %}
+
+			<a href="{{ path(path, options) }}">
+				{{ currentNamespace }}
+			</a>
+
+		{% endfor %}
+	</div>
+
+{% endblock  %}

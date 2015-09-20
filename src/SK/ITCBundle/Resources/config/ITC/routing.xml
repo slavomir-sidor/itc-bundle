@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes
+	xmlns="http://symfony.com/schema/routing"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+	<route
+		id="itc_saas"
+		path="{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas_jenkins"
+		path="/jenkins/{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:jenkins</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas_tomcat"
+		path="/tomcat/{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:tomcat</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas_nexus"
+		path="/nexus/{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:nexus</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas_sonar"
+		path="/sonar/{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:sonar</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas_admin"
+		path="/admin/{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:admin</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas_git"
+		path="/git/{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:git</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+</routes>

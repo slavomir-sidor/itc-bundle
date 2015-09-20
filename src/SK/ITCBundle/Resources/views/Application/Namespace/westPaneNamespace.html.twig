@@ -1,0 +1,25 @@
+{% block namespace %}
+
+	<ul class="ui-widget-tree ui-widget-tree">
+
+		{% for namespaceName, namespace in namespaces %}
+		<li>
+			<a href="#{{ namespace.getName() }}">
+				{{ namespace.getShortName() }}
+			</a>
+
+			{% include "SKITCBundle::Application/Namespace/westPaneNamespace.html.twig" with {
+				'bundle':bundle,
+				'namespaces': namespace
+			} %}
+		</li>
+		{% endfor  %}
+
+	</ul>
+
+	{% include "SKITCBundle::Application/Namespace/westPaneNamespaceClass.html.twig" with {
+		'bundle':bundle,
+		'namespace': namespaces
+	} %}
+
+{% endblock %}

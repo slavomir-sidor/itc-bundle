@@ -1,0 +1,83 @@
+{% extends 'SKITCBundle::Schema/workspace.html.twig' %}
+
+{% block workspace %}
+
+	<div class="ui-layout-center">
+
+		{% for bundleName,bundle in model.bundles %}
+
+			{% block bundle %}
+			<div class="ui-widget-content ui-widget-filesystem ui-widget-bundle">
+			
+				{% block bundleHeader %}
+				<a
+					class="ui-widget-header"
+					href="{{ path('itc_application_bundle', {
+						'bundle': bundleName
+					}) }}">
+					{{ bundleName }}
+				</a>
+				{% endblock %}
+			
+				{% block bundleContent %}
+
+				<ul class="ui-widget-content">
+				
+					{% set bundleClasses=model.bundlesClasses %}
+					{% for className, class in bundleClasses %}
+
+						{% block bundleContentClass %}
+							<li>
+								<a class="ui-widget-header"
+									href="{{ path('itc_application_class', {
+										'bundle': bundleName,
+										'class' :class.getName() 
+									}) }}">
+									{{ class.getShortName() }}
+								</a>
+							</li>
+						{% endblock %}
+
+					{% endfor %}
+				</ul>
+				{% endblock %}
+			
+				{% block bundleFooter %}
+				<div class="ui-widget-footer ui-buttonset">
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_application_bundle', {
+							'bundle': bundleName
+						}) }}">
+						{% trans %}Commands{% endtrans %}
+					</a>
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_application_bundle', {
+							'bundle': bundleName
+						}) }}">
+						{% trans %}WS{% endtrans %}
+					</a>
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_application_bundle', {
+							'bundle': bundleName
+						}) }}">
+						{% trans %}Tests{% endtrans %}
+					</a>
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_application_bundle', {
+							'bundle': bundleName
+						}) }}">
+						{% trans %}Maven{% endtrans %}
+					</a>
+				</div>
+				{% endblock %}
+			
+			</div>
+			{% endblock %}
+		{% endfor %}
+	</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+.perspectives {
+	
+}
+
+.perspectives.brand {
+	
+}
+
+.perspectives  .ui-layout-pane {
+	
+}
+
+.perspectives .toolbar {
+	
+}
+
+.perspectives .toolbar * {
+	
+}
+
+.perspectives .toolbar h1, .perspectives .toolbar  h2, .perspectives .toolbar  h3,
+	.perspectives .toolbar h4 {
+	-webkit-margin-before: 0%;
+	-webkit-margin-after: 0%;
+	-webkit-margin-start: 0%;
+	-webkit-margin-end: 0%;
+	padding: 0%;
+	vertical-align: baseline;
+}
+
+.perspectives .toolbar  a {
+	vertical-align: baseline;
+	padding: 0%;
+	-webkit-margin-before: 0%;
+	-webkit-margin-after: 0%;
+	-webkit-margin-start: 0%;
+	-webkit-margin-end: 0%;
+	border: solid 1px #ccc;
+}
+
+.perspectives .toolbar a:hover {
+	background-color: #cccccc;
+}
+
+.perspectives .toolbar .buttonset {
+	white-space: nowrap;
+}
+
+.perspectives .toolbar .buttonset>* {
+	display: inline-block;
+}
+
+.perspectives .ui-layout-center {
+	padding: 0.2em 2%;
+	margin: 0em 0%;
+}

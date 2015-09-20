@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container
+	xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<services>
+
+		<service
+			id="sk.itcbundle.code.generator.wsdl.bundle"
+			class="%sk.itcbundle.code.generator.wsdl.bundle.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.wsdl.controller"
+			class="%sk.itcbundle.code.generator.wsdl.controller.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.wsdl.orm"
+			class="%sk.itcbundle.code.generator.wsdl.orm.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.wsdl.form"
+			class="%sk.itcbundle.code.generator.wsdl.form.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.wsdl.client"
+			class="%sk.itcbundle.code.generator.wsdl.client.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.wsdl.server"
+			class="%sk.itcbundle.code.generator.wsdl.server.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.wsdl.route"
+			class="%sk.itcbundle.code.generator.wsdl.routing.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.wsdl.service"
+			class="%sk.itcbundle.code.generator.wsdl.config.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.wsdl.parameters"
+			class="%sk.itcbundle.code.generator.wsdl.view.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.wsdl.route"
+			class="%sk.itcbundle.code.generator.wsdl.route.class%" />
+
+		<service
+			id="sk.itcbundle.code.generator.wsdl.security"
+			class="%sk.itcbundle.code.generator.wsdl.security.class%" />
+
+	</services>
+
+</container>

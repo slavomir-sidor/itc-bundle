@@ -1,0 +1,96 @@
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>sk.itcloud</groupId>
+		<artifactId>sk.itcloud.project</artifactId>
+		<version>0.0.20-SNAPSHOT</version>
+	</parent>
+
+	<groupId>sk.itcloud.symfony</groupId>
+	<artifactId>bundle-itc</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<scm>
+		<url>${project.scm.url}</url>
+		<connection>${project.scm.connection}</connection>
+		<developerConnection>${project.scm.developerConnection}</developerConnection>
+		<tag>${project.scm.tag}</tag>
+	</scm>
+
+	<issueManagement>
+		<system>${project.issueManagement.system}</system>
+		<url>${project.issueManagement.url}</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>${project.ciManagement.system}</system>
+		<url>${project.ciManagement.url}</url>
+	</ciManagement>
+
+	<distributionManagement>
+
+		<repository>
+			<id>${project.distributionManagement.repository.id}</id>
+			<name>${project.distributionManagement.repository.name}</name>
+			<url>${project.distributionManagement.repository.url}</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>${project.distributionManagement.snapshotRepository.id}</id>
+			<name>${project.distributionManagement.snapshotRepository.name}</name>
+			<url>${project.distributionManagement.snapshotRepository.url}</url>
+		</snapshotRepository>
+
+	</distributionManagement>
+
+	<developers>
+		<developer>
+			<email>slavomir.kuzma@gmail.com</email>
+			<name>Slavomir Kuzma</name>
+			<roles>
+				<role>Integration</role>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<repositories>
+
+		<repository>
+
+			<id>${project.distributionManagement.snapshotRepository.id}</id>
+			<url>${project.distributionManagement.snapshotRepository.url}</url>
+			<name>${project.distributionManagement.snapshotRepository.name}</name>
+
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+
+		</repository>
+
+		<repository>
+			<id>${project.distributionManagement.repository.id}</id>
+			<url>${project.distributionManagement.repository.url}</url>
+			<name>${project.distributionManagement.repository.name}</name>
+
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+	</repositories>
+
+</project>

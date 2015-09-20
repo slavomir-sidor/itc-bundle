@@ -1,0 +1,104 @@
+{% extends 'SKITCBundle::Application/workspace.html.twig' %}
+
+{% block workspace %}
+
+	<div class="ui-layout-center">
+
+		{% if model.bundle %}
+		
+			{% set bundleName=model.bundle.getName() %}
+
+			{% for className, class in model.classesReflections %}
+
+				{% block bundle %}
+
+					<div class="ui-widget-filesystem ui-widget-class">
+
+						{% block classHeader %}
+							<a class="ui-widget-header"
+								href="{{ path('itc_application_class', {
+									'bundle': bundleName,
+									'class': className
+								}) }}">
+								{{ class.getShortName() }}
+							</a>
+						{% endblock %}
+
+						{% block classContent %}
+
+							<ul class="ui-widget-content">
+								<li>
+									{% trans %}Namespace:{% endtrans %}
+								
+									<a href="{{ path('itc_application_namespace', {
+										'bundle': bundleName,
+										'class': className
+										}) }}">
+										{{ class.getShortName() }}
+									</a>
+								</li>
+	
+								<li>
+									{% trans %}Implements:{% endtrans %}
+
+									<a href="{{ path('itc_application_namespace', {
+										'bundle': bundleName,
+										'class': className
+										}) }}">
+										{{ class.getShortName() }}
+									</a>
+								</li>
+
+							</ul>
+						{% endblock %}
+
+						{% block classFooter %}
+
+							<div class="ui-widget-footer ui-buttonset">
+	
+								<a
+									class="ui-widget-header"
+									href="{{ path('itc_filesystem_view', {
+										'path': class.getFileName()
+									}) }}">
+									{% trans %}Source{% endtrans %}
+								</a>
+	
+								<a
+									class="ui-widget-header"
+									href="{{ path('itc_console', {
+										'path': model.bundle.getPath()
+									}) }}">
+									{% trans %}Commands{% endtrans %}
+								</a>
+	
+								<a
+									class="ui-widget-header"
+									href="{{ path('itc_ws', {
+										'class': className
+									}) }}">
+									{% trans %}WS{% endtrans %}
+								</a>
+	
+								<a
+									class="ui-widget-header"
+									href="{{ path('itc_phpunit', {
+										'class': className
+									}) }}">
+									{% trans %}Tests{% endtrans %}
+								</a>
+
+							</div>
+
+						{% endblock %}
+					</div>
+
+				{% endblock %}
+
+			{% endfor %}
+
+		{% endif %}
+
+	</div>
+
+{% endblock %}

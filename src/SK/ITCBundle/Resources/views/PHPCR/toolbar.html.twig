@@ -1,0 +1,34 @@
+{% extends 'SKITCBundle::Filesystem/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+
+	<div class="buttonset left">
+
+		<h2>
+			{% trans %}Workspace{% endtrans %}
+		</h2>
+
+		<h3>
+			<a href="{{ path('itc_phpcr') }}">
+				{% trans %}Browse{% endtrans %}
+			</a>
+		</h3>
+
+		<h3>
+			<a href="{{ path('itc_phpcr_create') }}">
+				{% trans %}Create{% endtrans %}
+			</a>
+		</h3>
+
+	</div>
+
+	<div class="buttonset left">
+
+		<h2>
+			{% trans %}Search{% endtrans %}
+		</h2>
+		<input type="text" name="q" />
+
+	</div>
+
+{% endblock %}

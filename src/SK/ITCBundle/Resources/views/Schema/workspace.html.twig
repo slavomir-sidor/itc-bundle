@@ -1,0 +1,41 @@
+{% extends 'SKITCBundle::Application/workspace.html.twig' %}
+
+{% block bundleFooter %}
+	<div class="ui-widget-footer ui-buttonset">
+
+		<a href="{{ path('itc_schema_bundle', {
+			'bundle': bundle.getName()
+			}) }}">
+			{% trans %}Open{% endtrans %}
+		</a>
+
+		<a href="{{ path('itc_schema_documentation', {
+			'bundle': bundle.getName()
+			}) }}">
+			{% trans %}Documentation{% endtrans %}
+		</a>
+
+		<a href="{{ path('itc_schema_explorer', {
+			'bundle': bundle.getName()
+			}) }}">
+			{% trans %}Explorer{% endtrans %}
+		</a>
+
+		<a href="{{ path('itc_schema_interchange', {
+			'bundle': bundle.getName()
+			}) }}">
+			{% trans %}Interchange{% endtrans %}
+		</a>
+
+	</div>
+{% endblock %}
+
+{% block bundleHeader %}
+	<a
+		class="ui-widget-header"
+		href="{{ path('itc_schema_bundle', {
+		'bundle': bundleName
+		}) }}">
+		{{ bundleName }}
+	</a>
+{% endblock %}

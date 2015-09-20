@@ -1,0 +1,24 @@
+{% extends 'SKITCBundle::Application/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+
+	{% set bundleReflection=model.bundle %}
+	{% set bundle=bundleReflection.getBundle() %}
+
+	<div class="buttonset left">
+
+		<h2>
+			{% trans %}Bundle{% endtrans %}
+		</h2>
+
+		<a href="{{ path('itc_application_bundle', {
+				'bundle':bundle.getName()
+			}) }}">
+			{{ bundle.getName() }}
+		</a>
+
+	</div>
+
+	{{ parent() }}
+
+{% endblock %}

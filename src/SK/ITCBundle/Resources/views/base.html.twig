@@ -1,0 +1,67 @@
+{% block html %}
+<!DOCTYPE html>
+<html>
+
+	{% block head %}
+		<head>
+			<meta charset="UTF-8" />
+			<meta http-equiv="X-UA-Compatible" content="IE=9" />
+			<title>{% block title %}{% trans %}Application ITC{% endtrans %}{% endblock %}</title>
+
+			{% block stylesheets %}
+
+				{% stylesheets
+					'bundles/skitc/css/theme/blue/layout.css'
+
+					filter="cssrewrite, yui_css, content"
+					output="css/compiled/style.css"
+				%}
+
+				<link
+					href="{{ asset_url }}"
+					media="screen" 
+					rel="stylesheet"
+					type="text/css" />
+
+				{% endstylesheets %}
+
+			{% endblock %}
+
+			{% block javascript %}
+
+				{% javascripts
+					'@SKITCBundle/Resources/public/js/jquery.js'
+
+					output="js/compiled/script.js" %}
+					<script src="{{ asset_url }}" type="text/javascript"></script>
+				{% endjavascripts %}
+
+				{% block javaScriptHeaderCode %}
+					<script type="text/javascript">
+						$(document).bind('ready', function(e) {
+							
+						});
+					</script>
+				{% endblock %}
+
+			{% endblock %}
+
+		</head>
+	{% endblock %}
+
+	{% block body %}
+		<body class="ui-layout perspectives brand ui-state-loading">
+
+		{% block toolbar %}
+		{% include "SKITCBundle::Default/toolbar.html.twig" with {'model':model} %}
+		{% endblock %}
+
+		{% block workspace %}
+		{% include "SKITCBundle::Default/workspace.html.twig" with {'model':model} %}
+		{% endblock %}
+
+		</body>
+	{% endblock %}
+
+</html>
+{% endblock %}

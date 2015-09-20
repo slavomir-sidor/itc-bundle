@@ -1,0 +1,61 @@
+{% extends 'SKITCBundle::PHPUnit/workspace.html.twig' %}
+
+{% block workspace %}
+	{% set groups=model.groups %}
+
+	<div class="ui-layout-center">
+
+		{% for group, suite in groups %}
+
+			{% block group %}
+			<div class="ui-widget-content ui-widget-filesystem">
+
+				{% block groupsContent %}
+				<a class="ui-widget-header"
+					href="{{ path('itc_phpunit_group',{'group':group}) }}"
+					title="{% trans %}Test Suite Configuration{% endtrans %}">
+					{{ group }}
+				</a>
+				{% endblock %}
+
+				{% block bundleContent %}
+					<ul class="ui-widget-content">
+						{% for testSuiteIndex,testSuite in suite %}
+							<li>
+								<a href="{{ path('itc_phpunit_testsuite',{
+									'group':group,
+									'suite':testSuiteIndex})}}">
+								{{ testSuite.getName() }}
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				{% endblock %}
+
+				{% block bundleFooter %}
+				<div class="ui-widget-footer ui-buttonset">
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_group',{'group':group}) }}">
+						{% trans %}Open{% endtrans %}
+					</a>
+
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_run',{'group':group}) }}">
+						{% trans %}Run{% endtrans %}
+					</a>
+
+					<a
+						class="ui-widget-header"
+						href="{{ path('itc_phpunit_report',{'group':group}) }}">
+						{% trans %}Report{% endtrans %}
+					</a>
+				</div>
+				{% endblock %}
+
+			</div>
+			{% endblock %}
+		{% endfor %}
+	</div>
+{% endblock %}

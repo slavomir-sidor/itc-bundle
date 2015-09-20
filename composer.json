@@ -1,0 +1,28 @@
+{
+	"name" : "sk.itcloud.symfony/bundle-itc",
+	"license" : "ITCloud Symfony Bundle ITC",
+	"type" : "bundle",
+	"description" : "Symfony ITC Bundle",
+	"minimum-stability" : "dev",
+	"autoload" : {
+		"psr-0" : {
+			"SK\\ITCBundle" : "src/"
+		}
+	},
+	"bin" : [
+		"bin/itc"
+	],
+	"config" : {
+		"bin-dir" : "bin",
+		"vendor-dir" : "vendor"
+	},
+	"require" : {
+	    "symfony/console" : "2.7.*",
+		"knplabs/knp-menu-bundle" : "^2.0@dev",
+		"zendframework/zend-code" : "^2.5@dev",
+		"packagist/yuicompressor-bin": "dev-master",
+		"symfony/assetic-bundle": "^2.7@dev",
+		"symfony/form": "^3.0@dev",
+		"zendframework/zend-soap": "^2.5@dev"
+	}
+}

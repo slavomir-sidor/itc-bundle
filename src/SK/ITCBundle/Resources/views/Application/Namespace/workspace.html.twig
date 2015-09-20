@@ -1,0 +1,16 @@
+{% extends 'SKITCBundle::Application/workspace.html.twig' %}
+
+{% block workspace %}
+<div class="ui-layout-center">
+
+	{% set bundle=model.bundle %}
+	{% set bundles=model.bundles %}
+	{% set namespace=model.namespace %}
+
+	{% include "SKITCBundle::Application/Namespace/workspaceNamespace.html.twig" with {
+		'bundle':bundle.getBundle(),
+		'namespace': namespace
+	} %}
+
+</div>
+{% endblock %}

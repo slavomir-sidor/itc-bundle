@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container
+	xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<imports>
+
+		<import resource="Assetic/services.xml" />
+		<import resource="Application/services.xml" />
+		<import resource="Console/services.xml" />
+		<import resource="Filesystem/services.xml" />
+		<import resource="Google/services.xml" />
+		<import resource="Translation/services.xml" />
+		<import resource="ITC/services.xml" />
+		<import resource="Help/services.xml" />
+		<import resource="Maven/services.xml" />
+		<import resource="Menu/services.xml" />
+		<import resource="PHPCR/services.xml" />
+		<import resource="PHPUnit/services.xml" />
+		<import resource="Schema/services.xml" />
+		<import resource="WS/services.xml" />
+
+	</imports>
+
+</container>

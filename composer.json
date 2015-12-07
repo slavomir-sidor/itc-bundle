@@ -17,12 +17,12 @@
 		"vendor-dir" : "vendor"
 	},
 	"require" : {
-	    "symfony/console" : "2.7.*",
-		"knplabs/knp-menu-bundle" : "^2.0@dev",
-		"zendframework/zend-code" : "^2.5@dev",
-		"packagist/yuicompressor-bin": "dev-master",
-		"symfony/assetic-bundle": "^2.7@dev",
-		"symfony/form": "^3.0@dev",
-		"zendframework/zend-soap": "^2.5@dev"
+		"symfony/console" : "3.0.*",
+		"knplabs/knp-menu-bundle" : "2.1.0",
+		"zendframework/zend-code" : "2.6.1",
+		"packagist/yuicompressor-bin" : "2.4.8",
+		"symfony/assetic-bundle" : "2.7.1",
+		"symfony/form" : "3.0.0",
+		"zendframework/zend-soap" : "^2.5@dev"
 	}
 }

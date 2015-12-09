@@ -23,6 +23,6 @@
 		"packagist/yuicompressor-bin" : "2.4.8",
 		"symfony/assetic-bundle" : "2.7.1",
 		"symfony/form" : "3.0.0",
-		"zendframework/zend-soap" : "^2.5@dev"
+		"zendframework/zend-soap" : "2.5.1"
 	}
 }

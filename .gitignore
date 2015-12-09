@@ -1,3 +1,7 @@
 /target/
 /vendor/
+/.settings/
+/bin/yuicompressor.jar
 /composer.lock
+/.project
+/.buildpath

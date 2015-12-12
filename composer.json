@@ -28,7 +28,6 @@
 		"packagist/yuicompressor-bin" : "2.4.8",
 		"zendframework/zend-soap" : "2.5.1",
 		"doctrine/doctrine-migrations-bundle" : "1.1.1",
-		"behat/behat" : "3.0.15",
-		"cboden/ratchet" : "0.3.3"
+		"behat/behat" : "dev-master"
 	}
 }

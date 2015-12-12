@@ -94,4 +94,135 @@
 
 	</repositories>
 
+	<build>
+
+		<sourceDirectory>${project.basedir}/src</sourceDirectory>
+
+		<resources>
+
+			<resource>
+
+				<directory>${project.basedir}</directory>
+
+				<excludes>
+					<exclude>**/target</exclude>
+					<exclude>**/.*</exclude>
+					<exclude>**/.*/</exclude>
+					<exclude>**/tests</exclude>
+				</excludes>
+
+			</resource>
+
+		</resources>
+
+		<plugins>
+
+			<plugin>
+
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.4.0</version>
+
+				<executions>
+
+					<execution>
+
+						<id>composer-update</id>
+						<phase>generate-resources</phase>
+
+						<goals>
+							<goal>exec</goal>
+						</goals>
+
+					</execution>
+
+				</executions>
+
+				<configuration>
+
+					<workingDirectory>${project.basedir}</workingDirectory>
+					<executable>composer</executable>
+
+					<arguments>
+						<argument>update</argument>
+						<argument>--no-dev</argument>
+						<argument>--verbose</argument>
+						<argument>--optimize-autoloader</argument>
+						<argument>--no-interaction</argument>
+					</arguments>
+
+				</configuration>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rpm-maven-plugin</artifactId>
+				<version>2.1-alpha-4</version>
+				<extensions>true</extensions>
+
+				<executions>
+
+					<execution>
+
+						<goals>
+							<goal>attached-rpm</goal>
+						</goals>
+
+						<id>rpm-goal</id>
+						<phase>package</phase>
+
+					</execution>
+
+				</executions>
+
+				<configuration>
+
+					<copyright>${rpm.copyright}</copyright>
+					<distribution>${rpm.distribution}</distribution>
+					<group>${rpm.group}</group>
+					<sourceEncoding>${project.encoding}</sourceEncoding>
+					<changelogFile>${project.changelog.outputDirectory}/${project.changelog.announcementFile}</changelogFile>
+					<name>${rpm.name}</name>
+					<packager>${user.name}</packager>
+					<needarch>${rpm.needarch}</needarch>
+
+					<provides>
+						<provide>${rpm.name}</provide>
+					</provides>
+
+					<defineStatements>
+						<defineStatement>_unpackaged_files_terminate_build 0</defineStatement>
+					</defineStatements>
+
+					<mappings>
+
+						<mapping>
+
+							<directory>${rpm.prefix}</directory>
+							<filemode>${rpm.filemode}</filemode>
+							<username>${rpm.username}</username>
+							<groupname>${rpm.groupname}</groupname>
+
+							<sources>
+
+								<source>
+									<location>${project.build.outputDirectory}</location>
+								</source>
+
+							</sources>
+
+						</mapping>
+
+					</mappings>
+
+				</configuration>
+
+			</plugin>
+
+		</plugins>
+
+	</build>
+
 </project>

@@ -1,5 +1,5 @@
 {
-	"name" : "sk.itcloud.symfony/bundle-itc",
+	"name" : "sk.itcloud.symfony/tc-bundle",
 	"license" : "ITCloud Symfony Bundle ITC",
 	"type" : "bundle",
 	"description" : "Symfony ITC Bundle",
@@ -27,7 +27,6 @@
 		"packagist/yuicompressor-bin" : "2.4.8",
 		"zendframework/zend-soap" : "2.5.1",
 		"doctrine/doctrine-migrations-bundle" : "1.1.1",
-		"behat/behat" : "dev-master",
-		"friendsofsymfony/rest-bundle": "^1.7"
+		"behat/behat" : "dev-master"
 	}
 }

@@ -23,6 +23,8 @@
 		"packagist/yuicompressor-bin" : "2.4.8",
 		"symfony/assetic-bundle" : "2.7.1",
 		"symfony/form" : "3.0.0",
-		"zendframework/zend-soap" : "2.5.1"
+		"zendframework/zend-soap" : "2.5.1",
+		"doctrine/doctrine-migrations-bundle" : "1.1.1",
+		"behat/behat" : "dev-master"
 	}
 }

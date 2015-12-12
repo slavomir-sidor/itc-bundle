@@ -1,7 +1,12 @@
 /target/
 /vendor/
-/.settings/
 /bin/yuicompressor.jar
+/bin/yuicompressor.jar
+/bin/behat
+/bin/doctrine-dbal
+/bin/doctrine-migrations
+/bin/sql-formatter
 /composer.lock
+/.settings/
 /.project
 /.buildpath

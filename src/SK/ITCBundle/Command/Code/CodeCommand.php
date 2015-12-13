@@ -54,13 +54,6 @@ abstract class CodeCommand extends AbstractCommand
     protected $broker;
 
     /**
-     * SK ITCBundle Command Code Generator Exceptions
-     *
-     * @var \Exception[]
-     */
-    protected $exceptions;
-
-    /**
      * Gets SK ITCBundle Command Code Generator Broker
      *
      * @return \TokenReflection\Broker
@@ -79,7 +72,7 @@ abstract class CodeCommand extends AbstractCommand
      *
      * @return \Symfony\Component\Finder\Finder
      */
-    protected function getFinder()
+    public function getFinder()
     {
         if (null === $this->finder) {
             $finder = new Finder();
@@ -90,7 +83,10 @@ abstract class CodeCommand extends AbstractCommand
             if ($this->getInput()->getOption("suffix")) {
                 $finder->name('*.' . $nameSuffix);
             }
+            
             $this->setFinder($finder);
+            $this->writeInfo(sprintf("Found %d files.", $this->getFinder()
+                ->count()));
         }
         
         return $this->finder;
@@ -115,7 +111,7 @@ abstract class CodeCommand extends AbstractCommand
     protected function configure()
     {
         parent::configure();
-        
+        $this->addOption("parentClass", "pc", InputOption::VALUE_OPTIONAL, "Parent Class filter.");
         $this->addOption("suffix", "s", InputOption::VALUE_OPTIONAL, "File suffixes for given src, default all and not dot files.");
         $this->addArgument('src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
             'src',
@@ -177,16 +173,10 @@ abstract class CodeCommand extends AbstractCommand
     public function getClassReflections()
     {
         if (NULL === $this->classReflections) {
-            
-            $this->writeLine();
-            $this->writeInfo(sprintf("Processing files in given src path(s)'%s ', found %d files.", implode("|", $this->getSrc()), $this->getFinder()
-                ->count()));
-            $this->writeLine();
-            
             $progress = new ProgressBar($this->getOutput(), $this->getFinder()->count());
             $progress->start();
             
-            /* @var $classReflections [] */
+            /* @var $classReflections ReflectionClass[] */
             $classReflections = array();
             
             /* @var $exceptions \Exception[] */
@@ -201,12 +191,22 @@ abstract class CodeCommand extends AbstractCommand
                 }
                 $progress->advance();
             }
-            $classReflections = $this->getBroker()->getClasses(Backend::TOKENIZED_CLASSES);
-            $this->setClassReflections($classReflections);
             $progress->finish();
-            $this->writeLine();
-            $this->writeInfo(sprintf("Found %d Classes with %d errors.", count($this->getExceptions()), count($classReflections)));
-            $this->writeLine();
+            
+            $classReflections = $this->getBroker()->getClasses(Backend::TOKENIZED_CLASSES, Backend::INTERNAL_CLASSES);
+            $parentClass = $this->getInput()->getOption("parentClass");
+            
+            if ($parentClass) {
+                
+                foreach ($classReflections as $key=>$classReflection) {
+                    if(!in_array($parentClass, $classReflection->getParentClassNameList())){
+                        unset($classReflections[$key]);
+                    }
+                }
+            }
+            $this->setClassReflections($classReflections);
+            
+            $this->writeInfo(sprintf("Found %d Classes with %d errors.", count($this->getClassReflections()), count($this->getExceptions())));
         }
         
         return $this->classReflections;
@@ -247,42 +247,6 @@ abstract class CodeCommand extends AbstractCommand
     public function setBroker(Broker $broker)
     {
         $this->broker = $broker;
-        return $this;
-    }
-
-    /**
-     * Gets SK ITCBundle Command Code Generator Exception
-     *
-     * @return \Exception[]
-     */
-    public function getExceptions()
-    {
-        return $this->exceptions;
-    }
-
-    /**
-     * Sets SK ITCBundle Command Code Generator Exception
-     *
-     * @param \Exception[] $exceptions
-     *            SK ITCBundle Command Code Generator Exceptions
-     * @return \SK\ITCBundle\Command\Code\CodeCommand
-     */
-    public function setExceptions(array $exceptions)
-    {
-        $this->exceptions = $exceptions;
-        return $this;
-    }
-
-    /**
-     * Adds SK ITCBundle Command Code Generator Exception
-     *
-     * @param \Exception $exception
-     *            SK ITCBundle Command Code Generator Exception
-     * @return \SK\ITCBundle\Command\Code\CodeCommand
-     */
-    public function addException(\Exception $exception)
-    {
-        $this->exceptions[] = $exception;
         return $this;
     }
 }

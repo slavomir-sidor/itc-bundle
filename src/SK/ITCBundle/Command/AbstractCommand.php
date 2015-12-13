@@ -30,6 +30,52 @@ abstract class AbstractCommand extends Command
     protected $output;
 
     /**
+     * SK ITCBundle Command Code Generator Exceptions
+     *
+     * @var \Exception[]
+     */
+    protected $exceptions;
+
+    /**
+     * Gets SK ITCBundle Command Code Generator Exception
+     *
+     * @return \Exception[]
+     */
+    public function getExceptions()
+    {
+        if (null == $this->exceptions) {
+            $this->exceptions = array();
+        }
+        return $this->exceptions;
+    }
+
+    /**
+     * Sets SK ITCBundle Command Code Generator Exception
+     *
+     * @param \Exception[] $exceptions
+     *            SK ITCBundle Command Code Generator Exceptions
+     * @return \SK\ITCBundle\Command\Code\CodeCommand
+     */
+    public function setExceptions(array $exceptions)
+    {
+        $this->exceptions = $exceptions;
+        return $this;
+    }
+
+    /**
+     * Adds SK ITCBundle Command Code Generator Exception
+     *
+     * @param \Exception $exception
+     *            SK ITCBundle Command Code Generator Exception
+     * @return \SK\ITCBundle\Command\Code\CodeCommand
+     */
+    public function addException(\Exception $exception)
+    {
+        $this->exceptions[] = $exception;
+        return $this;
+    }
+
+    /**
      * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Option OPTION_VERBOSE_OUTPUT_YES
      *
      * @var string
@@ -116,15 +162,20 @@ abstract class AbstractCommand extends Command
     public function writeError($message)
     {
         $output = $this->getOutput();
-        $output->writeln('<fg=black;bg=red>Error:</fg=black;bg=red> ' . $message);
+        $output->writeln(' <fg=black;bg=red>Error:</fg=black;bg=red> ' . $message);
+    }
+
+    public function writeException(\Exception $exception)
+    {
+        $this->writeError(sprintf(" <fg=black;bg=red>Error %s %s</fg=black;bg=red>", $exception->getCode(), $exception->getMessage()));
     }
 
     public function writeExceptions()
     {
-        if (count($this->getExceptions() > 0)) {
-            $this->writeError("Errors");
+        if (count($this->getExceptions()) > 0) {
+            $this->writeInfo("Exceptions");
             foreach ($this->getExceptions() as $exception) {
-                $this->writeError($exception->getMessage());
+                $this->writeException($exception);
             }
         }
     }
@@ -137,19 +188,21 @@ abstract class AbstractCommand extends Command
 
     public function writeInfo($message)
     {
+        $this->writeLine();
         $output = $this->getOutput();
-        $output->writeln($message);
+        $output->writeln(' <fg=white;bg=green>' . $message . "</fg=white;bg=green>");
+        $this->writeLine();
     }
 
     public function writeHeader($message)
     {
         $output = $this->getOutput();
-        $output->writeln('<fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>");
+        $output->writeln(' <fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>");
     }
 
     public function writeNotice($message)
     {
-        $message = '<fg=cyan;bg=white>Notice:</fg=cyan;bg=white> ' . $message;
+        $message = ' <fg=green;bg=white>Notice:</fg=green;bg=white> ' . $message;
         $output = $this->getOutput();
         $output->writeln($message);
     }
@@ -160,7 +213,7 @@ abstract class AbstractCommand extends Command
         $output = $this->getOutput();
         
         if (self::OPTION_VERBOSE_OUTPUT_YES == $input->getOption("verbose")) {
-            $output->writeln('<fg=blue;bg=white>DEBUG:</fg=blue;bg=white> ' . $message);
+            $output->writeln(' <fg=blue;bg=white>DEBUG:</fg=blue;bg=white> ' . $message);
         }
     }
 

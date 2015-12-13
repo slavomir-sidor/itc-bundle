@@ -5,15 +5,15 @@ use Symfony\Component\Console\Command\Command;
 use SK\ITCBundle\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Zend\Code\Reflection\FileReflection;
-use Zend\Code\Scanner\AggregateDirectoryScanner;
-use Zend\Code\Scanner\DirectoryScanner;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Zend\Code\Scanner\FileScanner;
-use Zend\Code\Reflection\ClassReflection;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Console\Input\InputOption;
+use TokenReflection\Broker;
+use TokenReflection\ReflectionFile;
+use TokenReflection\ReflectionClass;
+use TokenReflection\Broker\Backend;
 
 /**
  * SK ITCBundle Command Abstract
@@ -28,7 +28,7 @@ abstract class CodeCommand extends AbstractCommand
     /**
      * SK ITCBundle Command Code Generator Class Reflection
      *
-     * @var ClassReflection[]
+     * @var ReflectionClass[]
      */
     protected $classReflections;
 
@@ -40,18 +40,39 @@ abstract class CodeCommand extends AbstractCommand
     protected $src;
 
     /**
-     * SK ITCBundle Command Code Generator Directory Scanner
-     *
-     * @var DirectoryScanner
-     */
-    protected $directoryScanner;
-
-    /**
      * SK ITCBundle Command Code Generator Finder
      *
      * @var Finder
      */
     protected $finder;
+
+    /**
+     * SK ITCBundle Command Code Generator Broker
+     *
+     * @var Broker
+     */
+    protected $broker;
+
+    /**
+     * SK ITCBundle Command Code Generator Exceptions
+     *
+     * @var \Exception[]
+     */
+    protected $exceptions;
+
+    /**
+     * Gets SK ITCBundle Command Code Generator Broker
+     *
+     * @return \TokenReflection\Broker
+     */
+    public function getBroker()
+    {
+        if (null === $this->broker) {
+            $broker = new Broker(new Broker\Backend\Memory());
+            $this->setBroker($broker);
+        }
+        return $this->broker;
+    }
 
     /**
      * Gets SK ITCBundle Command Code Generator Finder
@@ -69,9 +90,10 @@ abstract class CodeCommand extends AbstractCommand
             if ($this->getInput()->getOption("suffix")) {
                 $finder->name('*.' . $nameSuffix);
             }
+            $this->setFinder($finder);
         }
         
-        return $finder;
+        return $this->finder;
     }
 
     /**
@@ -148,60 +170,43 @@ abstract class CodeCommand extends AbstractCommand
     }
 
     /**
-     *
-     * @param boolean $returnFileScanners            
-     * @return $fileScanners FileScanner[]
-     *        
-     */
-    protected function getFileScanners($returnFileScanners = TRUE)
-    {
-        return $this->getDirectoryScanner()->getFiles($returnFileScanners);
-    }
-
-    /**
      * Gets SK ITCBundle Command Code Generator Class Reflection
      *
-     * @return ClassReflection[]
+     * @return ReflectionClass[]
      */
     public function getClassReflections()
     {
         if (NULL === $this->classReflections) {
             
             $this->writeLine();
-            $this->writeInfo(sprintf("Processing classes in source files '%s'.", implode("|", $this->getSrc())));
+            $this->writeInfo(sprintf("Processing files in given src path(s)'%s ', found %d files.", implode("|", $this->getSrc()), $this->getFinder()
+                ->count()));
             $this->writeLine();
             
             $progress = new ProgressBar($this->getOutput(), $this->getFinder()->count());
             $progress->start();
             
-            /* @var $classReflections FileReflection[] */
+            /* @var $classReflections [] */
             $classReflections = array();
             
             /* @var $exceptions \Exception[] */
             $exceptions = array();
             
             foreach ($this->getFinder()->files() as $fileName) {
-                
                 try {
-                    $file = new FileReflection($fileName, true);
-                    $fileClasses = $file->getClasses();
-                    $classReflections = array_merge($classReflections, $fileClasses);
+                    /* @var $fileReflection ReflectionFile */
+                    $fileReflection = $this->getBroker()->processFile($fileName);
                 } catch (\Exception $exception) {
-                    $exceptions[] = $exception;
+                    $this->addException($exception);
                 }
                 $progress->advance();
             }
+            $classReflections = $this->getBroker()->getClasses(Backend::TOKENIZED_CLASSES);
             $this->setClassReflections($classReflections);
-            
             $progress->finish();
-            
             $this->writeLine();
-            $this->writeInfo(sprintf("Done Processing %d Classes with %d errors.", count($exceptions), $this->getFinder()->count()));
+            $this->writeInfo(sprintf("Found %d Classes with %d errors.", count($this->getExceptions()), count($classReflections)));
             $this->writeLine();
-            
-            foreach ($exceptions as $exception) {
-                $this->writeError($exception->getMessage());
-            }
         }
         
         return $this->classReflections;
@@ -210,7 +215,7 @@ abstract class CodeCommand extends AbstractCommand
     /**
      * Sets SK ITCBundle Command Code Generator Class Reflections
      *
-     * @param ClassReflection[] $classReflections            
+     * @param ReflectionClass[] $classReflections            
      * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
      */
     public function setClassReflections($classReflections)
@@ -220,31 +225,64 @@ abstract class CodeCommand extends AbstractCommand
     }
 
     /**
-     * Gets SK ITCBundle Command Code Generator Class Directory Scanner
+     * Sets SK ITCBundle Command Code Generator Finder
      *
-     * @return DirectoryScanner
+     * @param Finder $finder
+     *            SK ITCBundle Command Code Generator Finder
+     * @return \SK\ITCBundle\Command\Code\CodeCommand
      */
-    public function getDirectoryScanner()
+    public function setFinder(Finder $finder)
     {
-        if (NULL === $this->directoryScanner) {
-            try {
-                $directoryScanner = new AggregateDirectoryScanner($this->getSrc());
-                $this->setDirectoryScanner($directoryScanner);
-            } catch (\Exception $e) {
-                $this->writeError($e->getMessage());
-            }
-        }
-        return $this->directoryScanner;
+        $this->finder = $finder;
+        return $this;
     }
 
     /**
-     * Sets SK ITCBundle Command Code Generator Class Directory Scanner
+     * Sets SK ITCBundle Command Code Generator Broker
      *
-     * @param DirectoryScanner $directoryScanner            
+     * @param Broker $broker
+     *            SK ITCBundle Command Code Generator Broker
+     * @return \SK\ITCBundle\Command\Code\CodeCommand
      */
-    public function setDirectoryScanner(DirectoryScanner $directoryScanner)
+    public function setBroker(Broker $broker)
     {
-        $this->directoryScanner = $directoryScanner;
+        $this->broker = $broker;
+        return $this;
+    }
+
+    /**
+     * Gets SK ITCBundle Command Code Generator Exception
+     *
+     * @return \Exception[]
+     */
+    public function getExceptions()
+    {
+        return $this->exceptions;
+    }
+
+    /**
+     * Sets SK ITCBundle Command Code Generator Exception
+     *
+     * @param \Exception[] $exceptions
+     *            SK ITCBundle Command Code Generator Exceptions
+     * @return \SK\ITCBundle\Command\Code\CodeCommand
+     */
+    public function setExceptions(array $exceptions)
+    {
+        $this->exceptions = $exceptions;
+        return $this;
+    }
+
+    /**
+     * Adds SK ITCBundle Command Code Generator Exception
+     *
+     * @param \Exception $exception
+     *            SK ITCBundle Command Code Generator Exception
+     * @return \SK\ITCBundle\Command\Code\CodeCommand
+     */
+    public function addException(\Exception $exception)
+    {
+        $this->exceptions[] = $exception;
         return $this;
     }
 }

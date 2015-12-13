@@ -11,38 +11,38 @@ use Symfony\Component\Console\Application;
 class ITCApplication extends Application
 {
     
-    private static $logo = '                                                                                                                    
-                                                                                                            dddddddd
-IIIIIIIIIITTTTTTTTTTTTTTTTTTTTTTT       CCCCCCCCCCCCClllllll                                                d::::::d
-I::::::::IT:::::::::::::::::::::T    CCC::::::::::::Cl:::::l                                                d::::::d
-I::::::::IT:::::::::::::::::::::T  CC:::::::::::::::Cl:::::l                                                d::::::d
-II::::::IIT:::::TT:::::::TT:::::T C:::::CCCCCCCC::::Cl:::::l                                                d:::::d 
-  I::::I  TTTTTT  T:::::T  TTTTTTC:::::C       CCCCCC l::::l    ooooooooooo   uuuuuu    uuuuuu      ddddddddd:::::d 
-  I::::I          T:::::T       C:::::C               l::::l  oo:::::::::::oo u::::u    u::::u    dd::::::::::::::d 
-  I::::I          T:::::T       C:::::C               l::::l o:::::::::::::::ou::::u    u::::u   d::::::::::::::::d 
-  I::::I          T:::::T       C:::::C               l::::l o:::::ooooo:::::ou::::u    u::::u  d:::::::ddddd:::::d 
-  I::::I          T:::::T       C:::::C               l::::l o::::o     o::::ou::::u    u::::u  d::::::d    d:::::d 
-  I::::I          T:::::T       C:::::C               l::::l o::::o     o::::ou::::u    u::::u  d:::::d     d:::::d 
-  I::::I          T:::::T       C:::::C               l::::l o::::o     o::::ou::::u    u::::u  d:::::d     d:::::d 
-  I::::I          T:::::T        C:::::C       CCCCCC l::::l o::::o     o::::ou:::::uuuu:::::u  d:::::d     d:::::d 
-II::::::II      TT:::::::TT       C:::::CCCCCCCC::::Cl::::::lo:::::ooooo:::::ou:::::::::::::::uud::::::ddddd::::::dd
-I::::::::I      T:::::::::T        CC:::::::::::::::Cl::::::lo:::::::::::::::o u:::::::::::::::u d:::::::::::::::::d
-I::::::::I      T:::::::::T          CCC::::::::::::Cl::::::l oo:::::::::::oo   uu::::::::uu:::u  d:::::::::ddd::::d
-IIIIIIIIII      TTTTTTTTTTT             CCCCCCCCCCCCCllllllll   ooooooooooo       uuuuuuuu  uuuu   ddddddddd   ddddd
-                                                                                                                    
-                                                                                                                    
-                                                                                                                    
-                                                                                                                    
-                                                                                                                    
-                                                                                                                    
-                                                                                                                    ';
+    private static $logo = '                                                     
+                                                     
+IIIIIIIIIITTTTTTTTTTTTTTTTTTTTTTT       CCCCCCCCCCCCC
+I::::::::IT:::::::::::::::::::::T    CCC::::::::::::C
+I::::::::IT:::::::::::::::::::::T  CC:::::::::::::::C
+II::::::IIT:::::TT:::::::TT:::::T C:::::CCCCCCCC::::C
+  I::::I  TTTTTT  T:::::T  TTTTTTC:::::C       CCCCCC
+  I::::I          T:::::T       C:::::C              
+  I::::I          T:::::T       C:::::C              
+  I::::I          T:::::T       C:::::C              
+  I::::I          T:::::T       C:::::C              
+  I::::I          T:::::T       C:::::C              
+  I::::I          T:::::T       C:::::C              
+  I::::I          T:::::T        C:::::C       CCCCCC
+II::::::II      TT:::::::TT       C:::::CCCCCCCC::::C
+I::::::::I      T:::::::::T        CC:::::::::::::::C
+I::::::::I      T:::::::::T          CCC::::::::::::C
+IIIIIIIIII      TTTTTTTTTTT             CCCCCCCCCCCCC
+                                                     
+                                                     
+                                                     
+                                                     
+                                                     
+                                                     
+                                                     ';
     /**
      *
      * {@inheritDoc}
      *
      * @see \Symfony\Component\Console\Application::__construct()
      */
-    public function __construct($name = 'ITC', $version = '0.0.20')
+    public function __construct($name = 'ITCloud', $version = '${project.version}')
     {
         parent::__construct($name, $version);
         

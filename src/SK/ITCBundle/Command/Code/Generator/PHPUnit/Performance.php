@@ -7,7 +7,6 @@
  */
 namespace SK\ITCBundle\Command\Code\Generator\PHPUnit;
 
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

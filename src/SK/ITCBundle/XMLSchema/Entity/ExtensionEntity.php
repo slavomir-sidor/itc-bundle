@@ -8,7 +8,6 @@
 namespace SK\ITCBundle\XMLSchema\Entity;
 
 use SK\ITCBundle\XMLSchema\Entity;
-use Doctrine\Tests\ORM\Functional\SequenceEntity;
 use Doctrine\Common\Annotations\Annotation\Attribute;
 
 class ExtensionEntity extends Entity

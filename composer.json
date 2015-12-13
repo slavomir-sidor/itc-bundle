@@ -27,6 +27,8 @@
 		"packagist/yuicompressor-bin" : "2.4.8",
 		"zendframework/zend-soap" : "2.5.1",
 		"doctrine/doctrine-migrations-bundle" : "1.1.1",
-		"behat/behat" : "dev-master"
+		"behat/behat" : "dev-master",
+		"symfony/finder": "^3.0",
+		"andrewsville/php-token-reflection": "^1.4"
 	}
 }

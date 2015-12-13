@@ -12,36 +12,67 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Zend\Code\Scanner\FileScanner;
 use Zend\Code\Reflection\ClassReflection;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * SK ITCBundle Command Abstract
  *
  * @licence GNU GPL
+ *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 abstract class CodeCommand extends AbstractCommand
 {
 
     /**
-     * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Class Reflection
+     * SK ITCBundle Command Code Generator Class Reflection
      *
      * @var ClassReflection[]
      */
     protected $classReflections;
 
     /**
-     * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Source directory
+     * SK ITCBundle Command Code Generator Source directory
      *
      * @var string[]
      */
     protected $src;
 
     /**
-     * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Directory Scanner
+     * SK ITCBundle Command Code Generator Directory Scanner
      *
      * @var DirectoryScanner
      */
     protected $directoryScanner;
+
+    /**
+     * SK ITCBundle Command Code Generator Finder
+     *
+     * @var Finder
+     */
+    protected $finder;
+
+    /**
+     * Gets SK ITCBundle Command Code Generator Finder
+     *
+     * @return \Symfony\Component\Finder\Finder
+     */
+    protected function getFinder()
+    {
+        if (null === $this->finder) {
+            $finder = new Finder();
+            $finder->ignoreDotFiles(TRUE);
+            $finder->in($this->getSrc());
+            $nameSuffix = $this->getInput()->getOption("suffix");
+            
+            if ($this->getInput()->getOption("suffix")) {
+                $finder->name('*.' . $nameSuffix);
+            }
+        }
+        
+        return $finder;
+    }
 
     /**
      * (non-PHPdoc)
@@ -63,6 +94,7 @@ abstract class CodeCommand extends AbstractCommand
     {
         parent::configure();
         
+        $this->addOption("suffix", "s", InputOption::VALUE_OPTIONAL, "File suffixes for given src, default all and not dot files.");
         $this->addArgument('src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
             'src',
             'app',
@@ -127,7 +159,7 @@ abstract class CodeCommand extends AbstractCommand
     }
 
     /**
-     * Gets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Class Reflection
+     * Gets SK ITCBundle Command Code Generator Class Reflection
      *
      * @return ClassReflection[]
      */
@@ -136,40 +168,39 @@ abstract class CodeCommand extends AbstractCommand
         if (NULL === $this->classReflections) {
             
             $this->writeLine();
-            $this->writeInfo(sprintf("Processing classes in source files %s.", implode("|",$this->getSrc())));
+            $this->writeInfo(sprintf("Processing classes in source files '%s'.", implode("|", $this->getSrc())));
             $this->writeLine();
             
-            $classReflections = array();
-            $fileScanners = $this->getFileScanners();
-            $fileScannersCount = count($fileScanners);
-            $fileScannersErrorCount = 0;
-            
-            $progress = new ProgressBar($this->getOutput(), $fileScannersCount);
+            $progress = new ProgressBar($this->getOutput(), $this->getFinder()->count());
             $progress->start();
+            
+            /* @var $classReflections FileReflection[] */
+            $classReflections = array();
+            
+            /* @var $exceptions \Exception[] */
             $exceptions = array();
-            /* @var $classScanner FileScanner */
-            foreach ($fileScanners as $fileScanner) {
+            
+            foreach ($this->getFinder()->files() as $fileName) {
                 
                 try {
-                    $file = new FileReflection($fileScanner->getFile(), TRUE);
+                    $file = new FileReflection($fileName, true);
                     $fileClasses = $file->getClasses();
                     $classReflections = array_merge($classReflections, $fileClasses);
-                } catch (\Exception $e) {
-                    $exceptions[] = $e;
-                    ++ $fileScannersErrorCount;
+                } catch (\Exception $exception) {
+                    $exceptions[] = $exception;
                 }
-                
                 $progress->advance();
             }
             $this->setClassReflections($classReflections);
+            
             $progress->finish();
             
             $this->writeLine();
-            $this->writeInfo(sprintf("Done Processing %d Classes with %d errors.", $fileScannersCount, $fileScannersErrorCount));
+            $this->writeInfo(sprintf("Done Processing %d Classes with %d errors.", count($exceptions), $this->getFinder()->count()));
             $this->writeLine();
             
             foreach ($exceptions as $exception) {
-                $this->writeError($e->getTraceAsString());
+                $this->writeError($exception->getMessage());
             }
         }
         
@@ -177,7 +208,7 @@ abstract class CodeCommand extends AbstractCommand
     }
 
     /**
-     * Sets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Class Reflections
+     * Sets SK ITCBundle Command Code Generator Class Reflections
      *
      * @param ClassReflection[] $classReflections            
      * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
@@ -189,7 +220,7 @@ abstract class CodeCommand extends AbstractCommand
     }
 
     /**
-     * Gets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Class Directory Scanner
+     * Gets SK ITCBundle Command Code Generator Class Directory Scanner
      *
      * @return DirectoryScanner
      */
@@ -207,7 +238,7 @@ abstract class CodeCommand extends AbstractCommand
     }
 
     /**
-     * Sets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Class Directory Scanner
+     * Sets SK ITCBundle Command Code Generator Class Directory Scanner
      *
      * @param DirectoryScanner $directoryScanner            
      */

@@ -43,7 +43,7 @@ abstract class AbstractCommand extends Command {
 	 * @param string $description
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
-	public function __construct($name = "src:reflect", $description = "ITCCloud Reflect Source Code") {
+	public function __construct($name = "src:reflect", $description = "ITCloud Reflect Source Code") {
 		parent::__construct ( $name );
 		$this->setDescription ( $description );
 	}

@@ -59,7 +59,6 @@ IIIIIIIIII      TTTTTTTTTTT             CCCCCCCCCCCCC
         
         $this->add ( new \SK\ITCBundle\Command\Code\Reflection\AttributesCommand() );
         $this->add ( new \SK\ITCBundle\Command\Code\Reflection\ClassCommand() );
-        $this->add ( new \SK\ITCBundle\Command\Code\Reflection\DocBlockCommand() );
         $this->add ( new \SK\ITCBundle\Command\Code\Reflection\FilesCommand() );
         $this->add ( new \SK\ITCBundle\Command\Code\Reflection\NamespaceCommand () );
         $this->add ( new \SK\ITCBundle\Command\Code\Reflection\OperationsCommand() );

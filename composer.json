@@ -1,5 +1,5 @@
 {
-	"name" : "sk.itcloud.symfony/tc-bundle",
+	"name" : "sk.itcloud.symfony/itc-bundle",
 	"license" : "ITCloud Symfony Bundle ITC",
 	"type" : "bundle",
 	"description" : "Symfony ITC Bundle",

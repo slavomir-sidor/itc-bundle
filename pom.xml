@@ -12,7 +12,7 @@
 	</parent>
 
 	<groupId>sk.itcloud.symfony</groupId>
-	<artifactId>bundle-itc</artifactId>
+	<artifactId>itc-bundle</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 

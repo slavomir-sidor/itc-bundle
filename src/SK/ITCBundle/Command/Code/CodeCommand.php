@@ -14,6 +14,7 @@ use TokenReflection\Broker;
 use TokenReflection\ReflectionFile;
 use TokenReflection\ReflectionClass;
 use TokenReflection\Broker\Backend;
+use TokenReflection\ReflectionMethod;
 
 /**
  * SK ITCBundle Command Abstract
@@ -31,6 +32,13 @@ abstract class CodeCommand extends AbstractCommand
      * @var ReflectionClass[]
      */
     protected $classReflections;
+
+    /**
+     * SK ITCBundle Command Code Generator Operations Reflection
+     *
+     * @var ReflectionMethod[]
+     */
+    protected $operationsReflections;
 
     /**
      * SK ITCBundle Command Code Generator Source directory
@@ -85,7 +93,7 @@ abstract class CodeCommand extends AbstractCommand
             }
             
             $this->setFinder($finder);
-            $this->writeInfo(sprintf("Found %d files.", $this->getFinder()
+            $this->writeInfo(sprintf("Processing %d files.", $this->getFinder()
                 ->count()));
         }
         
@@ -111,6 +119,8 @@ abstract class CodeCommand extends AbstractCommand
     protected function configure()
     {
         parent::configure();
+        $this->addOption("operationName", "on", InputOption::VALUE_OPTIONAL, "Operation name");
+        $this->addOption("operationFilter", "op", InputOption::VALUE_OPTIONAL, "Operation filter : Abstract,Final, Private, Protected, Public, Static.");
         $this->addOption("parentClass", "pc", InputOption::VALUE_OPTIONAL, "Parent Class filter.");
         $this->addOption("suffix", "s", InputOption::VALUE_OPTIONAL, "File suffixes for given src, default all and not dot files.");
         $this->addArgument('src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
@@ -198,8 +208,8 @@ abstract class CodeCommand extends AbstractCommand
             
             if ($parentClass) {
                 
-                foreach ($classReflections as $key=>$classReflection) {
-                    if(!in_array($parentClass, $classReflection->getParentClassNameList())){
+                foreach ($classReflections as $key => $classReflection) {
+                    if (! in_array($parentClass, $classReflection->getParentClassNameList())) {
                         unset($classReflections[$key]);
                     }
                 }
@@ -247,6 +257,56 @@ abstract class CodeCommand extends AbstractCommand
     public function setBroker(Broker $broker)
     {
         $this->broker = $broker;
+        return $this;
+    }
+
+    /**
+     * Sets SK ITCBundle Command Code Generator Operations Reflections
+     *
+     * @return ReflectionMethod[]
+     */
+    public function getOperationsReflections()
+    {
+        if (null === $this->operationsReflections) {
+            
+            $operationsReflections = array();
+            
+            /**
+             *
+             * @todo add operation filter for class reflections
+             *       $operationFilter = $this->getInput()->getOption('operationFilter');
+             */
+            
+            $operationName = $this->getInput()->hasOption('operationName') ? $this->getInput()->getOption('operationName') : "";
+            
+            foreach ($this->getClassReflections() as $classReflection) {
+                
+                /* @var $operationReflection ReflectionMethod[] */
+                $classOperationReflections = $classReflection->getMethods();
+                
+                foreach ($classOperationReflections as $operationReflection) {
+                    if ($operationName != "" && ! preg_match('/' . $operationName . '/', $operationReflection->getName())) {
+                        continue;
+                    }
+                    $operationsReflections[] = $operationReflection;
+                }
+            }
+            $this->setOperationsReflections($operationsReflections);
+        }
+        
+        return $this->operationsReflections;
+    }
+
+    /**
+     * Gets SK ITCBundle Command Code Generator Operations Reflections
+     *
+     * @param
+     *            $operationsReflections
+     * @return \SK\ITCBundle\Command\Code\CodeCommand
+     */
+    public function setOperationsReflections(array $operationsReflections)
+    {
+        $this->operationsReflections = $operationsReflections;
         return $this;
     }
 }

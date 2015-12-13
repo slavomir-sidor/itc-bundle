@@ -159,38 +159,39 @@ abstract class AbstractCommand extends Command
         return $this;
     }
 
-    public function writeError($message)
+    public function writeError($message, $verbosity=OutputInterface::VERBOSITY_NORMAL)
     {
         $output = $this->getOutput();
-        $output->writeln(' <fg=black;bg=red>Error:</fg=black;bg=red> ' . $message);
+        $output->writeln(' <fg=black;bg=red>Error:</fg=black;bg=red> ' . $message, $verbosity);
     }
 
     public function writeException(\Exception $exception)
     {
-        $this->writeError(sprintf(" <fg=black;bg=red>Error %s %s</fg=black;bg=red>", $exception->getCode(), $exception->getMessage()));
+        $this->getOutput()->writeln(sprintf(" <fg=black;bg=red>Error %s %s</fg=black;bg=red>", $exception->getCode(), $exception->getMessage()),OutputInterface::VERBOSITY_VERBOSE);
+        $this->getOutput()->writeln(sprintf(" <fg=black;bg=red>Trace %s</fg=black;bg=red>", $exception->getTraceAsString()),OutputInterface::VERBOSITY_VERY_VERBOSE );
     }
 
     public function writeExceptions()
     {
         if (count($this->getExceptions()) > 0) {
-            $this->writeInfo("Exceptions");
+            $this->writeInfo("Occured %d exceptions", count($this->getExceptions()));
             foreach ($this->getExceptions() as $exception) {
                 $this->writeException($exception);
             }
         }
     }
 
-    public function writeLine($message = "\n")
+    public function writeLine($message = "\n", $verbosity=OutputInterface::VERBOSITY_NORMAL)
     {
         $output = $this->getOutput();
         $output->writeln($message);
     }
 
-    public function writeInfo($message)
+    public function writeInfo($message, $verbosity=OutputInterface::VERBOSITY_NORMAL)
     {
         $this->writeLine();
         $output = $this->getOutput();
-        $output->writeln(' <fg=white;bg=green>' . $message . "</fg=white;bg=green>");
+        $output->writeln(sprintf(' <fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>", $verbosity));
         $this->writeLine();
     }
 

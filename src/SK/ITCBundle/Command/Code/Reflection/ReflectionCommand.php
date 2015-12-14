@@ -33,8 +33,8 @@ abstract class ReflectionCommand extends CodeCommand
 
     /**
      *
-     * @param InputInterface $input            
-     * @param OutputInterface $output            
+     * @param InputInterface $input
+     * @param OutputInterface $output
      */
     protected function executeClassReflection()
     {
@@ -51,24 +51,24 @@ abstract class ReflectionCommand extends CodeCommand
                 implode(", ", $classReflection->getInterfaceNames())
             );
         }
-        
+
         $table = new Table($this->getOutput());
         $table->setHeaders($tableHeader);
         $table->setRows($tableRows);
         $table->render();
-        
+
         $this->writeExceptions();
     }
 
     /**
      *
-     * @param InputInterface $input            
-     * @param OutputInterface $output            
+     * @param InputInterface $input
+     * @param OutputInterface $output
      */
     protected function executeAttributesReflection()
     {
         $classReflections = $this->getClassReflections();
-        
+
         $tableHeader = array(
             'Namespace Name',
             'Class',
@@ -76,7 +76,7 @@ abstract class ReflectionCommand extends CodeCommand
             'Accessibility',
             'Static'
         );
-        
+
         $tableRows = array();
         foreach ($classReflections as $classReflection) {
             $attributesReflections = $classReflection->getProperties();
@@ -90,7 +90,7 @@ abstract class ReflectionCommand extends CodeCommand
                 );
             }
         }
-        
+
         $table = new Table($this->getOutput());
         $table->setHeaders($tableHeader);
         $table->setRows($tableRows);
@@ -100,13 +100,13 @@ abstract class ReflectionCommand extends CodeCommand
 
     /**
      *
-     * @param InputInterface $input            
-     * @param OutputInterface $output            
+     * @param InputInterface $input
+     * @param OutputInterface $output
      */
     protected function executeOperationsReflection()
     {
         $classReflections = $this->getClassReflections();
-        
+
         $tableHeader = array(
             'Namespace Name',
             'Class',
@@ -116,13 +116,13 @@ abstract class ReflectionCommand extends CodeCommand
             'Static',
             'Returns'
         );
-        
+
         $tableRows = array();
         $table = new Table($this->getOutput());
         $table->setHeaders($tableHeader);
-        
+
         foreach ($this->getOperationsReflections() as $operationReflection) {
-            
+
             $tableRows[] = array(
                 $operationReflection->getDeclaringClass()->getNamespaceName(),
                 $operationReflection->getDeclaringClass()->getShortName(),
@@ -133,7 +133,7 @@ abstract class ReflectionCommand extends CodeCommand
                 ""
             );
         }
-        
+
         $table->setRows($tableRows);
         $table->render();
         $this->writeExceptions();
@@ -141,8 +141,8 @@ abstract class ReflectionCommand extends CodeCommand
 
     /**
      *
-     * @param InputInterface $input            
-     * @param OutputInterface $output            
+     * @param InputInterface $input
+     * @param OutputInterface $output
      */
     protected function executeOperationsAttributesReflection()
     {
@@ -155,15 +155,15 @@ abstract class ReflectionCommand extends CodeCommand
             'Type',
             'Default'
         );
-        
+
         $tableRows = array();
         foreach ($classReflections as $classReflection) {
             $operationReflections = $classReflection->getMethods();
-            
+
             foreach ($operationReflections as $operationReflection) {
-                
+
                 $attributeReflections = $operationReflection->getParameters();
-                
+
                 foreach ($attributeReflections as $attributeReflection) {
                     $row = array(
                         $classReflection->getNamespaceName(),
@@ -174,7 +174,7 @@ abstract class ReflectionCommand extends CodeCommand
                         $attributeReflection->isDefaultValueAvailable() ? $attributeReflection->getDefaultValue() : ""
                     );
                     // ($operationReflections->getDocBlock()) ? $classOperationReflection->getDocBlock()->getShortDescription() : ""
-                    
+
                     $tableRows[] = $row;
                 }
             }
@@ -188,21 +188,21 @@ abstract class ReflectionCommand extends CodeCommand
 
     /**
      *
-     * @param InputInterface $input            
-     * @param OutputInterface $output            
+     * @param InputInterface $input
+     * @param OutputInterface $output
      */
     protected function executeNamespaceReflection()
     {
         $classReflections = $this->getClassReflections();
-        
+
         $tableHeader = array(
             'Namespace Name',
             'Class Count'
         );
-        
+
         $tableRows = array();
         foreach ($classReflections as $classReflection) {
-            
+
             if (! isset($tableRows[$classReflection->getNamespaceName()])) {
                 $tableRows[$classReflection->getNamespaceName()] = array(
                     $classReflection->getNamespaceName(),
@@ -211,7 +211,7 @@ abstract class ReflectionCommand extends CodeCommand
             }
             ++ $tableRows[$classReflection->getNamespaceName()][1];
         }
-        
+
         $table = new Table($this->getOutput());
         $table->setHeaders($tableHeader);
         $table->setRows($tableRows);
@@ -221,13 +221,13 @@ abstract class ReflectionCommand extends CodeCommand
 
     /**
      *
-     * @param InputInterface $input            
-     * @param OutputInterface $output            
+     * @param InputInterface $input
+     * @param OutputInterface $output
      */
     protected function executeFilesReflection()
     {
         $tableHeader = array(
-            implode("|", $this->getSrc()),
+            implode("|", $this->getInput()->getArgument('src')),
             "Owner",
             "Group",
             "Permissions"
@@ -243,12 +243,12 @@ abstract class ReflectionCommand extends CodeCommand
             );
             $tableRows[] = $row;
         }
-        
+
         $table = new Table($this->getOutput());
         $table->setHeaders($tableHeader);
         $table->setRows($tableRows);
         $table->render();
-        
+
         $this->writeExceptions();
     }
 }

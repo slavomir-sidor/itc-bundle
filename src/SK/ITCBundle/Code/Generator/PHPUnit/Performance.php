@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Code Generator PHPUnit Performance
  *
@@ -14,10 +15,9 @@ use SK\ITCBundle\Code\Generator\CodeGenerator;
 
 class Performance extends PHPUnit
 {
-
 	public function generate()
 	{
-		parent::execute($input, $output);
-		$this->generateClassPerformanceCase($input, $output);
+		parent::execute( $input, $output );
+		$this->generateClassPerformanceCase( $input, $output );
 	}
 }

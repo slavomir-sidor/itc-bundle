@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle SOAP WSDL
  *
@@ -12,36 +13,36 @@ use \DOMElement as PHPDOMElement;
 
 class Document extends XMLSchemaDocument
 {
-
+	
 	/**
 	 * SK ITCBundle SOAP WSDL
 	 *
 	 * @var tDefinitions
 	 */
 	protected $definitions;
-
+	
 	/**
 	 *
 	 * @param PHPDOMElement $element        	
 	 */
-	public function __construct($uri)
+	public function __construct( $uri )
 	{
-		parent::__construct($uri);
+		parent::__construct( $uri );
 		
-		foreach ($this->childNodes as $childNode)
+		foreach( $this->childNodes as $childNode )
 		{
-			if ($childNode instanceof PHPDOMElement)
+			if( $childNode instanceof PHPDOMElement )
 			{
-				switch ($childNode->tagName)
+				switch( $childNode->tagName )
 				{
 					case tDefinitions::ELEMENT_NAME:
-						$this->definitions = new tDefinitions($childNode);
+						$this->definitions = new tDefinitions( $childNode );
 						break;
 				}
 			}
 		}
 	}
-
+	
 	/**
 	 * SK ITCBundle SOAP WSDL Definitions
 	 *
@@ -51,12 +52,12 @@ class Document extends XMLSchemaDocument
 	{
 		return $this->definitions;
 	}
-
+	
 	/**
 	 *
 	 * @param tDefinitions $definitions        	
 	 */
-	public function setDefinitions(tDefinitions $definitions)
+	public function setDefinitions( tDefinitions $definitions )
 	{
 		$this->definitions = $definitions;
 		return $this;

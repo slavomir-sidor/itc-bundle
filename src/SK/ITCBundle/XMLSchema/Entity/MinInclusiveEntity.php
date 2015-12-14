@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity Min Inclusive
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class MinInclusiveEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Min Inclusive Tag Name
 	 *

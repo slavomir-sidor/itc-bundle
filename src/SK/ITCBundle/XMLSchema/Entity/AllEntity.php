@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity All
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class AllEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity AllName
 	 *

@@ -18,16 +18,16 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 class SKITCExtension extends Extension
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\DependencyInjection\Extension\ExtensionInterface::load()
 	 */
-	public function load(array $configs, ContainerBuilder $container)
+	public function load( array $configs, ContainerBuilder $container )
 	{
-		$loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-		$loader->load('parameters.xml');
-		$loader->load('services.xml');
+		$loader = new XmlFileLoader( $container, new FileLocator( __DIR__ . '/../Resources/config' ) );
+		$loader->load( 'parameters.xml' );
+		$loader->load( 'services.xml' );
 	}
 }

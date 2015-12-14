@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle WSDL Binding Operation Fault
  *
@@ -9,14 +10,14 @@ namespace SK\ITCBundle\WSDL;
 
 class tBindingOperationFault extends Element
 {
-
+	
 	/**
 	 * SK ITCBundle WSDL tBindingOperationFault Contructor
 	 *
 	 * @param string $uri        	
 	 */
-	public function __construct(\DOMElement $element)
+	public function __construct( \DOMElement $element )
 	{
-		$this->setDOMElement($element);
+		$this->setDOMElement( $element );
 	}
 }

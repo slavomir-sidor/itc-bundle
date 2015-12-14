@@ -1,4 +1,5 @@
 <?php
+
 namespace SK\ITCBundle\Code\Generator;
 
 use Zend\Code\Generator\DocBlockGenerator as ZendDocBlockGenerator;
@@ -10,6 +11,4 @@ use Zend\Code\Generator\DocBlockGenerator as ZendDocBlockGenerator;
  */
 class DocBlockGenerator extends ZendDocBlockGenerator
 {
-
-  
 }

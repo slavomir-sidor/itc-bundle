@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle DTD Attribute List
  *
@@ -8,49 +9,49 @@ namespace SK\ITCBundle\DTD\Attribute;
 
 class AttributeList
 {
-
+	
 	/**
 	 * SK ITC Bundle DTD Attribute List Annotation
 	 *
 	 * @var Annotation
 	 */
 	protected $annotation;
-
+	
 	/**
 	 * SK ITC Bundle DTD Attribute List Attribute
 	 *
 	 * @var Attribute[]
 	 */
 	protected $attribute;
-
+	
 	/**
 	 * SK ITC Bundle DTD Attribute List Document
 	 *
 	 * @var Document
 	 */
 	protected $document;
-
+	
 	/**
 	 * SK ITC Bundle DTD Attribute List Element
 	 *
 	 * @var Element
 	 */
 	protected $element;
-
+	
 	/**
 	 * SK ITC Bundle DTD Attribute List Name
 	 *
 	 * @var string
 	 */
 	protected $name;
-
+	
 	/**
 	 * SK ITC Bundle DTD Attribute List Source
 	 *
 	 * @var string
 	 */
 	protected $source;
-
+	
 	/**
 	 * Constructs SK ITC Bundle DTD Attribute List
 	 *
@@ -61,24 +62,24 @@ class AttributeList
 	 * @param string $source
 	 *        	SK ITC Bundle DTD Attribute List Source
 	 */
-	public function __construct(Document $document, $name, $source = NULL)
+	public function __construct( Document $document, $name, $source = NULL )
 	{
-		$this->setDocument($document);
-		$this->setName($name);
-		$this->setSource($source);
+		$this->setDocument( $document );
+		$this->setName( $name );
+		$this->setSource( $source );
 	}
-
+	
 	/**
 	 * Loads SK ITC Bundle DTD Attribute List
 	 */
 	public function load()
 	{
-		if (TRUE !== $this->getLoaded())
+		if( TRUE !== $this->getLoaded() )
 		{
-			$this->setLoaded(TRUE);
+			$this->setLoaded( TRUE );
 		}
 	}
-
+	
 	/**
 	 * Creates SK ITC Bundle DTD Attribute List
 	 *
@@ -86,29 +87,28 @@ class AttributeList
 	 *        	SK ITC Bundle DTD Attribute List Source
 	 * @return \SK\ITCBundle\DTD\AttributeList
 	 */
-	public static function create($source, Document $document)
+	public static function create( $source, Document $document )
 	{
 		$entity = null;
 		
-		$sourceAttributes = explode(" ", $source);
-		$instance = new self($source);
-		$entity = array_shift($sourceAttributes);
+		$sourceAttributes = explode( " ", $source );
+		$instance = new self( $source );
+		$entity = array_shift( $sourceAttributes );
 		
 		$j = 0;
-		for ($i = 0; $i < count($sourceAttributes); $i ++)
+		for( $i = 0; $i < count( $sourceAttributes ); $i ++ )
 		{
-			$sourceAttribute = $sourceAttributes[$i];
+			$sourceAttribute = $sourceAttributes[ $i ];
 			
-			if (preg_match("/%/", $sourceAttribute) && $j == 0)
+			if( preg_match( "/%/", $sourceAttribute ) && $j == 0 )
 			{
 				$j = $j + 2;
-				$attribute = new Attribute("");
-				$instance->setAttribute($attribute);
-			}
-			else
+				$attribute = new Attribute( "" );
+				$instance->setAttribute( $attribute );
+			} else
 			{
 				$column = $j % 3;
-				switch ($column)
+				switch( $column )
 				{
 					case 0:
 						$attributeName = $sourceAttribute;
@@ -120,12 +120,12 @@ class AttributeList
 						break;
 					case 2:
 						$attributeDefaultValue = $sourceAttribute;
-						$attribute = new Attribute("");
-						$attribute->setDocument($document);
-						$attribute->setName($attributeName);
-						$attribute->setEntity($document->getEntity($attributeEntity));
-						$attribute->setDefaultValue($attributeDefaultValue);
-						$instance->setAttribute($attribute);
+						$attribute = new Attribute( "" );
+						$attribute->setDocument( $document );
+						$attribute->setName( $attributeName );
+						$attribute->setEntity( $document->getEntity( $attributeEntity ) );
+						$attribute->setDefaultValue( $attributeDefaultValue );
+						$instance->setAttribute( $attribute );
 						$j = 0;
 						break;
 				}
@@ -134,7 +134,7 @@ class AttributeList
 		
 		return $instance;
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Attribute List Annotation
 	 *
@@ -144,7 +144,7 @@ class AttributeList
 	{
 		return $this->annotation;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Attribute List Annotation
 	 *
@@ -152,12 +152,12 @@ class AttributeList
 	 *        	SK ITC Bundle DTD Attribute List Annotation
 	 * @return \SK\ITCBundle\DTD\AttributeList
 	 */
-	public function setAnnotation(Annotation $annotation)
+	public function setAnnotation( Annotation $annotation )
 	{
 		$this->annotation = $annotation;
 		return $this;
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Attribute List Name
 	 *
@@ -167,7 +167,7 @@ class AttributeList
 	{
 		return $this->name;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Attribute List Name
 	 *
@@ -175,12 +175,12 @@ class AttributeList
 	 *        	SK ITC Bundle DTD Document Attribute List Name
 	 * @return \SK\ITCBundle\DTD\AttributeList
 	 */
-	public function setName($name)
+	public function setName( $name )
 	{
-		$this->name = (string) $name;
+		$this->name = ( string ) $name;
 		return $this;
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Attribute List Source
 	 *
@@ -190,7 +190,7 @@ class AttributeList
 	{
 		return $this->source;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Attribute List Source
 	 *
@@ -198,12 +198,12 @@ class AttributeList
 	 *        	SK ITC Bundle DTD Attribute List Source
 	 * @return \SK\ITCBundle\DTD\AttributeList
 	 */
-	public function setSource($source)
+	public function setSource( $source )
 	{
 		$this->source = $source;
 		return $this;
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Attribute List Document
 	 *
@@ -213,7 +213,7 @@ class AttributeList
 	{
 		return $this->document;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Attribute List Document
 	 *
@@ -221,12 +221,12 @@ class AttributeList
 	 *        	SK ITC Bundle DTD Attribute List Document
 	 * @return \SK\ITCBundle\DTD\AttributeList
 	 */
-	public function setDocument(Document $document)
+	public function setDocument( Document $document )
 	{
 		$this->document = $document;
 		return $this;
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Attribute List Element
 	 *
@@ -236,7 +236,7 @@ class AttributeList
 	{
 		return $this->element;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Attribute List Element
 	 *
@@ -244,12 +244,12 @@ class AttributeList
 	 *        	SK ITC Bundle DTD Attribute List Element
 	 * @return \SK\ITCBundle\DTD\AttributeList
 	 */
-	public function setElement(Element $element)
+	public function setElement( Element $element )
 	{
 		$this->element = $element;
 		return $this;
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Attribute List Attribute
 	 *
@@ -259,7 +259,7 @@ class AttributeList
 	{
 		return $this->attribute;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Attribute List Attribute
 	 *
@@ -267,12 +267,12 @@ class AttributeList
 	 *        	SK ITC Bundle DTD Attribute List Attribute
 	 * @return \SK\ITCBundle\DTD\AttributeList
 	 */
-	public function setAttribute(Attribute $attribute)
+	public function setAttribute( Attribute $attribute )
 	{
-		$this->attribute[$attribute->getName()] = $attribute;
+		$this->attribute[ $attribute->getName() ] = $attribute;
 		return $this;
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Attribute List Loaded Flag
 	 *
@@ -282,7 +282,7 @@ class AttributeList
 	{
 		return $this->loaded;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Attribute List Loaded Flag
 	 *
@@ -290,7 +290,7 @@ class AttributeList
 	 *        	SK ITC Bundle DTD Attribute List Loaded Flag
 	 * @return \SK\ITCBundle\DTD\AttributeList
 	 */
-	public function setLoaded($loaded)
+	public function setLoaded( $loaded )
 	{
 		$this->loaded = $loaded;
 		return $this;

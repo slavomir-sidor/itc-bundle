@@ -26,7 +26,8 @@ use Zend\Code\Reflection\FileReflection;
 use Zend\Code\Generator\ParameterGenerator;
 use SK\ITCBundle\Command\Code\Generator\GeneratorCommand;
 
-abstract class PHPUnitGenerator extends GeneratorCommand {
+abstract class PHPUnitGenerator extends GeneratorCommand
+{
 	
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Config
@@ -83,7 +84,6 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @var string
 	 */
 	const OPTION_REMOVED_ORPHANED_NO = 'no';
-
 	
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Option OPTION_OVERRIDE_OUTPUT_NO
@@ -111,13 +111,14 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::configure()
 	 */
-	protected function configure() {
-		$this->addArgument ( 'dest', InputArgument::OPTIONAL, 'Destination tests directory', "tests" );
-		$this->addArgument ( 'dataCount', InputArgument::OPTIONAL, 'Dataset permutation count (1) default', 1 );
-		parent::configure ();
-		$this->addOption ( "override", "o", InputOption::VALUE_OPTIONAL, "Override outputs yes/no, default no", self::OPTION_OVERRIDE_OUTPUT_NO );
-		$this->addOption ( "remove-orphaned", "ro", InputOption::VALUE_OPTIONAL, "Remove orphaned yes/no, default no", self::OPTION_REMOVED_ORPHANED_NO );
-		$this->addOption ( "verbose-output", "vo", InputOption::VALUE_OPTIONAL, "Verbose output yes/no,  default no", self::OPTION_VERBOSE_OUTPUT_NO );
+	protected function configure()
+	{
+		$this->addArgument( 'dest', InputArgument::OPTIONAL, 'Destination tests directory', "tests" );
+		$this->addArgument( 'dataCount', InputArgument::OPTIONAL, 'Dataset permutation count (1) default', 1 );
+		parent::configure();
+		$this->addOption( "override", "o", InputOption::VALUE_OPTIONAL, "Override outputs yes/no, default no", self::OPTION_OVERRIDE_OUTPUT_NO );
+		$this->addOption( "remove-orphaned", "ro", InputOption::VALUE_OPTIONAL, "Remove orphaned yes/no, default no", self::OPTION_REMOVED_ORPHANED_NO );
+		$this->addOption( "verbose-output", "vo", InputOption::VALUE_OPTIONAL, "Verbose output yes/no,  default no", self::OPTION_VERBOSE_OUTPUT_NO );
 	}
 	
 	/**
@@ -125,10 +126,11 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute(InputInterface $input, OutputInterface $output) {
-		parent::execute ( $input, $output );
-		$this->setDest ( $input->getArgument ( 'dest' ) );
-		$this->setDataCount ( $input->getArgument ( 'dataCount' ) );
+	public function execute( InputInterface $input, OutputInterface $output )
+	{
+		parent::execute( $input, $output );
+		$this->setDest( $input->getArgument( 'dest' ) );
+		$this->setDataCount( $input->getArgument( 'dataCount' ) );
 	}
 	
 	/**
@@ -136,109 +138,127 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param OutputInterface $output        	
 	 * @param string $testSrc        	
 	 */
-	public function generatePhpUnit(InputInterface $input, OutputInterface $output) {
-		$this->writeNotice ( $output, sprintf ( "Generating PHPUnit" ) );
+	public function generatePhpUnit( InputInterface $input, OutputInterface $output )
+	{
+		$this->writeNotice( $output, sprintf( "Generating PHPUnit" ) );
 		
-		$dest = $this->getDest ();
+		$dest = $this->getDest();
 		
-		$phpunit = $this->getPhpunit ();
-		$phpunitDom = new \DOMDocument ();
+		$phpunit = $this->getPhpunit();
+		$phpunitDom = new \DOMDocument();
 		
-		if (file_exists ( $phpunit )) {
-			@$phpunitDom->load ( $phpunit );
+		if( file_exists( $phpunit ) )
+		{
+			@$phpunitDom->load( $phpunit );
 		}
 		
-		$phpunitConfig = $this->getConfig ()->phpunit;
+		$phpunitConfig = $this->getConfig()->phpunit;
 		
-		$phpunitXpath = new \DOMXPath ( $phpunitDom );
-		$phpunitDomElement = $phpunitXpath->query ( "/phpunit" )->item ( 0 );
+		$phpunitXpath = new \DOMXPath( $phpunitDom );
+		$phpunitDomElement = $phpunitXpath->query( "/phpunit" )->item( 0 );
 		
-		if (NULL === $phpunitDomElement) {
-			$phpunitDomElement = $phpunitDom->createElement ( "phpunit" );
-			$phpunitDom->appendChild ( $phpunitDomElement );
+		if( NULL === $phpunitDomElement )
+		{
+			$phpunitDomElement = $phpunitDom->createElement( "phpunit" );
+			$phpunitDom->appendChild( $phpunitDomElement );
 		}
 		
-		if ($phpunitConfig->offsetExists ( 'settings' )) {
-			foreach ( $phpunitConfig->offsetGet ( 'settings' ) as $phpunitAttributeName => $phpunitAttributeValue ) {
-				if (strlen ( $phpunitAttributeValue ) > 0) {
-					$phpunitAttributeName = str_replace ( "_", ":", $phpunitAttributeName );
-					$phpunitDomElement->setAttribute ( $phpunitAttributeName, $phpunitAttributeValue );
+		if( $phpunitConfig->offsetExists( 'settings' ) )
+		{
+			foreach( $phpunitConfig->offsetGet( 'settings' ) as $phpunitAttributeName => $phpunitAttributeValue )
+			{
+				if( strlen( $phpunitAttributeValue ) > 0 )
+				{
+					$phpunitAttributeName = str_replace( "_", ":", $phpunitAttributeName );
+					$phpunitDomElement->setAttribute( $phpunitAttributeName, $phpunitAttributeValue );
 				}
 			}
 		}
 		
-		if ($phpunitConfig->offsetExists ( 'logging' )) {
-			$loggingDomElement = $phpunitXpath->query ( "logging", $phpunitDomElement )->item ( 0 );
+		if( $phpunitConfig->offsetExists( 'logging' ) )
+		{
+			$loggingDomElement = $phpunitXpath->query( "logging", $phpunitDomElement )->item( 0 );
 			
-			if (NULL === $loggingDomElement) {
-				$loggingDomElement = $phpunitDom->createElement ( "logging" );
-				$phpunitDomElement->appendChild ( $loggingDomElement );
+			if( NULL === $loggingDomElement )
+			{
+				$loggingDomElement = $phpunitDom->createElement( "logging" );
+				$phpunitDomElement->appendChild( $loggingDomElement );
 			}
 			
-			foreach ( $phpunitConfig->offsetGet ( 'logging' ) as $log ) {
-				$logDomElement = $phpunitXpath->query ( "log[@type='" . $log->type . "']", $loggingDomElement )->item ( 0 );
+			foreach( $phpunitConfig->offsetGet( 'logging' ) as $log )
+			{
+				$logDomElement = $phpunitXpath->query( "log[@type='" . $log->type . "']", $loggingDomElement )->item( 0 );
 				
-				if (NULL == $logDomElement) {
-					$logDomElement = $phpunitDom->createElement ( "log" );
-					$loggingDomElement->appendChild ( $logDomElement );
+				if( NULL == $logDomElement )
+				{
+					$logDomElement = $phpunitDom->createElement( "log" );
+					$loggingDomElement->appendChild( $logDomElement );
 				}
 				
-				foreach ( $log as $logAttributeName => $logAttributeValue ) {
-					if (strlen ( $logAttributeValue ) > 0) {
-						$logDomElement->setAttribute ( $logAttributeName, $logAttributeValue );
+				foreach( $log as $logAttributeName => $logAttributeValue )
+				{
+					if( strlen( $logAttributeValue ) > 0 )
+					{
+						$logDomElement->setAttribute( $logAttributeName, $logAttributeValue );
 					}
 				}
 			}
 		}
 		
-		$testsuitesDomElements = $phpunitXpath->query ( "testsuites", $phpunitDomElement );
-		$testsuitesDomElement = $testsuitesDomElements->item ( 0 );
+		$testsuitesDomElements = $phpunitXpath->query( "testsuites", $phpunitDomElement );
+		$testsuitesDomElement = $testsuitesDomElements->item( 0 );
 		
-		if (NULL === $testsuitesDomElement) {
-			$testsuitesDomElement = $phpunitDom->createElement ( "testsuites" );
-			$phpunitDomElement->appendChild ( $testsuitesDomElement );
+		if( NULL === $testsuitesDomElement )
+		{
+			$testsuitesDomElement = $phpunitDom->createElement( "testsuites" );
+			$phpunitDomElement->appendChild( $testsuitesDomElement );
 		}
 		
-		$cache = new FileStorage ( $this->getCacheDirectory () );
-		$robotLoader = new RobotLoader ();
+		$cache = new FileStorage( $this->getCacheDirectory() );
+		$robotLoader = new RobotLoader();
 		$robotLoader->autoRebuild = TRUE;
-		$robotLoader->setCacheStorage ( $cache );
-		$robotLoader->addDirectory ( $dest );
-		$robotLoader->rebuild ();
-		$robotLoader->register ();
+		$robotLoader->setCacheStorage( $cache );
+		$robotLoader->addDirectory( $dest );
+		$robotLoader->rebuild();
+		$robotLoader->register();
 		
-		$reflecions = array ();
+		$reflecions = array();
 		
-		foreach ( $robotLoader->getIndexedClasses () as $classType => $class ) {
-			$reflecions [$classType] = ReflectionClassType::from ( $classType );
+		foreach( $robotLoader->getIndexedClasses() as $classType => $class )
+		{
+			$reflecions[ $classType ] = ReflectionClassType::from( $classType );
 		}
 		
-		foreach ( $reflecions as $namespaceName => $reflection ) {
-			$classFilename = sprintf ( "%s/%s.%s", $dest, str_replace ( "\\", "/", $namespaceName ), "php" );
+		foreach( $reflecions as $namespaceName => $reflection )
+		{
+			$classFilename = sprintf( "%s/%s.%s", $dest, str_replace( "\\", "/", $namespaceName ), "php" );
 			
-			$testsuitesTestsuiteElement = $phpunitXpath->query ( "testsuite[@name='" . $reflection->getNamespaceName () . "']", $testsuitesDomElement )->item ( 0 );
+			$testsuitesTestsuiteElement = $phpunitXpath->query( "testsuite[@name='" . $reflection->getNamespaceName() . "']", $testsuitesDomElement )->item( 0 );
 			
-			if (NULL == $testsuitesTestsuiteElement) {
-				$testsuitesTestsuiteElement = $phpunitDom->createElement ( "testsuite" );
-				$testsuitesTestsuiteElement->setAttribute ( "name", $reflection->getNamespaceName () );
-				$testsuitesDomElement->appendChild ( $testsuitesTestsuiteElement );
+			if( NULL == $testsuitesTestsuiteElement )
+			{
+				$testsuitesTestsuiteElement = $phpunitDom->createElement( "testsuite" );
+				$testsuitesTestsuiteElement->setAttribute( "name", $reflection->getNamespaceName() );
+				$testsuitesDomElement->appendChild( $testsuitesTestsuiteElement );
 			}
 			
-			$testCaseDirectory = sprintf ( "%s/%s", $dest, str_replace ( "\\", "/", $reflection->getNamespaceName () ) );
+			$testCaseDirectory = sprintf( "%s/%s", $dest, str_replace( "\\", "/", $reflection->getNamespaceName() ) );
 			
-			$testCaseDirectoryElement = $phpunitXpath->query ( "directory[text()='" . $testCaseDirectory . "']", $testsuitesTestsuiteElement )->item ( 0 );
+			$testCaseDirectoryElement = $phpunitXpath->query( "directory[text()='" . $testCaseDirectory . "']", $testsuitesTestsuiteElement )->item( 0 );
 			
-			if (NULL == $testCaseDirectoryElement) {
-				$testCaseDirectoryElement = $phpunitDom->createElement ( "directory", $testCaseDirectory );
-				$testsuitesTestsuiteElement->appendChild ( $testCaseDirectoryElement );
+			if( NULL == $testCaseDirectoryElement )
+			{
+				$testCaseDirectoryElement = $phpunitDom->createElement( "directory", $testCaseDirectory );
+				$testsuitesTestsuiteElement->appendChild( $testCaseDirectoryElement );
 			}
-			$testCaseDirectoryElement->setAttribute ( 'suffix', "Test.php" );
+			$testCaseDirectoryElement->setAttribute( 'suffix', "Test.php" );
 			
-			$classTestFileElement = $phpunitXpath->query ( "file[text()='" . $classFilename . "']", $testsuitesTestsuiteElement )->item ( 0 );
+			$classTestFileElement = $phpunitXpath->query( "file[text()='" . $classFilename . "']", $testsuitesTestsuiteElement )->item( 0 );
 			
-			if (NULL == $classTestFileElement) {
-				$classTestFileElement = $phpunitDom->createElement ( "file", $classFilename );
-				$testsuitesTestsuiteElement->appendChild ( $classTestFileElement );
+			if( NULL == $classTestFileElement )
+			{
+				$classTestFileElement = $phpunitDom->createElement( "file", $classFilename );
+				$testsuitesTestsuiteElement->appendChild( $classTestFileElement );
 			}
 		}
 		
@@ -259,7 +279,7 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 		 */
 		
 		$phpunitDom->formatOutput = TRUE;
-		$phpunitDom->save ( $phpunit );
+		$phpunitDom->save( $phpunit );
 	}
 	
 	/**
@@ -267,114 +287,126 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassCase(InputInterface $input, OutputInterface $output) {
-		$src = $this->getSrc ();
-		$dest = $this->getDest ();
+	public function generateClassCase( InputInterface $input, OutputInterface $output )
+	{
+		$src = $this->getSrc();
+		$dest = $this->getDest();
 		
-		$configNeon = $this->getNeonData ( $dest );
+		$configNeon = $this->getNeonData( $dest );
 		
-		$config = Arrays::get ( $configNeon, 'tests', array () );
-		$configServices = Arrays::get ( $config, 'services', array () );
-		$configData = Arrays::get ( $config, 'case', array () );
-		$configCount = count ( $configData );
+		$config = Arrays::get( $configNeon, 'tests', array() );
+		$configServices = Arrays::get( $config, 'services', array() );
+		$configData = Arrays::get( $config, 'case', array() );
+		$configCount = count( $configData );
 		
-		if ($configCount == 0) {
+		if( $configCount == 0 )
+		{
 			return;
 		}
 		
-		$this->writeNotice ( $output, "Generating Class Specific Tests: " . $configCount );
+		$this->writeNotice( $output, "Generating Class Specific Tests: " . $configCount );
 		
-		$robotLoader = new RobotLoader ();
+		$robotLoader = new RobotLoader();
 		$robotLoader->autoRebuild = TRUE;
-		$robotLoader->setCacheStorage ( new FileStorage ( $this->getCacheDirectory () ) );
+		$robotLoader->setCacheStorage( new FileStorage( $this->getCacheDirectory() ) );
 		
-		$robotLoader->addDirectory ( $dest );
-		$robotLoader->rebuild ();
-		$robotLoader->register ();
+		$robotLoader->addDirectory( $dest );
+		$robotLoader->rebuild();
+		$robotLoader->register();
 		
-		$autoloaderClasses = $robotLoader->getIndexedClasses ();
-		$classReflections = array ();
+		$autoloaderClasses = $robotLoader->getIndexedClasses();
+		$classReflections = array();
 		
-		foreach ( $autoloaderClasses as $class ) {
-			$classReflections [] = $class;
+		foreach( $autoloaderClasses as $class )
+		{
+			$classReflections[] = $class;
 		}
 		
-		foreach ( $configServices as $configName => $configClass ) {
-			$classPrototype = Arrays::get ( $configClass, 'class' );
+		foreach( $configServices as $configName => $configClass )
+		{
+			$classPrototype = Arrays::get( $configClass, 'class' );
 			
 			$classType = $classPrototype . "Test";
 			
-			$classFilename = Arrays::get ( $autoloaderClasses, $classType, NULL );
+			$classFilename = Arrays::get( $autoloaderClasses, $classType, NULL );
 			
-			$classGeneratorProperties = array ();
-			$classGeneratorMethods = array ();
-			$classGeneratorConst = array ();
-			$classGeneratorImplements = array ();
-			$classDependencies = array ();
+			$classGeneratorProperties = array();
+			$classGeneratorMethods = array();
+			$classGeneratorConst = array();
+			$classGeneratorImplements = array();
+			$classDependencies = array();
 			
-			if (NULL === $classFilename) {
-				$classPrototypeReflection = ReflectionClassType::from ( $classPrototype );
-				$classParent = "\\" . $classPrototypeReflection->getName () . "Base";
-				$classPrototypeName = $classPrototypeReflection->getName ();
+			if( NULL === $classFilename )
+			{
+				$classPrototypeReflection = ReflectionClassType::from( $classPrototype );
+				$classParent = "\\" . $classPrototypeReflection->getName() . "Base";
+				$classPrototypeName = $classPrototypeReflection->getName();
 				
-				$classPrototypeGenerator = PhpGeneratorClassType::from ( $classPrototypeReflection );
+				$classPrototypeGenerator = PhpGeneratorClassType::from( $classPrototypeReflection );
 				
-				$className = $classPrototypeGenerator->getName () . "Test";
+				$className = $classPrototypeGenerator->getName() . "Test";
 				
 				$classReflection = $classPrototypeReflection;
-				$classGenerator = new PhpGeneratorClassType ( $classReflection );
-				$classGenerator->setName ( $className );
-				$classGenerator->setExtends ( $classParent );
-				$classGenerator->setImplements ( $classGeneratorImplements );
-				$classGenerator->setProperties ( $classGeneratorProperties );
-				$classGenerator->setMethods ( $classGeneratorMethods );
-				$classGenerator->setConsts ( $classGeneratorConst );
-				$classGenerator->addProperty ( "className", "\\" . $configName );
+				$classGenerator = new PhpGeneratorClassType( $classReflection );
+				$classGenerator->setName( $className );
+				$classGenerator->setExtends( $classParent );
+				$classGenerator->setImplements( $classGeneratorImplements );
+				$classGenerator->setProperties( $classGeneratorProperties );
+				$classGenerator->setMethods( $classGeneratorMethods );
+				$classGenerator->setConsts( $classGeneratorConst );
+				$classGenerator->addProperty( "className", "\\" . $configName );
 				
-				$classFilename = dirname ( str_replace ( $this->getRootDir (), $this->getDest (), $classReflection->getFileName () ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName () . ".php";
-			} else {
-				$classReflection = ReflectionClassType::from ( $classType );
-				$classGenerator = PhpGeneratorClassType::from ( $classReflection );
-				$classGeneratorConst = $classGenerator->getConsts ();
-				$classGeneratorProperties = $classGenerator->getProperties ();
-				$classGeneratorImplements = $classGenerator->getImplements ();
-				$classGeneratorMethods = $classGenerator->getMethods ();
+				$classFilename = dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php";
+			} else
+			{
+				$classReflection = ReflectionClassType::from( $classType );
+				$classGenerator = PhpGeneratorClassType::from( $classReflection );
+				$classGeneratorConst = $classGenerator->getConsts();
+				$classGeneratorProperties = $classGenerator->getProperties();
+				$classGeneratorImplements = $classGenerator->getImplements();
+				$classGeneratorMethods = $classGenerator->getMethods();
 			}
 			
-			if ('interface' == $classGenerator->getType () || $classGenerator->isAbstract ()) {
+			if( 'interface' == $classGenerator->getType() || $classGenerator->isAbstract() )
+			{
 				continue;
 			}
 			
-			$classGeneratorAnnotation = $classReflection->getAnnotations ();
-			$classAnnotationsSwitch = Arrays::get ( $classGeneratorAnnotation, 'no-test', FALSE );
+			$classGeneratorAnnotation = $classReflection->getAnnotations();
+			$classAnnotationsSwitch = Arrays::get( $classGeneratorAnnotation, 'no-test', FALSE );
 			
-			if (FALSE !== $classAnnotationsSwitch) {
+			if( FALSE !== $classAnnotationsSwitch )
+			{
 				continue;
 			}
 			
-			try {
-				$instanceProvider = $classReflection->getMethod ( "getInstance" );
-			} catch ( \Exception $e ) {
-				$instanceProvider = $classGenerator->addMethod ( "getInstance" );
-				$instanceProvider->setBody ( 'return parent::getInstance();' );
-				$instanceProvider->setDocuments ( array (
+			try
+			{
+				$instanceProvider = $classReflection->getMethod( "getInstance" );
+			} catch( \Exception $e )
+			{
+				$instanceProvider = $classGenerator->addMethod( "getInstance" );
+				$instanceProvider->setBody( 'return parent::getInstance();' );
+				$instanceProvider->setDocuments( array( 
 						'return' => "@return \\" . $classPrototype 
 				) );
 			}
 			
 			$classDependency = "";
 			
-			foreach ( $classDependencies as $dependency => $dependencyClass ) {
+			foreach( $classDependencies as $dependency => $dependencyClass )
+			{
 				$classDependency .= "\nuse " . $dependency;
-				if ('' == $dependencyClass) {
+				if( '' == $dependencyClass )
+				{
 					$classDependency .= " as " . $dependencyClass;
 				}
 				$classDependency .= ";";
 			}
 			
-			$classCode = sprintf ( "<?php\nnamespace %s;\n%s\n%s", $classReflection->getNamespaceName (), $classDependency, $classGenerator );
+			$classCode = sprintf( "<?php\nnamespace %s;\n%s\n%s", $classReflection->getNamespaceName(), $classDependency, $classGenerator );
 			
-			$this->saveClass ( $classCode, new \SplFileInfo ( $classFilename ) );
+			$this->saveClass( $classCode, new \SplFileInfo( $classFilename ) );
 		}
 	}
 	
@@ -383,137 +415,153 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassFunctionalCase(InputInterface $input, OutputInterface $output) {
-		$dest = $this->getDest ();
+	public function generateClassFunctionalCase( InputInterface $input, OutputInterface $output )
+	{
+		$dest = $this->getDest();
 		
-		$config = Arrays::get ( $configNeon, 'tests', array () );
-		$configServices = Arrays::get ( $config, 'services', array () );
-		$configCase = Arrays::get ( $config, 'case', array () );
-		$configCount = count ( $configCase );
+		$config = Arrays::get( $configNeon, 'tests', array() );
+		$configServices = Arrays::get( $config, 'services', array() );
+		$configCase = Arrays::get( $config, 'case', array() );
+		$configCount = count( $configCase );
 		
-		$this->writeNotice ( $output, "Generating Class Tests Funcional Case: " . $configCount );
+		$this->writeNotice( $output, "Generating Class Tests Funcional Case: " . $configCount );
 		
-		if ($configCount == 0) {
+		if( $configCount == 0 )
+		{
 			return;
 		}
 		
-		foreach ( $configCase as $configName => $configClass ) {
-			$classService = Arrays::get ( $configServices, $configName );
-			$classType = Arrays::get ( $classService, 'class' );
-			$classReflection = ReflectionClassType::from ( $classType );
-			$classGenerator = PhpGeneratorClassType::from ( $classType );
-			$classAnnotations = $classReflection->getAnnotations ();
-			$classAnnotationsSwitch = Arrays::get ( $classAnnotations, 'no-test', FALSE );
+		foreach( $configCase as $configName => $configClass )
+		{
+			$classService = Arrays::get( $configServices, $configName );
+			$classType = Arrays::get( $classService, 'class' );
+			$classReflection = ReflectionClassType::from( $classType );
+			$classGenerator = PhpGeneratorClassType::from( $classType );
+			$classAnnotations = $classReflection->getAnnotations();
+			$classAnnotationsSwitch = Arrays::get( $classAnnotations, 'no-test', FALSE );
 			
-			if (FALSE !== $classAnnotationsSwitch) {
+			if( FALSE !== $classAnnotationsSwitch )
+			{
 				continue;
 			}
 			
-			$className = $classGenerator->getName () . "FunctionalTest";
+			$className = $classGenerator->getName() . "FunctionalTest";
 			
-			if ('interface' == $classGenerator->getType () || $classGenerator->isAbstract ()) {
+			if( 'interface' == $classGenerator->getType() || $classGenerator->isAbstract() )
+			{
 				continue;
 			}
-			$classParent = "\\" . $classReflection->getName () . "Base";
-			$dependencies = array ();
+			$classParent = "\\" . $classReflection->getName() . "Base";
+			$dependencies = array();
 			
-			$classGenerator->setName ( $className );
-			$classGenerator->setExtends ( $classParent );
-			$classGenerator->setImplements ( array () );
-			$classGenerator->setProperties ( array () );
-			$classGenerator->setMethods ( array () );
-			$classGenerator->setConsts ( array () );
-			$classNameProperty = $classGenerator->addProperty ( "className", $configName );
-			$classNameProperty->setVisibility ( 'protected' );
+			$classGenerator->setName( $className );
+			$classGenerator->setExtends( $classParent );
+			$classGenerator->setImplements( array() );
+			$classGenerator->setProperties( array() );
+			$classGenerator->setMethods( array() );
+			$classGenerator->setConsts( array() );
+			$classNameProperty = $classGenerator->addProperty( "className", $configName );
+			$classNameProperty->setVisibility( 'protected' );
 			// $classGenerator->addDocument("@runInSeparateProcess");
 			
-			$classProviderData = array ();
+			$classProviderData = array();
 			
-			foreach ( $configClass as $configClassMethod => $paramametersConfig ) {
+			foreach( $configClass as $configClassMethod => $paramametersConfig )
+			{
 				
-				$methodReflection = $classReflection->getMethod ( $configClassMethod );
-				$methodGenerator = Method::from ( $methodReflection );
-				$methodAnnotations = $methodReflection->getAnnotations ();
-				$methodAnnotationsReturn = Arrays::get ( $methodAnnotations, 'return', NULL );
-				$methodAnnotationsSwitch = Arrays::get ( $methodAnnotations, 'no-test', FALSE );
+				$methodReflection = $classReflection->getMethod( $configClassMethod );
+				$methodGenerator = Method::from( $methodReflection );
+				$methodAnnotations = $methodReflection->getAnnotations();
+				$methodAnnotationsReturn = Arrays::get( $methodAnnotations, 'return', NULL );
+				$methodAnnotationsSwitch = Arrays::get( $methodAnnotations, 'no-test', FALSE );
 				
-				if (FALSE !== $methodAnnotationsSwitch) {
+				if( FALSE !== $methodAnnotationsSwitch )
+				{
 					continue;
 				}
 				
-				if ($methodReflection->isAbstract ()) {
+				if( $methodReflection->isAbstract() )
+				{
 					continue;
 				}
 				
-				if ('__construct' == $methodReflection->getName ()) {
+				if( '__construct' == $methodReflection->getName() )
+				{
 					continue;
 				}
 				
-				if (! is_callable ( array (
+				if( ! is_callable( array( 
 						
-						$classReflection->getName (),
-						$methodReflection->getName () 
-				) )) {
+						$classReflection->getName(),
+						$methodReflection->getName() 
+				) ) )
+				{
 					continue;
 				}
 				
-				$providerName = $methodReflection->getName () . "Provider";
+				$providerName = $methodReflection->getName() . "Provider";
 				
-				$test = $classGenerator->addMethod ( "test_" . $methodReflection->getName () );
+				$test = $classGenerator->addMethod( "test_" . $methodReflection->getName() );
 				
-				$parameters = array ();
-				$parametersReflections = $methodReflection->getParameters ();
+				$parameters = array();
+				$parametersReflections = $methodReflection->getParameters();
 				
-				if (count ( $parametersReflections )) {
-					$test->addDocument ( "@dataProvider " . $providerName );
+				if( count( $parametersReflections ) )
+				{
+					$test->addDocument( "@dataProvider " . $providerName );
 					
-					$parametersGenerators = array ();
-					$parametersAnnotations = Arrays::get ( $methodAnnotations, 'param', array () );
+					$parametersGenerators = array();
+					$parametersAnnotations = Arrays::get( $methodAnnotations, 'param', array() );
 					
-					foreach ( $parametersReflections as $parameterId => $parameterReflection ) {
+					foreach( $parametersReflections as $parameterId => $parameterReflection )
+					{
 						
-						$parameterGenerator = Parameter::from ( $parameterReflection );
-						$parameterType = $parameterGenerator->getTypeHint ();
+						$parameterGenerator = Parameter::from( $parameterReflection );
+						$parameterType = $parameterGenerator->getTypeHint();
 						
-						if ($parameterType == '') {
-							$parameterAnnotation = Arrays::get ( $parametersAnnotations, $parameterId, "" );
+						if( $parameterType == '' )
+						{
+							$parameterAnnotation = Arrays::get( $parametersAnnotations, $parameterId, "" );
 							
-							$parameterAnnotations = explode ( " ", $parameterAnnotation );
-							$parameterType = Arrays::get ( $parameterAnnotations, 0, 'mixed' );
+							$parameterAnnotations = explode( " ", $parameterAnnotation );
+							$parameterType = Arrays::get( $parameterAnnotations, 0, 'mixed' );
 						}
 						
-						if ($parameterType != '' && $parameterType != 'array') {
-							$parameters [] = '$' . $parameterReflection->getName ();
+						if( $parameterType != '' && $parameterType != 'array' )
+						{
+							$parameters[] = '$' . $parameterReflection->getName();
 						}
 						
-						$test->addDocument ( "@param " . $parameterType . " " . $parameterReflection->getName () );
+						$test->addDocument( "@param " . $parameterType . " " . $parameterReflection->getName() );
 						
-						$parametersGenerators [] = $parameterGenerator;
+						$parametersGenerators[] = $parameterGenerator;
 					}
 					
-					$test->setParameters ( $parametersGenerators );
+					$test->setParameters( $parametersGenerators );
 				}
 				
 				$body = '';
-				$body .= "\n" . '$this->callTest("' . $classGenerator->getName () . '","' . $methodGenerator->getName () . '",' . ($methodGenerator->isStatic () ? 'TRUE' : 'FALSE') . ', func_get_args());';
-				$test->setBody ( $body );
+				$body .= "\n" . '$this->callTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' . ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
+				$test->setBody( $body );
 			}
 			
-			$classInfo = new \SplFileInfo ( dirname ( str_replace ( $this->getRootDir (), $this->getDest (), $classReflection->getFileName () ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName () . ".php" );
+			$classInfo = new \SplFileInfo( dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php" );
 			
 			$classDependency = "";
 			
-			foreach ( $dependencies as $dependency => $dependencyClass ) {
+			foreach( $dependencies as $dependency => $dependencyClass )
+			{
 				$classDependency .= "\nuse " . $dependency;
-				if ('' == $dependencyClass) {
+				if( '' == $dependencyClass )
+				{
 					$classDependency .= " as " . $dependencyClass;
 				}
 				$classDependency .= ";";
 			}
 			
-			$classCode = sprintf ( "<?php\nnamespace %s;\n%s\n%s", $classReflection->getNamespaceName (), $classDependency, $classGenerator );
+			$classCode = sprintf( "<?php\nnamespace %s;\n%s\n%s", $classReflection->getNamespaceName(), $classDependency, $classGenerator );
 			
-			$this->saveClass ( $classCode, $classInfo );
+			$this->saveClass( $classCode, $classInfo );
 		}
 	}
 	
@@ -522,139 +570,155 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassPerformanceCase(InputInterface $input, OutputInterface $output) {
-		$dest = $this->getDest ();
+	public function generateClassPerformanceCase( InputInterface $input, OutputInterface $output )
+	{
+		$dest = $this->getDest();
 		
-		$config = Arrays::get ( $configNeon, 'tests', array () );
-		$configServices = Arrays::get ( $config, 'services', array () );
-		$configCase = Arrays::get ( $config, 'case', array () );
-		$configCount = count ( $configCase );
+		$config = Arrays::get( $configNeon, 'tests', array() );
+		$configServices = Arrays::get( $config, 'services', array() );
+		$configCase = Arrays::get( $config, 'case', array() );
+		$configCount = count( $configCase );
 		
-		$this->writeNotice ( $output, "Generating Class Tests Performance Case: " . $configCount );
+		$this->writeNotice( $output, "Generating Class Tests Performance Case: " . $configCount );
 		
-		if ($configCount == 0) {
+		if( $configCount == 0 )
+		{
 			return;
 		}
 		
-		foreach ( $configCase as $configName => $configClass ) {
-			$classService = Arrays::get ( $configServices, $configName );
-			$classType = Arrays::get ( $classService, 'class' );
-			$classReflection = ReflectionClassType::from ( $classType );
-			$classGenerator = PhpGeneratorClassType::from ( $classType );
-			$classAnnotations = $classReflection->getAnnotations ();
-			$classAnnotationsSwitch = Arrays::get ( $classAnnotations, 'no-test', FALSE );
+		foreach( $configCase as $configName => $configClass )
+		{
+			$classService = Arrays::get( $configServices, $configName );
+			$classType = Arrays::get( $classService, 'class' );
+			$classReflection = ReflectionClassType::from( $classType );
+			$classGenerator = PhpGeneratorClassType::from( $classType );
+			$classAnnotations = $classReflection->getAnnotations();
+			$classAnnotationsSwitch = Arrays::get( $classAnnotations, 'no-test', FALSE );
 			
-			if (FALSE !== $classAnnotationsSwitch) {
+			if( FALSE !== $classAnnotationsSwitch )
+			{
 				continue;
 			}
 			
-			$className = $classGenerator->getName () . "PerformanceTest";
+			$className = $classGenerator->getName() . "PerformanceTest";
 			
-			if ('interface' == $classGenerator->getType () || $classGenerator->isAbstract ()) {
+			if( 'interface' == $classGenerator->getType() || $classGenerator->isAbstract() )
+			{
 				continue;
 			}
-			$classParent = "\\" . $classReflection->getName () . "Base";
-			$dependencies = array (
+			$classParent = "\\" . $classReflection->getName() . "Base";
+			$dependencies = array( 
 					'BaseCase' => 'BaseCase' 
 			);
 			
-			$classGenerator->setName ( $className );
-			$classGenerator->setExtends ( $classParent );
-			$classGenerator->setImplements ( array () );
-			$classGenerator->setProperties ( array () );
-			$classGenerator->setMethods ( array () );
-			$classGenerator->setConsts ( array () );
-			$classNameProperty = $classGenerator->addProperty ( "className", $configName );
-			$classNameProperty->setVisibility ( 'protected' );
+			$classGenerator->setName( $className );
+			$classGenerator->setExtends( $classParent );
+			$classGenerator->setImplements( array() );
+			$classGenerator->setProperties( array() );
+			$classGenerator->setMethods( array() );
+			$classGenerator->setConsts( array() );
+			$classNameProperty = $classGenerator->addProperty( "className", $configName );
+			$classNameProperty->setVisibility( 'protected' );
 			// $classGenerator->addDocument("@runInSeparateProcess");
 			
-			$classProviderData = array ();
+			$classProviderData = array();
 			
-			foreach ( $configClass as $configClassMethod => $paramametersConfig ) {
+			foreach( $configClass as $configClassMethod => $paramametersConfig )
+			{
 				
-				$methodReflection = $classReflection->getMethod ( $configClassMethod );
-				$methodGenerator = Method::from ( $methodReflection );
-				$methodAnnotations = $methodReflection->getAnnotations ();
-				$methodAnnotationsReturn = Arrays::get ( $methodAnnotations, 'return', NULL );
-				$methodAnnotationsSwitch = Arrays::get ( $methodAnnotations, 'no-test', FALSE );
+				$methodReflection = $classReflection->getMethod( $configClassMethod );
+				$methodGenerator = Method::from( $methodReflection );
+				$methodAnnotations = $methodReflection->getAnnotations();
+				$methodAnnotationsReturn = Arrays::get( $methodAnnotations, 'return', NULL );
+				$methodAnnotationsSwitch = Arrays::get( $methodAnnotations, 'no-test', FALSE );
 				
-				if (FALSE !== $methodAnnotationsSwitch) {
+				if( FALSE !== $methodAnnotationsSwitch )
+				{
 					continue;
 				}
 				
-				if ($methodReflection->isAbstract ()) {
+				if( $methodReflection->isAbstract() )
+				{
 					continue;
 				}
 				
-				if ('__construct' == $methodReflection->getName ()) {
+				if( '__construct' == $methodReflection->getName() )
+				{
 					continue;
 				}
 				
-				if (! is_callable ( array (
+				if( ! is_callable( array( 
 						
-						$classReflection->getName (),
-						$methodReflection->getName () 
-				) )) {
+						$classReflection->getName(),
+						$methodReflection->getName() 
+				) ) )
+				{
 					continue;
 				}
 				
-				$providerName = $methodReflection->getName () . "Provider";
+				$providerName = $methodReflection->getName() . "Provider";
 				
-				$test = $classGenerator->addMethod ( "test_" . $methodReflection->getName () );
+				$test = $classGenerator->addMethod( "test_" . $methodReflection->getName() );
 				
-				$parameters = array ();
-				$parametersReflections = $methodReflection->getParameters ();
+				$parameters = array();
+				$parametersReflections = $methodReflection->getParameters();
 				
-				if (count ( $parametersReflections )) {
-					$test->addDocument ( "@dataProvider " . $providerName );
+				if( count( $parametersReflections ) )
+				{
+					$test->addDocument( "@dataProvider " . $providerName );
 					
-					$parametersGenerators = array ();
-					$parametersAnnotations = Arrays::get ( $methodAnnotations, 'param', array () );
+					$parametersGenerators = array();
+					$parametersAnnotations = Arrays::get( $methodAnnotations, 'param', array() );
 					
-					foreach ( $parametersReflections as $parameterId => $parameterReflection ) {
+					foreach( $parametersReflections as $parameterId => $parameterReflection )
+					{
 						
-						$parameterGenerator = Parameter::from ( $parameterReflection );
-						$parameterType = $parameterGenerator->getTypeHint ();
+						$parameterGenerator = Parameter::from( $parameterReflection );
+						$parameterType = $parameterGenerator->getTypeHint();
 						
-						if ($parameterType == '') {
-							$parameterAnnotation = Arrays::get ( $parametersAnnotations, $parameterId, "" );
+						if( $parameterType == '' )
+						{
+							$parameterAnnotation = Arrays::get( $parametersAnnotations, $parameterId, "" );
 							
-							$parameterAnnotations = explode ( " ", $parameterAnnotation );
-							$parameterType = Arrays::get ( $parameterAnnotations, 0, 'mixed' );
+							$parameterAnnotations = explode( " ", $parameterAnnotation );
+							$parameterType = Arrays::get( $parameterAnnotations, 0, 'mixed' );
 						}
 						
-						if ($parameterType != '' && $parameterType != 'array') {
-							$parameters [] = '$' . $parameterReflection->getName ();
+						if( $parameterType != '' && $parameterType != 'array' )
+						{
+							$parameters[] = '$' . $parameterReflection->getName();
 						}
 						
-						$test->addDocument ( "@param " . $parameterType . " " . $parameterReflection->getName () );
+						$test->addDocument( "@param " . $parameterType . " " . $parameterReflection->getName() );
 						
-						$parametersGenerators [] = $parameterGenerator;
+						$parametersGenerators[] = $parameterGenerator;
 					}
 					
-					$test->setParameters ( $parametersGenerators );
+					$test->setParameters( $parametersGenerators );
 				}
 				
 				$body = '';
-				$body .= "\n" . '$this->callPerformanceTest("' . $classGenerator->getName () . '","' . $methodGenerator->getName () . '",' . ($methodGenerator->isStatic () ? 'TRUE' : 'FALSE') . ', func_get_args());';
-				$test->setBody ( $body );
+				$body .= "\n" . '$this->callPerformanceTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' . ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
+				$test->setBody( $body );
 			}
 			
-			$classInfo = new \SplFileInfo ( dirname ( str_replace ( $this->getRootDir (), $this->getDest (), $classReflection->getFileName () ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName () . ".php" );
+			$classInfo = new \SplFileInfo( dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php" );
 			
 			$classDependency = "";
 			
-			foreach ( $dependencies as $dependency => $dependencyClass ) {
+			foreach( $dependencies as $dependency => $dependencyClass )
+			{
 				$classDependency .= "\nuse " . $dependency;
-				if ('' == $dependencyClass) {
+				if( '' == $dependencyClass )
+				{
 					$classDependency .= " as " . $dependencyClass;
 				}
 				$classDependency .= ";";
 			}
 			
-			$classCode = sprintf ( "<?php\nnamespace %s;\n%s\n%s", $classReflection->getNamespaceName (), $classDependency, $classGenerator );
+			$classCode = sprintf( "<?php\nnamespace %s;\n%s\n%s", $classReflection->getNamespaceName(), $classDependency, $classGenerator );
 			
-			$this->saveClass ( $classCode, $classInfo );
+			$this->saveClass( $classCode, $classInfo );
 		}
 	}
 	
@@ -663,136 +727,152 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassEqualCase(InputInterface $input, OutputInterface $output) {
-		$dest = $this->getDest ();
+	public function generateClassEqualCase( InputInterface $input, OutputInterface $output )
+	{
+		$dest = $this->getDest();
 		
-		$configNeon = $this->getNeonData ( $dest );
-		$config = Arrays::get ( $configNeon, 'tests', array () );
-		$configServices = Arrays::get ( $config, 'services', array () );
-		$configCase = Arrays::get ( $config, 'case', array () );
-		$configCount = count ( $configCase );
+		$configNeon = $this->getNeonData( $dest );
+		$config = Arrays::get( $configNeon, 'tests', array() );
+		$configServices = Arrays::get( $config, 'services', array() );
+		$configCase = Arrays::get( $config, 'case', array() );
+		$configCount = count( $configCase );
 		
-		$this->writeNotice ( $output, "Generating Class Tests Equal Case: " . $configCount );
+		$this->writeNotice( $output, "Generating Class Tests Equal Case: " . $configCount );
 		
-		if ($configCount == 0) {
+		if( $configCount == 0 )
+		{
 			return;
 		}
 		
-		foreach ( $configCase as $configName => $configClass ) {
-			$classService = Arrays::get ( $configServices, $configName );
-			$classType = Arrays::get ( $classService, 'class' );
-			$classReflection = ReflectionClassType::from ( $classType );
-			$classGenerator = PhpGeneratorClassType::from ( $classType );
-			$classAnnotations = $classReflection->getAnnotations ();
-			$classAnnotationsSwitch = Arrays::get ( $classAnnotations, 'no-test', FALSE );
+		foreach( $configCase as $configName => $configClass )
+		{
+			$classService = Arrays::get( $configServices, $configName );
+			$classType = Arrays::get( $classService, 'class' );
+			$classReflection = ReflectionClassType::from( $classType );
+			$classGenerator = PhpGeneratorClassType::from( $classType );
+			$classAnnotations = $classReflection->getAnnotations();
+			$classAnnotationsSwitch = Arrays::get( $classAnnotations, 'no-test', FALSE );
 			
-			if (FALSE !== $classAnnotationsSwitch) {
+			if( FALSE !== $classAnnotationsSwitch )
+			{
 				continue;
 			}
-			$className = $classGenerator->getName () . "EqualTest";
+			$className = $classGenerator->getName() . "EqualTest";
 			
-			if ('interface' == $classGenerator->getType () || $classGenerator->isAbstract ()) {
+			if( 'interface' == $classGenerator->getType() || $classGenerator->isAbstract() )
+			{
 				continue;
 			}
-			$classParent = "\\" . $classReflection->getName () . "Base";
-			$dependencies = array ();
+			$classParent = "\\" . $classReflection->getName() . "Base";
+			$dependencies = array();
 			
-			$classGenerator->setName ( $className );
-			$classGenerator->setExtends ( $classParent );
-			$classGenerator->setImplements ( array () );
-			$classGenerator->setProperties ( array () );
-			$classGenerator->setMethods ( array () );
-			$classGenerator->setConsts ( array () );
-			$classNameProperty = $classGenerator->addProperty ( "className", $configName );
-			$classNameProperty->setVisibility ( 'protected' );
+			$classGenerator->setName( $className );
+			$classGenerator->setExtends( $classParent );
+			$classGenerator->setImplements( array() );
+			$classGenerator->setProperties( array() );
+			$classGenerator->setMethods( array() );
+			$classGenerator->setConsts( array() );
+			$classNameProperty = $classGenerator->addProperty( "className", $configName );
+			$classNameProperty->setVisibility( 'protected' );
 			// $classGenerator->addDocument("@runInSeparateProcess");
 			
-			$classProviderData = array ();
+			$classProviderData = array();
 			
-			foreach ( $configClass as $configClassMethod => $paramametersConfig ) {
+			foreach( $configClass as $configClassMethod => $paramametersConfig )
+			{
 				
-				$methodReflection = $classReflection->getMethod ( $configClassMethod );
-				$methodGenerator = Method::from ( $methodReflection );
-				$methodAnnotations = $methodReflection->getAnnotations ();
-				$methodAnnotationsReturn = Arrays::get ( $methodAnnotations, 'return', NULL );
-				$methodAnnotationsSwitch = Arrays::get ( $methodAnnotations, 'no-test', FALSE );
+				$methodReflection = $classReflection->getMethod( $configClassMethod );
+				$methodGenerator = Method::from( $methodReflection );
+				$methodAnnotations = $methodReflection->getAnnotations();
+				$methodAnnotationsReturn = Arrays::get( $methodAnnotations, 'return', NULL );
+				$methodAnnotationsSwitch = Arrays::get( $methodAnnotations, 'no-test', FALSE );
 				
-				if (FALSE !== $methodAnnotationsSwitch) {
+				if( FALSE !== $methodAnnotationsSwitch )
+				{
 					continue;
 				}
 				
-				if ($methodReflection->isAbstract ()) {
+				if( $methodReflection->isAbstract() )
+				{
 					continue;
 				}
 				
-				if ('__construct' == $methodReflection->getName ()) {
+				if( '__construct' == $methodReflection->getName() )
+				{
 					continue;
 				}
 				
-				if (! is_callable ( array (
+				if( ! is_callable( array( 
 						
-						$classReflection->getName (),
-						$methodReflection->getName () 
-				) )) {
+						$classReflection->getName(),
+						$methodReflection->getName() 
+				) ) )
+				{
 					continue;
 				}
 				
-				$providerName = $methodReflection->getName () . "Provider";
+				$providerName = $methodReflection->getName() . "Provider";
 				
-				$test = $classGenerator->addMethod ( "test_" . $methodReflection->getName () );
-				$parameters = array ();
-				$parametersReflections = $methodReflection->getParameters ();
+				$test = $classGenerator->addMethod( "test_" . $methodReflection->getName() );
+				$parameters = array();
+				$parametersReflections = $methodReflection->getParameters();
 				
-				if (count ( $parametersReflections )) {
-					$test->addDocument ( "@dataProvider " . $providerName );
+				if( count( $parametersReflections ) )
+				{
+					$test->addDocument( "@dataProvider " . $providerName );
 					
-					$parametersGenerators = array ();
-					$parametersAnnotations = Arrays::get ( $methodAnnotations, 'param', array () );
+					$parametersGenerators = array();
+					$parametersAnnotations = Arrays::get( $methodAnnotations, 'param', array() );
 					
-					foreach ( $parametersReflections as $parameterId => $parameterReflection ) {
+					foreach( $parametersReflections as $parameterId => $parameterReflection )
+					{
 						
-						$parameterGenerator = Parameter::from ( $parameterReflection );
-						$parameterType = $parameterGenerator->getTypeHint ();
+						$parameterGenerator = Parameter::from( $parameterReflection );
+						$parameterType = $parameterGenerator->getTypeHint();
 						
-						if ($parameterType == '') {
-							$parameterAnnotation = Arrays::get ( $parametersAnnotations, $parameterId, "" );
+						if( $parameterType == '' )
+						{
+							$parameterAnnotation = Arrays::get( $parametersAnnotations, $parameterId, "" );
 							
-							$parameterAnnotations = explode ( " ", $parameterAnnotation );
-							$parameterType = Arrays::get ( $parameterAnnotations, 0, 'mixed' );
+							$parameterAnnotations = explode( " ", $parameterAnnotation );
+							$parameterType = Arrays::get( $parameterAnnotations, 0, 'mixed' );
 						}
 						
-						if ($parameterType != '' && $parameterType != 'array') {
-							$parameters [] = '$' . $parameterReflection->getName ();
+						if( $parameterType != '' && $parameterType != 'array' )
+						{
+							$parameters[] = '$' . $parameterReflection->getName();
 						}
 						
-						$test->addDocument ( "@param " . $parameterType . " " . $parameterReflection->getName () );
+						$test->addDocument( "@param " . $parameterType . " " . $parameterReflection->getName() );
 						
-						$parametersGenerators [] = $parameterGenerator;
+						$parametersGenerators[] = $parameterGenerator;
 					}
 					
-					$test->setParameters ( $parametersGenerators );
+					$test->setParameters( $parametersGenerators );
 				}
 				
 				$body = '';
-				$body .= "\n" . '$this->callEqualTest("' . $classGenerator->getName () . '","' . $methodGenerator->getName () . '",' . ($methodGenerator->isStatic () ? 'TRUE' : 'FALSE') . ', func_get_args());';
-				$test->setBody ( $body );
+				$body .= "\n" . '$this->callEqualTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' . ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
+				$test->setBody( $body );
 			}
 			
-			$classInfo = new \SplFileInfo ( dirname ( str_replace ( $this->getRootDir (), $this->getDest (), $classReflection->getFileName () ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName () . ".php" );
+			$classInfo = new \SplFileInfo( dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php" );
 			
 			$classDependency = "";
 			
-			foreach ( $dependencies as $dependency => $dependencyClass ) {
+			foreach( $dependencies as $dependency => $dependencyClass )
+			{
 				$classDependency .= "\nuse " . $dependency;
-				if ('' == $dependencyClass) {
+				if( '' == $dependencyClass )
+				{
 					$classDependency .= " as " . $dependencyClass;
 				}
 				$classDependency .= ";";
 			}
 			
-			$classCode = sprintf ( "<?php\nnamespace %s;\n%s\n%s", $classReflection->getNamespaceName (), $classDependency, $classGenerator );
+			$classCode = sprintf( "<?php\nnamespace %s;\n%s\n%s", $classReflection->getNamespaceName(), $classDependency, $classGenerator );
 			
-			$this->saveClass ( $classCode, $classInfo );
+			$this->saveClass( $classCode, $classInfo );
 		}
 	}
 	
@@ -802,112 +882,125 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassBaseCase(InputInterface $input, OutputInterface $output) {
-		$cases = $this->getTestConfig ()->getTestsCase ();
-		$this->writeNotice ( "Generating Class Tests Base Case: " . count ( $cases ) );
-		foreach ( $cases as $configName => $configClass ) {
+	public function generateClassBaseCase( InputInterface $input, OutputInterface $output )
+	{
+		$cases = $this->getTestConfig()->getTestsCase();
+		$this->writeNotice( "Generating Class Tests Base Case: " . count( $cases ) );
+		foreach( $cases as $configName => $configClass )
+		{
 			print $configName . "\n";
 		}
 		
 		return;
 		
-		foreach ( $configCase as $configName => $configClass ) {
+		foreach( $configCase as $configName => $configClass )
+		{
 			
-			$classService = Arrays::get ( $configServices, $configName );
-			$classType = Arrays::get ( $classService, 'class' );
-			$classReflection = ReflectionClassType::from ( $classType );
-			$classGenerator = PhpGeneratorClassType::from ( $classType );
-			$classAnnotations = $classReflection->getAnnotations ();
-			$classAnnotationsSwitch = Arrays::get ( $classAnnotations, 'no-test', FALSE );
+			$classService = Arrays::get( $configServices, $configName );
+			$classType = Arrays::get( $classService, 'class' );
+			$classReflection = ReflectionClassType::from( $classType );
+			$classGenerator = PhpGeneratorClassType::from( $classType );
+			$classAnnotations = $classReflection->getAnnotations();
+			$classAnnotationsSwitch = Arrays::get( $classAnnotations, 'no-test', FALSE );
 			
-			if (FALSE !== $classAnnotationsSwitch) {
+			if( FALSE !== $classAnnotationsSwitch )
+			{
 				continue;
 			}
 			
-			$className = $classGenerator->getName () . "Base";
+			$className = $classGenerator->getName() . "Base";
 			
-			if ('interface' == $classGenerator->getType () || $classGenerator->isAbstract ()) {
+			if( 'interface' == $classGenerator->getType() || $classGenerator->isAbstract() )
+			{
 				continue;
 			}
 			$classParent = "BaseCase";
-			$dependencies = array (
+			$dependencies = array( 
 					
 					'\ITC\Tests\BaseCase' => 'BaseCase' 
 			);
 			
-			$classGenerator->setName ( $className );
-			$classGenerator->setExtends ( $classParent );
-			$classGenerator->setImplements ( array () );
-			$classGenerator->setProperties ( array () );
-			$classGenerator->setMethods ( array () );
-			$classGenerator->setConsts ( array () );
-			$classNameProperty = $classGenerator->addProperty ( "className", $configName );
-			$classNameProperty->setVisibility ( 'protected' );
+			$classGenerator->setName( $className );
+			$classGenerator->setExtends( $classParent );
+			$classGenerator->setImplements( array() );
+			$classGenerator->setProperties( array() );
+			$classGenerator->setMethods( array() );
+			$classGenerator->setConsts( array() );
+			$classNameProperty = $classGenerator->addProperty( "className", $configName );
+			$classNameProperty->setVisibility( 'protected' );
 			// $classGenerator->addDocument("@runInSeparateProcess");
 			
-			$classProviderData = array ();
+			$classProviderData = array();
 			
-			foreach ( $configClass as $configClassMethod => $paramametersConfig ) {
+			foreach( $configClass as $configClassMethod => $paramametersConfig )
+			{
 				
-				$methodReflection = $classReflection->getMethod ( $configClassMethod );
-				$methodGenerator = Method::from ( $methodReflection );
-				$methodAnnotations = $methodReflection->getAnnotations ();
-				$methodAnnotationsReturn = Arrays::get ( $methodAnnotations, 'return', NULL );
-				$methodAnnotationsSwitch = Arrays::get ( $methodAnnotations, 'no-test', FALSE );
+				$methodReflection = $classReflection->getMethod( $configClassMethod );
+				$methodGenerator = Method::from( $methodReflection );
+				$methodAnnotations = $methodReflection->getAnnotations();
+				$methodAnnotationsReturn = Arrays::get( $methodAnnotations, 'return', NULL );
+				$methodAnnotationsSwitch = Arrays::get( $methodAnnotations, 'no-test', FALSE );
 				
-				if (FALSE !== $methodAnnotationsSwitch) {
+				if( FALSE !== $methodAnnotationsSwitch )
+				{
 					continue;
 				}
 				
-				if ($methodReflection->isAbstract ()) {
+				if( $methodReflection->isAbstract() )
+				{
 					continue;
 				}
 				
-				if ('__construct' == $methodReflection->getName ()) {
+				if( '__construct' == $methodReflection->getName() )
+				{
 					continue;
 				}
 				
-				if (! is_callable ( array (
+				if( ! is_callable( array( 
 						
-						$classReflection->getName (),
-						$methodReflection->getName () 
-				) )) {
+						$classReflection->getName(),
+						$methodReflection->getName() 
+				) ) )
+				{
 					continue;
 				}
 				
-				$providerName = $methodReflection->getName () . "Provider";
-				$provider = $classGenerator->addMethod ( $providerName );
+				$providerName = $methodReflection->getName() . "Provider";
+				$provider = $classGenerator->addMethod( $providerName );
 				
-				$permutationOffset = array ();
-				$parametersPermutations = new Permutation ( $paramametersConfig );
+				$permutationOffset = array();
+				$parametersPermutations = new Permutation( $paramametersConfig );
 				
-				foreach ( $parametersPermutations as $permutation ) {
-					$permutationOffset [] = $permutation;
+				foreach( $parametersPermutations as $permutation )
+				{
+					$permutationOffset[] = $permutation;
 				}
 				
-				$classProviderData [$methodReflection->getName ()] = $permutationOffset;
+				$classProviderData[ $methodReflection->getName() ] = $permutationOffset;
 				
-				$provider->setBody ( sprintf ( 'return $this->getProviderData("%s");', $methodReflection->getName () ) );
+				$provider->setBody( sprintf( 'return $this->getProviderData("%s");', $methodReflection->getName() ) );
 			}
 			
-			$providerData = $classGenerator->addProperty ( "providerData", $classProviderData );
-			$providerData->setVisibility ( 'protected' );
+			$providerData = $classGenerator->addProperty( "providerData", $classProviderData );
+			$providerData->setVisibility( 'protected' );
 			
-			$classInfo = new \SplFileInfo ( dirname ( str_replace ( $this->getRootDir (), $this->getDest (), $classReflection->getFileName () ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName () . ".php" );
+			$classInfo = new \SplFileInfo( dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php" );
 			
 			$classDependency = "";
 			
-			foreach ( $dependencies as $dependency => $dependencyClass ) {
+			foreach( $dependencies as $dependency => $dependencyClass )
+			{
 				$classDependency .= "\nuse " . $dependency;
-				if ('' == $dependencyClass) {
+				if( '' == $dependencyClass )
+				{
 					$classDependency .= " as " . $dependencyClass;
 				}
 				$classDependency .= ";";
 			}
 			
-			$classCode = sprintf ( "<?php\nnamespace %s;\n%s\n%s", $classReflection->getNamespaceName (), $classDependency, $classGenerator );
+			$classCode = sprintf( "<?php\nnamespace %s;\n%s\n%s", $classReflection->getNamespaceName(), $classDependency, $classGenerator );
 			
-			$this->saveClass ( $classCode, $classInfo );
+			$this->saveClass( $classCode, $classInfo );
 		}
 	}
 	
@@ -916,9 +1009,10 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param string $code        	
 	 * @param \SplFileInfo $filename        	
 	 */
-	protected function saveClass($code, \SplFileInfo $filename) {
-		@mkdir ( $filename->getPath (), 0777, TRUE );
-		return file_put_contents ( $filename->__toString (), $code );
+	protected function saveClass( $code, \SplFileInfo $filename )
+	{
+		@mkdir( $filename->getPath(), 0777, TRUE );
+		return file_put_contents( $filename->__toString(), $code );
 	}
 	
 	/**
@@ -926,30 +1020,33 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateConfigServices(InputInterface $input, OutputInterface $output) {
-		$classReflections = $this->getClassReflections ();
-		$classReflectionsCount = count ( $classReflections );
+	public function generateConfigServices( InputInterface $input, OutputInterface $output )
+	{
+		$classReflections = $this->getClassReflections();
+		$classReflectionsCount = count( $classReflections );
 		
-		$this->writeNotice ( sprintf ( "Generating Config Services: %d", $classReflectionsCount ) );
+		$this->writeNotice( sprintf( "Generating Config Services: %d", $classReflectionsCount ) );
 		
-		$progressBar = new ProgressBar ( $output, $classReflectionsCount );
-		$progressBar->setFormat ( 'verbose' );
+		$progressBar = new ProgressBar( $output, $classReflectionsCount );
+		$progressBar->setFormat( 'verbose' );
 		
-		$testConfig = $this->getTestConfig ();
+		$testConfig = $this->getTestConfig();
 		
 		/* @var $class ClassReflection */
-		foreach ( $classReflections as $class ) {
+		foreach( $classReflections as $class )
+		{
 			
-			if ($class->isAbstract () || $class->isInterface ()) {
+			if( $class->isAbstract() || $class->isInterface() )
+			{
 				continue;
 			}
 			
-			$testConfig->generateService ( $class );
-			$progressBar->advance ();
+			$testConfig->generateService( $class );
+			$progressBar->advance();
 		}
 		
-		$progressBar->finish ();
-		$testConfig->save ();
+		$progressBar->finish();
+		$testConfig->save();
 	}
 	
 	/**
@@ -958,19 +1055,21 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateConfigCase(InputInterface $input, OutputInterface $output) {
-		$classReflections = $this->getClassReflections ();
-		$classReflectionsCount = count ( $classReflections );
+	public function generateConfigCase( InputInterface $input, OutputInterface $output )
+	{
+		$classReflections = $this->getClassReflections();
+		$classReflectionsCount = count( $classReflections );
 		
-		$this->writeNotice ( sprintf ( "Generating Config Cases for %d classes.", $classReflectionsCount ) );
+		$this->writeNotice( sprintf( "Generating Config Cases for %d classes.", $classReflectionsCount ) );
 		
-		$progressBar = new ProgressBar ( $output, $classReflectionsCount );
-		$progressBar->setFormat ( 'verbose' );
+		$progressBar = new ProgressBar( $output, $classReflectionsCount );
+		$progressBar->setFormat( 'verbose' );
 		
-		$testConfig = $this->getTestConfig ();
+		$testConfig = $this->getTestConfig();
 		
 		/* @var $class ClassReflection */
-		foreach ( $classReflections as $class ) {
+		foreach( $classReflections as $class )
+		{
 			
 			/*
 			 * Skipping tests
@@ -985,41 +1084,46 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 			 * }
 			 */
 			
-			if ($class->isAbstract () || $class->isInterface ()) {
+			if( $class->isAbstract() || $class->isInterface() )
+			{
 				continue;
 			}
 			
 			/*
 			 * Walks thrue methods
 			 */
-			foreach ( $class->getMethods () as $method ) {
+			foreach( $class->getMethods() as $method )
+			{
 				
-				$parameters = $method->getParameters ();
+				$parameters = $method->getParameters();
 				
-				foreach ( $parameters as $parameter ) {
+				foreach( $parameters as $parameter )
+				{
 					
-					$testConfig->setTestsCaseMethodParameter ( 
+					$testConfig->setTestsCaseMethodParameter( 
 
-					Config::generatePermutations ( $parameter, 
+					Config::generatePermutations( $parameter, 
 
-					$testConfig->getTestsCaseMethodParameter ( $class->getName (), $method->getName (), $parameter->getName () ), $this->getDataCount (), $input->getOption ( "override" ) ), $class->getName (), $method->getName (), $parameter->getName () );
+					$testConfig->getTestsCaseMethodParameter( $class->getName(), $method->getName(), $parameter->getName() ), $this->getDataCount(), $input->getOption( "override" ) ), $class->getName(), $method->getName(), $parameter->getName() );
 				}
 			}
 			
-			$progressBar->advance ();
+			$progressBar->advance();
 		}
 		
-		$progressBar->finish ();
-		$testConfig->save ();
+		$progressBar->finish();
+		$testConfig->save();
 	}
 	
 	/**
 	 *
 	 * @return string
 	 */
-	public function getPhpunit() {
-		if (NULL === $this->phpunit) {
-			$this->phpunit = $this->getRootDir () . "/phpunit.xml";
+	public function getPhpunit()
+	{
+		if( NULL === $this->phpunit )
+		{
+			$this->phpunit = $this->getRootDir() . "/phpunit.xml";
 		}
 		return $this->phpunit;
 	}
@@ -1028,7 +1132,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 *
 	 * @param string $phpunit        	
 	 */
-	public function setPhpunit($phpunit) {
+	public function setPhpunit( $phpunit )
+	{
 		$this->phpunit = $phpunit;
 		return $this;
 	}
@@ -1038,7 +1143,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 *
 	 * @param ArrayHash $config        	
 	 */
-	public function setConfig(ArrayHash $config) {
+	public function setConfig( ArrayHash $config )
+	{
 		$this->config = $config;
 		return $this;
 	}
@@ -1047,7 +1153,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 *
 	 * @return array
 	 */
-	public function getTestClasses() {
+	public function getTestClasses()
+	{
 		return $this->testClasses;
 	}
 	
@@ -1055,7 +1162,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 *
 	 * @param array $testClasses        	
 	 */
-	public function setTestClasses(array $testClasses) {
+	public function setTestClasses( array $testClasses )
+	{
 		$this->testClasses = $testClasses;
 		return $this;
 	}
@@ -1064,7 +1172,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 *
 	 * @return int
 	 */
-	public function getDataCount() {
+	public function getDataCount()
+	{
 		return $this->dataCount;
 	}
 	
@@ -1073,7 +1182,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param int $dataCount        	
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setDataCount($dataCount) {
+	public function setDataCount( $dataCount )
+	{
 		$this->dataCount = $dataCount;
 		return $this;
 	}
@@ -1085,13 +1195,16 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param string $name        	
 	 * @return array
 	 */
-	public function getClassDocBlockTagValue(array $tags, $name) {
-		$v = array_filter ( $tags, function ($value) use($name) {
-			return (Arrays::get ( $value, 'name', NULL ) == $name) ? $value : FALSE;
+	public function getClassDocBlockTagValue( array $tags, $name )
+	{
+		$v = array_filter( $tags, function ( $value ) use($name )
+		{
+			return (Arrays::get( $value, 'name', NULL ) == $name) ? $value : FALSE;
 		} );
-		$values = array ();
-		foreach ( $v as $value ) {
-			$values [] = Arrays::get ( $value, 'value', NULL );
+		$values = array();
+		foreach( $v as $value )
+		{
+			$values[] = Arrays::get( $value, 'value', NULL );
 		}
 		return $values;
 	}
@@ -1101,10 +1214,12 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 *
 	 * @return Config
 	 */
-	public function getTestConfig() {
-		if (NULL === $this->testConfig) {
-			$testConfig = Config::fromFile ( $this->getTestConfigFilename () );
-			$this->setTestConfig ( $testConfig );
+	public function getTestConfig()
+	{
+		if( NULL === $this->testConfig )
+		{
+			$testConfig = Config::fromFile( $this->getTestConfigFilename() );
+			$this->setTestConfig( $testConfig );
 		}
 		return $this->testConfig;
 	}
@@ -1115,7 +1230,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param Config $testConfig        	
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setTestConfig(Config $testConfig) {
+	public function setTestConfig( Config $testConfig )
+	{
 		$this->testConfig = $testConfig;
 		return $this;
 	}
@@ -1125,8 +1241,9 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 *
 	 * @return string
 	 */
-	public function getTestConfigFilename() {
-		return sprintf ( "%s/resource/config/%s", rtrim ( $this->getDest () ), $this->testConfigFilename );
+	public function getTestConfigFilename()
+	{
+		return sprintf( "%s/resource/config/%s", rtrim( $this->getDest() ), $this->testConfigFilename );
 	}
 	
 	/**
@@ -1135,7 +1252,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand {
 	 * @param unknown $testConfigFilename        	
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setTestConfigFilename($testConfigFilename) {
+	public function setTestConfigFilename( $testConfigFilename )
+	{
 		$this->testConfigFilename = $testConfigFilename;
 		return $this;
 	}

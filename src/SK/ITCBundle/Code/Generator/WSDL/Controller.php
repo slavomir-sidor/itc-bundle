@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Code Generator WSDL Controller
  *
@@ -15,13 +16,13 @@ use Monolog\Logger;
 
 class Controller extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Zend\Code\Generator\GeneratorInterface::generate()
 	 */
-	public function generate(Document $document)
+	public function generate( Document $document )
 	{
 		$definition = $document->getDefinitions();
 		$portTypes = $definition->getPortType();

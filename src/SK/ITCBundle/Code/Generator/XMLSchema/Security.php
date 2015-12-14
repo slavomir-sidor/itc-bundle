@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Generator XML Schema Security
  *
@@ -11,12 +12,13 @@ use Zend\Code\Generator\ClassGenerator;
 
 class Security extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Zend\Code\Generator\GeneratorInterface::generate()
 	 */
 	public function generate()
-	{}
+	{
+	}
 }

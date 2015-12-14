@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Command Code Generator XMI Export
  *
@@ -14,7 +15,7 @@ use SK\ITCBundle\Command\Code\Generator\GeneratorCommand;
 
 class Export extends GeneratorCommand
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -22,36 +23,35 @@ class Export extends GeneratorCommand
 	 */
 	protected function configure()
 	{
-		$this->setName('itc:xmi:export');
+		$this->setName( 'itc:xmi:export' );
 		
-		$this->addArgument('input', InputArgument::OPTIONAL, 'Input File');
-		$this->addArgument('dest', InputArgument::OPTIONAL, 'Output Folder', 'src/AppBUndle/Resource/UML');
-		$this->addArgument('name', InputArgument::OPTIONAL, 'Name', 'Default');
+		$this->addArgument( 'input', InputArgument::OPTIONAL, 'Input File' );
+		$this->addArgument( 'dest', InputArgument::OPTIONAL, 'Output Folder', 'src/AppBUndle/Resource/UML' );
+		$this->addArgument( 'name', InputArgument::OPTIONAL, 'Name', 'Default' );
 		parent::configure();
 	}
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute(InputInterface $input, OutputInterface $output)
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
-		$source = $input->getArgument('input');
-		$dest = $input->getArgument('dest');
-		$name = $input->getArgument('name');
+		$source = $input->getArgument( 'input' );
+		$dest = $input->getArgument( 'dest' );
+		$name = $input->getArgument( 'name' );
 		try
 		{
 			require_once 'PHP/UML.php';
 			$uml = new \PHP_UML();
-			$uml->setInput($source);
-			$uml->parse($name);
-			$uml->export('xmi', $dest);
-		}
-		catch (Exception $e)
+			$uml->setInput( $source );
+			$uml->parse( $name );
+			$uml->export( 'xmi', $dest );
+		} catch( Exception $e )
 		{
-			$output->writeln('Error!');
-			$output->writeln($e->getMessage());
+			$output->writeln( 'Error!' );
+			$output->writeln( $e->getMessage() );
 		}
 	}
 }

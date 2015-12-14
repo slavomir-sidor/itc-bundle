@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Command Code Generator PHPUnit Run
  *
@@ -7,7 +8,7 @@
  */
 namespace SK\ITCBundle\Command\Code\Generator\PHPUnit;
 
-define('PHPUnit_MAIN_METHOD', 'PHPUnit_TextUI_Command::main');
+define( 'PHPUnit_MAIN_METHOD', 'PHPUnit_TextUI_Command::main' );
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,13 +17,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Run extends PHPUnitGenerator
 {
 	/**
-	 * 
-	 * @param string $name
-	 * @param string $description
+	 *
+	 * @param string $name        	
+	 * @param string $description        	
 	 */
-	public function __construct($name="phpunit:run",$description="PHPUnit Run")
+	public function __construct( $name = "phpunit:run", $description = "PHPUnit Run" )
 	{
-		parent::__construct($name, $description);
+		parent::__construct( $name, $description );
 	}
 	
 	/**
@@ -34,31 +35,30 @@ class Run extends PHPUnitGenerator
 	{
 		parent::configure();
 	}
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
 	 */
-	public function execute(InputInterface $input, OutputInterface $output)
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
-		$this->writeHeader($output);
+		$this->writeHeader( $output );
 		
-		if (strpos('/usr/bin/php', '@php_bin') === 0)
+		if( strpos( '/usr/bin/php', '@php_bin' ) === 0 )
 		{
-			require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'PHPUnit' . DIRECTORY_SEPARATOR . 'Autoload.php';
-		}
-		else
+			require dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'PHPUnit' . DIRECTORY_SEPARATOR . 'Autoload.php';
+		} else
 		{
 			require '/usr/share/pear' . DIRECTORY_SEPARATOR . 'PHPUnit' . DIRECTORY_SEPARATOR . 'Autoload.php';
 		}
 		
-		$commandArg = array(
-			
-			'-c' => "phpunit.xml"
+		$commandArg = array( 
+				
+				'-c' => "phpunit.xml" 
 		);
 		
 		$command = new \PHPUnit_TextUI_Command();
-		$command->run($commandArg);
+		$command->run( $commandArg );
 	}
 }

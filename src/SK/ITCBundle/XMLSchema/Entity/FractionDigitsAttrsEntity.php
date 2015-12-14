@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity Fraction Digits Attrs
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class FractionDigitsAttrsEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Fraction Digits Attrs Name
 	 *

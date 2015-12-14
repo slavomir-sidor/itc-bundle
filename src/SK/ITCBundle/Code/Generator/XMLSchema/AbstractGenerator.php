@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle Code Generator XML Schema
  *
@@ -13,21 +14,21 @@ use SK\ITCBundle\Code\Generator\CodeGenerator;
 
 abstract class AbstractGenerator extends CodeGenerator
 {
-
+	
 	/**
 	 * SK ITC Bundle Code Generator XML Schema Document
 	 *
 	 * @var Document
 	 */
 	protected $document;
-
+	
 	/**
 	 * Gets SK ITC Bundle Code Generator XML Schema Document
 	 *
 	 * @return Document
 	 */
-	public function getDocument($uri)
+	public function getDocument( $uri )
 	{
-		return new Document($uri);
+		return new Document( $uri );
 	}
 }

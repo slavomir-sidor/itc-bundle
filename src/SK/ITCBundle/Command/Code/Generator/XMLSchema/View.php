@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Generator XML Schema Service
  *
@@ -14,7 +15,7 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class View extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -22,50 +23,50 @@ class View extends AbstractGenerator
 	 */
 	protected function configure()
 	{
-		$this->addArgument('output', InputArgument::OPTIONAL, 'Output Folder', 'src/AppBundle/XMLSchema');
+		$this->addArgument( 'output', InputArgument::OPTIONAL, 'Output Folder', 'src/AppBundle/XMLSchema' );
 		parent::configure();
 	}
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute(InputInterface $input, OutputInterface $output)
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
-		$this->getLogger()->log(Logger::INFO, "Creating XSD View Resources");
-		$xsd = $this->getDocument($input->getArgument("xsd"));
+		$this->getLogger()->log( Logger::INFO, "Creating XSD View Resources" );
+		$xsd = $this->getDocument( $input->getArgument( "xsd" ) );
 		$xsdSchema = $xsd->getSchema();
 		
-		$output->writeln("Annotations:");
+		$output->writeln( "Annotations:" );
 		$xsdSchemaAnnotations = $xsdSchema->getAnnotation();
-		foreach ($xsdSchemaAnnotations as $xsdSchemaAnnotation)
+		foreach( $xsdSchemaAnnotations as $xsdSchemaAnnotation )
 		{
 			// $output->writeln($xsdSchemaAnnotations->getDocumentation()->getContent());
 		}
 		
-		$output->writeln("Groups:");
+		$output->writeln( "Groups:" );
 		$xsdSchemaGroups = $xsdSchema->getGroup();
-		foreach ($xsdSchemaGroups as $xsdSchemaGroup)
+		foreach( $xsdSchemaGroups as $xsdSchemaGroup )
 		{
 			// $output->writeln($xsdSchemaGroup->getName());
 		}
-		$output->writeln("");
-		$output->writeln("------------------------------");
-		$output->writeln("Simple Type:");
-		$output->writeln("------------------------------");
+		$output->writeln( "" );
+		$output->writeln( "------------------------------" );
+		$output->writeln( "Simple Type:" );
+		$output->writeln( "------------------------------" );
 		$xsdSchemaSimpleTypes = $xsdSchema->getSimpleType();
-		foreach ($xsdSchemaSimpleTypes as $xsdSchemaSimpleType)
+		foreach( $xsdSchemaSimpleTypes as $xsdSchemaSimpleType )
 		{
-			$output->writeln($xsdSchemaSimpleType->getName());
+			$output->writeln( $xsdSchemaSimpleType->getName() );
 		}
 		
-		$output->writeln("");
-		$output->writeln("------------------------------");
-		$output->writeln("Complex Type:");
-		$output->writeln("------------------------------");
+		$output->writeln( "" );
+		$output->writeln( "------------------------------" );
+		$output->writeln( "Complex Type:" );
+		$output->writeln( "------------------------------" );
 		$xsdSchemaComplexTypes = $xsdSchema->getComplexType();
-		foreach ($xsdSchemaComplexTypes as $xsdSchemaComplexType)
+		foreach( $xsdSchemaComplexTypes as $xsdSchemaComplexType )
 		{
 			// $output->writeln($xsdSchemaComplexType->getName());
 		}

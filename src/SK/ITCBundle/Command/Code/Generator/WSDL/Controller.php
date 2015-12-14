@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Command Code Generator WSDL Controller
  *
@@ -15,7 +16,7 @@ use Monolog\Logger;
 
 class Controller extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -23,15 +24,13 @@ class Controller extends AbstractGenerator
 	 */
 	protected function configure()
 	{
-		$this->addOption("controllerClass", "controller", InputOption::VALUE_OPTIONAL, "SOAP Client Class", 
-			'SK\\ITCBundle\\Controller\\AbstractController');
+		$this->addOption( "controllerClass", "controller", InputOption::VALUE_OPTIONAL, "SOAP Client Class", 'SK\\ITCBundle\\Controller\\AbstractController' );
 		parent::configure();
 	}
-
-	public function execute(InputInterface $input, OutputInterface $output)
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
-		$this->getLogger()->log(Logger::INFO, "Creating WSDL Controllers");
-		$wsdl = $this->getWsdlDocument($input->getArgument("wsdl"));
+		$this->getLogger()->log( Logger::INFO, "Creating WSDL Controllers" );
+		$wsdl = $this->getWsdlDocument( $input->getArgument( "wsdl" ) );
 		$definition = $wsdl->getDefinitions();
 		$portTypes = $definition->getPortType();
 	}

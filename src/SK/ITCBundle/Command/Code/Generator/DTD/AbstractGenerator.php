@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle Service Abstract DTD Abstract Generator
  *
@@ -11,15 +12,16 @@ use SK\ITCBundle\DTD\Document;
 use Symfony\Component\Console\Input\InputArgument;
 use SK\ITCBundle\Command\Code\Generator\GeneratorCommand;
 
-abstract class AbstractGenerator extends GeneratorCommand{
-
+abstract class AbstractGenerator extends GeneratorCommand
+{
+	
 	/**
 	 * * SK ITC Bundle Code Abstract DTD Abstract Generator Document
 	 *
 	 * @var Document
 	 */
 	protected $document;
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -27,17 +29,17 @@ abstract class AbstractGenerator extends GeneratorCommand{
 	 */
 	protected function configure()
 	{
-		$this->addArgument('document', InputArgument::OPTIONAL, 'DTD File ');
+		$this->addArgument( 'document', InputArgument::OPTIONAL, 'DTD File ' );
 		parent::configure();
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle Service Abstract DTD Abstract Generator Document
 	 *
 	 * @return Document
 	 */
-	public function getDocument($uri)
+	public function getDocument( $uri )
 	{
-		return new Document($uri);
+		return new Document( $uri );
 	}
 }

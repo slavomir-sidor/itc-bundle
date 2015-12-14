@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity Max Length Attrs
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class MaxLengthAttrsEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Max Length Attrs Name
 	 *

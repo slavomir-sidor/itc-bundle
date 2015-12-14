@@ -26,42 +26,42 @@ use TokenReflection\ReflectionMethod;
  */
 abstract class CodeCommand extends AbstractCommand
 {
-
+	
 	/**
 	 * SK ITCBundle Command Code Generator Class Reflection
 	 *
 	 * @var ReflectionClass[]
 	 */
 	protected $classReflections;
-
+	
 	/**
 	 * SK ITCBundle Command Code Generator Operations Reflection
 	 *
 	 * @var ReflectionMethod[]
 	 */
 	protected $operationsReflections;
-
+	
 	/**
 	 * SK ITCBundle Command Code Generator Finder
 	 *
 	 * @var Finder
 	 */
 	protected $finder;
-
+	
 	/**
 	 * SK ITCBundle Command Code Generator Finder
 	 *
 	 * @var ReflectionFile[]
 	 */
 	protected $fileRelections;
-
+	
 	/**
 	 * SK ITCBundle Command Code Generator Broker
 	 *
 	 * @var Broker
 	 */
 	protected $broker;
-
+	
 	/**
 	 * Gets SK ITCBundle Command Code Generator Broker
 	 *
@@ -76,7 +76,7 @@ abstract class CodeCommand extends AbstractCommand
 		}
 		return $this->broker;
 	}
-
+	
 	/**
 	 * Gets SK ITCBundle Command Code Generator Finder
 	 *
@@ -89,19 +89,19 @@ abstract class CodeCommand extends AbstractCommand
 			$finder = new Finder();
 			$finder->ignoreDotFiles( TRUE );
 			$finder->in( $this->getInput()->getArgument( "src" ) );
-
+			
 			if( $this->getInput()->hasOption( "fileSuffix" ) )
 			{
 				$finder->name( $this->getInput()->getOption( "fileSuffix" ) );
 			}
-
+			
 			$this->setFinder( $finder );
 			$this->writeInfo( sprintf( "Processing %d files.", $finder->count() ) );
 		}
-
+		
 		return $this->finder;
 	}
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -112,7 +112,7 @@ abstract class CodeCommand extends AbstractCommand
 		parent::execute( $input, $output );
 		$this->setSrc( $input->getArgument( 'src' ) );
 	}
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -128,47 +128,49 @@ abstract class CodeCommand extends AbstractCommand
 		$this->addOption( "operationFilter", "op", InputOption::VALUE_OPTIONAL, "Operations filter : Abstract,Final, Private, Protected, Public, Static." );
 		$this->addOption( "parentClass", "pc", InputOption::VALUE_OPTIONAL, "Parent Class Name, e.g 'My\Class'" );
 		$this->addOption( "fileSuffix", "fs", InputOption::VALUE_OPTIONAL, "File suffixes for given src, default all and not dot files.", "*.php" );
-		$this->addArgument( 'src', InputArgument::IS_ARRAY, 'PHP Source directory', array("./") );
+		$this->addArgument( 'src', InputArgument::IS_ARRAY, 'PHP Source directory', array( 
+				"./" 
+		) );
 	}
-
+	
 	/**
 	 *
-	 * @param array $src
+	 * @param array $src        	
 	 */
 	public function setSrc( array $src )
 	{
 		$root = $this->getRootDir();
-
+		
 		foreach( $src as $directory )
 		{
 			$directory = $root . DIRECTORY_SEPARATOR . $directory;
-
+			
 			if( file_exists( $directory ) )
 			{
 				$this->src[] = $directory;
 			}
 		}
-
+		
 		return $this;
 	}
-
+	
 	/**
 	 *
-	 * @param string $class
+	 * @param string $class        	
 	 * @return array
 	 */
 	protected function getNamespace( $class )
 	{
 		$names = explode( "\\", $class );
 		$className = array_pop( $names );
-
-		return array(
-
+		
+		return array( 
+				
 				'namespace' => implode( "\\", $names ),
-				'class' => $className
+				'class' => $className 
 		);
 	}
-
+	
 	/**
 	 * Gets SK ITCBundle Command Code Generator Class Reflection
 	 *
@@ -180,13 +182,13 @@ abstract class CodeCommand extends AbstractCommand
 		{
 			$progress = new ProgressBar( $this->getOutput(), $this->getFinder()->count() );
 			$progress->start();
-
+			
 			/* @var $classReflections ReflectionClass[] */
 			$classReflections = array();
-
+			
 			/* @var $exceptions \Exception[] */
 			$exceptions = array();
-
+			
 			foreach( $this->getFinder()->files() as $fileName )
 			{
 				try
@@ -200,13 +202,13 @@ abstract class CodeCommand extends AbstractCommand
 				$progress->advance();
 			}
 			$progress->finish();
-
+			
 			$classReflections = $this->getBroker()->getClasses( Backend::TOKENIZED_CLASSES, Backend::INTERNAL_CLASSES );
 			$parentClass = $this->getInput()->getOption( "parentClass" );
-
+			
 			if( $parentClass )
 			{
-
+				
 				foreach( $classReflections as $key => $classReflection )
 				{
 					if( ! in_array( $parentClass, $classReflection->getParentClassNameList() ) )
@@ -216,17 +218,17 @@ abstract class CodeCommand extends AbstractCommand
 				}
 			}
 			$this->setClassReflections( $classReflections );
-
+			
 			$this->writeInfo( sprintf( "Found %d Classes with %d errors.", count( $this->getClassReflections() ), count( $this->getExceptions() ) ) );
 		}
-
+		
 		return $this->classReflections;
 	}
-
+	
 	/**
 	 * Sets SK ITCBundle Command Code Generator Class Reflections
 	 *
-	 * @param ReflectionClass[] $classReflections
+	 * @param ReflectionClass[] $classReflections        	
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
 	public function setClassReflections( $classReflections )
@@ -234,7 +236,7 @@ abstract class CodeCommand extends AbstractCommand
 		$this->classReflections = $classReflections;
 		return $this;
 	}
-
+	
 	/**
 	 * Sets SK ITCBundle Command Code Generator Finder
 	 *
@@ -247,7 +249,7 @@ abstract class CodeCommand extends AbstractCommand
 		$this->finder = $finder;
 		return $this;
 	}
-
+	
 	/**
 	 * Sets SK ITCBundle Command Code Generator Broker
 	 *
@@ -260,7 +262,7 @@ abstract class CodeCommand extends AbstractCommand
 		$this->broker = $broker;
 		return $this;
 	}
-
+	
 	/**
 	 * Sets SK ITCBundle Command Code Generator Operations Reflections
 	 *
@@ -271,21 +273,21 @@ abstract class CodeCommand extends AbstractCommand
 		if( null === $this->operationsReflections )
 		{
 			$operationsReflections = array();
-
+			
 			/**
 			 *
 			 * @todo add operation filter for class reflections
 			 *       $operationFilter = $this->getInput()->getOption('operationFilter');
 			 */
-
+			
 			$operationName = $this->getInput()->hasOption( 'operationName' ) ? $this->getInput()->getOption( 'operationName' ) : "";
-
+			
 			foreach( $this->getClassReflections() as $classReflection )
 			{
-
+				
 				/* @var $operationReflection ReflectionMethod[] */
 				$classOperationReflections = $classReflection->getMethods();
-
+				
 				foreach( $classOperationReflections as $operationReflection )
 				{
 					if( $operationName != "" && ! preg_match( '/' . $operationName . '/', $operationReflection->getName() ) )
@@ -297,14 +299,14 @@ abstract class CodeCommand extends AbstractCommand
 			}
 			$this->setOperationsReflections( $operationsReflections );
 		}
-
+		
 		return $this->operationsReflections;
 	}
-
+	
 	/**
 	 * Gets SK ITCBundle Command Code Generator Operations Reflections
 	 *
-	 * @param ReflectionMethod[] $operationsReflections
+	 * @param ReflectionMethod[] $operationsReflections        	
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
 	public function setOperationsReflections( array $operationsReflections )
@@ -312,7 +314,7 @@ abstract class CodeCommand extends AbstractCommand
 		$this->operationsReflections = $operationsReflections;
 		return $this;
 	}
-
+	
 	/**
 	 * Gets SK ITCBundle Command Code Generator File Reflections
 	 *
@@ -322,11 +324,11 @@ abstract class CodeCommand extends AbstractCommand
 	{
 		return $this->fileRelections;
 	}
-
+	
 	/**
 	 * Sets SK ITCBundle Command Code Generator File Reflections
 	 *
-	 * @param ReflectionFile[] $fileRelections
+	 * @param ReflectionFile[] $fileRelections        	
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
 	public function setFileRelections( $fileRelections )

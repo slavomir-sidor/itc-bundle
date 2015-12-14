@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle SOAP WSDL tDefinitions
  *
@@ -9,100 +10,99 @@ namespace SK\ITCBundle\WSDL;
 
 class tDefinitions extends Element
 {
-
 	const ELEMENT_NAME = 'wsdl:definitions';
-
+	
 	/**
 	 * SK ITCBundle XML Document Contructor
 	 *
 	 * @param string $uri        	
 	 */
-	public function __construct(\DOMElement $element)
+	public function __construct( \DOMElement $element )
 	{
-		$this->setDOMElement($element);
+		$this->setDOMElement( $element );
 		
-		foreach ($element->childNodes as $childNode)
+		foreach( $element->childNodes as $childNode )
 		{
-			if ($childNode instanceof \DOMElement)
+			if( $childNode instanceof \DOMElement )
 			{
-				switch ($childNode->tagName)
+				switch( $childNode->tagName )
 				{
 					case tMessage::ELEMENT_NAME:
-						$this->message[] = new tMessage($childNode);
+						$this->message[] = new tMessage( $childNode );
 						break;
 					case tPortType::ELEMENT_NAME:
-						$this->portType[] = new tPortType($childNode);
+						$this->portType[] = new tPortType( $childNode );
 						break;
 					case tTypes::ELEMENT_NAME:
-						$this->types = new tTypes($childNode);
+						$this->types = new tTypes( $childNode );
 						break;
 					case tBinding::ELEMENT_NAME:
-						$this->binding[] = new tBinding($childNode);
+						$this->binding[] = new tBinding( $childNode );
 						break;
 					case tService::ELEMENT_NAME:
-						$this->service[] = new tService($childNode);
+						$this->service[] = new tService( $childNode );
 						break;
 				}
 			}
 		}
 	}
-
+	
 	/**
 	 * SK ITCBundle SOAP WSDL tDefinitions Target Namespace
 	 *
 	 * @var string
 	 */
 	protected $tagretNamespace;
-
+	
 	/**
 	 * SK ITCBundle SOAP WSDL tDefinitions Name
 	 *
 	 * @var string
 	 */
 	protected $name;
-
+	
 	/**
 	 * SK ITCBundle SOAP WSDL tDefinitions
 	 *
 	 * @var tImport[]
 	 */
 	protected $import;
-
+	
 	/**
 	 * SK ITCBundle SOAP WSDL tDefinitions
 	 *
 	 * @var tTypes[]
 	 */
 	protected $types;
-
+	
 	/**
 	 * SK ITCBundle SOAP WSDL tMessage
 	 *
 	 * @var tMessage[]
 	 */
 	protected $message;
-
+	
 	/**
 	 * SK ITCBundle SOAP WSDL Port Type
 	 *
 	 * @var tPortType[]
 	 */
 	protected $portType;
-
+	
 	/**
 	 * SK ITCBundle SOAP WSDL tDefinitions Bindings
 	 *
 	 * @var tBinding[]
 	 */
 	protected $binding;
-
+	
 	/**
 	 * SK ITCBundle SOAP WSDL tDefinitions tService
 	 *
 	 * @var tService[]
 	 */
 	protected $service;
-
+	
 	/**
 	 *
 	 * @return string
@@ -111,17 +111,17 @@ class tDefinitions extends Element
 	{
 		return $this->tagretNamespace;
 	}
-
+	
 	/**
 	 *
 	 * @param string $tagretNamespace        	
 	 */
-	public function setTagretNamespace($tagretNamespace)
+	public function setTagretNamespace( $tagretNamespace )
 	{
 		$this->tagretNamespace = $tagretNamespace;
 		return $this;
 	}
-
+	
 	/**
 	 *
 	 * @return string
@@ -130,17 +130,17 @@ class tDefinitions extends Element
 	{
 		return $this->name;
 	}
-
+	
 	/**
 	 *
 	 * @param string $name        	
 	 */
-	public function setName($name)
+	public function setName( $name )
 	{
 		$this->name = $name;
 		return $this;
 	}
-
+	
 	/**
 	 *
 	 * @return tImport[]
@@ -149,17 +149,17 @@ class tDefinitions extends Element
 	{
 		return $this->import;
 	}
-
+	
 	/**
 	 *
 	 * @param tImport[] $import        	
 	 */
-	public function setImport($import)
+	public function setImport( $import )
 	{
 		$this->import = $import;
 		return $this;
 	}
-
+	
 	/**
 	 *
 	 * @return tTypes[]
@@ -168,17 +168,17 @@ class tDefinitions extends Element
 	{
 		return $this->types;
 	}
-
+	
 	/**
 	 *
 	 * @param tTypes[] $types        	
 	 */
-	public function setTypes($types)
+	public function setTypes( $types )
 	{
 		$this->types = $types;
 		return $this;
 	}
-
+	
 	/**
 	 *
 	 * @return tMessage[]
@@ -187,17 +187,17 @@ class tDefinitions extends Element
 	{
 		return $this->message;
 	}
-
+	
 	/**
 	 *
 	 * @param tMessage[] $message        	
 	 */
-	public function setMessage($message)
+	public function setMessage( $message )
 	{
 		$this->message = $message;
 		return $this;
 	}
-
+	
 	/**
 	 *
 	 * @return tPortType[]
@@ -206,17 +206,17 @@ class tDefinitions extends Element
 	{
 		return $this->portType;
 	}
-
+	
 	/**
 	 *
 	 * @param tPortType[] $portType        	
 	 */
-	public function setPortType($portType)
+	public function setPortType( $portType )
 	{
 		$this->portType = $portType;
 		return $this;
 	}
-
+	
 	/**
 	 *
 	 * @return tBinding[]
@@ -225,17 +225,17 @@ class tDefinitions extends Element
 	{
 		return $this->binding;
 	}
-
+	
 	/**
 	 *
 	 * @param tBinding[] $binding        	
 	 */
-	public function setBinding($binding)
+	public function setBinding( $binding )
 	{
 		$this->binding = $binding;
 		return $this;
 	}
-
+	
 	/**
 	 *
 	 * @return tService[]
@@ -244,12 +244,12 @@ class tDefinitions extends Element
 	{
 		return $this->service;
 	}
-
+	
 	/**
 	 *
 	 * @param tService[] $service        	
 	 */
-	public function setService($service)
+	public function setService( $service )
 	{
 		$this->service = $service;
 		return $this;

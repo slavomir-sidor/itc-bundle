@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity List
  *
@@ -11,14 +12,14 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class ListEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity List Name
 	 *
 	 * @var string
 	 */
 	protected $elementTagName = 'list';
-
+	
 	/**
 	 *
 	 * @var WhiteSpaceAttrsEntity[]

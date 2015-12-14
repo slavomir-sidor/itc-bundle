@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle DTD Attribute Type ID
  * 
@@ -12,7 +13,7 @@ namespace SK\ITCBundle\DTD\Attribute\Type;
 
 class ID
 {
-
+	
 	/**
 	 * SK ITC Bundle DTD Attribute Type ID Name
 	 *

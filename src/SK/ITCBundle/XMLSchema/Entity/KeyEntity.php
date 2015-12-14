@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity KeyEntity
  *
@@ -11,20 +12,20 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class KeyEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity KeyEntity Name
 	 *
 	 * @var string
 	 */
 	protected $elementTagName = 'key';
-
+	
 	/**
 	 *
 	 * @var SelectorEntity[]
 	 */
 	protected $selector;
-
+	
 	/**
 	 *
 	 * @var FieldEntity[]

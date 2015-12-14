@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Code Generator PHPUnit Functional
  *
@@ -13,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Functional extends PHPUnit
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -21,7 +22,7 @@ class Functional extends PHPUnit
 	 */
 	public function generate()
 	{
-		parent::execute($input, $output);
-		$this->generateClassFunctionalCase($input, $output);
+		parent::execute( $input, $output );
+		$this->generateClassFunctionalCase( $input, $output );
 	}
 }

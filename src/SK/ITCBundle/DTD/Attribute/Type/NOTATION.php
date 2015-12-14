@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle DTD Attribute Type NOTATION
  * 
@@ -11,7 +12,7 @@ namespace SK\ITCBundle\DTD\Attribute\Type;
 
 class NOTATION
 {
-
+	
 	/**
 	 * SK ITC Bundle DTD Attribute Type NOTATION Name
 	 *

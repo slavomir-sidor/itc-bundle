@@ -12,7 +12,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class OperationsAttributesCommand extends ReflectionCommand{
+class OperationsAttributesCommand extends ReflectionCommand
+{
 	
 	/**
 	 * Constructs SK ITCBundle Command Namespace Abstract Reflection
@@ -22,8 +23,9 @@ class OperationsAttributesCommand extends ReflectionCommand{
 	 * @param string $description
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
-	public function __construct($name = "src:operations:attr", $description = "Source Class Operations Attributes") {
-		parent::__construct ( $name, $description );
+	public function __construct( $name = "src:operations:attr", $description = "Source Class Operations Attributes" )
+	{
+		parent::__construct( $name, $description );
 	}
 	
 	/**
@@ -31,8 +33,9 @@ class OperationsAttributesCommand extends ReflectionCommand{
 	 *
 	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
 	 */
-	public function execute(InputInterface $input, OutputInterface $output) {
-		parent::execute ( $input, $output );
+	public function execute( InputInterface $input, OutputInterface $output )
+	{
+		parent::execute( $input, $output );
 		$this->executeOperationsAttributesReflection();
 	}
 }

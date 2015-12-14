@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity Max Bound
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class MaxBoundEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Max Bound Name
 	 *

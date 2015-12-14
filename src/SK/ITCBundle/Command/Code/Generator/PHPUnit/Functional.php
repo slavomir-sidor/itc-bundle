@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Command Code Generator PHPUnit Functional
  *
@@ -13,17 +14,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Functional extends PHPUnitGenerator
 {
-
+	
 	/**
-	 * 
-	 * @param string $name
-	 * @param string $description
+	 *
+	 * @param string $name        	
+	 * @param string $description        	
 	 */
-	public function __construct($name="phpunit:functional",$description="PHPUnit Generates Functional Tests")
+	public function __construct( $name = "phpunit:functional", $description = "PHPUnit Generates Functional Tests" )
 	{
-		parent::__construct($name, $description);
+		parent::__construct( $name, $description );
 	}
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -33,15 +34,15 @@ class Functional extends PHPUnitGenerator
 	{
 		parent::configure();
 	}
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
 	 */
-	public function execute(InputInterface $input, OutputInterface $output)
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
-		parent::execute($input, $output);
-		$this->generateClassFunctionalCase($input, $output);
+		parent::execute( $input, $output );
+		$this->generateClassFunctionalCase( $input, $output );
 	}
 }

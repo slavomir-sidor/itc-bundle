@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle DTD Entity External Public
  *
@@ -10,21 +11,21 @@ use SK\ITCBundle\DTD\Entity;
 
 class ExternalPublic extends Entity
 {
-
+	
 	/**
 	 * SK ITC Bundle DTD Entity External Public Identifier
 	 *
 	 * @var string
 	 */
 	protected $identifier;
-
+	
 	/**
 	 * SK ITC Bundle DTD Entity External Public Uri
 	 *
 	 * @var string
 	 */
 	protected $uri;
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Entity External Public Identifier
 	 *
@@ -34,7 +35,7 @@ class ExternalPublic extends Entity
 	{
 		return $this->identifier;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Entity External Public Identifier
 	 *
@@ -42,12 +43,12 @@ class ExternalPublic extends Entity
 	 *        	SK ITC Bundle DTD Entity External Public Identifier
 	 * @return \SK\ITCBundle\DTD\Entity\ExternalPublic
 	 */
-	public function setIdentifier($identifier)
+	public function setIdentifier( $identifier )
 	{
 		$this->identifier = $identifier;
 		return $this;
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Entity External Public Uri
 	 *
@@ -57,7 +58,7 @@ class ExternalPublic extends Entity
 	{
 		return $this->uri;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Entity External Public Uri
 	 *
@@ -65,7 +66,7 @@ class ExternalPublic extends Entity
 	 *        	SK ITC Bundle DTD Entity External Public Uri
 	 * @return \SK\ITCBundle\DTD\Entity\ExternalPublic
 	 */
-	public function setUri($uri)
+	public function setUri( $uri )
 	{
 		$this->uri = $uri;
 		return $this;

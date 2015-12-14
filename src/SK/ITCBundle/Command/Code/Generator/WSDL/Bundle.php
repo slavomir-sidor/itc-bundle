@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Command Code Generator WSDL Bundle
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\Command\Code\Generator\WSDL\AbstractGenerator;
 
 class Bundle extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *

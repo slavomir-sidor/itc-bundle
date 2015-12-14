@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle DTD Document
  *
@@ -11,49 +12,49 @@ use SK\ITCBundle\DTD\Attribute\AttributeList;
 
 class Document extends ITCDocument
 {
-
+	
 	/**
 	 * SK ITC Bundle DTD Document Attribute List
 	 *
 	 * @var AttributeList[]
 	 */
 	protected $attributeList;
-
+	
 	/**
 	 * SK ITC Bundle DTD Document Element
 	 *
 	 * @var Element[]
 	 */
 	protected $element;
-
+	
 	/**
 	 * SK ITC Bundle DTD Document Entity
 	 *
 	 * @var Entity[]
 	 */
 	protected $entity;
-
+	
 	/**
 	 * SK ITC Bundle DTD Document Source
 	 *
 	 * @var Source
 	 */
 	protected $source;
-
+	
 	/**
 	 * SK ITC Bundle DTD Document Source Definitions
 	 *
 	 * @var array
 	 */
 	protected $sourceDefinitions;
-
+	
 	/**
 	 * SK ITC Bundle DTD Document Annotation
 	 *
 	 * @var Annotation[]
 	 */
 	protected $annotation;
-
+	
 	/**
 	 * SK ITC Bundle DTD Document Loaded Flag
 	 *
@@ -61,18 +62,18 @@ class Document extends ITCDocument
 	 * @var boolean
 	 */
 	protected $loaded;
-
+	
 	/**
 	 * Constructs SK ITC Bundle DTD Document
 	 *
 	 * @param string $uri
 	 *        	SK ITC Bundle DTD Document URI
 	 */
-	public function __construct($uri)
+	public function __construct( $uri )
 	{
-		parent::__construct($uri);
+		parent::__construct( $uri );
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Document Source
 	 *
@@ -80,27 +81,27 @@ class Document extends ITCDocument
 	 */
 	public function getSource()
 	{
-		if (NULL === $this->source)
+		if( NULL === $this->source )
 		{
-			$source = new Source($this);
-			$this->setSource($source);
+			$source = new Source( $this );
+			$this->setSource( $source );
 		}
 		
 		return $this->source;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Document Source
 	 *
 	 * @param Source $source
 	 *        	SK ITC Bundle DTD Document Source
 	 */
-	public function setSource(Source $source)
+	public function setSource( Source $source )
 	{
 		$this->source = $source;
 		return $this;
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Document Element
 	 *
@@ -108,34 +109,33 @@ class Document extends ITCDocument
 	 *        	SK ITC Bundle DTD Document Element Name
 	 * @return \SK\ITCBundle\DTD\Element[]
 	 */
-	public function getElement($name = null)
+	public function getElement( $name = null )
 	{
-		if (NULL === $this->element)
+		if( NULL === $this->element )
 		{
 			$this->element = new \ArrayIterator();
 		}
-		if (NULL !== $name)
+		if( NULL !== $name )
 		{
-			if (! $this->getElement()->offsetExists($name))
+			if( ! $this->getElement()->offsetExists( $name ) )
 			{
-				$source = $this->getSource()->getElement($name);
-				$element = new Element($this, $name, $source);
-				$this->setElement($element);
+				$source = $this->getSource()->getElement( $name );
+				$element = new Element( $this, $name, $source );
+				$this->setElement( $element );
 			}
-			return $this->element->offsetGet($name);
-		}
-		else
+			return $this->element->offsetGet( $name );
+		} else
 		{
-			foreach ($this->getSource()->getElement() as $name => $source)
+			foreach( $this->getSource()->getElement() as $name => $source )
 			{
-				$element = new Element($this, $name, $source);
-				$this->setElement($element);
+				$element = new Element( $this, $name, $source );
+				$this->setElement( $element );
 			}
 		}
 		
 		return $this->element;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Document Element
 	 *
@@ -143,46 +143,45 @@ class Document extends ITCDocument
 	 *        	SK ITC Bundle DTD Document Element
 	 * @return \SK\ITCBundle\DTD\Document
 	 */
-	public function setElement(Element $element)
+	public function setElement( Element $element )
 	{
-		$this->element[$element->getName()] = $element;
-		$element->setDocument($this);
+		$this->element[ $element->getName() ] = $element;
+		$element->setDocument( $this );
 		
 		return $this;
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Document Attribute List
 	 *
 	 * @return AttributeList[]
 	 */
-	public function getAttributeList($name = NULL)
+	public function getAttributeList( $name = NULL )
 	{
-		if (NULL === $this->attributeList)
+		if( NULL === $this->attributeList )
 		{
 			$this->attributeList = new \ArrayIterator();
 		}
-		if (NULL !== $name)
+		if( NULL !== $name )
 		{
-			if (! $this->attributeList->offsetExists($name))
+			if( ! $this->attributeList->offsetExists( $name ) )
 			{
-				$source = $this->getSource()->getAttributeList($name);
-				$attributeList = new AttributeList($this, $name, $source);
-				$this->setAttributeList($attributeList);
+				$source = $this->getSource()->getAttributeList( $name );
+				$attributeList = new AttributeList( $this, $name, $source );
+				$this->setAttributeList( $attributeList );
 			}
-			return $this->attributeList->offsetGet($name);
-		}
-		else
+			return $this->attributeList->offsetGet( $name );
+		} else
 		{
-			foreach ($this->getSource()->getAttributeList() as $name => $source)
+			foreach( $this->getSource()->getAttributeList() as $name => $source )
 			{
-				$attributeList = new AttributeList($this, $name, $source);
-				$this->setAttributeList($attributeList);
+				$attributeList = new AttributeList( $this, $name, $source );
+				$this->setAttributeList( $attributeList );
 			}
 		}
 		return $this->attributeList;
 	}
-
+	
 	/**
 	 * Sets Gets SK ITC Bundle DTD Document Attribute List
 	 *
@@ -190,47 +189,46 @@ class Document extends ITCDocument
 	 *        	SK ITC Bundle DTD Document Attribute List
 	 * @return \SK\ITCBundle\DTD\Document
 	 */
-	public function setAttributeList(AttributeList $attributeList)
+	public function setAttributeList( AttributeList $attributeList )
 	{
-		$this->attributeList[$attributeList->getName()] = $attributeList;
-		$attributeList->setDocument($this);
+		$this->attributeList[ $attributeList->getName() ] = $attributeList;
+		$attributeList->setDocument( $this );
 		return $this;
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Document Entity
 	 *
 	 * @return Entity[]
 	 */
-	public function getEntity($name = NULL)
+	public function getEntity( $name = NULL )
 	{
-		if (NULL === $this->entity)
+		if( NULL === $this->entity )
 		{
 			$this->entity = new \ArrayIterator();
 		}
 		
-		if (NULL !== $name)
+		if( NULL !== $name )
 		{
-			if (! $this->entity->offsetExists($name))
+			if( ! $this->entity->offsetExists( $name ) )
 			{
-				$source = $this->getSource()->getEntity($name);
-				$entity = Entity::create($this, $name, $source);
-				$this->setEntity($entity);
+				$source = $this->getSource()->getEntity( $name );
+				$entity = Entity::create( $this, $name, $source );
+				$this->setEntity( $entity );
 			}
-			return $this->entity->offsetGet($name);
-		}
-		else
+			return $this->entity->offsetGet( $name );
+		} else
 		{
-			foreach ($this->getSource()->getEntity() as $name => $source)
+			foreach( $this->getSource()->getEntity() as $name => $source )
 			{
-				$entity = Entity::create($this, $name, $source);
-				$this->setEntity($entity);
+				$entity = Entity::create( $this, $name, $source );
+				$this->setEntity( $entity );
 			}
 		}
 		
 		return $this->entity;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Document Entity
 	 *
@@ -238,13 +236,13 @@ class Document extends ITCDocument
 	 *        	SK ITC Bundle DTD Document Entity
 	 * @return \SK\ITCBundle\DTD\Document
 	 */
-	public function setEntity(Entity $entity)
+	public function setEntity( Entity $entity )
 	{
-		$this->entity[$entity->getName()] = $entity;
-		$entity->setDocument($this);
+		$this->entity[ $entity->getName() ] = $entity;
+		$entity->setDocument( $this );
 		return $this;
 	}
-
+	
 	/**
 	 * Gets SK ITC Bundle DTD Document Annotation
 	 *
@@ -254,7 +252,7 @@ class Document extends ITCDocument
 	{
 		return $this->annotation;
 	}
-
+	
 	/**
 	 * Sets SK ITC Bundle DTD Document Annotation
 	 *
@@ -262,7 +260,7 @@ class Document extends ITCDocument
 	 *        	SK ITC Bundle DTD Document Annotation
 	 * @return \SK\ITCBundle\DTD\Document
 	 */
-	public function setAnnotation(Annotation $annotation)
+	public function setAnnotation( Annotation $annotation )
 	{
 		$this->annotation[] = $annotation;
 		return $this;

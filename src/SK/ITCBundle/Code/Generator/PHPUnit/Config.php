@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Code Generator PHPUnit Config
  *
@@ -13,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Config extends PHPUnit
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -21,9 +22,9 @@ class Config extends PHPUnit
 	 */
 	public function generate()
 	{
-		parent::execute($input, $output);
+		parent::execute( $input, $output );
 		
-		$this->generateConfigCase($input, $output);
-		$this->generateConfigServices($input, $output);
+		$this->generateConfigCase( $input, $output );
+		$this->generateConfigServices( $input, $output );
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Generator WSDL Security
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\Code\Generator\WSDL\AbstractGenerator;
 
 class Security extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *

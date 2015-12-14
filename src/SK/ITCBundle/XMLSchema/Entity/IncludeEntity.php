@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity Attribute Group
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class IncludeEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Attribute Group Name
 	 *

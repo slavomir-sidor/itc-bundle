@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Generator XML Schema Form
  *
@@ -16,12 +17,13 @@ use Zend\Code\Generator\ClassGenerator;
 
 class Form extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
-	 * 
+	 *
 	 * @see \Zend\Code\Generator\GeneratorInterface::generate()
 	 */
 	public function generate()
-	{}
+	{
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Code Generator DTD Security
  *
@@ -12,13 +13,13 @@ use SK\ITCBundle\DTD\Document as DTDDocument;
 
 class Security extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
-	 * 
+	 *
 	 * @see \SK\ITCBundle\Code\Generator\DTD\AbstractGenerator::generate()
 	 */
-	public function generate(DTDDocument $document)
+	public function generate( DTDDocument $document )
 	{
 		;
 	}

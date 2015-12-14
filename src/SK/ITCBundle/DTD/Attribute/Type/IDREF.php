@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle DTD Attribute Type IDREF
  * 
@@ -12,7 +13,7 @@ namespace SK\ITCBundle\DTD\Attribute\Type;
 
 class IDREF
 {
-
+	
 	/**
 	 * SK ITC Bundle DTD Attribute Type IDREF Name
 	 *

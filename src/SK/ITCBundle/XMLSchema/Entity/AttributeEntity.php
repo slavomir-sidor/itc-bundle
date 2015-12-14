@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity AttributeEntity
  *
@@ -11,20 +12,20 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class AttributeEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity AttributeEntity Name
 	 *
 	 * @var string
 	 */
 	protected $elementTagName = 'attribute';
-
+	
 	/**
 	 *
 	 * @var AnnotationEntity[]
 	 */
 	protected $annotation;
-
+	
 	/**
 	 *
 	 * @var WhiteSpaceAttrsEntity[]

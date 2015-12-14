@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle SOAP WSDL Fault
  *
@@ -9,16 +10,15 @@ namespace SK\ITCBundle\WSDL;
 
 class tFault extends Element
 {
-
 	const ELEMENT_NAME = 'wsdl:fault';
-
+	
 	/**
 	 * SK ITCBundle WSDL tFault Contructor
 	 *
 	 * @param string $uri        	
 	 */
-	public function __construct(\DOMElement $element)
+	public function __construct( \DOMElement $element )
 	{
-		$this->setDOMElement($element);
+		$this->setDOMElement( $element );
 	}
 }

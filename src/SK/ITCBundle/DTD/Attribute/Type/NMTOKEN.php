@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle DTD Attribute Type NMTOKEN
  * 
@@ -11,7 +12,7 @@ namespace SK\ITCBundle\DTD\Attribute\Type;
 
 class NMTOKEN
 {
-
+	
 	/**
 	 * SK ITC Bundle DTD Attribute Type NMTOKEN Name
 	 *

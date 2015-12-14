@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle Application Controller
  *
@@ -23,42 +24,35 @@ use Zend\Soap\AutoDiscover;
 
 class HelpController extends FilesystemController
 {
-
 	public function indexAction()
 	{
-		return $this->render('SKITCBundle:Help:index.html.twig', $this->getModel());
+		return $this->render( 'SKITCBundle:Help:index.html.twig', $this->getModel() );
 	}
-
 	public function toolbarAction()
 	{
-		return $this->render('SKITCBundle:Help:toolbar.html.twig', $this->getModel());
+		return $this->render( 'SKITCBundle:Help:toolbar.html.twig', $this->getModel() );
 	}
-
 	public function workspaceAction()
 	{
-		return $this->render('SKITCBundle:Help:workspace.html.twig', $this->getModel());
+		return $this->render( 'SKITCBundle:Help:workspace.html.twig', $this->getModel() );
 	}
-
 	public function bundleAction()
 	{
-		return $this->render('SKITCBundle:Help:Bundle/index.html.twig', $this->getModel());
+		return $this->render( 'SKITCBundle:Help:Bundle/index.html.twig', $this->getModel() );
 	}
-
 	public function schemaAction()
 	{
-		return $this->render('SKITCBundle:Help:Schema/index.html.twig', $this->getModel());
+		return $this->render( 'SKITCBundle:Help:Schema/index.html.twig', $this->getModel() );
 	}
-
 	public function wsAction()
 	{
-		return $this->render('SKITCBundle:Help:WS/index.html.twig', $this->getModel());
+		return $this->render( 'SKITCBundle:Help:WS/index.html.twig', $this->getModel() );
 	}
-
 	public function phpunitAction()
 	{
-		return $this->render('SKITCBundle:Help:PHPUnit/index.html.twig', $this->getModel());
+		return $this->render( 'SKITCBundle:Help:PHPUnit/index.html.twig', $this->getModel() );
 	}
-
+	
 	/**
 	 *
 	 * @return multitype:\SplFileInfo \Symfony\Component\Finder\Finder
@@ -67,64 +61,59 @@ class HelpController extends FilesystemController
 	protected function getModel()
 	{
 		$model = parent::getModel();
-		$model = $model['model'];
+		$model = $model[ 'model' ];
 		
-		$bundle = $this->getRequest()->get('bundle', NULL);
-		$namespace = $this->getRequest()->get('namespace', NULL);
-		$class = $this->getRequest()->get('class', NULL);
-		$kernel = $this->get('kernel');
+		$bundle = $this->getRequest()->get( 'bundle', NULL );
+		$namespace = $this->getRequest()->get( 'namespace', NULL );
+		$class = $this->getRequest()->get( 'class', NULL );
+		$kernel = $this->get( 'kernel' );
 		$bundles = $kernel->getBundles();
 		$classWsdl = null;
 		$classWsdlDomDocument = null;
 		
-		if (NULL !== $bundle && array_key_exists($bundle, $bundles))
+		if( NULL !== $bundle && array_key_exists( $bundle, $bundles ) )
 		{
-			$bundle = new BundleReflection($bundles[$bundle]);
-			$namespace = $bundle->getNamespace($namespace);
+			$bundle = new BundleReflection( $bundles[ $bundle ] );
+			$namespace = $bundle->getNamespace( $namespace );
 			
-			if (NULL !== $class)
+			if( NULL !== $class )
 			{
 				try
 				{
-					$class = $namespace->getClassReflection($class);
+					$class = $namespace->getClassReflection( $class );
 					$autodiscover = new AutoDiscover();
-					$autodiscover->setClass($class->getName())
-						->setUri(
-						$this->getRequest()
-							->getBaseUrl() . $this->getRequest()
-							->getRequestUri())
-						->setServiceName($class->getName());
+					$autodiscover->setClass( $class->getName() )->setUri( $this->getRequest()->getBaseUrl() . $this->getRequest()->getRequestUri() )->setServiceName( $class->getName() );
 					
 					$classWsdl = $autodiscover->generate();
 					$classWsdlDomDocument = $classWsdl->toDomDocument();
 					$classWsdlDomDocument->formatOutput = true;
+				} catch( \Exception $e )
+				{
 				}
-				catch (\Exception $e)
-				{}
 			}
 		}
 		
-		$model['bundle'] = $bundle;
-		$model['bundles'] = $bundles;
-		$model['namespace'] = $namespace;
-		$model['class'] = $class;
-		$model['classWsdl'] = $classWsdl;
-		$model['classWsdlDomDocument'] = $classWsdlDomDocument;
+		$model[ 'bundle' ] = $bundle;
+		$model[ 'bundles' ] = $bundles;
+		$model[ 'namespace' ] = $namespace;
+		$model[ 'class' ] = $class;
+		$model[ 'classWsdl' ] = $classWsdl;
+		$model[ 'classWsdlDomDocument' ] = $classWsdlDomDocument;
 		
-		return array(
-			'model' => $model
+		return array( 
+				'model' => $model 
 		);
 	}
-
+	
 	/**
 	 *
 	 * @param string $path        	
 	 * @return \Symfony\Component\Finder\Finder
 	 */
-	protected function getFinder($path)
+	protected function getFinder( $path )
 	{
-		$finder = parent::getFinder($path);
-		$finder->name('/\AppKernel.php$/');
+		$finder = parent::getFinder( $path );
+		$finder->name( '/\AppKernel.php$/' );
 		$finder->files();
 		return $finder;
 	}

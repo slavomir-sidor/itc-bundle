@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Command Code Generator DTD Security
  *
@@ -14,14 +15,14 @@ use SK\ITCBundle\Code\Generator\DTD\Security as SecurityGenerator;
 
 class Security extends AbstractGenerator
 {
-
+	
 	/**
 	 * * SK ITCBundle Command Code Generator DTD Security Generator
 	 *
 	 * @var SecurityGenerator
 	 */
 	protected $generator;
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -29,16 +30,16 @@ class Security extends AbstractGenerator
 	 */
 	protected function configure()
 	{
-		$this->addArgument('output', InputArgument::OPTIONAL, 'Output Folder', 'src/AppBundle/Resource/config');
+		$this->addArgument( 'output', InputArgument::OPTIONAL, 'Output Folder', 'src/AppBundle/Resource/config' );
 		parent::configure();
 	}
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute(InputInterface $input, OutputInterface $output)
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
 		$generator = $this->getGenerator();
 	}

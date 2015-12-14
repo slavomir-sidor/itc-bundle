@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity
  *
@@ -9,83 +10,80 @@ namespace SK\ITCBundle\XMLSchema;
 
 class Entity
 {
-
+	
 	/**
 	 *
 	 * @var \DOMElement
 	 */
 	protected $domElement;
-
+	
 	/**
 	 * SK ITCBundle XML Schema Element Contructor
 	 *
 	 * @param \DOMElement $domElement
 	 *        	SK ITCBundle XML Document PHP DOM Element
 	 */
-	public function __construct(\DOMElement $domElement)
+	public function __construct( \DOMElement $domElement )
 	{
-		$this->setDOMElement($domElement);
+		$this->setDOMElement( $domElement );
 	}
-
-	public function __get($name)
+	public function __get( $name )
 	{
 		return $this->$name;
 	}
-
-	public function __set($name, $value)
+	public function __set( $name, $value )
 	{
 		$values = $this->$name;
 		$values[] = $value;
 		$this->$name = $values;
 	}
-
+	
 	/**
 	 *
 	 * @param \DOMElement $domElement        	
 	 * @return Entity
 	 */
-	public static function create(\DOMElement $domElement)
+	public static function create( \DOMElement $domElement )
 	{
 		$entityName = $domElement->tagName;
-		if ($domElement->prefix != "")
+		if( $domElement->prefix != "" )
 		{
-			$entityName = substr($entityName, strlen($domElement->prefix) + 1, strlen($entityName));
+			$entityName = substr( $entityName, strlen( $domElement->prefix ) + 1, strlen( $entityName ) );
 		}
-		$entityName = ucfirst($entityName);
-		$domElementEntityClass = sprintf("%s\\Entity\\%sEntity", __NAMESPACE__, $entityName);
-		$domElementEntity = new $domElementEntityClass($domElement);
+		$entityName = ucfirst( $entityName );
+		$domElementEntityClass = sprintf( "%s\\Entity\\%sEntity", __NAMESPACE__, $entityName );
+		$domElementEntity = new $domElementEntityClass( $domElement );
 		
 		return $domElementEntity;
 	}
-
+	
 	/**
 	 *
 	 * @param \DOMElement $domElement        	
 	 */
-	public function setDOMElement(\DOMElement $domElement)
+	public function setDOMElement( \DOMElement $domElement )
 	{
 		$this->domElement = $domElement;
-		foreach ($domElement->attributes as $attribute)
+		foreach( $domElement->attributes as $attribute )
 		{
-			$setter = "set" . ucfirst($attribute->name);
+			$setter = "set" . ucfirst( $attribute->name );
 			
-			if (method_exists($this, $setter))
+			if( method_exists( $this, $setter ) )
 			{
-				$this->$setter($attribute->value);
+				$this->$setter( $attribute->value );
 			}
 		}
 		
-		foreach ($domElement->childNodes as $childNode)
+		foreach( $domElement->childNodes as $childNode )
 		{
-			if ($childNode instanceof \DOMElement)
+			if( $childNode instanceof \DOMElement )
 			{
-				$element = self::create($childNode);
+				$element = self::create( $childNode );
 				$elementName = $element->getElementTagname();
-				$this->__set($elementName, $element);
+				$this->__set( $elementName, $element );
 			}
 		}
 	}
-
 	public function getElementTagname()
 	{
 		return $this->elementTagName;

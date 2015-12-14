@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity NonNegativeIntegerEntity
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class NonNegativeIntegerEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity NonNegativeIntegerEntity Name
 	 *

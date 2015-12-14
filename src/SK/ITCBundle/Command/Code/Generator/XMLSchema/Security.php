@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Generator XML Schema Security
  *
@@ -16,7 +17,7 @@ use Zend\Code\Generator\ClassGenerator;
 
 class Security extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -26,15 +27,15 @@ class Security extends AbstractGenerator
 	{
 		parent::configure();
 	}
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute(InputInterface $input, OutputInterface $output)
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
-		$xsd = $this->getDocument($input->getArgument('xsd'));
+		$xsd = $this->getDocument( $input->getArgument( 'xsd' ) );
 		$xsdSchema = $xsd->getSchema();
 	}
 }

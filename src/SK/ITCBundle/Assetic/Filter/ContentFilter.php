@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Assetic Filter Content Filter
  *
@@ -12,15 +13,14 @@ use Assetic\Filter\FilterInterface;
 
 class ContentFilter implements FilterInterface
 {
-
-	public function filterLoad(AssetInterface $asset)
-	{}
-
-	public function filterDump(AssetInterface $asset)
+	public function filterLoad( AssetInterface $asset )
+	{
+	}
+	public function filterDump( AssetInterface $asset )
 	{
 		$content = $asset->getContent();
-		var_dump($content);
+		var_dump( $content );
 		// Do something to $content
-		$asset->setContent($content);
+		$asset->setContent( $content );
 	}
 }

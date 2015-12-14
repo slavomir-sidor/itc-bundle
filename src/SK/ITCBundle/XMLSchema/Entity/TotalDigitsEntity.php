@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity Total Digits
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class TotalDigitsEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Total Digits Name
 	 *

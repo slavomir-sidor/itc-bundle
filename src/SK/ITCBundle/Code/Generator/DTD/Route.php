@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Code Generator DTD Route
  *
@@ -12,12 +13,13 @@ use SK\ITCBundle\DTD\Document as DTDDocument;
 
 class Route extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
-	 * 
+	 *
 	 * @see \Zend\Code\Generator\GeneratorInterface::generate()
 	 */
-	public function generate(DTDDocument $document)
-	{}
+	public function generate( DTDDocument $document )
+	{
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity White Space
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class WhiteSpaceEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity White Space Name
 	 *

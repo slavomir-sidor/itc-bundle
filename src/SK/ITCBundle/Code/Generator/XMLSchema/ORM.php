@@ -14,11 +14,13 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class ORM extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
+	 * 
 	 * @see \Zend\Code\Generator\GeneratorInterface::generate()
 	 */
 	public function generate()
-	{}
+	{
+	}
 }

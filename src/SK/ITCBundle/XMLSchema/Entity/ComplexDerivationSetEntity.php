@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity Complex Derivation Set
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class ComplexDerivationSetEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Complex Derivation Set Name
 	 *

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Code Generator PHPUnit Equal
  *
@@ -13,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Equal extends PHPUnit
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -21,7 +22,7 @@ class Equal extends PHPUnit
 	 */
 	public function generate()
 	{
-		parent::execute($input, $output);
-		$this->generateClassEqualCase($input, $output);
+		parent::execute( $input, $output );
+		$this->generateClassEqualCase( $input, $output );
 	}
 }

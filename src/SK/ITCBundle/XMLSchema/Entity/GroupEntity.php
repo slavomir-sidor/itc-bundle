@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema GroupEntity Field
  *
@@ -11,32 +12,32 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class GroupEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity GroupEntity Name
 	 *
 	 * @var string
 	 */
 	protected $elementTagName = 'group';
-
+	
 	/**
 	 *
 	 * @var AnnotationEntity[]
 	 */
 	protected $annotation;
-
+	
 	/**
 	 *
 	 * @var AllEntity[]
 	 */
 	protected $all;
-
+	
 	/**
 	 *
 	 * @var ChoiceEntity[]
 	 */
 	protected $choice;
-
+	
 	/**
 	 *
 	 * @var SequenceEntity[]

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity Block Set
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class BlockSetEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Block Set Name
 	 *

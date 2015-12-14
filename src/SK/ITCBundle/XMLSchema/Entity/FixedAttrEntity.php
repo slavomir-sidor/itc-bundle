@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity Fixed Attr
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class FixedAttrEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Fixed Attr Name
 	 *

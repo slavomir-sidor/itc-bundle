@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Document
  *
@@ -13,33 +14,33 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class Document extends XMLDocument
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema
 	 *
 	 * @var SchemaEntity
 	 */
 	protected $schema;
-
+	
 	/**
 	 * SK ITCBundle XML Schema Document Constructor
 	 *
 	 * @param string $uri
 	 *        	SK ITCBundle XML Schema Document Uri
 	 */
-	public function __construct($uri)
+	public function __construct( $uri )
 	{
-		parent::__construct($uri);
+		parent::__construct( $uri );
 		
-		foreach ($this->childNodes as $childNode)
+		foreach( $this->childNodes as $childNode )
 		{
-			if ($childNode instanceof \DOMElement)
+			if( $childNode instanceof \DOMElement )
 			{
-				$this->schema = Entity::create($childNode);
+				$this->schema = Entity::create( $childNode );
 			}
 		}
 	}
-
+	
 	/**
 	 * Gets SK ITCBundle XML Schema Document Schema
 	 *
@@ -49,13 +50,13 @@ class Document extends XMLDocument
 	{
 		return $this->schema;
 	}
-
+	
 	/**
 	 * Sets SK ITCBundle XML Schema Document Schema
 	 *
 	 * @param SchemaElement $schema        	
 	 */
-	public function setSchema(SchemaEntity $schema)
+	public function setSchema( SchemaEntity $schema )
 	{
 		$this->schema = $schema;
 		return $this;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity UnionEntity
  *
@@ -11,38 +12,38 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class UnionEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity UnionEntity Name
 	 *
 	 * @var string
 	 */
 	protected $elementTagName = 'union';
-
+	
 	/**
 	 *
 	 * @var string
 	 */
 	protected $id;
-
+	
 	/**
 	 *
 	 * @var QNamesEntity
 	 */
 	protected $memberTypes;
-
+	
 	/**
 	 *
 	 * @var AnnotationEntity
 	 */
 	protected $annotation;
-
+	
 	/**
 	 *
 	 * @var SimpleTypeEntity[]
 	 */
 	protected $simpleType;
-
+	
 	/**
 	 *
 	 * @var WhiteSpaceAttrsEntity

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Form Type Abstract Type
  *
@@ -13,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class AbstractType extends SymfonyAbstractType
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *

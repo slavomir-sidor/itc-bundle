@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Generator XML Schema Config
  *
@@ -16,7 +17,7 @@ use Zend\Code\Generator\ClassGenerator;
 
 class Config extends AbstractGenerator
 {
-
 	public function generate()
-	{}
+	{
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Generator XML Schema Route
  *
@@ -9,12 +10,13 @@ namespace SK\ITCBundle\Code\Generator\XMLSchema;
 
 class Route extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Zend\Code\Generator\GeneratorInterface::generate()
 	 */
 	public function generate()
-	{}
+	{
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle ODM Document
  *
@@ -8,7 +9,7 @@ namespace SK\ITCBundle\Document;
 
 abstract class Document extends \SplFileObject
 {
-
+	
 	/**
 	 * SK ITC Bundle Document Source
 	 *

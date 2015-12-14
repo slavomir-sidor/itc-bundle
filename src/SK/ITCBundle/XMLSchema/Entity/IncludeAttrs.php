@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity Include Attrs
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class IncludeAttrs extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Include Attrs Name
 	 *

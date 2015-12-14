@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle DTD Attribute Declaration Implied
  *
@@ -8,7 +9,7 @@ namespace SK\ITCBundle\DTD\Attribute\Type;
 
 class Implied
 {
-
+	
 	/**
 	 * SK ITC Bundle DTD Attribute Declaration Implied Name
 	 *

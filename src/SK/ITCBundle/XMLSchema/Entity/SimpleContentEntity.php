@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity Simple Content
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class SimpleContentEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Simple Content Name
 	 *

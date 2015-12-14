@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Translation Translator
  *
@@ -12,5 +13,4 @@ use Symfony\Component\Translation\Translator as SymfonyTranslator;
 
 class Translator
 {
-	
 }

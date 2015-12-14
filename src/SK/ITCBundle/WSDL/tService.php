@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle WSDL tService
  *
@@ -9,16 +10,15 @@ namespace SK\ITCBundle\WSDL;
 
 class tService extends Element
 {
-
 	const ELEMENT_NAME = 'wsdl:service';
-
+	
 	/**
 	 * SK ITCBundle WSDL tService Contructor
 	 *
 	 * @param string $uri        	
 	 */
-	public function __construct(\DOMElement $element)
+	public function __construct( \DOMElement $element )
 	{
-		$this->setDOMElement($element);
+		$this->setDOMElement( $element );
 	}
 }

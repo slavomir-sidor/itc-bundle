@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity OrderedEntity
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class OrderedEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity OrderedEntity Name
 	 *

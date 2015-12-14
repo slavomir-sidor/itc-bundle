@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle DTD Attribute Type Enumeration
  * 
@@ -11,7 +12,7 @@ namespace SK\ITCBundle\DTD\Attribute\Type;
 
 class Enumeration
 {
-
+	
 	/**
 	 * SK ITC Bundle DTD Attribute Type Enumeration Name
 	 *

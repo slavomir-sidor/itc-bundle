@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity ExtensionEntity
  *
@@ -12,56 +13,56 @@ use Doctrine\Common\Annotations\Annotation\Attribute;
 
 class ExtensionEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Simple Content Name
 	 *
 	 * @var string
 	 */
 	protected $elementTagName = 'extension';
-
+	
 	/**
 	 *
 	 * @var AnnotationEntity[]
 	 */
 	protected $annotation;
-
+	
 	/**
 	 *
 	 * @var AllEntity[]
 	 */
 	protected $all;
-
+	
 	/**
 	 *
 	 * @var ChoiceEntity[]
 	 */
 	protected $choice;
-
+	
 	/**
 	 *
 	 * @var SequenceEntity[]
 	 */
 	protected $sequence;
-
+	
 	/**
 	 *
 	 * @var GroupEntity[]
 	 */
 	protected $group;
-
+	
 	/**
 	 *
 	 * @var AttributeEntity[]
 	 */
 	protected $attribute;
-
+	
 	/**
 	 *
 	 * @var AttributeGroupEntity[]
 	 */
 	protected $attributeGroup;
-
+	
 	/**
 	 *
 	 * @var AnyAttributeEntity[]

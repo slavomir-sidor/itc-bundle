@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Generator Wsdl Server
  *
@@ -13,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Server extends AbstractGenerator
 {
-
-	public function execute(InputInterface $input, OutputInterface $output)
-	{}
+	public function execute( InputInterface $input, OutputInterface $output )
+	{
+	}
 }

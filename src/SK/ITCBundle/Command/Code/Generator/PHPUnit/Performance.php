@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Command Code Generator PHPUnit Performance
  *
@@ -12,15 +13,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Performance extends PHPUnitGenerator
 {
-
+	
 	/**
-	 * 
-	 * @param string $name
-	 * @param string $description
+	 *
+	 * @param string $name        	
+	 * @param string $description        	
 	 */
-	public function __construct($name="phpunit:performance",$description="PHPUnit Generates Performance Tests")
+	public function __construct( $name = "phpunit:performance", $description = "PHPUnit Generates Performance Tests" )
 	{
-		parent::__construct($name, $description);
+		parent::__construct( $name, $description );
 	}
 	
 	/**
@@ -32,15 +33,15 @@ class Performance extends PHPUnitGenerator
 	{
 		parent::configure();
 	}
-
+	
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
 	 */
-	public function execute(InputInterface $input, OutputInterface $output)
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
-		parent::execute($input, $output);
-		$this->generateClassPerformanceCase($input, $output);
+		parent::execute( $input, $output );
+		$this->generateClassPerformanceCase( $input, $output );
 	}
 }

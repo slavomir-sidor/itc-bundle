@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Code Generator WSDL Bundle
  *
@@ -11,12 +12,13 @@ use SK\ITCBundle\Code\Generator\WSDL\AbstractGenerator;
 
 class Bundle extends AbstractGenerator
 {
-
+	
 	/**
 	 * (non-PHPdoc)
-	 * 
+	 *
 	 * @see \Zend\Code\Generator\GeneratorInterface::generate()
 	 */
 	public function generate()
-	{}
+	{
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Generator Route
  *
@@ -11,15 +12,15 @@ use SK\ITCBundle\Command\Code\Generator\WSDL\AbstractGenerator;
 
 class Route extends AbstractGenerator
 {
-
+	
 	/**
 	 *
 	 * @param OptionsResolverInterface $resolver        	
 	 */
-	protected function configureOptions(OptionsResolverInterface $resolver)
+	protected function configureOptions( OptionsResolverInterface $resolver )
 	{
-		$resolver->setDefaults(array(
-			'controllerClass' => 'SK\\ITCBundle\\Controller\\AbstractController'
-		));
+		$resolver->setDefaults( array( 
+				'controllerClass' => 'SK\\ITCBundle\\Controller\\AbstractController' 
+		) );
 	}
 }

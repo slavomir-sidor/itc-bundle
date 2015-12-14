@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity EnumerationEntity
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class EnumerationEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity EnumerationEntity Name
 	 *

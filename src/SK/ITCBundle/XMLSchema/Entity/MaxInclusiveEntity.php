@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity Max Exclusive
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class MaxInclusiveEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity Max Exclusive Tag Name
 	 *

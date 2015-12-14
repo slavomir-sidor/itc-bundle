@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity ChoiceEntity
  *
@@ -11,44 +12,44 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class ChoiceEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity ChoiceEntity Name
 	 *
 	 * @var string
 	 */
 	protected $elementTagName = 'choice';
-
+	
 	/**
 	 *
 	 * @var AnnotationEntity[]
 	 */
 	protected $annotation;
-
+	
 	/**
 	 *
 	 * @var ElementEntity[]
 	 */
 	protected $element;
-
+	
 	/**
 	 *
 	 * @var GroupEntity[]
 	 */
 	protected $group;
-
+	
 	/**
 	 *
 	 * @var AnyAttributeEntity[]
 	 */
 	protected $any;
-
+	
 	/**
 	 *
 	 * @var ChoiceEntity[]
 	 */
 	protected $choice;
-
+	
 	/**
 	 *
 	 * @var SequenceEntity[]

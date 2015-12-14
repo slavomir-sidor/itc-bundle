@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle SOAP WSDL tBindingOperation
  *
@@ -9,14 +10,14 @@ namespace SK\ITCBundle\WSDL;
 
 class tBindingOperation extends Element
 {
-
+	
 	/**
 	 * SK ITCBundle WSDL tBindingOperation Contructor
 	 *
 	 * @param string $uri        	
 	 */
-	public function __construct(\DOMElement $element)
+	public function __construct( \DOMElement $element )
 	{
-		$this->setDOMElement($element);
+		$this->setDOMElement( $element );
 	}
 }

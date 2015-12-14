@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle XML Schema Entity URIrefEntity
  *
@@ -11,7 +12,7 @@ use SK\ITCBundle\XMLSchema\Entity;
 
 class URIrefEntity extends Entity
 {
-
+	
 	/**
 	 * SK ITCBundle XML Schema Entity URIrefEntity Name
 	 *

@@ -15,28 +15,28 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 abstract class AbstractCommand extends Command
 {
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Input
 	 *
 	 * @var InputInterface
 	 */
 	protected $input;
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Output
 	 *
 	 * @var OutputInterface
 	 */
 	protected $output;
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator Exceptions
 	 *
 	 * @var \Exception[]
 	 */
 	protected $exceptions;
-	
+
 	/**
 	 * Gets SK ITCBundle Command Code Generator Exception
 	 *
@@ -50,7 +50,7 @@ abstract class AbstractCommand extends Command
 		}
 		return $this->exceptions;
 	}
-	
+
 	/**
 	 * Sets SK ITCBundle Command Code Generator Exception
 	 *
@@ -63,7 +63,7 @@ abstract class AbstractCommand extends Command
 		$this->exceptions = $exceptions;
 		return $this;
 	}
-	
+
 	/**
 	 * Adds SK ITCBundle Command Code Generator Exception
 	 *
@@ -76,14 +76,14 @@ abstract class AbstractCommand extends Command
 		$this->exceptions[] = $exception;
 		return $this;
 	}
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Option OPTION_VERBOSE_OUTPUT_YES
 	 *
 	 * @var string
 	 */
 	const OPTION_VERBOSE_OUTPUT_YES = 'yes';
-	
+
 	/**
 	 * Constructs SK ITCBundle Command Code Abstract Reflection
 	 *
@@ -97,7 +97,7 @@ abstract class AbstractCommand extends Command
 		parent::__construct( $name );
 		$this->setDescription( $description );
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -108,7 +108,7 @@ abstract class AbstractCommand extends Command
 		$this->setInput( $input );
 		$this->setOutput( $output );
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -118,7 +118,7 @@ abstract class AbstractCommand extends Command
 	{
 		parent::configure();
 	}
-	
+
 	/**
 	 * Gets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Input
 	 *
@@ -128,18 +128,18 @@ abstract class AbstractCommand extends Command
 	{
 		return $this->input;
 	}
-	
+
 	/**
 	 * Sets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Input
 	 *
-	 * @param InputInterface $input        	
+	 * @param InputInterface $input
 	 */
 	public function setInput( InputInterface $input )
 	{
 		$this->input = $input;
 		return $this;
 	}
-	
+
 	/**
 	 * Gets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Output
 	 *
@@ -149,11 +149,11 @@ abstract class AbstractCommand extends Command
 	{
 		return $this->output;
 	}
-	
+
 	/**
 	 * Sets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Output
 	 *
-	 * @param OutputInterface $output        	
+	 * @param OutputInterface $output
 	 */
 	public function setOutput( OutputInterface $output )
 	{
@@ -190,7 +190,7 @@ abstract class AbstractCommand extends Command
 	{
 		$this->writeLine();
 		$output = $this->getOutput();
-		$output->writeln( sprintf( ' <fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>", $verbosity ) );
+		$output->writeln( sprintf( ' <fg=green>' . $message . "</fg=green>", $verbosity ) );
 		$this->writeLine();
 	}
 	public function writeHeader( $message )
@@ -208,20 +208,20 @@ abstract class AbstractCommand extends Command
 	{
 		$input = $this->getInput();
 		$output = $this->getOutput();
-		
+
 		if( self::OPTION_VERBOSE_OUTPUT_YES == $input->getOption( "verbose" ) )
 		{
 			$output->writeln( ' <fg=blue;bg=white>DEBUG:</fg=blue;bg=white> ' . $message );
 		}
 	}
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Root directory
 	 *
 	 * @var string
 	 */
 	protected $rootDir;
-	
+
 	/**
 	 *
 	 * @return string
@@ -232,13 +232,13 @@ abstract class AbstractCommand extends Command
 		{
 			$this->setRootDir( getcwd() );
 		}
-		
+
 		return $this->rootDir;
 	}
-	
+
 	/**
 	 *
-	 * @param string $rootDir        	
+	 * @param string $rootDir
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
 	public function setRootDir( $rootDir )
@@ -246,7 +246,7 @@ abstract class AbstractCommand extends Command
 		$this->rootDir = $rootDir;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return \SystemContainer
@@ -255,32 +255,32 @@ abstract class AbstractCommand extends Command
 	{
 		return Environment::getContext();
 	}
-	
+
 	/**
 	 *
-	 * @param string $method        	
+	 * @param string $method
 	 * @return \Nette\mixed
 	 */
 	public function getEnvironmentInvokedConfig( $method )
 	{
 		return Environment::getConfig( __NAMESPACE__ . $method, array() );
 	}
-	
+
 	/**
 	 *
 	 * @throws Nette\InvalidStateException
-	 * @param string $name        	
+	 * @param string $name
 	 * @return string
 	 */
 	protected function getCacheDirectory( $name = 'Boostrap' )
 	{
 		$directory = sprintf( "%s/cache/%s.%s", $this->getContainer()->parameters[ 'tempDir' ], str_replace( "\\", ".", __CLASS__ ), $name );
-		
+
 		if( ! is_dir( $directory ) )
 		{
 			mkdir( $directory, 0775, TRUE );
 		}
-		
+
 		return $directory;
 	}
 }

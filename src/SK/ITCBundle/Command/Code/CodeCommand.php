@@ -27,333 +27,383 @@ use TokenReflection\ReflectionMethod;
 abstract class CodeCommand extends AbstractCommand
 {
 
-    /**
-     * SK ITCBundle Command Code Generator Class Reflection
-     *
-     * @var ReflectionClass[]
-     */
-    protected $classReflections;
+	/**
+	 * SK ITCBundle Command Code Generator Class Reflection
+	 *
+	 * @var ReflectionClass[]
+	 */
+	protected $classReflections;
 
-    /**
-     * SK ITCBundle Command Code Generator Operations Reflection
-     *
-     * @var ReflectionMethod[]
-     */
-    protected $operationsReflections;
+	/**
+	 * SK ITCBundle Command Code Generator Operations Reflection
+	 *
+	 * @var ReflectionMethod[]
+	 */
+	protected $operationsReflections;
 
-    /**
-     * SK ITCBundle Command Code Generator Finder
-     *
-     * @var Finder
-     */
-    protected $finder;
+	/**
+	 * SK ITCBundle Command Code Generator Finder
+	 *
+	 * @var Finder
+	 */
+	protected $finder;
 
-    /**
-     * SK ITCBundle Command Code Generator Finder
-     *
-     * @var ReflectionFile[]
-     */
-    protected $fileRelections;
+	/**
+	 * SK ITCBundle Command Code Generator Finder
+	 *
+	 * @var ReflectionFile[]
+	 */
+	protected $fileRelections;
 
-    /**
-     * SK ITCBundle Command Code Generator Broker
-     *
-     * @var Broker
-     */
-    protected $broker;
+	/**
+	 * SK ITCBundle Command Code Generator Broker
+	 *
+	 * @var Broker
+	 */
+	protected $broker;
 
-    /**
-     * Gets SK ITCBundle Command Code Generator Broker
-     *
-     * @return \TokenReflection\Broker
-     */
-    public function getBroker()
-    {
-        if( null === $this->broker )
-        {
-            $broker = new Broker( new Broker\Backend\Memory() );
-            $this->setBroker( $broker );
-        }
-        return $this->broker;
-    }
+	/**
+	 * Gets SK ITCBundle Command Code Generator Broker
+	 *
+	 * @return \TokenReflection\Broker
+	 */
+	public function getBroker()
+	{
+		if( null === $this->broker )
+		{
+			$broker = new Broker( new Broker\Backend\Memory() );
+			$this->setBroker( $broker );
+		}
+		return $this->broker;
+	}
 
-    /**
-     * Gets SK ITCBundle Command Code Generator Finder
-     *
-     * @return \Symfony\Component\Finder\Finder
-     */
-    public function getFinder()
-    {
-        if( null === $this->finder )
-        {
-            $finder = new Finder();
-            $finder->ignoreDotFiles( TRUE );
-            $finder->in( $this->getInput()->getArgument( "src" ) );
+	/**
+	 * Gets SK ITCBundle Command Code Generator Finder
+	 *
+	 * @return \Symfony\Component\Finder\Finder
+	 */
+	public function getFinder()
+	{
+		if( null === $this->finder )
+		{
 
-            if( $this->getInput()->hasOption( "fileSuffix" ) )
-            {
-                $finder->name( $this->getInput()->getOption( "fileSuffix" ) );
-            }
+			$finder = new Finder();
+			try
+			{
+				$src = $this->getInput()->getArgument( "src" );
+				$finder->in( $src );
+				$this->writeInfo( sprintf( "Searching files in '%s'.", implode( ", ", $src ) ) );
+			} catch( \Exception $e )
+			{
+				$this->writeException( $e );
+			}
 
-            $this->setFinder( $finder );
-            $this->writeInfo( sprintf( "Processing %d files.", $finder->count() ) );
-        }
+			if( $this->getInput()->hasOption( "ignoreDotFiles" ) )
+			{
+				try
+				{
+					$ignoreDotFiles = $this->getInput()->getOption( "ignoreDotFiles" );
+					$finder->ignoreDotFiles( $ignoreDotFiles );
+					$this->writeLine( sprintf( "\tFinder ignoring dot files '%s'", $ignoreDotFiles ? 'yes' : 'no' ), OutputInterface::VERBOSITY_VERBOSE );
+				} catch( \Exception $e )
+				{
+					$this->writeException( $e );
+				}
+			}
 
-        return $this->finder;
-    }
+			if( $this->getInput()->hasOption( "fileSuffix" ) )
+			{
+				$fileSuffix = $this->getInput()->getOption( "fileSuffix" );
+				try
+				{
+					$finder->name( $fileSuffix );
+					$this->writeLine( sprintf( "\tFinder seatching with file suffix '%s'", $fileSuffix ), OutputInterface::VERBOSITY_VERBOSE );
+				} catch( \Exception $e )
+				{
+					$this->writeException( $e );
+				}
+			}
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \Symfony\Component\Console\Command\Command::execute()
-     */
-    public function execute( InputInterface $input, OutputInterface $output )
-    {
-        parent::execute( $input, $output );
-        $this->setSrc( $input->getArgument( 'src' ) );
-    }
+			$exclude = $this->getInput()->getOption( "exclude" );
+			if( $this->getInput()->hasOption( "exclude" ) && $exclude )
+			{
+				try
+				{
+					$finder->exclude( $this->getInput()->getOption( "exclude" ) );
+					$this->writeLine( sprintf( "\tFinder seatching with exclude '%s'", implode( ",", $exclude ) ), OutputInterface::VERBOSITY_VERBOSE );
+				} catch( \Exception $e )
+				{
+					$this->writeException( $e );
+				}
+			}
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \Symfony\Component\Console\Command\Command::configure()
-     */
-    protected function configure()
-    {
-        parent::configure();
-        $this->addOption( "attributeName", "an", InputOption::VALUE_OPTIONAL, "Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
-        $this->addOption( "ignoreDotFiles", "df", InputOption::VALUE_OPTIONAL, "Ignore DOT files.", true );
-        $this->addOption( "operationName", "on", InputOption::VALUE_OPTIONAL, "Operations name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
-        $this->addOption( "operationAttributeName", "oa", InputOption::VALUE_OPTIONAL, "Operations Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
-        $this->addOption( "operationFilter", "op", InputOption::VALUE_OPTIONAL, "Operations filter : Abstract,Final, Private, Protected, Public, Static." );
-        $this->addOption( "parentClass", "pc", InputOption::VALUE_OPTIONAL, "Parent Class Name, e.g 'My\Class'" );
-        $this->addOption( "fileSuffix", "fs", InputOption::VALUE_OPTIONAL, "File suffixes for given src, default all and not dot files.", "*.php" );
-        $this->addArgument( 'src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
-                "./"
-        ) );
-    }
+			$this->setFinder( $finder );
+			$this->writeInfo( sprintf( "Found %d files.", $finder->count() ) );
+		}
 
-    /**
-     *
-     * @param array $src
-     */
-    public function setSrc( array $src )
-    {
-        $root = $this->getRootDir();
+		return $this->finder;
+	}
 
-        foreach( $src as $directory )
-        {
-            $directory = $root . DIRECTORY_SEPARATOR . $directory;
+	/**
+	 * (non-PHPdoc)
+	 *
+	 * @see \Symfony\Component\Console\Command\Command::execute()
+	 */
+	public function execute( InputInterface $input, OutputInterface $output )
+	{
+		parent::execute( $input, $output );
+		$this->setSrc( $input->getArgument( 'src' ) );
+	}
 
-            if( file_exists( $directory ) )
-            {
-                $this->src[] = $directory;
-            }
-        }
+	/**
+	 * (non-PHPdoc)
+	 *
+	 * @see \Symfony\Component\Console\Command\Command::configure()
+	 */
+	protected function configure()
+	{
+		parent::configure();
+		$this->addOption( "attributeName", "an", InputOption::VALUE_OPTIONAL, "Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
+		$this->addOption( "ignoreDotFiles", "df", InputOption::VALUE_OPTIONAL, "Ignore DOT files.", true );
+		$this->addOption( "operationName", "on", InputOption::VALUE_OPTIONAL, "Operations name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
+		$this->addOption( "operationAttributeName", "oa", InputOption::VALUE_OPTIONAL, "Operations Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
+		$this->addOption( "operationFilter", "op", InputOption::VALUE_OPTIONAL, "Operations filter : Abstract,Final, Private, Protected, Public, Static." );
+		$this->addOption( "parentClass", "pc", InputOption::VALUE_OPTIONAL, "Parent Class Name, e.g 'My\Class'" );
+		$this->addOption( "fileSuffix", "fs", InputOption::VALUE_OPTIONAL, "File suffixes for given src, default all and not dot files.", "*.php" );
+		$this->addOption( "exclude", "ed", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Exclude Directory from source" );
+		$this->addArgument( 'src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
+				"./"
+		) );
+	}
 
-        return $this;
-    }
+	/**
+	 *
+	 * @param array $src
+	 */
+	public function setSrc( array $src )
+	{
+		$root = $this->getRootDir();
 
-    /**
-     *
-     * @param string $class
-     * @return array
-     */
-    protected function getNamespace( $class )
-    {
-        $names = explode( "\\", $class );
-        $className = array_pop( $names );
+		foreach( $src as $directory )
+		{
+			$directory = $root . DIRECTORY_SEPARATOR . $directory;
 
-        return array(
+			if( file_exists( $directory ) )
+			{
+				$this->src[] = $directory;
+			}
+		}
 
-                'namespace' => implode( "\\", $names ),
-                'class' => $className
-        );
-    }
+		return $this;
+	}
 
-    /**
-     * Gets SK ITCBundle Command Code Generator Class Reflection
-     *
-     * @return ReflectionClass[]
-     */
-    public function getClassReflections()
-    {
-        if( NULL === $this->classReflections )
-        {
-            $progress = new ProgressBar( $this->getOutput(), $this->getFinder()->count() );
-            $progress->start();
+	/**
+	 *
+	 * @param string $class
+	 * @return array
+	 */
+	protected function getNamespace( $class )
+	{
+		$names = explode( "\\", $class );
+		$className = array_pop( $names );
 
-            /* @var $classReflections ReflectionClass[] */
-            $classReflections = array();
+		return array(
 
-            /* @var $exceptions \Exception[] */
-            $exceptions = array();
+				'namespace' => implode( "\\", $names ),
+				'class' => $className
+		);
+	}
 
-            foreach( $this->getFinder()->files() as $fileName )
-            {
-                try
-                {
-                    /* @var $fileReflection ReflectionFile */
-                    $fileReflection = $this->getBroker()->processFile( $fileName );
-                } catch( \Exception $exception )
-                {
-                    $this->addException( $exception );
-                }
-                $progress->advance();
-            }
-            $progress->finish();
+	/**
+	 * Gets SK ITCBundle Command Code Generator Class Reflection
+	 *
+	 * @return ReflectionClass[]
+	 */
+	public function getClassReflections()
+	{
+		if( NULL === $this->classReflections )
+		{
+			$filesCount = $this->getFinder()->count();
 
-            $classReflections = $this->getBroker()->getClasses( Backend::TOKENIZED_CLASSES, Backend::INTERNAL_CLASSES );
-            $parentClass = $this->getInput()->getOption( "parentClass" );
+			$this->writeInfo( sprintf( "Searching classes in '%s' files.", $filesCount ) );
 
-            if( $parentClass )
-            {
-                foreach( $classReflections as $key => $classReflection )
-                {
-                    if( ! in_array( $parentClass, $classReflection->getParentClassNameList() ) )
-                    {
-                        unset( $classReflections[ $key ] );
-                    }
-                }
-            }
-            $this->setClassReflections( $classReflections );
+			$progress = new ProgressBar( $this->getOutput(), $filesCount );
+			$progress->start();
 
-            $this->writeInfo( sprintf( "Found %d Classes with %d errors.", count( $this->getClassReflections() ), count( $this->getExceptions() ) ) );
-        }
+			/* @var $classReflections ReflectionClass[] */
+			$classReflections = array();
 
-        return $this->classReflections;
-    }
+			/* @var $exceptions \Exception[] */
+			$exceptions = array();
 
-    /**
-     * Gets SK ITCBundle Command Code Generator Class Reflection
-     *
-     * @param string $className
-     * @return ReflectionClass
-     */
-    public function getClassReflection( $className )
-    {
-        $classReflections = $this->getClassReflections();
-        if( ! isset( $classReflections[ $className ] ) )
-        {
-            throw new \Exception( sprintf( "Class reflection '%s' is not set.", $className ) );
-        }
-        return $classReflections[ $className ];
-    }
+			foreach( $this->getFinder()->files() as $fileName )
+			{
+				try
+				{
+					/* @var $fileReflection ReflectionFile */
+					$fileReflection = $this->getBroker()->processFile( $fileName );
+				} catch( \Exception $exception )
+				{
+					$this->addException( $exception );
+				}
+				$progress->advance();
+			}
+			$progress->finish();
 
-    /**
-     * Sets SK ITCBundle Command Code Generator Class Reflections
-     *
-     * @param ReflectionClass[] $classReflections
-     * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
-     */
-    public function setClassReflections( $classReflections )
-    {
-        $this->classReflections = $classReflections;
-        return $this;
-    }
+			$classReflections = $this->getBroker()->getClasses( Backend::TOKENIZED_CLASSES, Backend::INTERNAL_CLASSES );
 
-    /**
-     * Sets SK ITCBundle Command Code Generator Finder
-     *
-     * @param Finder $finder
-     *            SK ITCBundle Command Code Generator Finder
-     * @return \SK\ITCBundle\Command\Code\CodeCommand
-     */
-    public function setFinder( Finder $finder )
-    {
-        $this->finder = $finder;
-        return $this;
-    }
+			$parentClass = $this->getInput()->getOption( "parentClass" );
+			if( $parentClass )
+			{
+				$this->writeInfo( sprintf( "Searching for classes inherited from '%s'", $parentClass ), OutputInterface::VERBOSITY_VERBOSE );
 
-    /**
-     * Sets SK ITCBundle Command Code Generator Broker
-     *
-     * @param Broker $broker
-     *            SK ITCBundle Command Code Generator Broker
-     * @return \SK\ITCBundle\Command\Code\CodeCommand
-     */
-    public function setBroker( Broker $broker )
-    {
-        $this->broker = $broker;
-        return $this;
-    }
+				foreach( $classReflections as $key => $classReflection )
+				{
+					if( ! in_array( $parentClass, $classReflection->getParentClassNameList() ) )
+					{
+						unset( $classReflections[ $key ] );
+					}
+				}
+			}
+			$this->setClassReflections( $classReflections );
+			$this->writeInfo( sprintf( "Found '%d' classes with %d errors.", count( $this->getClassReflections() ), count( $this->getExceptions() ) ) );
+		}
 
-    /**
-     * Sets SK ITCBundle Command Code Generator Operations Reflections
-     *
-     * @return ReflectionMethod[]
-     */
-    public function getOperationsReflections($className=NULL)
-    {
-        if( null === $this->operationsReflections )
-        {
-            $operationsReflections = array();
+		return $this->classReflections;
+	}
 
-            /**
-             *
-             * @todo add operation filter for class reflections
-             *       $operationFilter = $this->getInput()->getOption('operationFilter');
-             */
+	/**
+	 * Gets SK ITCBundle Command Code Generator Class Reflection
+	 *
+	 * @param string $className
+	 * @return ReflectionClass
+	 */
+	public function getClassReflection( $className )
+	{
+		$classReflections = $this->getClassReflections();
+		if( ! isset( $classReflections[ $className ] ) )
+		{
+			throw new \Exception( sprintf( "Class reflection '%s' is not set.", $className ) );
+		}
+		return $classReflections[ $className ];
+	}
 
-            $operationPattern = "";
-            if( $this->getInput()->hasOption( 'operationName' ) )
-            {
-                $operationPattern = sprintf( "/%s/", $this->getInput()->getOption( 'operationName' ) );
-            }
+	/**
+	 * Sets SK ITCBundle Command Code Generator Class Reflections
+	 *
+	 * @param ReflectionClass[] $classReflections
+	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
+	 */
+	public function setClassReflections( $classReflections )
+	{
+		$this->classReflections = $classReflections;
+		return $this;
+	}
 
-            foreach( $this->getClassReflections() as $classReflection )
-            {
+	/**
+	 * Sets SK ITCBundle Command Code Generator Finder
+	 *
+	 * @param Finder $finder
+	 *        	SK ITCBundle Command Code Generator Finder
+	 * @return \SK\ITCBundle\Command\Code\CodeCommand
+	 */
+	public function setFinder( Finder $finder )
+	{
+		$this->finder = $finder;
+		return $this;
+	}
 
-                /* @var $operationReflection ReflectionMethod[] */
-                $classOperationReflections = $classReflection->getMethods();
+	/**
+	 * Sets SK ITCBundle Command Code Generator Broker
+	 *
+	 * @param Broker $broker
+	 *        	SK ITCBundle Command Code Generator Broker
+	 * @return \SK\ITCBundle\Command\Code\CodeCommand
+	 */
+	public function setBroker( Broker $broker )
+	{
+		$this->broker = $broker;
+		return $this;
+	}
 
-                foreach( $classOperationReflections as $operationReflection )
-                {
-                    if( $operationPattern !== "" && ! preg_match( $operationPattern, $operationReflection->getName() ) )
-                    {
-                        continue;
-                    }
-                    $operationsReflections[] = $operationReflection;
-                }
-            }
-            $this->setOperationsReflections( $operationsReflections );
-            $this->writeInfo( sprintf( "Found '%d' Operations in '%d' Classes.", count( $this->getOperationsReflections() ), count( $this->getClassReflections() ) ) );
-        }
+	/**
+	 * Sets SK ITCBundle Command Code Generator Operations Reflections
+	 *
+	 * @return ReflectionMethod[]
+	 */
+	public function getOperationsReflections( $className = NULL )
+	{
+		if( null === $this->operationsReflections )
+		{
+			$classReflections = $this->getClassReflections();
+			$this->writeInfo( sprintf( "Searching class operations in '%s' classes.", count( $classReflections ) ) );
+			$operationsReflections = array();
 
-        return $this->operationsReflections;
-    }
+			/**
+			 *
+			 * @todo add operation filter for class reflections
+			 *       $operationFilter = $this->getInput()->getOption('operationFilter');
+			 */
 
-    /**
-     * Gets SK ITCBundle Command Code Generator Operations Reflections
-     *
-     * @param ReflectionMethod[] $operationsReflections
-     * @return \SK\ITCBundle\Command\Code\CodeCommand
-     */
-    public function setOperationsReflections( array $operationsReflections )
-    {
-        $this->operationsReflections = $operationsReflections;
-        return $this;
-    }
+			$operationPattern = "";
+			if( $this->getInput()->hasOption( 'operationName' ) )
+			{
+				$operationPattern = sprintf( "/%s/", $this->getInput()->getOption( 'operationName' ) );
+			}
 
-    /**
-     * Gets SK ITCBundle Command Code Generator File Reflections
-     *
-     * @return the ReflectionFile[]
-     */
-    public function getFileRelections()
-    {
-        return $this->fileRelections;
-    }
+			foreach( $classReflections as $classReflection )
+			{
 
-    /**
-     * Sets SK ITCBundle Command Code Generator File Reflections
-     *
-     * @param ReflectionFile[] $fileRelections
-     * @return \SK\ITCBundle\Command\Code\CodeCommand
-     */
-    public function setFileRelections( $fileRelections )
-    {
-        $this->fileRelections = $fileRelections;
-        return $this;
-    }
+				/* @var $operationReflection ReflectionMethod[] */
+				$classOperationReflections = $classReflection->getMethods();
+
+				foreach( $classOperationReflections as $operationReflection )
+				{
+					if( $operationPattern !== "" && ! preg_match( $operationPattern, $operationReflection->getName() ) )
+					{
+						continue;
+					}
+					$operationsReflections[] = $operationReflection;
+				}
+			}
+			$this->setOperationsReflections( $operationsReflections );
+			$this->writeInfo( sprintf( "Found '%d' Operations in '%d' Classes.", count( $this->getOperationsReflections() ), count( $this->getClassReflections() ) ) );
+		}
+
+		return $this->operationsReflections;
+	}
+
+	/**
+	 * Gets SK ITCBundle Command Code Generator Operations Reflections
+	 *
+	 * @param ReflectionMethod[] $operationsReflections
+	 * @return \SK\ITCBundle\Command\Code\CodeCommand
+	 */
+	public function setOperationsReflections( array $operationsReflections )
+	{
+		$this->operationsReflections = $operationsReflections;
+		return $this;
+	}
+
+	/**
+	 * Gets SK ITCBundle Command Code Generator File Reflections
+	 *
+	 * @return the ReflectionFile[]
+	 */
+	public function getFileRelections()
+	{
+		return $this->fileRelections;
+	}
+
+	/**
+	 * Sets SK ITCBundle Command Code Generator File Reflections
+	 *
+	 * @param ReflectionFile[] $fileRelections
+	 * @return \SK\ITCBundle\Command\Code\CodeCommand
+	 */
+	public function setFileRelections( $fileRelections )
+	{
+		$this->fileRelections = $fileRelections;
+		return $this;
+	}
 }

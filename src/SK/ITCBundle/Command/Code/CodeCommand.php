@@ -86,8 +86,22 @@ abstract class CodeCommand extends AbstractCommand
 	{
 		if( null === $this->finder )
 		{
-
 			$finder = new Finder();
+			$bootstrap = $this->getInput()->hasOption( "bootstrap" );
+
+			if( $bootstrap )
+			{
+				try
+				{
+					$finder->append( array(
+							$bootstrap
+					) );
+				} catch( \Exception $e )
+				{
+					$this->writeException( $e );
+				}
+			}
+
 			try
 			{
 				$src = $this->getInput()->getArgument( "src" );
@@ -163,6 +177,7 @@ abstract class CodeCommand extends AbstractCommand
 	protected function configure()
 	{
 		parent::configure();
+		$this->addOption( "bootstrap", "bs", InputOption::VALUE_OPTIONAL, "PHP Boostrap File." );
 		$this->addOption( "attributeName", "an", InputOption::VALUE_OPTIONAL, "Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
 		$this->addOption( "ignoreDotFiles", "df", InputOption::VALUE_OPTIONAL, "Ignore DOT files.", true );
 		$this->addOption( "operationName", "on", InputOption::VALUE_OPTIONAL, "Operations name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );

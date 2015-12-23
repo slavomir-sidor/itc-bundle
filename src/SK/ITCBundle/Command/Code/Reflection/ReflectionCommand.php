@@ -178,7 +178,7 @@ abstract class ReflectionCommand extends CodeCommand
 							$classReflection->getShortName(),
 							$operationReflection->getName(),
 							$attributeReflection->getName(),
-							$attributeReflection->getType(),
+							//$attributeReflection->getType(),
 							$attributeReflection->isDefaultValueAvailable() ? $attributeReflection->getDefaultValue() : "" 
 					);
 					// ($operationReflections->getDocBlock()) ? $classOperationReflection->getDocBlock()->getShortDescription() : ""

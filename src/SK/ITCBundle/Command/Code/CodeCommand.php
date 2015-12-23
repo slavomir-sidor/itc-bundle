@@ -87,7 +87,7 @@ abstract class CodeCommand extends AbstractCommand
 		if( null === $this->finder )
 		{
 			$finder = new Finder();
-			$bootstrap = $this->getInput()->hasOption( "bootstrap" );
+			$bootstrap = $this->getInput()->getOption( "bootstrap" );
 
 			if( $bootstrap )
 			{

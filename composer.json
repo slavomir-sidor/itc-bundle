@@ -30,6 +30,7 @@
 		"behat/behat" : "dev-master",
 		"symfony/finder" : "^3.0",
 		"andrewsville/php-token-reflection" : "^1.4",
-		"sonata-project/formatter-bundle" : "^2.3"
+		"sonata-project/formatter-bundle" : "^2.3",
+		"cboden/ratchet": "^0.3.4"
 	}
 }

@@ -9,7 +9,8 @@
  */
 namespace SK\ITCBundle\Command\Code\Reflection;
 
-use SK\ITCBundle\Command\Code\Reflection\ReflectionCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class BundleCommand extends ReflectionCommand
 {
@@ -22,13 +23,15 @@ class BundleCommand extends ReflectionCommand
 	 * @param string $description
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
-	public function __construct( 
-		$name = "src:bundles", 
-		$description = "Source Bundles" )
+	public function __construct(
+		$name = "itc:reflection:bundles",
+		$description = "ITC Reflection Bundles" )
 	{
 
-		parent::__construct( $name, $description );
-	
+		parent::__construct(
+			$name,
+			$description );
+
 	}
 
 	/**
@@ -36,13 +39,15 @@ class BundleCommand extends ReflectionCommand
 	 *
 	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
 	 */
-	public function execute( 
-		InputInterface $input, 
+	public function execute(
+		InputInterface $input,
 		OutputInterface $output )
 	{
 
-		parent::execute( $input, $output );
-	
+		parent::execute(
+			$input,
+			$output );
+
 	}
 
 }

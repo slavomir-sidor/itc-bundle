@@ -106,8 +106,6 @@ abstract class CodeCommand extends AbstractCommand
 			$src = $this->getInput()
 				->getArgument( "src" );
 
-			$this->writeInfo( sprintf( "Initializing Code in sources '%s'.", implode( ", ", $src ) ), OutputInterface::VERBOSITY_VERBOSE );
-
 			foreach( $src as $source )
 			{
 				try
@@ -115,20 +113,22 @@ abstract class CodeCommand extends AbstractCommand
 
 					if( ! file_exists( $source ) )
 					{
-						$this->writeNotice( sprintf( "Source '%s' not Exists.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+						$this->writeNotice( sprintf( "Finder Source '%s' not Exists.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 					}
 
 					if( is_dir( $source ) )
 					{
 						$finder->in( $source );
-						$this->writeNotice( sprintf( "Adding directory '%s'.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+						$this->writeNotice( sprintf( "Finder Adding directory '%s'.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 					}
 
 					if( is_file( $source ) )
 					{
-						$finder->append( array($source) );
+						$finder->append( array(
+							$source
+						) );
 
-						$this->writeNotice( sprintf( "Adding file '%s'.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+						$this->writeNotice( sprintf( "Finder Adding file '%s'.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 					}
 				}
 				catch( \Exception $e )
@@ -147,7 +147,7 @@ abstract class CodeCommand extends AbstractCommand
 				{
 					if( NULL === $bootstrap )
 					{
-						$this->writeNotice( sprintf( "Boostrap not set.", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+						$this->writeNotice( sprintf( "Finder Boostrap not set.", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 					}
 					elseif( file_exists( $bootstrap ) )
 					{
@@ -160,7 +160,7 @@ abstract class CodeCommand extends AbstractCommand
 					}
 					else
 					{
-						$this->writeNotice( sprintf( "Boostrap '%s' not exists.", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+						$this->writeNotice( sprintf( "Finder Boostrap '%s' not exists.", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 					}
 				}
 				catch( \Exception $e )
@@ -182,8 +182,7 @@ abstract class CodeCommand extends AbstractCommand
 						$finder->followLinks();
 					}
 
-					$this->writeNotice(
-						sprintf( "Finder following links '%s'.", $followLinks ? 'yes' : 'no' ),
+					$this->writeNotice( sprintf( "Finder following links '%s'.", $followLinks ? 'yes' : 'no' ),
 						OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
 				catch( \Exception $e )
@@ -202,8 +201,7 @@ abstract class CodeCommand extends AbstractCommand
 
 					$finder->ignoreDotFiles( $ignoreDotFiles );
 
-					$this->writeNotice(
-						sprintf( "Finder ignoring dot files '%s'.", $ignoreDotFiles ? 'yes' : 'no' ),
+					$this->writeNotice( sprintf( "Finder ignoring dot files '%s'.", $ignoreDotFiles ? 'yes' : 'no' ),
 						OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
 				catch( \Exception $e )
@@ -240,8 +238,7 @@ abstract class CodeCommand extends AbstractCommand
 					$finder->exclude( $this->getInput()
 						->getOption( "exclude" ) );
 
-					$this->writeNotice(
-						sprintf( "Finder applying exclude '%s'.", implode( ",", $exclude ) ),
+					$this->writeNotice( sprintf( "Finder applying exclude '%s'.", implode( ",", $exclude ) ),
 						OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
 				catch( \Exception $e )
@@ -283,30 +280,22 @@ abstract class CodeCommand extends AbstractCommand
 		parent::configure();
 
 		$this->addOption( "bootstrap", "bs", InputOption::VALUE_OPTIONAL, "PHP Boostrap File." );
-		$this->addOption(
-			"attributeName",
-			"an",
-			InputOption::VALUE_OPTIONAL,
+		$this->addOption( "attributeName", "an", InputOption::VALUE_OPTIONAL,
 			"Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
 		$this->addOption( "ignoreDotFiles", "df", InputOption::VALUE_OPTIONAL, "Ignore DOT files.", true );
-		$this->addOption(
-			"operationName",
-			"on",
-			InputOption::VALUE_OPTIONAL,
+		$this->addOption( "operationName", "on", InputOption::VALUE_OPTIONAL,
 			"Operations name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
-		$this->addOption(
-			"operationAttributeName",
-			"oa",
-			InputOption::VALUE_OPTIONAL,
+		$this->addOption( "operationAttributeName", "oa", InputOption::VALUE_OPTIONAL,
 			"Operations Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
-		$this->addOption(
-			"operationFilter",
-			"op",
-			InputOption::VALUE_OPTIONAL,
+		$this->addOption( "operationFilter", "op", InputOption::VALUE_OPTIONAL,
 			"Operations filter : Abstract,Final, Private, Protected, Public, Static." );
 		$this->addOption( "parentClass", "pc", InputOption::VALUE_OPTIONAL, "Parent Class Name, e.g 'My\Class'" );
 		$this->addOption( "fileSuffix", "fs", InputOption::VALUE_OPTIONAL, "File suffixes for given src, default all and not dot files.", "*.php" );
 		$this->addOption( "followLinks", "fl", InputOption::VALUE_OPTIONAL, "Follows links.", false );
+		$this->addOption( "is-interface", "ii", InputOption::VALUE_OPTIONAL, "Reflect Interfaces Objects Only.", false );
+		$this->addOption( "is-abstract", "ia", InputOption::VALUE_OPTIONAL, "Reflect Abstract Classes Only.", false );
+		$this->addOption( "is-final", "if", InputOption::VALUE_OPTIONAL, "Reflect Final Classes Only.", false );
+		$this->addOption( "implements-interface", "imi", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Reflect Abstract Classes Only." );
 		$this->addOption( "exclude", "ed", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Exclude Directory from source" );
 
 		$this->addArgument( 'src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
@@ -394,26 +383,49 @@ abstract class CodeCommand extends AbstractCommand
 			$classReflections = $this->getBroker()
 				->getClasses( Backend::TOKENIZED_CLASSES, Backend::INTERNAL_CLASSES );
 
-			$parentClass = $this->getInput()
-				->getOption( "parentClass" );
+			$input = $this->getInput();
 
-			if( NULL !== $parentClass )
-			{
-				$this->writeNotice( sprintf( "Searching for classes inherited from '%s'", $parentClass ), OutputInterface::VERBOSITY_VERBOSE );
-
-				foreach( $classReflections as $key => $classReflection )
+			array_filter( $classReflections,
+				function (
+					$classReflection ) use (
+				$input )
 				{
-					if( ! in_array( $parentClass, $classReflection->getParentClassNameList() ) )
-					{
-						unset( $classReflections[ $key ] );
-					}
-				}
-			}
+					$implementsInterface = $input->getOption( "implements-interface" );
+					$isInterface = $input->getOption( "is-interface" );
+					$isAbstract = $input->getOption( "is-abstract" );
+					$isFinal = $input->getOption( "is-final" );
+					$parentClass = $input->getOption( "parentClass" );
 
+					if( NULL !== $parentClass )
+					{
+						return in_array( $parentClass, $classReflection->getParentClassNameList() );
+					}
+
+					if( NULL !== $implementsInterface )
+					{
+						return in_array( $classReflection->getInterfaceNames(), $implementsInterface );
+					}
+
+					if( true === $isInterface )
+					{
+						return $classReflections->isInterface();
+					}
+
+					if( true === $isAbstract )
+					{
+						return $classReflection->isAbstract();
+					}
+
+					if( true === $isFinal )
+					{
+						return $classReflection->isFinal();
+					}
+					return true;
+				} );
 			$this->setClassReflections( $classReflections );
 
-			$this->writeNotice(
-				sprintf( "Found '%d' classes with %d errors.", count( $this->getClassReflections() ), count( $this->getExceptions() ) ),
+			$this->writeNotice( sprintf( "Found '%d' classes with %d errors.", count( $classReflections ), count( $this->getExceptions() ) ),
+
 				OutputInterface::VERBOSITY_VERBOSE );
 		}
 
@@ -477,7 +489,7 @@ abstract class CodeCommand extends AbstractCommand
 
 		$this->finders[ $name ] = $finder;
 
-		$this->writeInfo( sprintf( "Found %d files.", $finder->count() ), OutputInterface::VERBOSITY_VERBOSE );
+		$this->writeNotice( sprintf( "Finder Found %d files.", $finder->count() ), OutputInterface::VERBOSITY_VERBOSE );
 
 		return $this;
 
@@ -512,8 +524,7 @@ abstract class CodeCommand extends AbstractCommand
 		{
 			$classReflections = $this->getClassReflections();
 
-			$this->writeInfo(
-				sprintf( "Searching class operations in '%s' classes.", count( $classReflections ) ),
+			$this->writeInfo( sprintf( "Searching class operations in '%s' classes.", count( $classReflections ) ),
 				OutputInterface::VERBOSITY_VERBOSE );
 
 			$operationsReflections = [];

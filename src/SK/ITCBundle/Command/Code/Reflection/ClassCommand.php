@@ -4,13 +4,11 @@
  * SK ITCBundle Command Code Abstract Reflection
  *
  * @licence GNU GPL
- * 
+ *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Command\Code\Reflection;
 
-use SK\ITCBundle\Command\AbstractCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -25,13 +23,13 @@ class ClassCommand extends ReflectionCommand
 	 * @param string $description
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
-	public function __construct( 
-		$name = "src:class", 
-		$description = "Source Classes" )
+	public function __construct(
+		$name = "itc:reflections:class",
+		$description = "ITC Reflection Classes" )
 	{
 
 		parent::__construct( $name, $description );
-	
+
 	}
 
 	/**
@@ -39,14 +37,14 @@ class ClassCommand extends ReflectionCommand
 	 *
 	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
 	 */
-	public function execute( 
-		InputInterface $input, 
+	public function execute(
+		InputInterface $input,
 		OutputInterface $output )
 	{
 
 		parent::execute( $input, $output );
 		$this->executeClassReflection();
-	
+
 	}
 
 }

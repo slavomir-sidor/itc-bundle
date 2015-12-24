@@ -23,15 +23,15 @@
 		"symfony/routing" : "3.0.0",
 		"symfony/http-foundation" : "3.0.0",
 		"symfony/assetic-bundle" : "2.7.1",
-		"zendframework/zend-code" : "2.6.1",
-		"packagist/yuicompressor-bin" : "2.4.8",
-		"zendframework/zend-soap" : "2.5.1",
-		"doctrine/doctrine-migrations-bundle" : "1.1.1",
-		"behat/behat" : "dev-master",
 		"symfony/finder" : "^3.0",
+		"symfony/process" : "^3.0",
+		"packagist/yuicompressor-bin" : "2.4.8",
+		"zendframework/zend-code" : "2.6.1",
+		"zendframework/zend-soap" : "2.5.1",
+		"behat/behat" : "dev-master",
 		"andrewsville/php-token-reflection" : "^1.4",
 		"sonata-project/formatter-bundle" : "^2.3",
-		"cboden/ratchet": "^0.3.4",
-		"symfony/process": "^3.0"
+		"cboden/ratchet" : "^0.3.4",
+		"react/zmq" : "0.2.*|0.3.*"
 	}
 }

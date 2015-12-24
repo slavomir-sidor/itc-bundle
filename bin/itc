@@ -5,4 +5,4 @@ if (PHP_SAPI !== 'cli') {
     echo 'Warning: ITC should be invoked via the CLI version of PHP, the '.PHP_SAPI.' SAPI is over web interface'.PHP_EOL;
 }
 require_once (__DIR__ . '/../vendor/autoload.php');
-(new SK\ITCBundle\Console\ITCApplication())->run ();
+(new SK\ITCBundle\Application\Console())->run ();

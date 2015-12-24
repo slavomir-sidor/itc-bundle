@@ -5,6 +5,7 @@ namespace SK\ITCBundle\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Helper\Table;
 
 /**
  * SK ITCBundle Command Abstract
@@ -44,11 +45,13 @@ abstract class AbstractCommand extends Command
 	 */
 	public function getExceptions()
 	{
+
 		if( null == $this->exceptions )
 		{
 			$this->exceptions = array();
 		}
 		return $this->exceptions;
+
 	}
 
 	/**
@@ -58,10 +61,13 @@ abstract class AbstractCommand extends Command
 	 *        	SK ITCBundle Command Code Generator Exceptions
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function setExceptions( array $exceptions )
+	public function setExceptions(
+		array $exceptions )
 	{
+
 		$this->exceptions = $exceptions;
 		return $this;
+
 	}
 
 	/**
@@ -71,10 +77,13 @@ abstract class AbstractCommand extends Command
 	 *        	SK ITCBundle Command Code Generator Exception
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function addException( \Exception $exception )
+	public function addException(
+		\Exception $exception )
 	{
+
 		$this->exceptions[] = $exception;
 		return $this;
+
 	}
 
 	/**
@@ -92,10 +101,14 @@ abstract class AbstractCommand extends Command
 	 * @param string $description
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
-	public function __construct( $name = "src:reflect", $description = "ITCloud Reflect Source Code" )
+	public function __construct(
+		$name = "src:reflect",
+		$description = "ITCloud Reflect Source Code" )
 	{
+
 		parent::__construct( $name );
 		$this->setDescription( $description );
+
 	}
 
 	/**
@@ -103,10 +116,14 @@ abstract class AbstractCommand extends Command
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute(
+		InputInterface $input,
+		OutputInterface $output )
 	{
+
 		$this->setInput( $input );
 		$this->setOutput( $output );
+
 	}
 
 	/**
@@ -116,7 +133,9 @@ abstract class AbstractCommand extends Command
 	 */
 	protected function configure()
 	{
+
 		parent::configure();
+
 	}
 
 	/**
@@ -126,7 +145,9 @@ abstract class AbstractCommand extends Command
 	 */
 	public function getInput()
 	{
+
 		return $this->input;
+
 	}
 
 	/**
@@ -134,10 +155,13 @@ abstract class AbstractCommand extends Command
 	 *
 	 * @param InputInterface $input
 	 */
-	public function setInput( InputInterface $input )
+	public function setInput(
+		InputInterface $input )
 	{
+
 		$this->input = $input;
 		return $this;
+
 	}
 
 	/**
@@ -147,7 +171,9 @@ abstract class AbstractCommand extends Command
 	 */
 	public function getOutput()
 	{
+
 		return $this->output;
+
 	}
 
 	/**
@@ -155,23 +181,43 @@ abstract class AbstractCommand extends Command
 	 *
 	 * @param OutputInterface $output
 	 */
-	public function setOutput( OutputInterface $output )
+	public function setOutput(
+		OutputInterface $output )
 	{
+
 		$this->output = $output;
 		return $this;
+
 	}
-	public function writeError( $message, $verbosity = OutputInterface::VERBOSITY_NORMAL )
+
+	public function writeError(
+		$message,
+		$verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
+
 		$output = $this->getOutput();
 		$output->writeln( ' <fg=black;bg=red>Error:</fg=black;bg=red> ' . $message, $verbosity );
+
 	}
-	public function writeException( \Exception $exception )
+
+	public function writeException(
+		\Exception $exception )
 	{
-		$this->getOutput()->writeln( sprintf( " <fg=black;bg=red>Error %s %s</fg=black;bg=red>", $exception->getCode(), $exception->getMessage() ), OutputInterface::VERBOSITY_VERBOSE );
-		$this->getOutput()->writeln( sprintf( " <fg=black;bg=red>Trace %s</fg=black;bg=red>", $exception->getTraceAsString() ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+
+		$this->getOutput()
+			->writeln(
+			sprintf( " <fg=black;bg=red>Error %s %s</fg=black;bg=red>", $exception->getCode(), $exception->getMessage() ),
+			OutputInterface::VERBOSITY_VERBOSE );
+		$this->getOutput()
+			->writeln(
+			sprintf( " <fg=black;bg=red>Trace %s</fg=black;bg=red>", $exception->getTraceAsString() ),
+			OutputInterface::VERBOSITY_VERY_VERBOSE );
+
 	}
+
 	public function writeExceptions()
 	{
+
 		if( count( $this->getExceptions() ) > 0 )
 		{
 			$this->writeInfo( "Occured %d exceptions", count( $this->getExceptions() ) );
@@ -180,32 +226,71 @@ abstract class AbstractCommand extends Command
 				$this->writeException( $exception );
 			}
 		}
+
 	}
-	public function writeLine( $message = "\n", $verbosity = OutputInterface::VERBOSITY_NORMAL )
+
+	public function writeLine(
+		$message = "\n",
+		$verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
+
 		$output = $this->getOutput();
 		$output->writeln( $message );
+
 	}
-	public function writeInfo( $message, $verbosity = OutputInterface::VERBOSITY_NORMAL )
+
+	public function writeInfo(
+		$message,
+		$verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
-		$this->writeLine();
+
 		$output = $this->getOutput();
-		$output->writeln( sprintf( ' <fg=green>' . $message . "</fg=green>", $verbosity ) );
-		$this->writeLine();
+		$output->writeln( sprintf( '<bg=green>%s</bg=green>', $message ), $verbosity );
+
 	}
-	public function writeHeader( $message )
+
+	public function writeHeader(
+		$message )
 	{
+
 		$output = $this->getOutput();
 		$output->writeln( ' <fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>" );
+
 	}
-	public function writeNotice( $message )
+
+	/**
+	 * Writes Given Table
+	 *
+	 * @param array $rows
+	 * @param array $header
+	 */
+	public function writeTable(
+		$rows = array(),
+		$header = array(),
+		$verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
-		$message = ' <fg=green;bg=white>Notice:</fg=green;bg=white> ' . $message;
-		$output = $this->getOutput();
-		$output->writeln( $message );
+
+		$table = new Table( $this->getOutput() );
+		$table->setHeaders( $header );
+		$table->setRows( $rows );
+		$table->render();
+
 	}
-	public function writeDebug( $message )
+
+	public function writeNotice(
+		$message,
+		$verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
+
+		$this->getOutput()
+			->writeln( "<fg=yellow>{$message}</fg=yellow>", $verbosity );
+
+	}
+
+	public function writeDebug(
+		$message )
+	{
+
 		$input = $this->getInput();
 		$output = $this->getOutput();
 
@@ -213,6 +298,7 @@ abstract class AbstractCommand extends Command
 		{
 			$output->writeln( ' <fg=blue;bg=white>DEBUG:</fg=blue;bg=white> ' . $message );
 		}
+
 	}
 
 	/**
@@ -228,12 +314,14 @@ abstract class AbstractCommand extends Command
 	 */
 	public function getRootDir()
 	{
+
 		if( NULL === $this->rootDir )
 		{
 			$this->setRootDir( getcwd() );
 		}
 
 		return $this->rootDir;
+
 	}
 
 	/**
@@ -241,10 +329,13 @@ abstract class AbstractCommand extends Command
 	 * @param string $rootDir
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setRootDir( $rootDir )
+	public function setRootDir(
+		$rootDir )
 	{
+
 		$this->rootDir = $rootDir;
 		return $this;
+
 	}
 
 	/**
@@ -253,7 +344,9 @@ abstract class AbstractCommand extends Command
 	 */
 	protected function getContainer()
 	{
+
 		return Environment::getContext();
+
 	}
 
 	/**
@@ -261,9 +354,12 @@ abstract class AbstractCommand extends Command
 	 * @param string $method
 	 * @return \Nette\mixed
 	 */
-	public function getEnvironmentInvokedConfig( $method )
+	public function getEnvironmentInvokedConfig(
+		$method )
 	{
+
 		return Environment::getConfig( __NAMESPACE__ . $method, array() );
+
 	}
 
 	/**
@@ -272,8 +368,10 @@ abstract class AbstractCommand extends Command
 	 * @param string $name
 	 * @return string
 	 */
-	protected function getCacheDirectory( $name = 'Boostrap' )
+	protected function getCacheDirectory(
+		$name = 'Boostrap' )
 	{
+
 		$directory = sprintf( "%s/cache/%s.%s", $this->getContainer()->parameters[ 'tempDir' ], str_replace( "\\", ".", __CLASS__ ), $name );
 
 		if( ! is_dir( $directory ) )
@@ -282,5 +380,7 @@ abstract class AbstractCommand extends Command
 		}
 
 		return $directory;
+
 	}
+
 }

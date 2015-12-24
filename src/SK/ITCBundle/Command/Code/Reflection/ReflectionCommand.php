@@ -18,7 +18,7 @@ use TokenReflection\ReflectionMethod;
  */
 abstract class ReflectionCommand extends CodeCommand
 {
-	
+
 	/**
 	 * Constructs SK ITCBundle Command Code Abstract Reflection
 	 *
@@ -27,239 +27,248 @@ abstract class ReflectionCommand extends CodeCommand
 	 * @param string $description
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
-	public function __construct( $name = "src:reflect", $description = "ITCCloud Reflect Source Code" )
+	public function __construct(
+		$name = "src:reflect",
+		$description = "ITCCloud Reflect Source Code" )
 	{
+
 		parent::__construct( $name, $description );
+
 	}
-	
+
 	/**
 	 *
-	 * @param InputInterface $input        	
-	 * @param OutputInterface $output        	
+	 * @param InputInterface $input
+	 * @param OutputInterface $output
 	 */
 	protected function executeClassReflection()
 	{
-		$tableHeader = array( 
-				'Class Namespace Name',
-				'Parent',
-				'Interfaces' 
+
+		$header = array(
+
+			'Class Namespace Name',
+			'Parent',
+			'Interfaces'
 		);
-		$tableRows = array();
+		$rows = array();
+
 		foreach( $this->getClassReflections() as $classReflection )
 		{
-			$tableRows[] = array( 
-					$classReflection->getName(),
-					implode( ", ", $classReflection->getParentClassNameList() ),
-					implode( ", ", $classReflection->getInterfaceNames() ) 
+			$rows[] = array(
+
+				$classReflection->getName(),
+				implode( ", ", $classReflection->getParentClassNameList() ),
+				implode( ", ", $classReflection->getInterfaceNames() )
 			);
 		}
-		
-		$table = new Table( $this->getOutput() );
-		$table->setHeaders( $tableHeader );
-		$table->setRows( $tableRows );
-		$table->render();
-		
+
+		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
+
 	}
-	
+
 	/**
 	 *
-	 * @param InputInterface $input        	
-	 * @param OutputInterface $output        	
+	 * @param InputInterface $input
+	 * @param OutputInterface $output
 	 */
 	protected function executeAttributesReflection()
 	{
+
 		$classReflections = $this->getClassReflections();
-		
-		$tableHeader = array( 
-				'Namespace Name',
-				'Class',
-				'Attribute',
-				'Accessibility',
-				'Static' 
+
+		$header = array(
+			'Namespace Name',
+			'Class',
+			'Attribute',
+			'Accessibility',
+			'Static'
 		);
-		
-		$tableRows = array();
+		$rows = array();
+
 		foreach( $classReflections as $classReflection )
 		{
 			$attributesReflections = $classReflection->getProperties();
 			foreach( $attributesReflections as $attributesReflection )
 			{
-				$tableRows[] = array( 
-						$classReflection->getNamespaceName(),
-						$classReflection->getShortName(),
-						$attributesReflection->getName(),
-						$attributesReflection->isPrivate() ? "Private" : $attributesReflection->isProtected() ? "Protected" : "Public",
-						$attributesReflection->isStatic() ? "Yes" : "No" 
+				$rows[] = array(
+
+					$classReflection->getNamespaceName(),
+					$classReflection->getShortName(),
+					$attributesReflection->getName(),
+					$attributesReflection->isPrivate() ? "Private" : $attributesReflection->isProtected() ? "Protected" : "Public",
+					$attributesReflection->isStatic() ? "Yes" : "No"
 				);
 			}
 		}
-		
-		$table = new Table( $this->getOutput() );
-		$table->setHeaders( $tableHeader );
-		$table->setRows( $tableRows );
-		$table->render();
+		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
+
 	}
-	
+
 	/**
 	 *
-	 * @param InputInterface $input        	
-	 * @param OutputInterface $output        	
+	 * @param InputInterface $input
+	 * @param OutputInterface $output
 	 */
 	protected function executeOperationsReflection()
 	{
-		$classReflections = $this->getClassReflections();
-		
-		$tableHeader = array( 
-				'Namespace Name',
-				'Class',
-				'Operation',
-				'Accessibility',
-				'Abstract',
-				'Static',
-				'Returns' 
+
+		$header = array(
+			'Namespace Name',
+			'Class',
+			'Operation',
+			'Accessibility',
+			'Abstract',
+			'Static',
+			'Returns'
 		);
-		
-		$tableRows = array();
-		$table = new Table( $this->getOutput() );
-		$table->setHeaders( $tableHeader );
-		
-		foreach( $this->getOperationsReflections() as $operationReflection )
+		$rows = [];
+		$reflection = $this->getOperationsReflections();
+
+		foreach( $reflection as $operationReflection )
 		{
-			
-			$tableRows[] = array( 
-					$operationReflection->getDeclaringClass()->getNamespaceName(),
-					$operationReflection->getDeclaringClass()->getShortName(),
-					$operationReflection->getName(),
-					$operationReflection->isPrivate() ? "Private" : $operationReflection->isProtected() ? "Protected" : "Public",
-					$operationReflection->isAbstract() ? "Yes" : "No",
-					$operationReflection->isStatic() ? "Yes" : "No",
-					"" 
+
+			$row = array(
+				$operationReflection->getDeclaringClass()
+					->getNamespaceName(),
+				$operationReflection->getDeclaringClass()
+					->getShortName(),
+				$operationReflection->getName(),
+				$operationReflection->isPrivate() ? "Private" : $operationReflection->isProtected() ? "Protected" : "Public",
+				$operationReflection->isAbstract() ? "Yes" : "No",
+				$operationReflection->isStatic() ? "Yes" : "No",
+				""
 			);
+
+			$rows[] = $row;
 		}
-		
-		$table->setRows( $tableRows );
-		$table->render();
+
+		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
+
 	}
-	
+
 	/**
 	 *
-	 * @param InputInterface $input        	
-	 * @param OutputInterface $output        	
+	 * @param InputInterface $input
+	 * @param OutputInterface $output
 	 */
 	protected function executeOperationsAttributesReflection()
 	{
-		$classReflections = $this->getClassReflections();
-		$tableHeader = array( 
-				'Namespace Name',
-				'Class',
-				'Operation',
-				'Attribute',
-				'Type',
-				'Default' 
+
+		$header = array(
+			'Namespace Name',
+			'Class',
+			'Operation',
+			'Attribute',
+			'Type',
+			'Default'
 		);
-		
-		$tableRows = array();
-		foreach( $classReflections as $classReflection )
+		$rows = [];
+		$reflections = $this->getClassReflections();
+
+		foreach( $reflections as $classReflection )
 		{
 			$operationReflections = $classReflection->getMethods();
-			
+
 			foreach( $operationReflections as $operationReflection )
 			{
-				
+
 				$attributeReflections = $operationReflection->getParameters();
-				
+
 				foreach( $attributeReflections as $attributeReflection )
 				{
-					$row = array( 
-							$classReflection->getNamespaceName(),
-							$classReflection->getShortName(),
-							$operationReflection->getName(),
-							$attributeReflection->getName(),
-							//$attributeReflection->getType(),
-							$attributeReflection->isDefaultValueAvailable() ? $attributeReflection->getDefaultValue() : "" 
+					$row = array(
+
+						$classReflection->getNamespaceName(),
+						$classReflection->getShortName(),
+						$operationReflection->getName(),
+						$attributeReflection->getName(),
+						// $attributeReflection->getType(),
+						$attributeReflection->isDefaultValueAvailable() ? $attributeReflection->getDefaultValue() : ""
 					);
 					// ($operationReflections->getDocBlock()) ? $classOperationReflection->getDocBlock()->getShortDescription() : ""
-					
-					$tableRows[] = $row;
+
+					$rows[] = $row;
 				}
 			}
 		}
-		$table = new Table( $this->getOutput() );
-		$table->setHeaders( $tableHeader );
-		$table->setRows( $tableRows );
-		$table->render();
+
+		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
+
 	}
-	
+
 	/**
 	 *
-	 * @param InputInterface $input        	
-	 * @param OutputInterface $output        	
+	 * @param InputInterface $input
+	 * @param OutputInterface $output
 	 */
 	protected function executeNamespaceReflection()
 	{
-		$classReflections = $this->getClassReflections();
-		
-		$tableHeader = array( 
-				'Namespace Name',
-				'Class Count' 
+
+		$header = array(
+			'Namespace Name',
+			'Class Count'
 		);
-		
-		$tableRows = array();
-		foreach( $classReflections as $classReflection )
+
+		$reflections = $this->getClassReflections();
+
+		foreach( $reflections as $classReflection )
 		{
-			
-			if( ! isset( $tableRows[ $classReflection->getNamespaceName() ] ) )
+
+			if( ! isset( $reflections[ $classReflection->getNamespaceName() ] ) )
 			{
-				$tableRows[ $classReflection->getNamespaceName() ] = array( 
-						$classReflection->getNamespaceName(),
-						0 
+				$reflections[ $classReflection->getNamespaceName() ] = array(
+
+					$classReflection->getNamespaceName(),
+					0
 				);
 			}
-			++ $tableRows[ $classReflection->getNamespaceName() ][ 1 ];
+			++ $reflections[ $classReflection->getNamespaceName() ][ 1 ];
 		}
-		
-		$table = new Table( $this->getOutput() );
-		$table->setHeaders( $tableHeader );
-		$table->setRows( $tableRows );
-		$table->render();
+
+		$this->writeTable( $reflections, $header );
 		$this->writeExceptions();
+
 	}
-	
+
 	/**
 	 *
-	 * @param InputInterface $input        	
-	 * @param OutputInterface $output        	
+	 * @param InputInterface $input
+	 * @param OutputInterface $output
 	 */
 	protected function executeFilesReflection()
 	{
-		$tableHeader = array( 
-				implode( "|", $this->getInput()->getArgument( 'src' ) ),
-				"Owner",
-				"Group",
-				"Permissions" 
+
+		$header = array(
+			'File',
+			"Owner",
+			"Group",
+			"Permissions"
 		);
-		$tableRows = array();
+
+		$rows = [];
+
 		/* @var $file SplFileInfo*/
-		foreach( $this->getFinder()->files() as $file )
+		foreach( $this->getFinder()
+			->files() as $file )
 		{
-			$row = array( 
-					$file->getRelativePathname(),
-					$file->getOwner(),
-					$file->getGroup(),
-					$file->getPerms() 
+
+			$row = array(
+				$file->getRelativePathname(),
+				$file->getOwner(),
+				$file->getGroup(),
+				$file->getPerms()
 			);
-			$tableRows[] = $row;
+
+			$rows[] = $row;
 		}
-		
-		$table = new Table( $this->getOutput() );
-		$table->setHeaders( $tableHeader );
-		$table->setRows( $tableRows );
-		$table->render();
-		
+
+		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
+
 	}
+
 }

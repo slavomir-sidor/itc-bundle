@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * SK ITC Bundle Application Console
+ *
+ * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
+ *
+ */
 namespace SK\ITCBundle\Application;
 
 use Symfony\Component\Console\Application;

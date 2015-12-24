@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+if (PHP_SAPI !== 'cli') {
+    echo 'Warning: ITC should be invoked via the CLI version of PHP, the '.PHP_SAPI.' SAPI is over web interface'.PHP_EOL;
+}
+require_once (__DIR__ . '/../vendor/autoload.php');
+
+$socket=\Ratchet\Server\IoServer::factory(
+    new \Ratchet\Http\HttpServer(
+        new \Ratchet\WebSocket\WsServer(
+            new \SK\ITCBundle\Application\Socket()
+        )
+    ), 8581, '0.0.0.0'
+);
+$socket->run();

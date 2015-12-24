@@ -1,9 +1,10 @@
 <?php
 
 /**
- *SK ITCBundle Code Generator DTD  Entity
+ * SK ITCBundle Code Generator DTD Entity
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Code\Generator\DTD;
@@ -20,7 +21,7 @@ use SK\ITCBundle\DTD\Document as DTDDocument;
 
 class Entity extends AbstractGenerator
 {
-	
+
 	/**
 	 *
 	 * @param DTDDocument $document        	
@@ -28,11 +29,18 @@ class Entity extends AbstractGenerator
 	 * @param unknown $namespace        	
 	 * @param unknown $parentClass        	
 	 */
-	public function generate( DTDDocument $document, $outputDirectory, $namespace, $parentClass )
+	public function generate( 
+		DTDDocument $document, 
+		$outputDirectory, 
+		$namespace, 
+		$parentClass )
 	{
+
 		$items = $document->getEntity();
-		$directory = sprintf( $outputDirectory, $document->getFileInfo()->getBasename( '.dtd' ) );
-		$namespace = sprintf( $namespace, $document->getFileInfo()->getBasename( '.dtd' ) );
+		$directory = sprintf( $outputDirectory, $document->getFileInfo()
+			->getBasename( '.dtd' ) );
+		$namespace = sprintf( $namespace, $document->getFileInfo()
+			->getBasename( '.dtd' ) );
 		$description = str_replace( "\\", " ", $namespace );
 		
 		if( ! file_exists( $directory ) )
@@ -47,24 +55,31 @@ class Entity extends AbstractGenerator
 			$classDescription = sprintf( "%s %s", $description, $name );
 			$datetime = new \DateTime();
 			$properties = array( 
-					
-					(new PropertyGenerator( "name", $item->getName() ))->setDocBlock( new DocBlockGenerator( sprintf( "%s Name", $classDescription ), "", array( 
-							new Tag( "var", "string" ) 
+				
+				(new PropertyGenerator( "name", $item->getName() ))->setDocBlock( 
+					new DocBlockGenerator( sprintf( "%s Name", $classDescription ), "", array( 
+						new Tag( "var", "string" ) 
 					) ) ),
-					
-					(new PropertyGenerator( "value", $item->getValue() ))->setDocBlock( new DocBlockGenerator( sprintf( "%s Value", $classDescription ), "", array( 
-							new Tag( "var", "string" ) 
+				
+				(new PropertyGenerator( "value", $item->getValue() ))->setDocBlock( 
+					new DocBlockGenerator( sprintf( "%s Value", $classDescription ), "", array( 
+						new Tag( "var", "string" ) 
 					) ) ) 
 			);
-			$docblock = new DocBlockGenerator( $classDescription, "", array( 
+			$docblock = new DocBlockGenerator( 
+				$classDescription, 
+				"", 
+				array( 
 					new Tag( "author", "ITC Generator " . $datetime->format( "d.m.Y h:m:s" ) ),
 					new Tag( "copyright", "LGPL" ) 
-			) );
+				) );
 			
 			$fileGenerator = new FileGenerator();
 			$fileGenerator->setClass( new ClassGenerator( $name, $namespace, null, $parentClass, array(), $properties, array(), $docblock ) );
 			
 			file_put_contents( $filename, $fileGenerator->generate() );
 		}
+	
 	}
+
 }

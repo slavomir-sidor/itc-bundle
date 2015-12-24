@@ -11,6 +11,7 @@ use Symfony\Component\Console\Application;
  */
 class ITCApplication extends Application
 {
+
 	private static $logo = '                                                     
                                                      
 IIIIIIIIIITTTTTTTTTTTTTTTTTTTTTTT       CCCCCCCCCCCCC
@@ -36,14 +37,18 @@ IIIIIIIIII      TTTTTTTTTTT             CCCCCCCCCCCCC
                                                      
                                                      
                                                      ';
+
 	/**
 	 *
 	 * {@inheritDoc}
 	 *
 	 * @see \Symfony\Component\Console\Application::__construct()
 	 */
-	public function __construct( $name = 'ITCloud', $version = '${project.version}' )
+	public function __construct( 
+		$name = 'ITCloud', 
+		$version = '${project.version}' )
 	{
+
 		parent::__construct( $name, $version );
 		
 		$this->add( new \SK\ITCBundle\Command\Google\Translator() );
@@ -66,8 +71,12 @@ IIIIIIIIII      TTTTTTTTTTT             CCCCCCCCCCCCC
 		
 		// $this->add ( new \SK\ITCBundle\Command\Code\Reflection\BundleCommand () );
 	}
+
 	public function getHelp()
 	{
+
 		return self::$logo . parent::getHelp();
+	
 	}
+
 }

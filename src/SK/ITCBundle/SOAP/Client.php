@@ -11,4 +11,5 @@ use Zend\Soap\Client as ZendClient;
 
 class Client extends ZendClient
 {
+
 }

@@ -4,6 +4,7 @@
  * SK ITCBundle Code Generator WSDL Bundle
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Code\Generator\WSDL;
@@ -12,7 +13,7 @@ use SK\ITCBundle\Code\Generator\WSDL\AbstractGenerator;
 
 class Bundle extends AbstractGenerator
 {
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -20,5 +21,8 @@ class Bundle extends AbstractGenerator
 	 */
 	public function generate()
 	{
+
+	
 	}
+
 }

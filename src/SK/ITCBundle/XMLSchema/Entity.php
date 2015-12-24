@@ -4,47 +4,62 @@
  * SK ITCBundle XML Schema Entity
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\XMLSchema;
 
 class Entity
 {
-	
+
 	/**
 	 *
 	 * @var \DOMElement
 	 */
 	protected $domElement;
-	
+
 	/**
 	 * SK ITCBundle XML Schema Element Contructor
 	 *
 	 * @param \DOMElement $domElement
 	 *        	SK ITCBundle XML Document PHP DOM Element
 	 */
-	public function __construct( \DOMElement $domElement )
+	public function __construct( 
+		\DOMElement $domElement )
 	{
+
 		$this->setDOMElement( $domElement );
+	
 	}
-	public function __get( $name )
+
+	public function __get( 
+		$name )
 	{
+
 		return $this->$name;
+	
 	}
-	public function __set( $name, $value )
+
+	public function __set( 
+		$name, 
+		$value )
 	{
+
 		$values = $this->$name;
 		$values[] = $value;
 		$this->$name = $values;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param \DOMElement $domElement        	
 	 * @return Entity
 	 */
-	public static function create( \DOMElement $domElement )
+	public static function create( 
+		\DOMElement $domElement )
 	{
+
 		$entityName = $domElement->tagName;
 		if( $domElement->prefix != "" )
 		{
@@ -55,14 +70,17 @@ class Entity
 		$domElementEntity = new $domElementEntityClass( $domElement );
 		
 		return $domElementEntity;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param \DOMElement $domElement        	
 	 */
-	public function setDOMElement( \DOMElement $domElement )
+	public function setDOMElement( 
+		\DOMElement $domElement )
 	{
+
 		$this->domElement = $domElement;
 		foreach( $domElement->attributes as $attribute )
 		{
@@ -83,9 +101,14 @@ class Entity
 				$this->__set( $elementName, $element );
 			}
 		}
+	
 	}
+
 	public function getElementTagname()
 	{
+
 		return $this->elementTagName;
+	
 	}
+
 }

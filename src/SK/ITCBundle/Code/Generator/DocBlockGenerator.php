@@ -11,4 +11,5 @@ use Zend\Code\Generator\DocBlockGenerator as ZendDocBlockGenerator;
  */
 class DocBlockGenerator extends ZendDocBlockGenerator
 {
+
 }

@@ -1,9 +1,10 @@
 <?php
 
 /**
- *SK ITCBundle Command Code Generator DTD  Document
+ * SK ITCBundle Command Code Generator DTD Document
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Command\Code\Generator\DTD;
@@ -24,7 +25,7 @@ use SK\ITCBundle\DTD\Source;
 
 class Document extends AbstractGenerator
 {
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -32,19 +33,24 @@ class Document extends AbstractGenerator
 	 */
 	protected function configure()
 	{
+
 		$this->addArgument( 'namespace', InputArgument::OPTIONAL, 'Namespace Name', 'AppBundle\\DTD\\Document' );
 		$this->addArgument( 'parentClass', InputArgument::OPTIONAL, 'Entity Generalized Class', '\\SK\\ITCBundle\\DTD\\Document' );
 		$this->addArgument( 'output', InputArgument::OPTIONAL, 'Output Folder', 'src/AppBundle/DTD/Document' );
 		parent::configure();
-	}
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$document = $this->getDocument( $input->getArgument( 'document' ) );
 		$directory = $input->getArgument( 'output' );
 		$namespace = $input->getArgument( 'namespace' );
@@ -55,7 +61,8 @@ class Document extends AbstractGenerator
 			mkdir( $directory, 0777, true );
 		}
 		
-		$name = ucfirst( $document->getFileInfo()->getBasename( '.dtd' ) );
+		$name = ucfirst( $document->getFileInfo()
+			->getBasename( '.dtd' ) );
 		$output->writeln( "Generating Document " . $name );
 		
 		$filename = sprintf( "%s/%s.php", $directory, $name );
@@ -67,5 +74,7 @@ class Document extends AbstractGenerator
 		$fileDocblock->setTag( new Tag( "licence", "LGPL" ) );
 		$fileGenerator->setDocBlock( $fileDocblock );
 		file_put_contents( $filename, $fileGenerator->generate() );
+	
 	}
+
 }

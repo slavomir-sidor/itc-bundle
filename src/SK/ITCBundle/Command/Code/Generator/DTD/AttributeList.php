@@ -4,6 +4,7 @@
  * SK ITCBundle Command Code Generator DTD Attribute List
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Command\Code\Generator\DTD;
@@ -26,14 +27,14 @@ use SK\ITCBundle\Code\Generator\DTD\AttributeList as AttributeListGenerator;
 
 class AttributeList extends AbstractGenerator
 {
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator DTD Attribute List Generator
 	 *
 	 * @var AttributeListGenerator
 	 */
 	protected $generator;
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -41,18 +42,25 @@ class AttributeList extends AbstractGenerator
 	 */
 	protected function configure()
 	{
+
 		$this->addArgument( 'attlistNamespace', InputArgument::OPTIONAL, 'Namespace Name', 'AppBundle\\DTD\\AttributeList' );
 		$this->addArgument( 'attlistParentClass', InputArgument::OPTIONAL, 'Entity Generalized Class', '\\SK\\ITCBundle\\DTD\\%s\\AttributeList' );
 		$this->addArgument( 'attlistOutput', InputArgument::OPTIONAL, 'Output Folder', 'src/AppBundle/DTD/%s/AttributeList' );
 		parent::configure();
-	}
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
+	
 	}
+
 }

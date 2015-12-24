@@ -11,4 +11,5 @@ use SK\ITCBundle\DTD\Entity;
 
 class Parameter extends Entity
 {
+
 }

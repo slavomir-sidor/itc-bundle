@@ -4,6 +4,7 @@
  * SK ITC Bundle Schema Controller
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Controller;
@@ -17,31 +18,45 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SchemaController extends ApplicationController
 {
-	
+
 	/**
 	 * SK ITC Bundle Console Controller
 	 *
 	 * @var Application
 	 */
 	protected $cliApplication;
+
 	public function indexAction()
 	{
+
 		return $this->render( 'SKITCBundle:Schema:index.html.twig', $this->getModel() );
+	
 	}
+
 	public function toolbarAction()
 	{
+
 		return $this->render( 'SKITCBundle:Schema:toolbar.html.twig', $this->getModel() );
+	
 	}
+
 	public function workspaceAction()
 	{
+
 		return $this->render( 'SKITCBundle:Schema:workspace.html.twig', $this->getModel() );
+	
 	}
+
 	public function namespaceAction()
 	{
+
 		return $this->render( 'SKITCBundle:Schema:namespace.html.twig', $this->getModel() );
+	
 	}
+
 	public function interchangeAction()
 	{
+
 		$model = $this->getModel();
 		$model = $model[ 'model' ];
 		$request = $this->getRequest();
@@ -52,13 +67,16 @@ class SchemaController extends ApplicationController
 		}
 		
 		$response = new Response( 'Content', Response::HTTP_OK, array( 
-				'content-type' => 'text/xml' 
+			'content-type' => 'text/xml' 
 		) );
 		$response->prepare( $request );
 		return $response->setContent( $xmi );
+	
 	}
+
 	public function documentationAction()
 	{
+
 		$request = $this->getRequest();
 		$model = $this->getModel();
 		$systemCommand = sprintf( "%s %s", "phpuml %s", $model[ 'model' ][ 'path' ] );
@@ -74,16 +92,20 @@ class SchemaController extends ApplicationController
 			}
 		}
 		
-		$response = new Response( 'Content', Response::HTTP_OK, array( 
+		$response = new Response( 
+			'Content', 
+			Response::HTTP_OK, 
+			array( 
 				
 				// 'content-type' => 'application/xml',
 				'content-type' => 'text/plain' 
-		) );
+			) );
 		$response->prepare( $request );
 		$response->setContent( $content );
 		return $this->render( 'SKITCBundle:Schema:Documentation/index.html.twig', $this->getModel() );
-	}
 	
+	}
+
 	/**
 	 * SK ITC Bundle Schema Controller Gateway Action
 	 *
@@ -91,19 +113,25 @@ class SchemaController extends ApplicationController
 	 */
 	public function gatewayAction()
 	{
+
 		return $this->render( 'SKITCBundle:Schema:Gateway/index.html.twig', $this->getModel() );
+	
 	}
+
 	public function explorerAction()
 	{
+
 		$model = $this->getModel();
 		$model = $model[ 'model' ];
 		$request = $this->getRequest();
 		
-		$xmiFile = sprintf( "%s%s", $this->get( 'kernel' )->getRootDir(), "/../vendor/sk.itcloud/sk.itcloud.symfony.bundle.itc/src/Schema/SK/ITC/Bundle.xmi" );
+		$xmiFile = sprintf( "%s%s", $this->get( 'kernel' )
+			->getRootDir(), "/../vendor/sk.itcloud/sk.itcloud.symfony.bundle.itc/src/Schema/SK/ITC/Bundle.xmi" );
 		$xmi = new \DOMDocument();
 		$xmi->load( $xmiFile );
 		
-		$svgFileTemplate = sprintf( "%s%s", $this->get( 'kernel' )->getRootDir(), "/../vendor/sk.itcloud/sk.itcloud.symfony.bundle.itc/src/sk/ITCBundle/Resources/transformations/umbrello-xmi-to-html.xsl" );
+		$svgFileTemplate = sprintf( "%s%s", $this->get( 'kernel' )
+			->getRootDir(), "/../vendor/sk.itcloud/sk.itcloud.symfony.bundle.itc/src/sk/ITCBundle/Resources/transformations/umbrello-xmi-to-html.xsl" );
 		$svgFile = new \DOMDocument();
 		$svgFile->load( $svgFileTemplate );
 		
@@ -113,18 +141,22 @@ class SchemaController extends ApplicationController
 		$svg = $xsl->transformToXML( $xmi );
 		
 		$response = new Response( 'Content', Response::HTTP_OK, array( 
-				'content-type' => 'text/xml' 
+			'content-type' => 'text/xml' 
 		) );
 		$response->prepare( $request );
 		$svg->saveXML();
 		
 		return $response->setContent();
+	
 	}
+
 	protected function getModel()
 	{
+
 		$model = parent::getModel();
 		$model = $model[ 'model' ];
-		$path = $this->getRequest()->get( "path", NULL );
+		$path = $this->getRequest()
+			->get( "path", NULL );
 		
 		$xmi = null;
 		if( $path !== NULL )
@@ -144,11 +176,15 @@ class SchemaController extends ApplicationController
 		$model[ 'xmi' ] = $xmi;
 		
 		return array( 
-				'model' => $model 
+			'model' => $model 
 		);
+	
 	}
-	protected function getFinder( $path )
+
+	protected function getFinder( 
+		$path )
 	{
+
 		$finder = new Finder();
 		
 		$finder->ignoreDotFiles( TRUE );
@@ -162,5 +198,7 @@ class SchemaController extends ApplicationController
 		$finder->in( $path );
 		
 		return $finder;
+	
 	}
+
 }

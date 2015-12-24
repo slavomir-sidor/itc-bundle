@@ -4,6 +4,7 @@
  * SK ITCBundle Generator WSDL Security
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Code\Generator\WSDL;
@@ -12,7 +13,7 @@ use SK\ITCBundle\Code\Generator\WSDL\AbstractGenerator;
 
 class Security extends AbstractGenerator
 {
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -20,6 +21,9 @@ class Security extends AbstractGenerator
 	 */
 	protected function configure()
 	{
+
 		parent::configure();
+	
 	}
+
 }

@@ -4,6 +4,7 @@
  * SK ITCBundle Command Code Generator PHPUnit Abstract Generator
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Command\Code\Generator\PHPUnit;
@@ -28,84 +29,84 @@ use SK\ITCBundle\Command\Code\Generator\GeneratorCommand;
 
 abstract class PHPUnitGenerator extends GeneratorCommand
 {
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Config
 	 *
 	 * @var ArrayHash
 	 */
 	protected $config;
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator PHPUnit File
 	 *
 	 * @var string
 	 */
 	protected $phpunit;
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Permutation Data Count
 	 *
 	 * @var int
 	 */
 	protected $dataCount;
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Tests Classes
 	 *
 	 * @var array
 	 */
 	protected $testClasses;
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Tests Config
 	 *
 	 * @var Config
 	 */
 	protected $testConfig;
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Config File Name
 	 *
 	 * @var string
 	 */
 	protected $testConfigFilename = 'phpunit.ini';
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Option OPTION_REMOVED_ORPHANED_NO
 	 *
 	 * @var string
 	 */
 	const OPTION_REMOVED_ORPHANED_YES = 'yes';
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Option OPTION_REMOVED_ORPHANED_NO
 	 *
 	 * @var string
 	 */
 	const OPTION_REMOVED_ORPHANED_NO = 'no';
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Option OPTION_OVERRIDE_OUTPUT_NO
 	 *
 	 * @var string
 	 */
 	const OPTION_OVERRIDE_OUTPUT_NO = 'no';
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Option OPTION_OVERRIDE_OUTPUT_YES
 	 *
 	 * @var string
 	 */
 	const OPTION_OVERRIDE_OUTPUT_YES = 'yes';
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Option OPTION_VERBOSE_OUTPUT_NO
 	 *
 	 * @var string
 	 */
 	const OPTION_VERBOSE_OUTPUT_NO = 'no';
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -113,33 +114,47 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 	 */
 	protected function configure()
 	{
+
 		$this->addArgument( 'dest', InputArgument::OPTIONAL, 'Destination tests directory', "tests" );
 		$this->addArgument( 'dataCount', InputArgument::OPTIONAL, 'Dataset permutation count (1) default', 1 );
 		parent::configure();
 		$this->addOption( "override", "o", InputOption::VALUE_OPTIONAL, "Override outputs yes/no, default no", self::OPTION_OVERRIDE_OUTPUT_NO );
-		$this->addOption( "remove-orphaned", "ro", InputOption::VALUE_OPTIONAL, "Remove orphaned yes/no, default no", self::OPTION_REMOVED_ORPHANED_NO );
+		$this->addOption( 
+			"remove-orphaned", 
+			"ro", 
+			InputOption::VALUE_OPTIONAL, 
+			"Remove orphaned yes/no, default no", 
+			self::OPTION_REMOVED_ORPHANED_NO );
 		$this->addOption( "verbose-output", "vo", InputOption::VALUE_OPTIONAL, "Verbose output yes/no,  default no", self::OPTION_VERBOSE_OUTPUT_NO );
-	}
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		parent::execute( $input, $output );
 		$this->setDest( $input->getArgument( 'dest' ) );
 		$this->setDataCount( $input->getArgument( 'dataCount' ) );
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param OutputInterface $output        	
 	 * @param string $testSrc        	
 	 */
-	public function generatePhpUnit( InputInterface $input, OutputInterface $output )
+	public function generatePhpUnit( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$this->writeNotice( $output, sprintf( "Generating PHPUnit" ) );
 		
 		$dest = $this->getDest();
@@ -155,7 +170,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 		$phpunitConfig = $this->getConfig()->phpunit;
 		
 		$phpunitXpath = new \DOMXPath( $phpunitDom );
-		$phpunitDomElement = $phpunitXpath->query( "/phpunit" )->item( 0 );
+		$phpunitDomElement = $phpunitXpath->query( "/phpunit" )
+			->item( 0 );
 		
 		if( NULL === $phpunitDomElement )
 		{
@@ -177,7 +193,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 		
 		if( $phpunitConfig->offsetExists( 'logging' ) )
 		{
-			$loggingDomElement = $phpunitXpath->query( "logging", $phpunitDomElement )->item( 0 );
+			$loggingDomElement = $phpunitXpath->query( "logging", $phpunitDomElement )
+				->item( 0 );
 			
 			if( NULL === $loggingDomElement )
 			{
@@ -187,7 +204,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			
 			foreach( $phpunitConfig->offsetGet( 'logging' ) as $log )
 			{
-				$logDomElement = $phpunitXpath->query( "log[@type='" . $log->type . "']", $loggingDomElement )->item( 0 );
+				$logDomElement = $phpunitXpath->query( "log[@type='" . $log->type . "']", $loggingDomElement )
+					->item( 0 );
 				
 				if( NULL == $logDomElement )
 				{
@@ -233,7 +251,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 		{
 			$classFilename = sprintf( "%s/%s.%s", $dest, str_replace( "\\", "/", $namespaceName ), "php" );
 			
-			$testsuitesTestsuiteElement = $phpunitXpath->query( "testsuite[@name='" . $reflection->getNamespaceName() . "']", $testsuitesDomElement )->item( 0 );
+			$testsuitesTestsuiteElement = $phpunitXpath->query( "testsuite[@name='" . $reflection->getNamespaceName() . "']", $testsuitesDomElement )
+				->item( 0 );
 			
 			if( NULL == $testsuitesTestsuiteElement )
 			{
@@ -244,7 +263,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			
 			$testCaseDirectory = sprintf( "%s/%s", $dest, str_replace( "\\", "/", $reflection->getNamespaceName() ) );
 			
-			$testCaseDirectoryElement = $phpunitXpath->query( "directory[text()='" . $testCaseDirectory . "']", $testsuitesTestsuiteElement )->item( 0 );
+			$testCaseDirectoryElement = $phpunitXpath->query( "directory[text()='" . $testCaseDirectory . "']", $testsuitesTestsuiteElement )
+				->item( 0 );
 			
 			if( NULL == $testCaseDirectoryElement )
 			{
@@ -253,7 +273,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			}
 			$testCaseDirectoryElement->setAttribute( 'suffix', "Test.php" );
 			
-			$classTestFileElement = $phpunitXpath->query( "file[text()='" . $classFilename . "']", $testsuitesTestsuiteElement )->item( 0 );
+			$classTestFileElement = $phpunitXpath->query( "file[text()='" . $classFilename . "']", $testsuitesTestsuiteElement )
+				->item( 0 );
 			
 			if( NULL == $classTestFileElement )
 			{
@@ -280,15 +301,19 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 		
 		$phpunitDom->formatOutput = TRUE;
 		$phpunitDom->save( $phpunit );
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassCase( InputInterface $input, OutputInterface $output )
+	public function generateClassCase( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$src = $this->getSrc();
 		$dest = $this->getDest();
 		
@@ -356,8 +381,10 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 				$classGenerator->setConsts( $classGeneratorConst );
 				$classGenerator->addProperty( "className", "\\" . $configName );
 				
-				$classFilename = dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php";
-			} else
+				$classFilename = dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR .
+								 $classGenerator->getName() . ".php";
+			}
+			else
 			{
 				$classReflection = ReflectionClassType::from( $classType );
 				$classGenerator = PhpGeneratorClassType::from( $classReflection );
@@ -383,12 +410,13 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			try
 			{
 				$instanceProvider = $classReflection->getMethod( "getInstance" );
-			} catch( \Exception $e )
+			}
+			catch( \Exception $e )
 			{
 				$instanceProvider = $classGenerator->addMethod( "getInstance" );
 				$instanceProvider->setBody( 'return parent::getInstance();' );
 				$instanceProvider->setDocuments( array( 
-						'return' => "@return \\" . $classPrototype 
+					'return' => "@return \\" . $classPrototype 
 				) );
 			}
 			
@@ -408,15 +436,19 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			
 			$this->saveClass( $classCode, new \SplFileInfo( $classFilename ) );
 		}
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassFunctionalCase( InputInterface $input, OutputInterface $output )
+	public function generateClassFunctionalCase( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$dest = $this->getDest();
 		
 		$config = Arrays::get( $configNeon, 'tests', array() );
@@ -491,9 +523,9 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 				}
 				
 				if( ! is_callable( array( 
-						
-						$classReflection->getName(),
-						$methodReflection->getName() 
+					
+					$classReflection->getName(),
+					$methodReflection->getName() 
 				) ) )
 				{
 					continue;
@@ -541,11 +573,14 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 				}
 				
 				$body = '';
-				$body .= "\n" . '$this->callTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' . ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
+				$body .= "\n" . '$this->callTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' .
+						 ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
 				$test->setBody( $body );
 			}
 			
-			$classInfo = new \SplFileInfo( dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php" );
+			$classInfo = new \SplFileInfo( 
+				dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR .
+				 $classGenerator->getName() . ".php" );
 			
 			$classDependency = "";
 			
@@ -563,15 +598,19 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			
 			$this->saveClass( $classCode, $classInfo );
 		}
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassPerformanceCase( InputInterface $input, OutputInterface $output )
+	public function generateClassPerformanceCase( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$dest = $this->getDest();
 		
 		$config = Arrays::get( $configNeon, 'tests', array() );
@@ -608,7 +647,7 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			}
 			$classParent = "\\" . $classReflection->getName() . "Base";
 			$dependencies = array( 
-					'BaseCase' => 'BaseCase' 
+				'BaseCase' => 'BaseCase' 
 			);
 			
 			$classGenerator->setName( $className );
@@ -648,9 +687,9 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 				}
 				
 				if( ! is_callable( array( 
-						
-						$classReflection->getName(),
-						$methodReflection->getName() 
+					
+					$classReflection->getName(),
+					$methodReflection->getName() 
 				) ) )
 				{
 					continue;
@@ -698,11 +737,14 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 				}
 				
 				$body = '';
-				$body .= "\n" . '$this->callPerformanceTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' . ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
+				$body .= "\n" . '$this->callPerformanceTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' .
+						 ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
 				$test->setBody( $body );
 			}
 			
-			$classInfo = new \SplFileInfo( dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php" );
+			$classInfo = new \SplFileInfo( 
+				dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR .
+				 $classGenerator->getName() . ".php" );
 			
 			$classDependency = "";
 			
@@ -720,15 +762,19 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			
 			$this->saveClass( $classCode, $classInfo );
 		}
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassEqualCase( InputInterface $input, OutputInterface $output )
+	public function generateClassEqualCase( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$dest = $this->getDest();
 		
 		$configNeon = $this->getNeonData( $dest );
@@ -803,9 +849,9 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 				}
 				
 				if( ! is_callable( array( 
-						
-						$classReflection->getName(),
-						$methodReflection->getName() 
+					
+					$classReflection->getName(),
+					$methodReflection->getName() 
 				) ) )
 				{
 					continue;
@@ -852,11 +898,14 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 				}
 				
 				$body = '';
-				$body .= "\n" . '$this->callEqualTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' . ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
+				$body .= "\n" . '$this->callEqualTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' .
+						 ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
 				$test->setBody( $body );
 			}
 			
-			$classInfo = new \SplFileInfo( dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php" );
+			$classInfo = new \SplFileInfo( 
+				dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR .
+				 $classGenerator->getName() . ".php" );
 			
 			$classDependency = "";
 			
@@ -874,17 +923,22 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			
 			$this->saveClass( $classCode, $classInfo );
 		}
-	}
 	
+	}
+
 	/**
 	 * Generates SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Class Base Case
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassBaseCase( InputInterface $input, OutputInterface $output )
+	public function generateClassBaseCase( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
-		$cases = $this->getTestConfig()->getTestsCase();
+
+		$cases = $this->getTestConfig()
+			->getTestsCase();
 		$this->writeNotice( "Generating Class Tests Base Case: " . count( $cases ) );
 		foreach( $cases as $configName => $configClass )
 		{
@@ -916,8 +970,8 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			}
 			$classParent = "BaseCase";
 			$dependencies = array( 
-					
-					'\ITC\Tests\BaseCase' => 'BaseCase' 
+				
+				'\ITC\Tests\BaseCase' => 'BaseCase' 
 			);
 			
 			$classGenerator->setName( $className );
@@ -957,9 +1011,9 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 				}
 				
 				if( ! is_callable( array( 
-						
-						$classReflection->getName(),
-						$methodReflection->getName() 
+					
+					$classReflection->getName(),
+					$methodReflection->getName() 
 				) ) )
 				{
 					continue;
@@ -984,7 +1038,9 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			$providerData = $classGenerator->addProperty( "providerData", $classProviderData );
 			$providerData->setVisibility( 'protected' );
 			
-			$classInfo = new \SplFileInfo( dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php" );
+			$classInfo = new \SplFileInfo( 
+				dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR .
+				 $classGenerator->getName() . ".php" );
 			
 			$classDependency = "";
 			
@@ -1002,26 +1058,34 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			
 			$this->saveClass( $classCode, $classInfo );
 		}
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param string $code        	
 	 * @param \SplFileInfo $filename        	
 	 */
-	protected function saveClass( $code, \SplFileInfo $filename )
+	protected function saveClass( 
+		$code, 
+		\SplFileInfo $filename )
 	{
+
 		@mkdir( $filename->getPath(), 0777, TRUE );
 		return file_put_contents( $filename->__toString(), $code );
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateConfigServices( InputInterface $input, OutputInterface $output )
+	public function generateConfigServices( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$classReflections = $this->getClassReflections();
 		$classReflectionsCount = count( $classReflections );
 		
@@ -1047,16 +1111,20 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 		
 		$progressBar->finish();
 		$testConfig->save();
-	}
 	
+	}
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generates Config Case
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateConfigCase( InputInterface $input, OutputInterface $output )
+	public function generateConfigCase( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$classReflections = $this->getClassReflections();
 		$classReflectionsCount = count( $classReflections );
 		
@@ -1101,10 +1169,16 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 				{
 					
 					$testConfig->setTestsCaseMethodParameter( 
-
-					Config::generatePermutations( $parameter, 
-
-					$testConfig->getTestsCaseMethodParameter( $class->getName(), $method->getName(), $parameter->getName() ), $this->getDataCount(), $input->getOption( "override" ) ), $class->getName(), $method->getName(), $parameter->getName() );
+						
+						Config::generatePermutations( 
+							$parameter, 
+							
+							$testConfig->getTestsCaseMethodParameter( $class->getName(), $method->getName(), $parameter->getName() ), 
+							$this->getDataCount(), 
+							$input->getOption( "override" ) ), 
+						$class->getName(), 
+						$method->getName(), 
+						$parameter->getName() );
 				}
 			}
 			
@@ -1113,81 +1187,100 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 		
 		$progressBar->finish();
 		$testConfig->save();
-	}
 	
+	}
+
 	/**
 	 *
 	 * @return string
 	 */
 	public function getPhpunit()
 	{
+
 		if( NULL === $this->phpunit )
 		{
 			$this->phpunit = $this->getRootDir() . "/phpunit.xml";
 		}
 		return $this->phpunit;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param string $phpunit        	
 	 */
-	public function setPhpunit( $phpunit )
+	public function setPhpunit( 
+		$phpunit )
 	{
+
 		$this->phpunit = $phpunit;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Sets Gets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Config Array Hash
 	 *
 	 * @param ArrayHash $config        	
 	 */
-	public function setConfig( ArrayHash $config )
+	public function setConfig( 
+		ArrayHash $config )
 	{
+
 		$this->config = $config;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @return array
 	 */
 	public function getTestClasses()
 	{
+
 		return $this->testClasses;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param array $testClasses        	
 	 */
-	public function setTestClasses( array $testClasses )
+	public function setTestClasses( 
+		array $testClasses )
 	{
+
 		$this->testClasses = $testClasses;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @return int
 	 */
 	public function getDataCount()
 	{
+
 		return $this->dataCount;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param int $dataCount        	
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setDataCount( $dataCount )
+	public function setDataCount( 
+		$dataCount )
 	{
+
 		$this->dataCount = $dataCount;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Class Doc Block Values By Name
 	 *
@@ -1195,9 +1288,14 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 	 * @param string $name        	
 	 * @return array
 	 */
-	public function getClassDocBlockTagValue( array $tags, $name )
+	public function getClassDocBlockTagValue( 
+		array $tags, 
+		$name )
 	{
-		$v = array_filter( $tags, function ( $value ) use($name )
+
+		$v = array_filter( $tags, function ( 
+			$value ) use (
+		$name )
 		{
 			return (Arrays::get( $value, 'name', NULL ) == $name) ? $value : FALSE;
 		} );
@@ -1207,8 +1305,9 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 			$values[] = Arrays::get( $value, 'value', NULL );
 		}
 		return $values;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Test Config
 	 *
@@ -1216,26 +1315,31 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 	 */
 	public function getTestConfig()
 	{
+
 		if( NULL === $this->testConfig )
 		{
 			$testConfig = Config::fromFile( $this->getTestConfigFilename() );
 			$this->setTestConfig( $testConfig );
 		}
 		return $this->testConfig;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Test Config
 	 *
 	 * @param Config $testConfig        	
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setTestConfig( Config $testConfig )
+	public function setTestConfig( 
+		Config $testConfig )
 	{
+
 		$this->testConfig = $testConfig;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Config File Name
 	 *
@@ -1243,18 +1347,24 @@ abstract class PHPUnitGenerator extends GeneratorCommand
 	 */
 	public function getTestConfigFilename()
 	{
+
 		return sprintf( "%s/resource/config/%s", rtrim( $this->getDest() ), $this->testConfigFilename );
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Config File Name
 	 *
 	 * @param unknown $testConfigFilename        	
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setTestConfigFilename( $testConfigFilename )
+	public function setTestConfigFilename( 
+		$testConfigFilename )
 	{
+
 		$this->testConfigFilename = $testConfigFilename;
 		return $this;
+	
 	}
+
 }

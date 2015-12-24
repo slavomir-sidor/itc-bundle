@@ -4,6 +4,7 @@
  * SK ITCBundle Command Code Generator DTD Entity
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Command\Code\Generator\DTD;
@@ -26,14 +27,14 @@ use SK\ITCBundle\Code\Generator\DTD\Entity as EntityGenerator;
 
 class Entity extends AbstractGenerator
 {
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator DTD Entity Generator
 	 *
 	 * @var EntityGenerator
 	 */
 	protected $generator;
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -41,24 +42,31 @@ class Entity extends AbstractGenerator
 	 */
 	protected function configure()
 	{
+
 		$this->addArgument( 'entityNamespace', InputArgument::OPTIONAL, 'Namespace Name', 'AppBundle\\DTD\\%s\\Entity' );
 		$this->addArgument( 'entityParentClass', InputArgument::OPTIONAL, 'Entity Generalized Class', '\\SK\\ITCBundle\\DTD\\Entity' );
 		$this->addArgument( 'entityOutput', InputArgument::OPTIONAL, 'Output Folder', 'src/AppBundle/DTD/%s/Entity' );
 		
 		parent::configure();
-	}
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$document = $this->getDocument( $input->getArgument( 'document' ) );
 		$items = $document->getEntity();
-		$directory = sprintf( $input->getArgument( 'entityOutput' ), $document->getFileInfo()->getBasename( '.dtd' ) );
-		$namespace = sprintf( $input->getArgument( 'entityNamespace' ), $document->getFileInfo()->getBasename( '.dtd' ) );
+		$directory = sprintf( $input->getArgument( 'entityOutput' ), $document->getFileInfo()
+			->getBasename( '.dtd' ) );
+		$namespace = sprintf( $input->getArgument( 'entityNamespace' ), $document->getFileInfo()
+			->getBasename( '.dtd' ) );
 		$parentClass = $input->getArgument( 'entityParentClass' );
 		$description = str_replace( "\\", " ", $namespace );
 		
@@ -77,19 +85,24 @@ class Entity extends AbstractGenerator
 			$classDescription = sprintf( "%s %s", $description, $name );
 			$datetime = new \DateTime();
 			$properties = array( 
-					
-					(new PropertyGenerator( "name", $item->getName() ))->setDocBlock( new DocBlockGenerator( sprintf( "%s Name", $classDescription ), "", array( 
-							new Tag( "var", "string" ) 
+				
+				(new PropertyGenerator( "name", $item->getName() ))->setDocBlock( 
+					new DocBlockGenerator( sprintf( "%s Name", $classDescription ), "", array( 
+						new Tag( "var", "string" ) 
 					) ) ),
-					
-					(new PropertyGenerator( "value", $item->getValue() ))->setDocBlock( new DocBlockGenerator( sprintf( "%s Value", $classDescription ), "", array( 
-							new Tag( "var", "string" ) 
+				
+				(new PropertyGenerator( "value", $item->getValue() ))->setDocBlock( 
+					new DocBlockGenerator( sprintf( "%s Value", $classDescription ), "", array( 
+						new Tag( "var", "string" ) 
 					) ) ) 
 			);
-			$docblock = new DocBlockGenerator( $classDescription, "", array( 
+			$docblock = new DocBlockGenerator( 
+				$classDescription, 
+				"", 
+				array( 
 					new Tag( "author", "ITC Generator " . $datetime->format( "d.m.Y h:m:s" ) ),
 					new Tag( "copyright", "LGPL" ) 
-			) );
+				) );
 			
 			$fileGenerator = new FileGenerator();
 			$fileGenerator->setClass( new ClassGenerator( $name, $namespace, null, $parentClass, array(), $properties, array(), $docblock ) );
@@ -100,4 +113,5 @@ class Entity extends AbstractGenerator
 		}
 		// $progressBar->finish();
 	}
+
 }

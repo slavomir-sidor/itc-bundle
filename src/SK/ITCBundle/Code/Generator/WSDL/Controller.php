@@ -4,6 +4,7 @@
  * SK ITCBundle Code Generator WSDL Controller
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Code\Generator\WSDL;
@@ -16,15 +17,19 @@ use Monolog\Logger;
 
 class Controller extends AbstractGenerator
 {
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Zend\Code\Generator\GeneratorInterface::generate()
 	 */
-	public function generate( Document $document )
+	public function generate( 
+		Document $document )
 	{
+
 		$definition = $document->getDefinitions();
 		$portTypes = $definition->getPortType();
+	
 	}
+
 }

@@ -4,6 +4,7 @@
  * SK ITCBundle Translation Translator
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Command\Translation;
@@ -18,8 +19,9 @@ use SK\ITCBundle\Command\AbstractCommand;
 
 class Translator extends AbstractCommand
 {
+
 	protected $translator;
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -27,7 +29,9 @@ class Translator extends AbstractCommand
 	 */
 	protected function configure()
 	{
-		$this->setDefinition( array( 
+
+		$this->setDefinition( 
+			array( 
 				new InputArgument( 'locale', InputArgument::REQUIRED, 'The locale' ),
 				new InputArgument( 'bundle', InputArgument::OPTIONAL, 'The bundle where to load the messages, defaults to app/Resources folder', null ),
 				new InputOption( 'prefix', null, InputOption::VALUE_OPTIONAL, 'Override the default prefix', '__' ),
@@ -35,26 +39,36 @@ class Translator extends AbstractCommand
 				new InputOption( 'force', null, InputOption::VALUE_NONE, 'Should the update be done' ),
 				new InputOption( 'no-backup', null, InputOption::VALUE_NONE, 'Should backup be disabled' ),
 				new InputOption( 'clean', null, InputOption::VALUE_NONE, 'Should clean not found messages' ) 
-		) );
-	}
+			) );
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
-		$translator = $this->getContainer()->get( 'sk.itcbundle.google.translator' );
+
+		$translator = $this->getContainer()
+			->get( 'sk.itcbundle.google.translator' );
 		
 		$locale = $input->getArgument( 'locale' );
 		$domain = $input->getOption( 'domain' );
-		$bundle = $this->getContainer()->get( 'kernel' )->getBundle( $input->getArgument( 'bundle' ) );
-		$loader = $this->getContainer()->get( 'translation.loader' );
+		$bundle = $this->getContainer()
+			->get( 'kernel' )
+			->getBundle( $input->getArgument( 'bundle' ) );
+		$loader = $this->getContainer()
+			->get( 'translation.loader' );
 		
 		// Extract used messages
 		$extractedCatalogue = new MessageCatalogue( $locale );
-		$this->getContainer()->get( 'translation.extractor' )->extract( $bundle->getPath() . '/Resources/views', $extractedCatalogue );
+		$this->getContainer()
+			->get( 'translation.extractor' )
+			->extract( $bundle->getPath() . '/Resources/views', $extractedCatalogue );
 		
 		// Load defined messages
 		$currentCatalogue = new MessageCatalogue( $locale );
@@ -62,5 +76,7 @@ class Translator extends AbstractCommand
 		{
 			$loader->loadMessages( $bundle->getPath() . '/Resources/translations', $currentCatalogue );
 		}
+	
 	}
+
 }

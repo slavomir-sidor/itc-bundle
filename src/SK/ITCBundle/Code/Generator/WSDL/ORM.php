@@ -4,6 +4,7 @@
  * SK ITCBundle Generator Wsdl ORM
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Code\Generator\WSDL;
@@ -15,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ORM extends AbstractGenerator
 {
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -23,19 +24,23 @@ class ORM extends AbstractGenerator
 	 */
 	protected function configure()
 	{
+
 		parent::configure();
 		
 		$this->addArgument( 'namespace', InputArgument::OPTIONAL, 'Namespace Name', 'AppBundle\\DTD\\Document' );
 		$this->addArgument( 'parentClass', InputArgument::OPTIONAL, 'Entity Generalized Class', '\\SK\\ITCBundle\\DTD\\Document' );
 		$this->addArgument( 'output', InputArgument::OPTIONAL, 'Output Folder', 'src/AppBundle/DTD/Document' );
-	}
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
 		// $this->config = $config;
 		$this->log( 'Starting generation' );
@@ -44,9 +49,9 @@ class ORM extends AbstractGenerator
 		if( empty( $options[ 'features' ] ) || (($options[ 'features' ] & SOAP_SINGLE_ELEMENT_ARRAYS) != SOAP_SINGLE_ELEMENT_ARRAYS) )
 		{
 			$message = array( 
-					'SoapClient option feature SOAP_SINGLE_ELEMENT_ARRAYS is not set.',
-					'This is not recommended as data types in DocBlocks for array properties will not be ',
-					'valid if the array only contains a single value.' 
+				'SoapClient option feature SOAP_SINGLE_ELEMENT_ARRAYS is not set.',
+				'This is not recommended as data types in DocBlocks for array properties will not be ',
+				'valid if the array only contains a single value.' 
 			);
 			$this->log( implode( PHP_EOL, $message ), 'warning' );
 		}
@@ -58,7 +63,8 @@ class ORM extends AbstractGenerator
 			{
 				$this->load( $ws );
 			}
-		} else
+		}
+		else
 		{
 			$this->load( $wsdl );
 		}
@@ -107,5 +113,7 @@ class ORM extends AbstractGenerator
 		}
 		
 		$this->log( 'Generation complete', 'info' );
+	
 	}
+
 }

@@ -4,42 +4,46 @@
  * SK ITCBundle SOAP WSDL tOperation
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\WSDL;
 
 class tOperation extends Element
 {
+
 	const ELEMENT_NAME = 'wsdl:operation';
-	
+
 	/**
 	 * SK ITCBundle SOAP WSDL Operation Input
 	 *
 	 * @var tInput
 	 */
 	protected $input;
-	
+
 	/**
 	 * SK ITCBundle SOAP WSDL Operation Output
 	 *
 	 * @var tOutput
 	 */
 	protected $output;
-	
+
 	/**
 	 * SK ITCBundle SOAP WSDL Operation Fault
 	 *
 	 * @var tFault[]
 	 */
 	protected $fault;
-	
+
 	/**
 	 * SK ITCBundle XML Document Contructor
 	 *
 	 * @param string $uri        	
 	 */
-	public function __construct( \DOMElement $element )
+	public function __construct( 
+		\DOMElement $element )
 	{
+
 		$this->setDOMElement( $element );
 		
 		foreach( $element->childNodes as $childNode )
@@ -61,8 +65,9 @@ class tOperation extends Element
 				}
 			}
 		}
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle SOAP WSDL Operation Input
 	 *
@@ -70,20 +75,25 @@ class tOperation extends Element
 	 */
 	public function getInput()
 	{
+
 		return $this->input;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITCBundle SOAP WSDL Operation Input
 	 *
 	 * @param tInput $input        	
 	 */
-	public function setInput( tInput $input )
+	public function setInput( 
+		tInput $input )
 	{
+
 		$this->input = $input;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle SOAP WSDL Operation Output
 	 *
@@ -91,20 +101,25 @@ class tOperation extends Element
 	 */
 	public function getOutput()
 	{
+
 		return $this->output;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITCBundle SOAP WSDL Operation Output
 	 *
 	 * @param tOutput $output        	
 	 */
-	public function setOutput( tOutput $output )
+	public function setOutput( 
+		tOutput $output )
 	{
+
 		$this->output = $output;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle SOAP WSDL Operation Fault
 	 *
@@ -112,17 +127,23 @@ class tOperation extends Element
 	 */
 	public function getFault()
 	{
+
 		return $this->fault;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITCBundle SOAP WSDL Operation Fault
 	 *
 	 * @param tFault $fault        	
 	 */
-	public function setFault( tFault $fault )
+	public function setFault( 
+		tFault $fault )
 	{
+
 		$this->fault = $fault;
 		return $this;
+	
 	}
+
 }

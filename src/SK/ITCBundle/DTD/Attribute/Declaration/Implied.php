@@ -9,11 +9,12 @@ namespace SK\ITCBundle\DTD\Attribute\Type;
 
 class Implied
 {
-	
+
 	/**
 	 * SK ITC Bundle DTD Attribute Declaration Implied Name
 	 *
 	 * @var string
 	 */
 	const NAME = 'IMPLIED';
+
 }

@@ -4,6 +4,7 @@
  * SK ITCBundle Code Generator PHPUnit Abstract Generator
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Code\Generator\PHPUnit;
@@ -29,144 +30,144 @@ use SK\ITCBundle\Code\Generator\CodeGenerator;
 
 abstract class PHPUnit extends CodeGenerator
 {
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Class Reflection
 	 *
 	 * @var ClassReflection[]
 	 */
 	protected $classReflections;
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Config
 	 *
 	 * @var ArrayHash
 	 */
 	protected $config;
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Source directory
 	 *
 	 * @var string[]
 	 */
 	protected $src;
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Root directory
 	 *
 	 * @var string
 	 */
 	protected $rootDir;
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Destination directory
 	 *
 	 * @var string
 	 */
 	protected $dest;
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Directory Scanner
 	 *
 	 * @var DirectoryScanner
 	 */
 	protected $directoryScanner;
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Input
 	 *
 	 * @var InputInterface
 	 */
 	protected $input;
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator PHPUnit File
 	 *
 	 * @var string
 	 */
 	protected $phpunit;
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Permutation Data Count
 	 *
 	 * @var int
 	 */
 	protected $dataCount;
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Output
 	 *
 	 * @var OutputInterface
 	 */
 	protected $output;
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Tests Classes
 	 *
 	 * @var array
 	 */
 	protected $testClasses;
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Tests Config
 	 *
 	 * @var Config
 	 */
 	protected $testConfig;
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Config File Name
 	 *
 	 * @var string
 	 */
 	protected $testConfigFilename = 'tests.config.neon';
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Option OPTION_REMOVED_ORPHANED_NO
 	 *
 	 * @var string
 	 */
 	const OPTION_REMOVED_ORPHANED_YES = 'yes';
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Option OPTION_REMOVED_ORPHANED_NO
 	 *
 	 * @var string
 	 */
 	const OPTION_REMOVED_ORPHANED_NO = 'no';
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Option OPTION_VERBOSE_OUTPUT_YES
 	 *
 	 * @var string
 	 */
 	const OPTION_VERBOSE_OUTPUT_YES = 'yes';
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Option OPTION_OVERRIDE_OUTPUT_NO
 	 *
 	 * @var string
 	 */
 	const OPTION_OVERRIDE_OUTPUT_NO = 'no';
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Option OPTION_OVERRIDE_OUTPUT_YES
 	 *
 	 * @var string
 	 */
 	const OPTION_OVERRIDE_OUTPUT_YES = 'yes';
-	
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Option OPTION_VERBOSE_OUTPUT_NO
 	 *
 	 * @var string
 	 */
 	const OPTION_VERBOSE_OUTPUT_NO = 'no';
-	
+
 	/**
 	 */
 	public abstract function generate();
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -174,63 +175,81 @@ abstract class PHPUnit extends CodeGenerator
 	 */
 	protected function configure()
 	{
+
 		$this->addArgument( 'dest', InputArgument::OPTIONAL, 'Destination tests directory', "tests" );
 		$this->addArgument( 'dataCount', InputArgument::OPTIONAL, 'Dataset permutation count (1) default', 1 );
 		$this->addArgument( 'src', InputArgument::IS_ARRAY, 'PHP Source directory', array( 
-				'src',
-				'app',
-				'resource' 
+			'src',
+			'app',
+			'resource' 
 		) );
 		
 		$this->addOption( "override", "o", InputOption::VALUE_OPTIONAL, "Override outputs yes/no, default no", self::OPTION_OVERRIDE_OUTPUT_NO );
 		
-		$this->addOption( "remove-orphaned", "ro", InputOption::VALUE_OPTIONAL, "Remove orphaned yes/no, default no", self::OPTION_REMOVED_ORPHANED_NO );
+		$this->addOption( 
+			"remove-orphaned", 
+			"ro", 
+			InputOption::VALUE_OPTIONAL, 
+			"Remove orphaned yes/no, default no", 
+			self::OPTION_REMOVED_ORPHANED_NO );
 		
 		$this->addOption( "verbose-output", "vo", InputOption::VALUE_OPTIONAL, "Verbose output yes/no,  default no", self::OPTION_VERBOSE_OUTPUT_NO );
-	}
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$this->setInput( $input );
 		$this->setOutput( $output );
 		
 		$this->setDest( $input->getArgument( 'dest' ) );
 		$this->setDataCount( $input->getArgument( 'dataCount' ) );
 		$this->setSrc( $input->getArgument( 'src' ) );
-	}
 	
+	}
+
 	/**
 	 *
 	 * @return \SystemContainer
 	 */
 	protected function getContainer()
 	{
+
 		return Environment::getContext();
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param string $method        	
 	 * @return \Nette\mixed
 	 */
-	public function getEnvironmentInvokedConfig( $method )
+	public function getEnvironmentInvokedConfig( 
+		$method )
 	{
+
 		return Environment::getConfig( __NAMESPACE__ . $method, array() );
-	}
 	
+	}
+
 	/**
 	 *
 	 * @throws Nette\InvalidStateException
 	 * @param string $name        	
 	 * @return string
 	 */
-	protected function getCacheDirectory( $name = 'Boostrap' )
+	protected function getCacheDirectory( 
+		$name = 'Boostrap' )
 	{
+
 		$directory = sprintf( "%s/cache/%s.%s", $this->getContainer()->parameters[ 'tempDir' ], str_replace( "\\", ".", __CLASS__ ), $name );
 		
 		if( ! is_dir( $directory ) )
@@ -239,32 +258,39 @@ abstract class PHPUnit extends CodeGenerator
 		}
 		
 		return $directory;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param string $class        	
 	 * @return array
 	 */
-	protected function getNamespace( $class )
+	protected function getNamespace( 
+		$class )
 	{
+
 		$names = explode( "\\", $class );
 		$className = array_pop( $names );
 		
 		return array( 
-				
-				'namespace' => implode( "\\", $names ),
-				'class' => $className 
+			
+			'namespace' => implode( "\\", $names ),
+			'class' => $className 
 		);
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param OutputInterface $output        	
 	 * @param string $testSrc        	
 	 */
-	public function generatePhpUnit( InputInterface $input, OutputInterface $output )
+	public function generatePhpUnit( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$this->writeNotice( $output, sprintf( "Generating PHPUnit" ) );
 		
 		$dest = $this->getDest();
@@ -280,7 +306,8 @@ abstract class PHPUnit extends CodeGenerator
 		$phpunitConfig = $this->getConfig()->phpunit;
 		
 		$phpunitXpath = new \DOMXPath( $phpunitDom );
-		$phpunitDomElement = $phpunitXpath->query( "/phpunit" )->item( 0 );
+		$phpunitDomElement = $phpunitXpath->query( "/phpunit" )
+			->item( 0 );
 		
 		if( NULL === $phpunitDomElement )
 		{
@@ -302,7 +329,8 @@ abstract class PHPUnit extends CodeGenerator
 		
 		if( $phpunitConfig->offsetExists( 'logging' ) )
 		{
-			$loggingDomElement = $phpunitXpath->query( "logging", $phpunitDomElement )->item( 0 );
+			$loggingDomElement = $phpunitXpath->query( "logging", $phpunitDomElement )
+				->item( 0 );
 			
 			if( NULL === $loggingDomElement )
 			{
@@ -312,7 +340,8 @@ abstract class PHPUnit extends CodeGenerator
 			
 			foreach( $phpunitConfig->offsetGet( 'logging' ) as $log )
 			{
-				$logDomElement = $phpunitXpath->query( "log[@type='" . $log->type . "']", $loggingDomElement )->item( 0 );
+				$logDomElement = $phpunitXpath->query( "log[@type='" . $log->type . "']", $loggingDomElement )
+					->item( 0 );
 				
 				if( NULL == $logDomElement )
 				{
@@ -358,7 +387,8 @@ abstract class PHPUnit extends CodeGenerator
 		{
 			$classFilename = sprintf( "%s/%s.%s", $dest, str_replace( "\\", "/", $namespaceName ), "php" );
 			
-			$testsuitesTestsuiteElement = $phpunitXpath->query( "testsuite[@name='" . $reflection->getNamespaceName() . "']", $testsuitesDomElement )->item( 0 );
+			$testsuitesTestsuiteElement = $phpunitXpath->query( "testsuite[@name='" . $reflection->getNamespaceName() . "']", $testsuitesDomElement )
+				->item( 0 );
 			
 			if( NULL == $testsuitesTestsuiteElement )
 			{
@@ -369,7 +399,8 @@ abstract class PHPUnit extends CodeGenerator
 			
 			$testCaseDirectory = sprintf( "%s/%s", $dest, str_replace( "\\", "/", $reflection->getNamespaceName() ) );
 			
-			$testCaseDirectoryElement = $phpunitXpath->query( "directory[text()='" . $testCaseDirectory . "']", $testsuitesTestsuiteElement )->item( 0 );
+			$testCaseDirectoryElement = $phpunitXpath->query( "directory[text()='" . $testCaseDirectory . "']", $testsuitesTestsuiteElement )
+				->item( 0 );
 			
 			if( NULL == $testCaseDirectoryElement )
 			{
@@ -378,7 +409,8 @@ abstract class PHPUnit extends CodeGenerator
 			}
 			$testCaseDirectoryElement->setAttribute( 'suffix', "Test.php" );
 			
-			$classTestFileElement = $phpunitXpath->query( "file[text()='" . $classFilename . "']", $testsuitesTestsuiteElement )->item( 0 );
+			$classTestFileElement = $phpunitXpath->query( "file[text()='" . $classFilename . "']", $testsuitesTestsuiteElement )
+				->item( 0 );
 			
 			if( NULL == $classTestFileElement )
 			{
@@ -405,15 +437,19 @@ abstract class PHPUnit extends CodeGenerator
 		
 		$phpunitDom->formatOutput = TRUE;
 		$phpunitDom->save( $phpunit );
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassCase( InputInterface $input, OutputInterface $output )
+	public function generateClassCase( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$src = $this->getSrc();
 		$dest = $this->getDest();
 		
@@ -480,8 +516,10 @@ abstract class PHPUnit extends CodeGenerator
 				$classGenerator->setConsts( $classGeneratorConst );
 				$classGenerator->addProperty( "className", "\\" . $configName );
 				
-				$classFilename = dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php";
-			} else
+				$classFilename = dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR .
+								 $classGenerator->getName() . ".php";
+			}
+			else
 			{
 				$classReflection = ReflectionClassType::from( $classType );
 				$classGenerator = PhpGeneratorClassType::from( $classReflection );
@@ -507,13 +545,14 @@ abstract class PHPUnit extends CodeGenerator
 			try
 			{
 				$instanceProvider = $classReflection->getMethod( "getInstance" );
-			} catch( \Exception $e )
+			}
+			catch( \Exception $e )
 			{
 				$instanceProvider = $classGenerator->addMethod( "getInstance" );
 				$instanceProvider->setBody( 'return parent::getInstance();' );
 				$instanceProvider->setDocuments( array( 
-						
-						'return' => "@return \\" . $classPrototype 
+					
+					'return' => "@return \\" . $classPrototype 
 				) );
 			}
 			
@@ -533,15 +572,19 @@ abstract class PHPUnit extends CodeGenerator
 			
 			$this->saveClass( $classCode, new \SplFileInfo( $classFilename ) );
 		}
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassFunctionalCase( InputInterface $input, OutputInterface $output )
+	public function generateClassFunctionalCase( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$dest = $this->getDest();
 		
 		$config = Arrays::get( $configNeon, 'tests', array() );
@@ -616,9 +659,9 @@ abstract class PHPUnit extends CodeGenerator
 				}
 				
 				if( ! is_callable( array( 
-						
-						$classReflection->getName(),
-						$methodReflection->getName() 
+					
+					$classReflection->getName(),
+					$methodReflection->getName() 
 				) ) )
 				{
 					continue;
@@ -666,11 +709,14 @@ abstract class PHPUnit extends CodeGenerator
 				}
 				
 				$body = '';
-				$body .= "\n" . '$this->callTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' . ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
+				$body .= "\n" . '$this->callTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' .
+						 ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
 				$test->setBody( $body );
 			}
 			
-			$classInfo = new \SplFileInfo( dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php" );
+			$classInfo = new \SplFileInfo( 
+				dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR .
+				 $classGenerator->getName() . ".php" );
 			
 			$classDependency = "";
 			
@@ -688,15 +734,19 @@ abstract class PHPUnit extends CodeGenerator
 			
 			$this->saveClass( $classCode, $classInfo );
 		}
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassPerformanceCase( InputInterface $input, OutputInterface $output )
+	public function generateClassPerformanceCase( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$dest = $this->getDest();
 		
 		$config = Arrays::get( $configNeon, 'tests', array() );
@@ -733,7 +783,7 @@ abstract class PHPUnit extends CodeGenerator
 			}
 			$classParent = "\\" . $classReflection->getName() . "Base";
 			$dependencies = array( 
-					'BaseCase' => 'BaseCase' 
+				'BaseCase' => 'BaseCase' 
 			);
 			
 			$classGenerator->setName( $className );
@@ -773,9 +823,9 @@ abstract class PHPUnit extends CodeGenerator
 				}
 				
 				if( ! is_callable( array( 
-						
-						$classReflection->getName(),
-						$methodReflection->getName() 
+					
+					$classReflection->getName(),
+					$methodReflection->getName() 
 				) ) )
 				{
 					continue;
@@ -823,11 +873,14 @@ abstract class PHPUnit extends CodeGenerator
 				}
 				
 				$body = '';
-				$body .= "\n" . '$this->callPerformanceTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' . ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
+				$body .= "\n" . '$this->callPerformanceTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' .
+						 ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
 				$test->setBody( $body );
 			}
 			
-			$classInfo = new \SplFileInfo( dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php" );
+			$classInfo = new \SplFileInfo( 
+				dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR .
+				 $classGenerator->getName() . ".php" );
 			
 			$classDependency = "";
 			
@@ -845,15 +898,19 @@ abstract class PHPUnit extends CodeGenerator
 			
 			$this->saveClass( $classCode, $classInfo );
 		}
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassEqualCase( InputInterface $input, OutputInterface $output )
+	public function generateClassEqualCase( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$dest = $this->getDest();
 		
 		$configNeon = $this->getNeonData( $dest );
@@ -928,9 +985,9 @@ abstract class PHPUnit extends CodeGenerator
 				}
 				
 				if( ! is_callable( array( 
-						
-						$classReflection->getName(),
-						$methodReflection->getName() 
+					
+					$classReflection->getName(),
+					$methodReflection->getName() 
 				) ) )
 				{
 					continue;
@@ -977,11 +1034,14 @@ abstract class PHPUnit extends CodeGenerator
 				}
 				
 				$body = '';
-				$body .= "\n" . '$this->callEqualTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' . ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
+				$body .= "\n" . '$this->callEqualTest("' . $classGenerator->getName() . '","' . $methodGenerator->getName() . '",' .
+						 ($methodGenerator->isStatic() ? 'TRUE' : 'FALSE') . ', func_get_args());';
 				$test->setBody( $body );
 			}
 			
-			$classInfo = new \SplFileInfo( dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php" );
+			$classInfo = new \SplFileInfo( 
+				dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR .
+				 $classGenerator->getName() . ".php" );
 			
 			$classDependency = "";
 			
@@ -999,17 +1059,22 @@ abstract class PHPUnit extends CodeGenerator
 			
 			$this->saveClass( $classCode, $classInfo );
 		}
-	}
 	
+	}
+
 	/**
 	 * Generates SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Class Base Case
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateClassBaseCase( InputInterface $input, OutputInterface $output )
+	public function generateClassBaseCase( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
-		$cases = $this->getTestConfig()->getTestsCase();
+
+		$cases = $this->getTestConfig()
+			->getTestsCase();
 		$this->writeNotice( "Generating Class Tests Base Case: " . count( $cases ) );
 		foreach( $cases as $configName => $configClass )
 		{
@@ -1041,8 +1106,8 @@ abstract class PHPUnit extends CodeGenerator
 			}
 			$classParent = "BaseCase";
 			$dependencies = array( 
-					
-					'\ITC\Tests\BaseCase' => 'BaseCase' 
+				
+				'\ITC\Tests\BaseCase' => 'BaseCase' 
 			);
 			
 			$classGenerator->setName( $className );
@@ -1082,9 +1147,9 @@ abstract class PHPUnit extends CodeGenerator
 				}
 				
 				if( ! is_callable( array( 
-						
-						$classReflection->getName(),
-						$methodReflection->getName() 
+					
+					$classReflection->getName(),
+					$methodReflection->getName() 
 				) ) )
 				{
 					continue;
@@ -1109,7 +1174,9 @@ abstract class PHPUnit extends CodeGenerator
 			$providerData = $classGenerator->addProperty( "providerData", $classProviderData );
 			$providerData->setVisibility( 'protected' );
 			
-			$classInfo = new \SplFileInfo( dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR . $classGenerator->getName() . ".php" );
+			$classInfo = new \SplFileInfo( 
+				dirname( str_replace( $this->getRootDir(), $this->getDest(), $classReflection->getFileName() ) ) . DIRECTORY_SEPARATOR .
+				 $classGenerator->getName() . ".php" );
 			
 			$classDependency = "";
 			
@@ -1127,26 +1194,34 @@ abstract class PHPUnit extends CodeGenerator
 			
 			$this->saveClass( $classCode, $classInfo );
 		}
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param string $code        	
 	 * @param \SplFileInfo $filename        	
 	 */
-	protected function saveClass( $code, \SplFileInfo $filename )
+	protected function saveClass( 
+		$code, 
+		\SplFileInfo $filename )
 	{
+
 		@mkdir( $filename->getPath(), 0777, TRUE );
 		return file_put_contents( $filename->__toString(), $code );
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateConfigServices( InputInterface $input, OutputInterface $output )
+	public function generateConfigServices( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$classReflections = $this->getClassReflections();
 		$classReflectionsCount = count( $classReflections );
 		
@@ -1172,16 +1247,20 @@ abstract class PHPUnit extends CodeGenerator
 		
 		$progressBar->finish();
 		$testConfig->save();
-	}
 	
+	}
+
 	/**
 	 * SK ITCBundle Code Generator PHPUnit Abstract Generator Generates Config Case
 	 *
 	 * @param InputInterface $input        	
 	 * @param OutputInterface $output        	
 	 */
-	public function generateConfigCase( InputInterface $input, OutputInterface $output )
+	public function generateConfigCase( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$classReflections = $this->getClassReflections();
 		$classReflectionsCount = count( $classReflections );
 		
@@ -1226,10 +1305,16 @@ abstract class PHPUnit extends CodeGenerator
 				{
 					
 					$testConfig->setTestsCaseMethodParameter( 
-
-					Config::generatePermutations( $parameter, 
-
-					$testConfig->getTestsCaseMethodParameter( $class->getName(), $method->getName(), $parameter->getName() ), $this->getDataCount(), $input->getOption( "override" ) ), $class->getName(), $method->getName(), $parameter->getName() );
+						
+						Config::generatePermutations( 
+							$parameter, 
+							
+							$testConfig->getTestsCaseMethodParameter( $class->getName(), $method->getName(), $parameter->getName() ), 
+							$this->getDataCount(), 
+							$input->getOption( "override" ) ), 
+						$class->getName(), 
+						$method->getName(), 
+						$parameter->getName() );
 				}
 			}
 			
@@ -1238,23 +1323,28 @@ abstract class PHPUnit extends CodeGenerator
 		
 		$progressBar->finish();
 		$testConfig->save();
-	}
 	
+	}
+
 	/**
 	 *
 	 * @return the array
 	 */
 	public function getSrc()
 	{
+
 		return $this->src;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param array $src        	
 	 */
-	public function setSrc( array $src )
+	public function setSrc( 
+		array $src )
 	{
+
 		$root = $this->getRootDir();
 		
 		foreach( $src as $directory )
@@ -1268,14 +1358,16 @@ abstract class PHPUnit extends CodeGenerator
 		}
 		
 		return $this;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @return string
 	 */
 	public function getDest()
 	{
+
 		if( NULL == $this->dest )
 		{
 			$this->setDest( $this->getRootDir() . DIRECTORY_SEPARATOR . "tests" );
@@ -1287,14 +1379,17 @@ abstract class PHPUnit extends CodeGenerator
 		}
 		
 		return $this->dest;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param string $dest        	
 	 */
-	public function setDest( $dest )
+	public function setDest( 
+		$dest )
 	{
+
 		if( NULL == $this->dest )
 		{
 			$this->dest = $this->getRootDir() . DIRECTORY_SEPARATOR . $dest;
@@ -1306,31 +1401,37 @@ abstract class PHPUnit extends CodeGenerator
 		}
 		
 		return $this;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @return string
 	 */
 	public function getPhpunit()
 	{
+
 		if( NULL === $this->phpunit )
 		{
 			$this->phpunit = $this->getRootDir() . "/phpunit.xml";
 		}
 		return $this->phpunit;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param string $phpunit        	
 	 */
-	public function setPhpunit( $phpunit )
+	public function setPhpunit( 
+		$phpunit )
 	{
+
 		$this->phpunit = $phpunit;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Config Array Hash
 	 *
@@ -1338,6 +1439,7 @@ abstract class PHPUnit extends CodeGenerator
 	 */
 	public function getConfig()
 	{
+
 		if( NULL == $this->config )
 		{
 			$config = Environment::getConfig();
@@ -1345,83 +1447,102 @@ abstract class PHPUnit extends CodeGenerator
 		}
 		
 		return $this->config;
-	}
 	
+	}
+
 	/**
 	 * Sets Gets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Config Array Hash
 	 *
 	 * @param ArrayHash $config        	
 	 */
-	public function setConfig( ArrayHash $config )
+	public function setConfig( 
+		ArrayHash $config )
 	{
+
 		$this->config = $config;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @return array
 	 */
 	public function getTestClasses()
 	{
+
 		return $this->testClasses;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param array $testClasses        	
 	 */
-	public function setTestClasses( array $testClasses )
+	public function setTestClasses( 
+		array $testClasses )
 	{
+
 		$this->testClasses = $testClasses;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @return int
 	 */
 	public function getDataCount()
 	{
+
 		return $this->dataCount;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param int $dataCount        	
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setDataCount( $dataCount )
+	public function setDataCount( 
+		$dataCount )
 	{
+
 		$this->dataCount = $dataCount;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @return string
 	 */
 	public function getRootDir()
 	{
+
 		if( NULL === $this->rootDir )
 		{
 			$this->setRootDir( getcwd() );
 		}
 		
 		return $this->rootDir;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param string $rootDir        	
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setRootDir( $rootDir )
+	public function setRootDir( 
+		$rootDir )
 	{
+
 		$this->rootDir = $rootDir;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Class Directory Scanner
 	 *
@@ -1429,14 +1550,16 @@ abstract class PHPUnit extends CodeGenerator
 	 */
 	public function getDirectoryScanner()
 	{
+
 		if( NULL === $this->directoryScanner )
 		{
 			$directoryScanner = new AggregateDirectoryScanner( $this->getSrc() );
 			$this->setDirectoryScanner( $directoryScanner );
 		}
 		return $this->directoryScanner;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Class Doc Block Values By Name
 	 *
@@ -1444,9 +1567,14 @@ abstract class PHPUnit extends CodeGenerator
 	 * @param string $name        	
 	 * @return array
 	 */
-	public function getClassDocBlockTagValue( array $tags, $name )
+	public function getClassDocBlockTagValue( 
+		array $tags, 
+		$name )
 	{
-		$v = array_filter( $tags, function ( $value ) use($name )
+
+		$v = array_filter( $tags, function ( 
+			$value ) use (
+		$name )
 		{
 			return (Arrays::get( $value, 'name', NULL ) == $name) ? $value : FALSE;
 		} );
@@ -1456,19 +1584,23 @@ abstract class PHPUnit extends CodeGenerator
 			$values[] = Arrays::get( $value, 'value', NULL );
 		}
 		return $values;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Class Directory Scanner
 	 *
 	 * @param DirectoryScanner $directoryScanner        	
 	 */
-	public function setDirectoryScanner( DirectoryScanner $directoryScanner )
+	public function setDirectoryScanner( 
+		DirectoryScanner $directoryScanner )
 	{
+
 		$this->directoryScanner = $directoryScanner;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Class Reflection
 	 *
@@ -1476,6 +1608,7 @@ abstract class PHPUnit extends CodeGenerator
 	 */
 	public function getClassReflections()
 	{
+
 		if( NULL === $this->classReflections )
 		{
 			
@@ -1497,20 +1630,24 @@ abstract class PHPUnit extends CodeGenerator
 		}
 		
 		return $this->classReflections;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Class Reflections
 	 *
 	 * @param ClassReflection[] $classReflections        	
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setClassReflections( $classReflections )
+	public function setClassReflections( 
+		$classReflections )
 	{
+
 		$this->classReflections = $classReflections;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Input
 	 *
@@ -1518,20 +1655,25 @@ abstract class PHPUnit extends CodeGenerator
 	 */
 	public function getInput()
 	{
+
 		return $this->input;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Input
 	 *
 	 * @param InputInterface $input        	
 	 */
-	public function setInput( InputInterface $input )
+	public function setInput( 
+		InputInterface $input )
 	{
+
 		$this->input = $input;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Output
 	 *
@@ -1539,31 +1681,47 @@ abstract class PHPUnit extends CodeGenerator
 	 */
 	public function getOutput()
 	{
+
 		return $this->output;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Output
 	 *
 	 * @param OutputInterface $output        	
 	 */
-	public function setOutput( OutputInterface $output )
+	public function setOutput( 
+		OutputInterface $output )
 	{
+
 		$this->output = $output;
 		return $this;
+	
 	}
-	public function writeError( $message )
+
+	public function writeError( 
+		$message )
 	{
+
 		$output = $this->getOutput();
 		$output->writeln( '<fg=black;bg=red>Error:</fg=black;bg=red> ' . $message );
+	
 	}
-	public function writeInfo( $message )
+
+	public function writeInfo( 
+		$message )
 	{
+
 		$output = $this->getOutput();
 		$output->writeln( '<fg=black;bg=green>Info:</fg=black;bg=green> ' . $message );
+	
 	}
-	public function writeHeader( $message = NULL )
+
+	public function writeHeader( 
+		$message = NULL )
 	{
+
 		$output = $this->getOutput();
 		
 		if( NULL == $message )
@@ -1574,15 +1732,23 @@ abstract class PHPUnit extends CodeGenerator
 		$output->writeln( '<fg=white;bg=magenta>ITC Version</fg=white;bg=magenta>' );
 		$output->writeln( '<fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>" );
 		$output->writeln( '<fg=white;bg=magenta></fg=white;bg=magenta>' );
+	
 	}
-	public function writeNotice( $message )
+
+	public function writeNotice( 
+		$message )
 	{
+
 		$message = '<fg=cyan;bg=white>Notice:</fg=cyan;bg=white> ' . $message;
 		$output = $this->getOutput();
 		$output->writeln( $message );
+	
 	}
-	public function writeDebug( $message )
+
+	public function writeDebug( 
+		$message )
 	{
+
 		$input = $this->getInput();
 		$output = $this->getOutput();
 		
@@ -1590,8 +1756,9 @@ abstract class PHPUnit extends CodeGenerator
 		{
 			$output->writeln( '<fg=blue;bg=white>DEBUG:</fg=blue;bg=white> ' . $message );
 		}
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Test Config
 	 *
@@ -1599,26 +1766,31 @@ abstract class PHPUnit extends CodeGenerator
 	 */
 	public function getTestConfig()
 	{
+
 		if( NULL === $this->testConfig )
 		{
 			$testConfig = Config::fromFile( $this->getTestConfigFilename() );
 			$this->setTestConfig( $testConfig );
 		}
 		return $this->testConfig;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Test Config
 	 *
 	 * @param Config $testConfig        	
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setTestConfig( Config $testConfig )
+	public function setTestConfig( 
+		Config $testConfig )
 	{
+
 		$this->testConfig = $testConfig;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle Code Generator PHPUnit Abstract Generator Config File Name
 	 *
@@ -1626,18 +1798,24 @@ abstract class PHPUnit extends CodeGenerator
 	 */
 	public function getTestConfigFilename()
 	{
+
 		return sprintf( "%s/resource/config/%s", rtrim( $this->getDest() ), $this->testConfigFilename );
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITCBundle Code Generator PHPUnit Abstract Generator Config File Name
 	 *
 	 * @param unknown $testConfigFilename        	
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setTestConfigFilename( $testConfigFilename )
+	public function setTestConfigFilename( 
+		$testConfigFilename )
 	{
+
 		$this->testConfigFilename = $testConfigFilename;
 		return $this;
+	
 	}
+
 }

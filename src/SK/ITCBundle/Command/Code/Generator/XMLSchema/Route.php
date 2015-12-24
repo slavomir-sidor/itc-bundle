@@ -4,6 +4,7 @@
  * SK ITCBundle Generator XML Schema Route
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Command\Code\Generator\XMLSchema;
@@ -17,7 +18,7 @@ use Zend\Code\Generator\ClassGenerator;
 
 class Route extends AbstractGenerator
 {
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -25,17 +26,24 @@ class Route extends AbstractGenerator
 	 */
 	protected function configure()
 	{
+
 		parent::configure();
-	}
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		$xsd = $this->getDocument( $input->getArgument( 'xsd' ) );
 		$xsdSchema = $xsd->getSchema();
+	
 	}
+
 }

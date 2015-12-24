@@ -11,4 +11,5 @@ use Zend\Soap\Server as ZendServer;
 
 class Server extends ZendServer
 {
+
 }

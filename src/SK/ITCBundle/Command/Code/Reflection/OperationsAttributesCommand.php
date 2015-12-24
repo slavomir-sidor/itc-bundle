@@ -25,7 +25,7 @@ class OperationsAttributesCommand extends ReflectionCommand
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
 	public function __construct(
-		$name = "itc:reflection:class:operations:attr",
+		$name = "reflection:class:operations:attr",
 		$description = "ITC Reflection Clases Operations Attributes" )
 	{
 

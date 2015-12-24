@@ -4,6 +4,7 @@
  * SK ITCBundle Command Code Generator PHPUnit Permutation
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Command\Code\Generator\PHPUnit;
@@ -14,15 +15,21 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Permutation extends PHPUnitGenerator
 {
+
 	/**
 	 *
 	 * @param string $name        	
 	 * @param string $description        	
 	 */
-	public function __construct( $name = "phpunit:permutation", $description = "PHPUnit Paramameters Permutation Generator" )
+	public function __construct( 
+		$name = "phpunit:permutation", 
+		$description = "PHPUnit Paramameters Permutation Generator" )
 	{
+
 		parent::__construct( $name, $description );
+	
 	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -30,16 +37,23 @@ class Permutation extends PHPUnitGenerator
 	 */
 	protected function configure()
 	{
+
 		parent::configure();
-	}
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		parent::execute( $input, $output );
+	
 	}
+
 }

@@ -13,63 +13,63 @@ use SK\ITCBundle\DTD\Element;
 
 class Attribute extends Entity
 {
-	
+
 	/**
 	 * SK ITC Bundle DTD Attribute Annotation
 	 *
 	 * @var Annotation
 	 */
 	protected $annotation;
-	
+
 	/**
 	 * SK ITC Bundle DTD Attribute Document
 	 *
 	 * @var Document
 	 */
 	protected $document;
-	
+
 	/**
 	 * SK ITC Bundle DTD Attribute Name
 	 *
 	 * @var string
 	 */
 	protected $name;
-	
+
 	/**
 	 * SK ITC Bundle DTD Attribute Source
 	 *
 	 * @var string
 	 */
 	protected $source;
-	
+
 	/**
 	 * SK ITC Bundle DTD Attribute Entity
 	 *
 	 * @var Entity
 	 */
 	protected $entity;
-	
+
 	/**
 	 * SK ITC Bundle DTD Attribute Element
 	 *
 	 * @var Element
 	 */
 	protected $element;
-	
+
 	/**
 	 * SK ITC Bundle DTD Attribute Value
 	 *
 	 * @var mixed
 	 */
 	protected $value;
-	
+
 	/**
 	 * SK ITC Bundle DTD Attribute Default Value
 	 *
 	 * @var mixed
 	 */
 	protected $defaultValue;
-	
+
 	/**
 	 * Constructs SK ITC Bundle DTD Attribute
 	 *
@@ -80,13 +80,18 @@ class Attribute extends Entity
 	 * @param string $source
 	 *        	SK ITC Bundle DTD Attribute Source
 	 */
-	public function __construct( Document $document, $name, $source = NULL )
+	public function __construct( 
+		Document $document, 
+		$name, 
+		$source = NULL )
 	{
+
 		$this->setDocument( $document );
 		$this->setSource( $name );
 		$this->setSource( $source );
-	}
 	
+	}
+
 	/**
 	 * Creates SK ITC Bundle DTD Attribute
 	 *
@@ -94,12 +99,16 @@ class Attribute extends Entity
 	 *        	SK ITC Bundle DTD Attribute Source
 	 * @return \SK\ITCBundle\DTD\Attribute
 	 */
-	public static function create( Document $document, $source )
+	public static function create( 
+		Document $document, 
+		$source )
 	{
+
 		$instance = new self( $source );
 		return $instance;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITC Bundle DTD Attribute Annotation
 	 *
@@ -107,9 +116,11 @@ class Attribute extends Entity
 	 */
 	public function getAnnotation()
 	{
+
 		return $this->annotation;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITC Bundle DTD Attribute Annotation
 	 *
@@ -117,12 +128,15 @@ class Attribute extends Entity
 	 *        	SK ITC Bundle DTD Attribute Annotation
 	 * @return \SK\ITCBundle\DTD\Attribute
 	 */
-	public function setAnnotation( Annotation $annotation )
+	public function setAnnotation( 
+		Annotation $annotation )
 	{
+
 		$this->annotation = $annotation;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITC Bundle DTD Attribute Name
 	 *
@@ -130,9 +144,11 @@ class Attribute extends Entity
 	 */
 	public function getName()
 	{
+
 		return $this->name;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITC Bundle DTD Attribute Name
 	 *
@@ -140,12 +156,15 @@ class Attribute extends Entity
 	 *        	SK ITC Bundle DTD Attribute Name
 	 * @return \SK\ITCBundle\DTD\Attribute
 	 */
-	public function setName( $name )
+	public function setName( 
+		$name )
 	{
+
 		$this->name = ( string ) $name;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITC Bundle DTD Attribute Entity
 	 *
@@ -153,9 +172,11 @@ class Attribute extends Entity
 	 */
 	public function getEntity()
 	{
+
 		return $this->entity;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITC Bundle DTD Attribute Entity
 	 *
@@ -163,12 +184,15 @@ class Attribute extends Entity
 	 *        	SK ITC Bundle DTD Attribute Entity
 	 * @return \SK\ITCBundle\DTD\Attribute
 	 */
-	public function setEntity( $entity )
+	public function setEntity( 
+		$entity )
 	{
+
 		$this->entity = $entity;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITC Bundle DTD Attribute Value
 	 *
@@ -176,21 +200,26 @@ class Attribute extends Entity
 	 */
 	public function getValue()
 	{
+
 		return $this->value;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITC Bundle DTD Attribute Value
 	 *
 	 * @param mixed $value        	
 	 * @return \SK\ITCBundle\DTD\Attribute
 	 */
-	public function setValue( $value )
+	public function setValue( 
+		$value )
 	{
+
 		$this->value = $value;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITC Bundle DTD Attribute Default Value
 	 *
@@ -198,21 +227,26 @@ class Attribute extends Entity
 	 */
 	public function getDefaultValue()
 	{
+
 		return $this->defaultValue;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITC Bundle DTD Attribute Default Value
 	 *
 	 * @param mixed $defaultValue        	
 	 * @return \SK\ITCBundle\DTD\Attribute
 	 */
-	public function setDefaultValue( $defaultValue )
+	public function setDefaultValue( 
+		$defaultValue )
 	{
+
 		$this->defaultValue = $defaultValue;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITC Bundle DTD Attribute Source
 	 *
@@ -220,9 +254,11 @@ class Attribute extends Entity
 	 */
 	public function getSource()
 	{
+
 		return $this->source;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITC Bundle DTD Attribute Source
 	 *
@@ -230,12 +266,15 @@ class Attribute extends Entity
 	 *        	SK ITC Bundle DTD Attribute Source
 	 * @return \SK\ITCBundle\DTD\Attribute
 	 */
-	public function setSource( $source )
+	public function setSource( 
+		$source )
 	{
+
 		$this->source = $source;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITC Bundle DTD Attribute Document
 	 *
@@ -243,9 +282,11 @@ class Attribute extends Entity
 	 */
 	public function getDocument()
 	{
+
 		return $this->document;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITC Bundle DTD Attribute Document
 	 *
@@ -253,12 +294,15 @@ class Attribute extends Entity
 	 *        	SK ITC Bundle DTD Attribute Document
 	 * @return \SK\ITCBundle\DTD\Attribute
 	 */
-	public function setDocument( Document $document )
+	public function setDocument( 
+		Document $document )
 	{
+
 		$this->document = $document;
 		return $this;
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITC Bundle DTD Attribute Element
 	 *
@@ -266,9 +310,11 @@ class Attribute extends Entity
 	 */
 	public function getElement()
 	{
+
 		return $this->element;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITC Bundle DTD Attribute Element
 	 *
@@ -276,9 +322,13 @@ class Attribute extends Entity
 	 *        	SK ITC Bundle DTD Attribute Element
 	 * @return \SK\ITCBundle\DTD\Attribute
 	 */
-	public function setElement( Element $element )
+	public function setElement( 
+		Element $element )
 	{
+
 		$this->element = $element;
 		return $this;
+	
 	}
+
 }

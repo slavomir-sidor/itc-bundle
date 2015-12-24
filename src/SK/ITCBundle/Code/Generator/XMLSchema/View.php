@@ -4,20 +4,23 @@
  * SK ITCBundle Generator XML Schema Service
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Code\Generator\XMLSchema;
 
 class View extends AbstractGenerator
 {
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Zend\Code\Generator\GeneratorInterface::generate()
 	 */
-	public function generate( $xsd )
+	public function generate( 
+		$xsd )
 	{
+
 		$xsd = $this->getDocument( $xsd );
 		$xsdSchema = $xsd->getSchema();
 		
@@ -39,5 +42,7 @@ class View extends AbstractGenerator
 		foreach( $xsdSchemaComplexTypes as $xsdSchemaComplexTypes )
 		{
 		}
+	
 	}
+
 }

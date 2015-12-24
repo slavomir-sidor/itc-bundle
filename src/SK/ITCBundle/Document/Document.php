@@ -9,11 +9,12 @@ namespace SK\ITCBundle\Document;
 
 abstract class Document extends \SplFileObject
 {
-	
+
 	/**
 	 * SK ITC Bundle Document Source
 	 *
 	 * @var Source
 	 */
 	protected $source;
+
 }

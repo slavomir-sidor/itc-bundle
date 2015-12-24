@@ -1,108 +1,108 @@
 .
 .form {
-	display: inline-block;
-	padding: 0em 0%;
-	float: left;
-	width: 100%;
-	margin: 0%;
-	border: 0px;
-	height: 100%;
+ display: inline-block;
+ padding: 0em 0%;
+ float: left;
+ width: 100%;
+ margin: 0%;
+ border: 0px;
+ height: 100%;
 }
 
 .form fieldset {
-	display: block;
-	padding: 1% 1%;
-	margin: 1% 1%;
-	border: dotted 1px #aaa;
-	background-image: url("../images/AEAEAE-0.8.png");
-	background-repeat: repeat;
-	max-height: 96%;
+ display: block;
+ padding: 1% 1%;
+ margin: 1% 1%;
+ border: dotted 1px #aaa;
+ background-image: url("../images/AEAEAE-0.8.png");
+ background-repeat: repeat;
+ max-height: 96%;
 }
 
 .form fieldset.left, .form fieldset.right {
-	width: 45%;
+ width: 45%;
 }
 
 .form fieldset.left {
-	float: left;
-	clear: left;
+ float: left;
+ clear: left;
 }
 
 .form fieldset.right {
-	float: right;
-	clear: right;
+ float: right;
+ clear: right;
 }
 
 .form fieldset legend {
-	padding: 0.4em 1ex;
-	margin: 0px;
-	font-size: 1.1em;
-	background-image: url("../images/AEAEAE-0.8.png");
-	background-repeat: repeat;
-	display: inline-block;
-	cursor: pointer;
+ padding: 0.4em 1ex;
+ margin: 0px;
+ font-size: 1.1em;
+ background-image: url("../images/AEAEAE-0.8.png");
+ background-repeat: repeat;
+ display: inline-block;
+ cursor: pointer;
 }
 
 .form fieldset legend span {
-	float: left;
+ float: left;
 }
 
 .form fieldset.ui-state-collapsed>* {
-	display: none;
+ display: none;
 }
 
 .form fieldset.ui-state-collapsed>legend {
-	display: inline-block;
+ display: inline-block;
 }
 
 .form fieldset>div {
-	clear: both;
+ clear: both;
 }
 
 .form label {
-	display: inline-block;
-	float: left;
-	font-size: 1.1em;
-	font-weight: normal;
-	cursor: pointer;
-	margin: 0%;
-	padding: 0.2em 1%;
-	width: 27%;
+ display: inline-block;
+ float: left;
+ font-size: 1.1em;
+ font-weight: normal;
+ cursor: pointer;
+ margin: 0%;
+ padding: 0.2em 1%;
+ width: 27%;
 }
 
 .form input {
-	display: inline-block;
-	padding: 0.2em 1%;
-	margin: 0em 0%;
-	font-size: 1em;
-	float: left;
-	width: 68%;
+ display: inline-block;
+ padding: 0.2em 1%;
+ margin: 0em 0%;
+ font-size: 1em;
+ float: left;
+ width: 68%;
 }
 
 .form input::-moz-focus-inner {
-	border: 0;
+ border: 0;
 }
 
 .form textarea {
-	display: inline-block;
-	padding: 0.2em 1%;
-	margin: 0em 0%;
-	font-size: 1em;
-	float: left;
-	width: 68%;
-	overflow: auto;
-	height: 60px;
+ display: inline-block;
+ padding: 0.2em 1%;
+ margin: 0em 0%;
+ font-size: 1em;
+ float: left;
+ width: 68%;
+ overflow: auto;
+ height: 60px;
 }
 
 .form div {
-	padding: 0em 0%;
+ padding: 0em 0%;
 }
 
 .form p {
-	clear: both;
-	float: none;
-	margin: 0px;
-	font-size: 0.9em;
-	font-style: italic;
-	padding: 0.2em 1% 0.2em 29%;
+ clear: both;
+ float: none;
+ margin: 0px;
+ font-size: 0.9em;
+ font-style: italic;
+ padding: 0.2em 1% 0.2em 29%;
 }

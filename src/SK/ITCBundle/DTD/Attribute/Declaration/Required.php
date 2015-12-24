@@ -9,11 +9,12 @@ namespace SK\ITCBundle\DTD\Attribute\Type;
 
 class Required
 {
-	
+
 	/**
 	 * SK ITC Bundle DTD Attribute Declaration Required Name
 	 *
 	 * @var string
 	 */
 	const NAME = 'Required';
+
 }

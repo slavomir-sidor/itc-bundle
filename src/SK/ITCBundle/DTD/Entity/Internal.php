@@ -11,4 +11,5 @@ use SK\ITCBundle\DTD\Entity;
 
 class Internal extends Entity
 {
+
 }

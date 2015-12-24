@@ -4,6 +4,7 @@
  * SK ITCBundle Command Code Abstract Reflection
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Command\Code\Reflection;
@@ -15,7 +16,7 @@ use SK\ITCBundle\Command\Code\Generator\CodeGeneratorCommand;
 
 class OperationsCommand extends ReflectionCommand
 {
-	
+
 	/**
 	 * Constructs SK ITCBundle Command Namespace Abstract Reflection
 	 *
@@ -24,19 +25,28 @@ class OperationsCommand extends ReflectionCommand
 	 * @param string $description
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
-	public function __construct( $name = "src:operations", $description = "Source Classes Operations" )
+	public function __construct( 
+		$name = "src:operations", 
+		$description = "Source Classes Operations" )
 	{
+
 		parent::__construct( $name, $description );
-	}
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
+
 		parent::execute( $input, $output );
 		$this->executeOperationsReflection();
+	
 	}
+
 }

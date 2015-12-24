@@ -58,8 +58,8 @@
 		<requirement key="_locale">%framework.translator.locales%</requirement>
 
 	</route>
-	
-	
+
+
 	<route
 		id="itc_help_dbal"
 		path="/dbal/{_locale}">

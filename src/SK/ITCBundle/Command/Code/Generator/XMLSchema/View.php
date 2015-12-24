@@ -4,6 +4,7 @@
  * SK ITCBundle Generator XML Schema Service
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Command\Code\Generator\XMLSchema;
@@ -15,7 +16,7 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class View extends AbstractGenerator
 {
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -23,18 +24,24 @@ class View extends AbstractGenerator
 	 */
 	protected function configure()
 	{
+
 		$this->addArgument( 'output', InputArgument::OPTIONAL, 'Output Folder', 'src/AppBundle/XMLSchema' );
 		parent::configure();
-	}
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute( 
+		InputInterface $input, 
+		OutputInterface $output )
 	{
-		$this->getLogger()->log( Logger::INFO, "Creating XSD View Resources" );
+
+		$this->getLogger()
+			->log( Logger::INFO, "Creating XSD View Resources" );
 		$xsd = $this->getDocument( $input->getArgument( "xsd" ) );
 		$xsdSchema = $xsd->getSchema();
 		
@@ -70,5 +77,7 @@ class View extends AbstractGenerator
 		{
 			// $output->writeln($xsdSchemaComplexType->getName());
 		}
+	
 	}
+
 }

@@ -13,24 +13,27 @@ use \DOMXPath as PHPDOMXpath;
  */
 class Document extends PHPDOMDocument
 {
-	
+
 	/**
 	 * SK ITCBundle XML Document XPath
 	 *
 	 * @var PHPDOMXpath
 	 */
 	protected $xpath;
-	
+
 	/**
 	 * SK ITCBundle XML Document Contructor
 	 *
 	 * @param string $uri        	
 	 */
-	public function __construct( $uri )
+	public function __construct( 
+		$uri )
 	{
+
 		$this->load( $uri );
-	}
 	
+	}
+
 	/**
 	 * Gets SK ITCBundle XML Document XPath
 	 *
@@ -38,22 +41,28 @@ class Document extends PHPDOMDocument
 	 */
 	protected function getXpath()
 	{
+
 		if( null === $this->xpath )
 		{
 			$this->setXpath( new PHPDOMXpath( $this ) );
 		}
 		return $this->xpath;
-	}
 	
+	}
+
 	/**
 	 * Sets SK ITCBundle XML Document XPath
 	 *
 	 * @param PHPDOMXpath $xpath        	
 	 * @return \SK\ITCBundle\SOAP\Document
 	 */
-	protected function setXpath( PHPDOMXpath $xpath )
+	protected function setXpath( 
+		PHPDOMXpath $xpath )
 	{
+
 		$this->xpath = $xpath;
 		return $this;
+	
 	}
+
 }

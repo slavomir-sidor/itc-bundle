@@ -4,6 +4,7 @@
  * SK ITCBundle Command Code Abstract Generator
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Command\Code\Generator;
@@ -12,14 +13,14 @@ use SK\ITCBundle\Command\Code\CodeCommand;
 
 abstract class GeneratorCommand extends CodeCommand
 {
-	
+
 	/**
 	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Destination directory
 	 *
 	 * @var string
 	 */
 	protected $dest;
-	
+
 	/**
 	 * Constructs SK ITCBundle Command Code Abstract Generator
 	 *
@@ -28,17 +29,22 @@ abstract class GeneratorCommand extends CodeCommand
 	 * @param string $description
 	 *        	SK ITCBundle Command Code Abstract Generator Description
 	 */
-	public function __construct( $name, $description )
+	public function __construct( 
+		$name, 
+		$description )
 	{
+
 		parent::__construct( $name, $description );
-	}
 	
+	}
+
 	/**
 	 *
 	 * @return string
 	 */
 	public function getDest()
 	{
+
 		if( NULL == $this->dest )
 		{
 			$this->setDest( $this->getRootDir() . DIRECTORY_SEPARATOR . "tests" );
@@ -50,14 +56,17 @@ abstract class GeneratorCommand extends CodeCommand
 		}
 		
 		return $this->dest;
-	}
 	
+	}
+
 	/**
 	 *
 	 * @param string $dest        	
 	 */
-	public function setDest( $dest )
+	public function setDest( 
+		$dest )
 	{
+
 		if( NULL == $this->dest )
 		{
 			$this->dest = $this->getRootDir() . DIRECTORY_SEPARATOR . $dest;
@@ -69,5 +78,7 @@ abstract class GeneratorCommand extends CodeCommand
 		}
 		
 		return $this;
+	
 	}
+
 }

@@ -4,6 +4,7 @@
  * SK ITC Bundle PHPUnit Controller
  *
  * @licence GNU GPL
+ * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Controller;
@@ -13,59 +14,100 @@ use Assetic\Exception\Exception;
 
 class PHPUnitController extends ApplicationController
 {
+
 	protected $phpunit;
+
 	public function indexAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:index.html.twig', $this->getModel() );
+	
 	}
+
 	public function toolbarAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:toolbar.html.twig', $this->getModel() );
+	
 	}
+
 	public function workspaceAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:workspace.html.twig', $this->getModel() );
+	
 	}
+
 	public function bundleAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:Bundle/index.html.twig', $this->getModel() );
+	
 	}
+
 	public function configurationAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:Configuration/index.html.twig', $this->getModel() );
+	
 	}
+
 	public function configurationFilterAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:Configuration/filter.html.twig', $this->getModel() );
+	
 	}
+
 	public function configurationLoggingAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:Configuration/logging.html.twig', $this->getModel() );
+	
 	}
+
 	public function configurationPhpAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:Configuration/php.html.twig', $this->getModel() );
+	
 	}
+
 	public function groupAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:Group/index.html.twig', $this->getModel() );
+	
 	}
+
 	public function testsuiteAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:TestSuite/index.html.twig', $this->getModel() );
+	
 	}
+
 	public function testAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:Test/index.html.twig', $this->getModel() );
+	
 	}
+
 	public function caseAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:Case/index.html.twig', $this->getModel() );
+	
 	}
+
 	public function reportAction()
 	{
+
 		return $this->render( 'SKITCBundle:PHPUnit:Report/index.html.twig', $this->getModel() );
+	
 	}
+
 	public function runAction()
 	{
 		// $model = $this->getModel();
@@ -121,10 +163,11 @@ class PHPUnitController extends ApplicationController
 		// ob_clean();
 		// $model['output'] = $output;
 		return $this->render( 'SKITCBundle:PHPUnit:Run/index.html.twig', array( 
-				'model' => $model 
+			'model' => $model 
 		) );
-	}
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -132,6 +175,7 @@ class PHPUnitController extends ApplicationController
 	 */
 	protected function getModel()
 	{
+
 		$model = parent::getModel();
 		
 		$model = $model[ 'model' ];
@@ -157,14 +201,19 @@ class PHPUnitController extends ApplicationController
 			$configuration = \PHPUnit_Util_Configuration::getInstance( $phpunit );
 			$configuration->handlePHPConfiguration();
 			
-			$groups = $configuration->getTestSuiteConfiguration()->getGroupDetails();
+			$groups = $configuration->getTestSuiteConfiguration()
+				->getGroupDetails();
 			
 			$model[ 'configuration' ] = $configuration;
 			$model[ 'groups' ] = $groups;
-			$model[ 'group' ] = $this->getRequest()->get( 'group', NULL );
-			$model[ 'suite' ] = $this->getRequest()->get( 'suite', NULL );
-			$model[ 'test' ] = $this->getRequest()->get( 'test', NULL );
-			$model[ 'case' ] = $this->getRequest()->get( 'case', NULL );
+			$model[ 'group' ] = $this->getRequest()
+				->get( 'group', NULL );
+			$model[ 'suite' ] = $this->getRequest()
+				->get( 'suite', NULL );
+			$model[ 'test' ] = $this->getRequest()
+				->get( 'test', NULL );
+			$model[ 'case' ] = $this->getRequest()
+				->get( 'case', NULL );
 			$model[ 'phpunit' ] = $phpunit;
 			
 			// $geshi = new \GeSHi(file_get_contents($phpunit), 'xml');
@@ -172,17 +221,20 @@ class PHPUnitController extends ApplicationController
 		}
 		
 		return array( 
-				'model' => $model 
+			'model' => $model 
 		);
-	}
 	
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \SK\ITCBundle\Controller\FilesystemController::getFinder()
 	 */
-	protected function getFinder( $path )
+	protected function getFinder( 
+		$path )
 	{
+
 		$finder = new Finder();
 		$finder->ignoreDotFiles( TRUE );
 		$finder->depth( 0 );
@@ -198,5 +250,7 @@ class PHPUnitController extends ApplicationController
 		$finder->files();
 		
 		return $finder;
+	
 	}
+
 }

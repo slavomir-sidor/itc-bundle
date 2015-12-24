@@ -23,7 +23,7 @@ class OperationsCommand extends ReflectionCommand
 	 * @param string $description
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
-	public function __construct( $name = "itc:reflection:operations", $description = "ITC Reflection Classes Operations" )
+	public function __construct( $name = "reflection:operations", $description = "ITC Reflection Classes Operations" )
 	{
 
 		parent::__construct( $name, $description );

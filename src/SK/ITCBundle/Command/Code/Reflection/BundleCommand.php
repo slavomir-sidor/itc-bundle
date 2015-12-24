@@ -24,7 +24,7 @@ class BundleCommand extends ReflectionCommand
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
 	public function __construct(
-		$name = "itc:reflection:bundles",
+		$name = "reflection:bundles",
 		$description = "ITC Reflection Bundles" )
 	{
 

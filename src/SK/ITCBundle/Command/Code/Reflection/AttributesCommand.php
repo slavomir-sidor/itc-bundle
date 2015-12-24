@@ -24,13 +24,11 @@ class AttributesCommand extends ReflectionCommand
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
 	public function __construct(
-		$name = "itc:reflection:class:attributes",
+		$name = "reflection:class:attributes",
 		$description = "ITC Reflection Classes Attributes in src." )
 	{
 
-		parent::__construct(
-			$name,
-			$description );
+		parent::__construct( $name, $description );
 
 	}
 
@@ -44,9 +42,7 @@ class AttributesCommand extends ReflectionCommand
 		OutputInterface $output )
 	{
 
-		parent::execute(
-			$input,
-			$output );
+		parent::execute( $input, $output );
 		$this->executeAttributesReflection();
 
 	}

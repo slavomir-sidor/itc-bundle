@@ -24,7 +24,7 @@ class NamespaceCommand extends ReflectionCommand
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
 	public function __construct(
-		$name = "itc:reflection:namespaces",
+		$name = "reflection:namespaces",
 		$description = "ITC Reflection Namespaces" )
 	{
 

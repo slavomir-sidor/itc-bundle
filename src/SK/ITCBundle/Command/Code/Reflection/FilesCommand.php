@@ -24,13 +24,11 @@ class FilesCommand extends ReflectionCommand
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
 	public function __construct(
-		$name = "itc:reflection:files",
+		$name = "reflection:files",
 		$description = "ITC Reflection Files" )
 	{
 
-		parent::__construct(
-			$name,
-			$description );
+		parent::__construct( $name, $description );
 
 	}
 
@@ -44,9 +42,7 @@ class FilesCommand extends ReflectionCommand
 		OutputInterface $output )
 	{
 
-		parent::execute(
-			$input,
-			$output );
+		parent::execute( $input, $output );
 		$this->executeFilesReflection();
 
 	}

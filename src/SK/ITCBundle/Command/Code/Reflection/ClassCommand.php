@@ -24,7 +24,7 @@ class ClassCommand extends ReflectionCommand
 	 *        	SK ITCBundle Command Code Abstract Reflection Description
 	 */
 	public function __construct(
-		$name = "itc:reflections:class",
+		$name = "reflections:class",
 		$description = "ITC Reflection Classes" )
 	{
 

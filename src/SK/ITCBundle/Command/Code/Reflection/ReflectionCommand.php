@@ -8,6 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Console\Helper\Table;
 use TokenReflection\ReflectionMethod;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 /**
  * SK ITCBundle Command Code Abstract Reflection
@@ -32,9 +33,7 @@ abstract class ReflectionCommand extends CodeCommand
 		$description = "ITCCloud Reflect Source Code" )
 	{
 
-		parent::__construct(
-			$name,
-			$description );
+		parent::__construct( $name, $description );
 
 	}
 
@@ -78,19 +77,13 @@ abstract class ReflectionCommand extends CodeCommand
 			$row[] = $classReflection->isFinal() ? "Yes" : "No";
 			$row[] = $classReflection->isAbstract() ? "Yes" : "No";
 
-			$row[] = implode(
-				",\n",
-				$classReflection->getParentClassNameList() );
-			$row[] = implode(
-				", ",
-				$classReflection->getInterfaceNames() );
+			$row[] = implode( ",\n", $classReflection->getParentClassNameList() );
+			$row[] = implode( ", ", $classReflection->getInterfaceNames() );
 
 			$rows[] = $row;
 		}
 
-		$this->writeTable(
-			$rows,
-			$header );
+		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
 
 	}
@@ -130,9 +123,7 @@ abstract class ReflectionCommand extends CodeCommand
 				);
 			}
 		}
-		$this->writeTable(
-			$rows,
-			$header );
+		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
 
 	}
@@ -172,9 +163,7 @@ abstract class ReflectionCommand extends CodeCommand
 			$rows[] = $row;
 		}
 
-		$this->writeTable(
-			$rows,
-			$header );
+		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
 
 	}
@@ -214,8 +203,7 @@ abstract class ReflectionCommand extends CodeCommand
 						$operationReflection->getName(),
 						$attributeReflection->getName(),
 						// $attributeReflection->getType(),
-						$attributeReflection->isDefaultValueAvailable() ? is_string(
-							$attributeReflection->getDefaultValue() ) ? $attributeReflection->getDefaultValue() : "" : ""
+						$attributeReflection->isDefaultValueAvailable() ? is_string( $attributeReflection->getDefaultValue() ) ? $attributeReflection->getDefaultValue() : "" : ""
 					);
 					// ($operationReflections->getDocBlock()) ? $classOperationReflection->getDocBlock()->getShortDescription() : ""
 
@@ -224,9 +212,7 @@ abstract class ReflectionCommand extends CodeCommand
 			}
 		}
 
-		$this->writeTable(
-			$rows,
-			$header );
+		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
 
 	}
@@ -251,8 +237,7 @@ abstract class ReflectionCommand extends CodeCommand
 		foreach( $reflections as $classReflection )
 		{
 
-			if( ! isset(
-				$rows[ $classReflection->getNamespaceName() ] ) )
+			if( ! isset( $rows[ $classReflection->getNamespaceName() ] ) )
 			{
 				$rows[ $classReflection->getNamespaceName() ] = array(
 
@@ -263,9 +248,7 @@ abstract class ReflectionCommand extends CodeCommand
 			++ $rows[ $classReflection->getNamespaceName() ][ 1 ];
 		}
 
-		$this->writeTable(
-			$rows,
-			$header );
+		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
 
 	}
@@ -302,9 +285,7 @@ abstract class ReflectionCommand extends CodeCommand
 			$rows[] = $row;
 		}
 
-		$this->writeTable(
-			$rows,
-			$header );
+		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
 
 	}

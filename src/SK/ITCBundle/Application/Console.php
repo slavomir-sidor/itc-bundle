@@ -45,7 +45,7 @@ IIIIIIIIII      TTTTTTTTTTT             CCCCCCCCCCCCC
 	 * @param string $name
 	 * @param string $version
 	 */
-	public function __construct( KernelInterface $kernel, $name = 'ITCloud', $version = '${project.version}' )
+	public function __construct( KernelInterface $kernel, $name = 'ITCloud Console', $version = '${project.version}' )
 	{
 		parent::__construct( $kernel );
 

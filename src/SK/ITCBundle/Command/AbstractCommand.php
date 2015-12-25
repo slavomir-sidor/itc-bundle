@@ -46,6 +46,13 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	protected $logger;
 
 	/**
+	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Root directory
+	 *
+	 * @var string
+	 */
+	protected $rootDir;
+
+	/**
 	 * Constructs SK ITCBundle Abstract Command
 	 *
 	 * @param string $name
@@ -313,5 +320,25 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	public function setLogger( Logger $logger )
 	{
 		$this->logger = $logger;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getRootDir()
+	{
+		if( NULL === $this->rootDir )
+		{
+			$this->setRootDir( getcwd() );
+		}
+
+		return $this->rootDir;
+	}
+
+	public function setRootDir( $rootDir )
+	{
+		$this->rootDir = $rootDir;
+		return $this;
 	}
 }

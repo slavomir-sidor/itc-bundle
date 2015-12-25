@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * SK ITCBundle Command Abstract
+ *
+ * @licence GNU GPL
+ *
+ * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
+ */
 namespace SK\ITCBundle\Command\Code;
 
 use Symfony\Component\Console\Command\Command;
@@ -16,13 +22,6 @@ use TokenReflection\ReflectionClass;
 use TokenReflection\Broker\Backend;
 use TokenReflection\ReflectionMethod;
 
-/**
- * SK ITCBundle Command Abstract
- *
- * @licence GNU GPL
- *
- * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
- */
 abstract class CodeCommand extends AbstractCommand
 {
 

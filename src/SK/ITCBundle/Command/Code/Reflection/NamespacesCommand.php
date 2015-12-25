@@ -1,17 +1,17 @@
 <?php
 /**
- * SK ITCBundle Command Code Generator PHPUnit Equal
+ * SK ITCBundle Command Code Reflection Namespaces
  *
  * @licence GNU GPL
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Command\Code\Generator\PHPUnit;
+namespace SK\ITCBundle\Command\Code\Reflection;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Equal extends PHPUnitGenerator
+class NamespacesCommand extends ReflectionCommand
 {
 
 	/**
@@ -22,6 +22,6 @@ class Equal extends PHPUnitGenerator
 	public function execute( InputInterface $input, OutputInterface $output )
 	{
 		parent::execute( $input, $output );
-		$this->generateClassEqualCase( $input, $output );
+		$this->executeNamespaceReflection();
 	}
 }

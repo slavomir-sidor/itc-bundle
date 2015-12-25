@@ -81,11 +81,11 @@ class ConsoleKernel extends Kernel
 	public function registerContainerConfiguration( LoaderInterface $loader )
 	{
 		$environment = $this->getEnvironment();
-		$config = dirname(__DIR__) . sprintf( '/../Resources/config/%s/config.xml', $environment );
+		$config = dirname(__DIR__) . sprintf( '/Resources/config/%s/config.xml', $environment );
 
 		if( ! file_exists( $config ) )
 		{
-			$config = dirname(__DIR__) . sprintf( '/../Resources/config/config.xml' );
+			$config = dirname(__DIR__) . sprintf( '/Resources/config/config.xml' );
 		}
 
 		if( file_exists( $config ) )

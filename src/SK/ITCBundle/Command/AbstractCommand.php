@@ -1,114 +1,65 @@
 <?php
-
-namespace SK\ITCBundle\Command;
-
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\Table;
-
 /**
- * SK ITCBundle Command Abstract
+ * SK ITCBundle Abstract Command
  *
  * @licence GNU GPL
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-abstract class AbstractCommand extends Command
+namespace SK\ITCBundle\Command;
+
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Helper\Table;
+use Monolog\Logger;
+
+abstract class AbstractCommand extends ContainerAwareCommand
 {
 
 	/**
-	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Input
+	 * SK ITCBundle Abstract Command Input
 	 *
 	 * @var InputInterface
 	 */
 	protected $input;
 
 	/**
-	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Output
+	 * SK ITCBundle Abstract Command Output
 	 *
 	 * @var OutputInterface
 	 */
 	protected $output;
 
 	/**
-	 * SK ITCBundle Command Code Generator Exceptions
+	 * SK ITCBundle Abstract Command Exceptions
 	 *
 	 * @var \Exception[]
 	 */
 	protected $exceptions;
 
 	/**
-	 * Gets SK ITCBundle Command Code Generator Exception
+	 * SK ITCBundle Abstract Command Logger
 	 *
-	 * @return \Exception[]
+	 * @var Logger
 	 */
-	public function getExceptions()
-	{
-
-		if( null == $this->exceptions )
-		{
-			$this->exceptions = array();
-		}
-		return $this->exceptions;
-	
-	}
+	protected $logger;
 
 	/**
-	 * Sets SK ITCBundle Command Code Generator Exception
-	 *
-	 * @param \Exception[] $exceptions
-	 *        	SK ITCBundle Command Code Generator Exceptions
-	 * @return \SK\ITCBundle\Command\Code\CodeCommand
-	 */
-	public function setExceptions( 
-		array $exceptions )
-	{
-
-		$this->exceptions = $exceptions;
-		return $this;
-	
-	}
-
-	/**
-	 * Adds SK ITCBundle Command Code Generator Exception
-	 *
-	 * @param \Exception $exception
-	 *        	SK ITCBundle Command Code Generator Exception
-	 * @return \SK\ITCBundle\Command\Code\CodeCommand
-	 */
-	public function addException( 
-		\Exception $exception )
-	{
-
-		$this->exceptions[] = $exception;
-		return $this;
-	
-	}
-
-	/**
-	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Option OPTION_VERBOSE_OUTPUT_YES
-	 *
-	 * @var string
-	 */
-	const OPTION_VERBOSE_OUTPUT_YES = 'yes';
-
-	/**
-	 * Constructs SK ITCBundle Command Code Abstract Reflection
+	 * Constructs SK ITCBundle Abstract Command
 	 *
 	 * @param string $name
-	 *        	SK ITCBundle Command Code Abstract Reflection Name
+	 *        	SK ITCBundle Abstract Command Name
 	 * @param string $description
-	 *        	SK ITCBundle Command Code Abstract Reflection Description
+	 *        	SK ITCBundle Abstract Command Description
+	 * @param Logger $logger
+	 *        	SK ITCBundle Abstract Command Logger
 	 */
-	public function __construct( 
-		$name = "src:reflect", 
-		$description = "ITCloud Reflect Source Code" )
+	public function __construct( $name, $description, Logger $logger )
 	{
-
 		parent::__construct( $name );
 		$this->setDescription( $description );
-	
+		$this->setLogger( $logger );
 	}
 
 	/**
@@ -116,14 +67,10 @@ abstract class AbstractCommand extends Command
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( 
-		InputInterface $input, 
-		OutputInterface $output )
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
-
 		$this->setInput( $input );
 		$this->setOutput( $output );
-	
 	}
 
 	/**
@@ -133,91 +80,115 @@ abstract class AbstractCommand extends Command
 	 */
 	protected function configure()
 	{
-
 		parent::configure();
-	
 	}
 
 	/**
-	 * Gets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Input
+	 * Gets SK ITCBundle Abstract Command Input
 	 *
 	 * @return InputInterface
 	 */
 	public function getInput()
 	{
-
 		return $this->input;
-	
 	}
 
 	/**
-	 * Sets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Input
+	 * Sets SK ITCBundle Abstract Command Input
 	 *
-	 * @param InputInterface $input        	
+	 * @param InputInterface $input
 	 */
-	public function setInput( 
-		InputInterface $input )
+	public function setInput( InputInterface $input )
 	{
-
 		$this->input = $input;
 		return $this;
-	
 	}
 
 	/**
-	 * Gets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Output
+	 * Gets SK ITCBundle Abstract Command Output
 	 *
 	 * @return OutputInterface
 	 */
 	public function getOutput()
 	{
-
 		return $this->output;
-	
 	}
 
 	/**
-	 * Sets SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Output
+	 * Sets SK ITCBundle Abstract Command Output
 	 *
-	 * @param OutputInterface $output        	
+	 * @param OutputInterface $output
 	 */
-	public function setOutput( 
-		OutputInterface $output )
+	public function setOutput( OutputInterface $output )
 	{
-
 		$this->output = $output;
 		return $this;
-	
 	}
 
-	public function writeError( 
-		$message, 
-		$verbosity = OutputInterface::VERBOSITY_NORMAL )
+	/**
+	 * Gets SK ITCBundle Abstract Command Exception
+	 *
+	 * @return \Exception[]
+	 */
+	public function getExceptions()
 	{
-
-		$output = $this->getOutput();
-		$output->writeln( ' <fg=black;bg=red>Error:</fg=black;bg=red> ' . $message, $verbosity );
-	
+		if( null == $this->exceptions )
+		{
+			$this->exceptions = array();
+		}
+		return $this->exceptions;
 	}
 
-	public function writeException( 
-		\Exception $exception )
+	/**
+	 * Sets SK ITCBundle Abstract Command Exception
+	 *
+	 * @param \Exception[] $exceptions
+	 *        	SK ITCBundle Abstract Command Exceptions
+	 * @return \SK\ITCBundle\Command\Code\CodeCommand SK ITCBundle Abstract Command
+	 */
+	public function setExceptions( array $exceptions )
 	{
+		$this->exceptions = $exceptions;
+		return $this;
+	}
 
+	/**
+	 * Adds SK ITCBundle Abstract Command Exception
+	 *
+	 * @param \Exception $exception
+	 *        	SK ITCBundle Abstract Command Exception
+	 * @return \SK\ITCBundle\Command\Code\CodeCommand
+	 */
+	public function addException( \Exception $exception )
+	{
+		$this->exceptions[] = $exception;
+		return $this;
+	}
+
+	/**
+	 * Writes SK ITCBundle Abstract Command Exception
+	 *
+	 * @param \Exception $exception
+	 *        	SK ITCBundle Abstract Command Exception
+	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
+	 */
+	public function writeException( \Exception $exception )
+	{
 		$this->getOutput()
-			->writeln( 
-			sprintf( " <fg=black;bg=red>Error %s %s</fg=black;bg=red>", $exception->getCode(), $exception->getMessage() ), 
+			->writeln( sprintf( " <fg=black;bg=red>Error %s %s</fg=black;bg=red>", $exception->getCode(), $exception->getMessage() ),
 			OutputInterface::VERBOSITY_VERBOSE );
 		$this->getOutput()
-			->writeln( 
-			sprintf( " <fg=black;bg=red>Trace %s</fg=black;bg=red>", $exception->getTraceAsString() ), 
+			->writeln( sprintf( " <fg=black;bg=red>Trace %s</fg=black;bg=red>", $exception->getTraceAsString() ),
 			OutputInterface::VERBOSITY_VERY_VERBOSE );
-	
 	}
 
+	/**
+	 * Writes SK ITCBundle Abstract Command Exceptions
+	 *
+	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
+	 */
 	public function writeExceptions()
 	{
-
 		if( count( $this->getExceptions() ) > 0 )
 		{
 			$this->writeInfo( "Occured %d exceptions", count( $this->getExceptions() ) );
@@ -226,161 +197,121 @@ abstract class AbstractCommand extends Command
 				$this->writeException( $exception );
 			}
 		}
-	
-	}
-
-	public function writeLine( 
-		$message = "\n", 
-		$verbosity = OutputInterface::VERBOSITY_NORMAL )
-	{
-
-		$output = $this->getOutput();
-		$output->writeln( $message );
-	
-	}
-
-	public function writeInfo( 
-		$message, 
-		$verbosity = OutputInterface::VERBOSITY_NORMAL )
-	{
-
-		$output = $this->getOutput();
-		$output->writeln( sprintf( '<bg=green>%s</bg=green>', $message ), $verbosity );
-	
-	}
-
-	public function writeHeader( 
-		$message )
-	{
-
-		$output = $this->getOutput();
-		$output->writeln( ' <fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>" );
-	
+		return $this;
 	}
 
 	/**
-	 * Writes Given Table
+	 * Writes SK ITCBundle Abstract Command Line
 	 *
-	 * @param array $rows        	
-	 * @param array $header        	
+	 * @param string $message
+	 *        	SK ITCBundle Abstract Command Info Line
+	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeTable( 
-		$rows = array(), 
-		$header = array(), 
-		$verbosity = OutputInterface::VERBOSITY_NORMAL )
+	public function writeLine( $message = "\n", $verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
+		$this->getOutput()
+			->writeln( $message );
+		return $this;
+	}
 
+	/**
+	 * Writes SK ITCBundle Abstract Command Info
+	 *
+	 * @param string $message
+	 *        	SK ITCBundle Abstract Command Info Message
+	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
+	 */
+	public function writeInfo( $message, $verbosity = OutputInterface::VERBOSITY_NORMAL )
+	{
+		$output = $this->getOutput();
+		$output->writeln( sprintf( '<bg=green>%s</bg=green>', $message ), $verbosity );
+		return $this;
+	}
+
+	/**
+	 * Writes SK ITCBundle Abstract Command Header
+	 *
+	 * @param string $message
+	 *        	SK ITCBundle Abstract Command Header Message
+	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
+	 */
+	public function writeHeader( $message )
+	{
+		$output = $this->getOutput();
+		$output->writeln( ' <fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>" );
+		return $this;
+	}
+
+	/**
+	 * Writes SK ITCBundle Abstract Command Table
+	 *
+	 * @param array $rows
+	 *        	SK ITCBundle Abstract Command Table Rows
+	 * @param array $header
+	 *        	SK ITCBundle Abstract Command Table Header
+	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
+	 */
+	public function writeTable( $rows = array(), $header = array(), $verbosity = OutputInterface::VERBOSITY_NORMAL )
+	{
 		$table = new Table( $this->getOutput() );
 		$table->setHeaders( $header );
 		$table->setRows( $rows );
 		$table->render();
-	
+		return $this;
 	}
 
-	public function writeNotice( 
-		$message, 
-		$verbosity = OutputInterface::VERBOSITY_NORMAL )
+	/**
+	 * Writes SK ITCBundle Abstract Command Notice
+	 *
+	 * @param string $message
+	 *        	SK ITCBundle Abstract Command Notice Message
+	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
+	 */
+	public function writeNotice( $message, $verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
-
 		$this->getOutput()
 			->writeln( "<fg=yellow>{$message}</fg=yellow>", $verbosity );
-	
+		return $this;
 	}
 
-	public function writeDebug( 
-		$message )
+	/**
+	 * Writes SK ITCBundle Abstract Command Debug
+	 *
+	 * @param string $message
+	 *        	SK ITCBundle Abstract Command Debug Message
+	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
+	 */
+	public function writeDebug( $message )
 	{
-
 		$input = $this->getInput();
 		$output = $this->getOutput();
-		
+
 		if( self::OPTION_VERBOSE_OUTPUT_YES == $input->getOption( "verbose" ) )
 		{
 			$output->writeln( ' <fg=blue;bg=white>DEBUG:</fg=blue;bg=white> ' . $message );
 		}
-	
-	}
-
-	/**
-	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Root directory
-	 *
-	 * @var string
-	 */
-	protected $rootDir;
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function getRootDir()
-	{
-
-		if( NULL === $this->rootDir )
-		{
-			$this->setRootDir( getcwd() );
-		}
-		
-		return $this->rootDir;
-	
-	}
-
-	/**
-	 *
-	 * @param string $rootDir        	
-	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
-	 */
-	public function setRootDir( 
-		$rootDir )
-	{
-
-		$this->rootDir = $rootDir;
 		return $this;
-	
 	}
 
 	/**
+	 * Gets SK ITCBundle Abstract Command Logger
 	 *
-	 * @return \SystemContainer
+	 * @return Logger SK ITCBundle Abstract Command Logger
 	 */
-	protected function getContainer()
+	public function getLogger()
 	{
-
-		return Environment::getContext();
-	
+		return $this->logger;
 	}
 
 	/**
+	 * Sets SK ITCBundle Abstract Command Logger
 	 *
-	 * @param string $method        	
-	 * @return \Nette\mixed
+	 * @param Logger $logger
+	 *        	SK ITCBundle Abstract Command Logger
+	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function getEnvironmentInvokedConfig( 
-		$method )
+	public function setLogger( Logger $logger )
 	{
-
-		return Environment::getConfig( __NAMESPACE__ . $method, array() );
-	
+		$this->logger = $logger;
 	}
-
-	/**
-	 *
-	 * @throws Nette\InvalidStateException
-	 * @param string $name        	
-	 * @return string
-	 */
-	protected function getCacheDirectory( 
-		$name = 'Boostrap' )
-	{
-
-		$directory = sprintf( "%s/cache/%s.%s", $this->getContainer()->parameters[ 'tempDir' ], str_replace( "\\", ".", __CLASS__ ), $name );
-		
-		if( ! is_dir( $directory ) )
-		{
-			mkdir( $directory, 0775, TRUE );
-		}
-		
-		return $directory;
-	
-	}
-
 }

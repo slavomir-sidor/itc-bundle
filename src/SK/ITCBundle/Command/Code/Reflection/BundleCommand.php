@@ -1,7 +1,6 @@
 <?php
-
 /**
- * SK ITC Bundle Code Bundle Reflection
+ * SK ITC Bundle Code Bundle Reflection Bundle
  *
  * @licence GNU GPL
  *
@@ -16,38 +15,12 @@ class BundleCommand extends ReflectionCommand
 {
 
 	/**
-	 * Constructs SK ITCBundle Command Namespace Abstract Reflection
-	 *
-	 * @param string $name
-	 *        	SK ITCBundle Command Code Abstract Reflection Name
-	 * @param string $description
-	 *        	SK ITCBundle Command Code Abstract Reflection Description
-	 */
-	public function __construct(
-		$name = "reflection:bundles",
-		$description = "ITC Reflection Bundles" )
-	{
-
-		parent::__construct(
-			$name,
-			$description );
-
-	}
-
-	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
 	 */
-	public function execute(
-		InputInterface $input,
-		OutputInterface $output )
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
-
-		parent::execute(
-			$input,
-			$output );
-
+		parent::execute( $input, $output );
 	}
-
 }

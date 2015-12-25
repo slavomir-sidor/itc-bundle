@@ -8,7 +8,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Zend\Code\Reflection\FileReflection;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Console\Input\InputOption;
 use TokenReflection\Broker;

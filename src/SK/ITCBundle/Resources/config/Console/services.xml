@@ -4,9 +4,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-<!-- 	<services>
+	<services>
 
-		PHPUnit
 		<service
 			id="sk.itcbundle.command.code.generator.phpunit.functional"
 			class="%sk.itcbundle.command.code.generator.phpunit.functional.class%">
@@ -177,7 +176,6 @@
 
 		</service>
 
-		XSD Schema
 		<service
 			id="sk.itcbundle.command.code.generator.xmlschema.orm"
 			class="%sk.itcbundle.command.code.generator.xmlschema.orm.class%">
@@ -280,7 +278,6 @@
 
 		</service>
 
-		UML XMI Export
 		<service
 			id="sk.itcbundle.command.code.generator.xmi.export"
 			class="%sk.itcbundle.command.code.generator.xmi.export.class%">
@@ -298,7 +295,6 @@
 
 		</service>
 
-		WS
 		<service
 			id="sk.itcbundle.command.code.generator.wsdl.bundle"
 			class="%sk.itcbundle.command.code.generator.wsdl.bundle.class%">
@@ -492,34 +488,113 @@
 
 			<argument type="string">%sk.itcbundle.command.google.translator.name%</argument>
 			<argument type="string">%sk.itcbundle.command.google.translator.description%</argument>
+			
 			<argument
 				type="service"
 				id="logger" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<!-- Reflection Commands -->
+		<service
+			id="sk.itcbundle.command.code.reflection.operations"
+			class="%sk.itcbundle.command.code.reflection.operations.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.reflection.operations.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.operations.description%</argument>
 			<argument
 				type="service"
-				id="sk.itcbundle.google.translator" />
+				id="logger" />
 
 			<tag name="console.command" />
 
 		</service>
 
 		<service
-			id="sk.itcbundle.command.translation.translator"
-			class="%sk.itcbundle.command.translation.translator.class%">
+			id="sk.itcbundle.command.code.reflection.operationsattr"
+			class="%sk.itcbundle.command.code.reflection.operationsattr.class%">
 
-			<argument type="string">%sk.itcbundle.command.translation.translator.name%</argument>
-			<argument type="string">%sk.itcbundle.command.translation.translator.description%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.operationsattr.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.operationsattr.description%</argument>
 			<argument
 				type="service"
 				id="logger" />
-			<argument
-				type="service"
-				id="sk.itcbundle.translation.translator" />
 
 			<tag name="console.command" />
 
 		</service>
 
-	</services> -->
+		<service
+			id="sk.itcbundle.command.code.reflection.namespaces"
+			class="%sk.itcbundle.command.code.reflection.namespaces.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.reflection.namespaces.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.namespaces.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.reflection.files"
+			class="%sk.itcbundle.command.code.reflection.files.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.reflection.files.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.files.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.reflection.classes"
+			class="%sk.itcbundle.command.code.reflection.classes.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.reflection.classes.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.classes.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.reflection.bundles"
+			class="%sk.itcbundle.command.code.reflection.bundles.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.reflection.bundles.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.bundles.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.reflection.classesattr"
+			class="%sk.itcbundle.command.code.reflection.classesattr.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.reflection.classesattr.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.classesattr.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+
+			<tag name="console.command" />
+
+		</service>
+
+	</services>
 
 </container>

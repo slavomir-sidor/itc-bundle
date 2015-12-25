@@ -18,7 +18,6 @@ use Symfony\Component\Console\Helper\ProgressBar;
 
 abstract class ReflectionCommand extends CodeCommand
 {
-
 	/**
 	 *
 	 * @param InputInterface $input
@@ -27,20 +26,19 @@ abstract class ReflectionCommand extends CodeCommand
 	protected function executeClassReflection()
 	{
 		$header = array(
-			'Final',
-			'Abstract',
-			'PHP Object',
-			'Namespace Name',
-			'Parent',
-			'Implements Interfaces'
+				'PHP Object',
+				'Final',
+				'Abstract',
+				'Namespace Name',
+				'Parent',
+				'Implements Interfaces'
 		);
+
 		$rows = array();
 
 		foreach( $this->getClassReflections() as $classReflection )
 		{
 			$row = [];
-			$row[] = $classReflection->isFinal() ? "Yes" : "No";
-			$row[] = $classReflection->isAbstract() ? "Yes" : "No";
 			if( $classReflection->isTrait() )
 			{
 				$row[] = "Trait";
@@ -53,9 +51,12 @@ abstract class ReflectionCommand extends CodeCommand
 			{
 				$row[] = "Class";
 			}
+			$row[] = $classReflection->isFinal() ? "Yes" : "No";
+			$row[] = $classReflection->isAbstract() ? "Yes" : "No";
+
 			$row[] = $classReflection->getName();
-			$row[] = implode( ",\n", $classReflection->getParentClassNameList() );
-			$row[] = implode( ",\n", $classReflection->getInterfaceNames() );
+			$row[] = implode( "\n", $classReflection->getParentClassNameList() );
+			$row[] = implode( "\n", $classReflection->getInterfaceNames() );
 
 			$rows[] = $row;
 		}
@@ -110,8 +111,7 @@ abstract class ReflectionCommand extends CodeCommand
 	protected function executeOperationsReflection()
 	{
 		$header = array(
-			'Class Name',
-			'Operation',
+			'Class Operation',
 			'Accessibility',
 			'Abstract',
 			'Static',
@@ -120,12 +120,19 @@ abstract class ReflectionCommand extends CodeCommand
 		$rows = [];
 		$reflection = $this->getOperationsReflections();
 
+		$className="";
+
 		foreach( $reflection as $operationReflection )
 		{
+			$operationReflection=$operationReflection->getDeclaringClass()
+					->getName();
+			if($className!=){
+				$className
+			}
+			$rows[] = $row;
+			$row=array();
 
 			$row = array(
-				$operationReflection->getDeclaringClass()
-					->getName(),
 				$operationReflection->getName(),
 				$operationReflection->isPrivate() ? "Private" : $operationReflection->isProtected() ? "Protected" : "Public",
 				$operationReflection->isAbstract() ? "Yes" : "No",

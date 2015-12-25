@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * SK ITCBundle Command Code Abstract Reflection
+ *
+ * @licence GNU GPL
+ *
+ * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
+ */
 namespace SK\ITCBundle\Command\Code\Reflection;
 
 use SK\ITCBundle\Command\Code\CodeCommand;
@@ -10,33 +16,8 @@ use Symfony\Component\Console\Helper\Table;
 use TokenReflection\ReflectionMethod;
 use Symfony\Component\Console\Helper\ProgressBar;
 
-/**
- * SK ITCBundle Command Code Abstract Reflection
- *
- * @licence GNU GPL
- *
- * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
- */
 abstract class ReflectionCommand extends CodeCommand
 {
-
-	/**
-	 * Constructs SK ITCBundle Command Code Abstract Reflection
-	 *
-	 * @param string $name
-	 *        	SK ITCBundle Command Code Abstract Reflection Name
-	 * @param string $description
-	 *        	SK ITCBundle Command Code Abstract Reflection Description
-	 */
-	public function __construct(
-		$name = "src:reflect",
-		$description = "ITCCloud Reflect Source Code" )
-	{
-
-		parent::__construct( $name, $description );
-
-	}
-
 	/**
 	 *
 	 * @param InputInterface $input
@@ -44,7 +25,6 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeClassReflection()
 	{
-
 		$header = array(
 			'Type',
 			'Namespace Name',
@@ -85,7 +65,6 @@ abstract class ReflectionCommand extends CodeCommand
 
 		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
-
 	}
 
 	/**
@@ -95,7 +74,6 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeAttributesReflection()
 	{
-
 		$classReflections = $this->getClassReflections();
 
 		$header = array(
@@ -125,7 +103,6 @@ abstract class ReflectionCommand extends CodeCommand
 		}
 		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
-
 	}
 
 	/**
@@ -135,7 +112,6 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeOperationsReflection()
 	{
-
 		$header = array(
 			'Class Name',
 			'Operation',
@@ -165,7 +141,6 @@ abstract class ReflectionCommand extends CodeCommand
 
 		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
-
 	}
 
 	/**
@@ -175,7 +150,6 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeOperationsAttributesReflection()
 	{
-
 		$header = array(
 			'Class Name',
 			'Operation',
@@ -214,7 +188,6 @@ abstract class ReflectionCommand extends CodeCommand
 
 		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
-
 	}
 
 	/**
@@ -224,7 +197,6 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeNamespaceReflection()
 	{
-
 		$header = array(
 			'Namespace Name',
 			'Objects Count'
@@ -250,7 +222,6 @@ abstract class ReflectionCommand extends CodeCommand
 
 		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
-
 	}
 
 	/**
@@ -260,7 +231,6 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeFilesReflection()
 	{
-
 		$header = array(
 			'File',
 			"Owner",
@@ -287,7 +257,5 @@ abstract class ReflectionCommand extends CodeCommand
 
 		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
-
 	}
-
 }

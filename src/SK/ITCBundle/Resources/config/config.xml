@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container
+	xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:framework="http://symfony.com/schema/dic/symfony"
+	xmlns:doctrine="http://symfony.com/schema/dic/doctrine"
+	xmlns:mongo="http://symfony.com/schema/dic/doctrine/odm/mongodb"
+	xmlns:assetic="http://symfony.com/schema/dic/assetic"
+	xmlns:swiftmailer="http://symfony.com/schema/dic/swiftmailer"
+	xmlns:monolog="http://symfony.com/schema/dic/monolog"
+	xmlns:twig="http://symfony.com/schema/dic/twig"
+	xmlns:security="http://symfony.com/schema/dic/security"
+	xmlns:routing="http://symfony.com/schema/routing"
+	xsi:schemaLocation="
+		http://symfony.com/schema/dic/services               http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/services-1.0.xsd
+		http://symfony.com/schema/dic/assetic                http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/assetic-1.0.xsd
+		http://symfony.com/schema/dic/symfony                http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/symfony-1.0.xsd
+		http://symfony.com/schema/dic/doctrine               http://localhost/sk.itcloud.itc.facade/src/XSD/Doctrine/doctrine-1.0.xsd
+		http://symfony.com/schema/dic/doctrine/odm/mongodb   http://localhost/sk.itcloud.itc.facade/src/XSD/Doctrine/mongodb-1.0.xsd
+		http://symfony.com/schema/dic/swiftmailer            http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/swiftmailer-1.0.xsd
+		http://symfony.com/schema/dic/monolog                http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/monolog-1.0.xsd
+		http://symfony.com/schema/dic/twig                   http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/twig-1.0.xsd
+		http://symfony.com/schema/routing                    http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/routing-1.0.xsd">
+
+	<imports>
+		<import resource="parameters.xml" />
+		<import resource="services.xml" />
+	</imports>
+
+	<framework:config
+		default-locale="%framework.default_locale%"
+		http-method-override="%framework.http_method_override%"
+		secret="%framework.secret%"
+		trusted-proxies="%framework.trusted_proxies%"
+		test="%framework.test%">
+
+		<framework:fragments
+			enabled="%framework.fragments.enabled%"
+			path="%framework.fragments.path%" />
+
+		<framework:router
+			http-port="%framework.router.http_port%"
+			https-port="%framework.router.https_port%"
+			resource="%framework.router.resource%" />
+
+		<framework:annotations
+			cache="%framework.annotations.cache%"
+			debug="%framework.annotations.debug%"
+			file-cache-dir="%framework.annotations.file_cache_dir%" />
+
+		<framework:esi enabled="%framework.esi.enabled%" />
+
+		<framework:profiler enabled="%framework.profiler.enabled%" />
+		<framework:session save-path="%framework.session.save_path%" />
+
+		<framework:translator
+			enabled="%framework.translator.enabled%"
+			fallback="%framework.translator.fallback%" />
+
+		<framework:form enabled="%framework.form.enabled%">
+			<!-- <framework:csrf-protection enabled="%framework.form.csfr_protection.enabled%" /> -->
+		</framework:form>
+
+	</framework:config>
+
+	<!-- <assetic:config debug="%assetic.debug%" use-controller="%assetic.use_controller%" read-from="%assetic.read_from" write-to="%assetic.write_to%" java="%assetic.java%" 
+		> <assetic:bundle>FrameworkBundle</assetic:bundle> <assetic:bundle>SecurityBundle</assetic:bundle> <assetic:bundle>TwigBundle</assetic:bundle> <assetic:bundle>MonologBundle</assetic:bundle> 
+		<assetic:bundle>SwiftmailerBundle</assetic:bundle> <assetic:bundle>DoctrineBundle</assetic:bundle> <assetic:bundle>AsseticBundle</assetic:bundle> <assetic:bundle>EGitAAABundle</assetic:bundle> 
+		<assetic:filter name="cssrewrite" /> <assetic:filter name="yui_js" jar="%assetic.filter.yui_js.jar%" /> <assetic:filter name="yui_css" jar="%assetic.filter.yui_css.jar%" 
+		/> </assetic:config> -->
+
+	<monolog:config>
+
+		<monolog:handler
+			name="%monolog.logger.main.name%"
+			type="%monolog.logger.main.type%"
+			path="%monolog.logger.main.path%"
+			level="%monolog.logger.main.level%"
+			max-files="%monolog.logger.main.max_files%"
+			handler="%monolog.logger.main.handler%" />
+
+		<monolog:handler
+			name="%monolog.logger.console.name%"
+			type="%monolog.logger.console.type%"
+			level="%monolog.logger.console.level%" />
+
+	</monolog:config>
+
+</container>

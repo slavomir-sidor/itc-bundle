@@ -7,139 +7,163 @@
 	<parameters>
 
 		<!-- PHPUnit -->
-		<parameter key="sk.itcbundle.command.code.generator.phpunit.functional.name">itc:phpunit:functional</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.phpunit.functional.description">IT Cloud PHPUnit Functional Case</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.phpunit.functional.name">generator:phpunit:functional</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.phpunit.functional.description">ITCloud PHPUnit Functional Case</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.phpunit.functional.class">SK\ITCBundle\Command\Code\Generator\PHPUnit\Functional</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.phpunit.performance.name">itc:phpunit:performance</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.phpunit.performance.description">IT Cloud PHPUnit Performance Case</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.phpunit.performance.name">generator:phpunit:performance</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.phpunit.performance.description">ITCloud PHPUnit Performance Case</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.phpunit.performance.class">SK\ITCBundle\Command\Code\Generator\PHPUnit\Performance</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.phpunit.config.name">itc:phpunit:config</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.phpunit.config.description">IT Cloud PHPUnit Config Case</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.phpunit.config.name">generator:phpunit:config</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.phpunit.config.description">ITCloud PHPUnit Config Case</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.phpunit.config.class">SK\ITCBundle\Command\Code\Generator\PHPUnit\Config</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.phpunit.equal.name">itc:phpunit:equal</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.phpunit.equal.description">IT Cloud PHPUnit Equal Case</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.phpunit.equal.name">generator:phpunit:equal</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.phpunit.equal.description">ITCloud PHPUnit Equal Case</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.phpunit.equal.class">SK\ITCBundle\Command\Code\Generator\PHPUnit\Equal</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.phpunit.run.name">itc:phpunit:run</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.phpunit.run.description">IT Cloud PHPUnit Run Case</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.phpunit.run.name">generator:phpunit:run</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.phpunit.run.description">ITCloud PHPUnit Run Case</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.phpunit.run.class">SK\ITCBundle\Command\Code\Generator\PHPUnit\Run</parameter>
 
 		<!-- DTD Schema -->
-		<parameter key="sk.itcbundle.command.code.generator.dtd.entity.name">itc:dtd:entity</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.dtd.entity.description">IT Cloud DTD Entity Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.dtd.entity.name">generator:dtd:entity</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.dtd.entity.description">ITCloud DTD Entity Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.dtd.entity.class">SK\ITCBundle\Command\Code\Generator\DTD\Entity</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.dtd.attribute_list.name">itc:dtd:attlist</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.dtd.attribute_list.description">IT Cloud DTD Attribute List Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.dtd.attribute_list.name">generator:dtd:attlist</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.dtd.attribute_list.description">ITCloud DTD Attribute List Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.dtd.attribute_list.class">SK\ITCBundle\Command\Code\Generator\DTD\AttributeList</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.dtd.element.name">itc:dtd:element</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.dtd.element.description">IT Cloud DTD Element Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.dtd.element.name">generator:dtd:element</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.dtd.element.description">ITCloud DTD Element Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.dtd.element.class">SK\ITCBundle\Command\Code\Generator\DTD\Element</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.dtd.document.name">itc:dtd:document</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.dtd.document.description">IT Cloud DTD Document Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.dtd.document.name">generator:dtd:document</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.dtd.document.description">ITCloud DTD Document Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.dtd.document.class">SK\ITCBundle\Command\Code\Generator\DTD\Document</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.dtd.route.name">itc:dtd:route</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.dtd.route.description">IT Cloud DTD Route Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.dtd.route.name">generator:dtd:route</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.dtd.route.description">ITCloud DTD Route Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.dtd.route.class">SK\ITCBundle\Command\Code\Generator\DTD\Route</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.dtd.security.name">itc:dtd:security</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.dtd.security.description">IT Cloud DTD Security Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.dtd.security.name">generator:dtd:security</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.dtd.security.description">ITCloud DTD Security Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.dtd.security.class">SK\ITCBundle\Command\Code\Generator\DTD\Security</parameter>
 
 		<!-- XSD Schema -->
-		<parameter key="sk.itcbundle.command.code.generator.xmlschema.orm.name">itc:xsd:orm</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.xmlschema.orm.description">IT Cloud XSD ORM Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmlschema.orm.name">generator:xsd:orm</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmlschema.orm.description">ITCloud XSD ORM Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.xmlschema.orm.class">SK\ITCBundle\Command\Code\Generator\XMLSchema\ORM</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.xmlschema.form.name">itc:xsd:form</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.xmlschema.form.description">IT Cloud XSD Form Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmlschema.form.name">generator:xsd:form</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmlschema.form.description">ITCloud XSD Form Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.xmlschema.form.class">SK\ITCBundle\Command\Code\Generator\XMLSchema\Form</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.xmlschema.view.name">itc:xsd:view</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.xmlschema.view.description">IT Cloud XSD View Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmlschema.view.name">generator:xsd:view</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmlschema.view.description">ITCloud XSD View Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.xmlschema.view.class">SK\ITCBundle\Command\Code\Generator\XMLSchema\View</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.xmlschema.config.name">itc:xsd:config</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.xmlschema.config.description">IT Cloud XSD Config Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmlschema.config.name">generator:xsd:config</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmlschema.config.description">ITCloud XSD Config Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.xmlschema.config.class">SK\ITCBundle\Command\Code\Generator\XMLSchema\Config</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.xmlschema.route.name">itc:xsd:route</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.xmlschema.route.description">IT Cloud XSD Route Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmlschema.route.name">generator:xsd:route</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmlschema.route.description">ITCloud XSD Route Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.xmlschema.route.class">SK\ITCBundle\Command\Code\Generator\XMLSchema\Route</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.xmlschema.security.name">itc:xsd:security</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.xmlschema.security.description">IT Cloud XSD Security Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmlschema.security.name">generator:xsd:security</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmlschema.security.description">ITCloud XSD Security Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.xmlschema.security.class">SK\ITCBundle\Command\Code\Generator\XMLSchema\Security</parameter>
 
 		<!-- UML XMI Export -->
-		<parameter key="sk.itcbundle.command.code.generator.xmi.export.name">itc:xmi:export</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.xmi.export.description">IT Cloud XMI Export Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmi.export.name">xmi:export</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.xmi.export.description">ITCloud XMI Export Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.xmi.export.class">SK\ITCBundle\Command\Code\Generator\XMI\Export</parameter>
 
 		<!-- WS -->
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.bundle.name">itc:wsdl:bundle</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.bundle.description">IT Cloud WSDL Bundle Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.bundle.name">generator:wsdl:bundle</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.bundle.description">ITCloud WSDL Bundle Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.bundle.class">SK\ITCBundle\Command\Code\Generator\WSDL\Bundle</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.controller.name">itc:wsdl:controller</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.controller.description">IT Cloud WSDL Controller Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.controller.name">generator:wsdl:controller</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.controller.description">ITCloud WSDL Controller Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.controller.class">SK\ITCBundle\Command\Code\Generator\WSDL\Controller</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.orm.name">itc:wsdl:orm</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.orm.description">IT Cloud WSDL ORM Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.orm.name">generator:wsdl:orm</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.orm.description">ITCloud WSDL ORM Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.orm.class">SK\ITCBundle\Command\Code\Generator\WSDL\ORM</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.form.name">itc:wsdl:form</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.form.description">IT Cloud WSDL Form Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.form.name">generator:wsdl:form</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.form.description">ITCloud WSDL Form Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.form.class">SK\ITCBundle\Command\Code\Generator\WSDL\Form</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.client.name">itc:wsdl:client</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.client.description">IT Cloud WSDL Client Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.client.name">generator:wsdl:client</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.client.description">ITCloud WSDL Client Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.client.class">SK\ITCBundle\Command\Code\Generator\WSDL\Client</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.server.name">itc:wsdl:server</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.server.description">IT Cloud WSDL Server Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.server.name">generator:wsdl:server</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.server.description">ITCloud WSDL Server Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.server.class">SK\ITCBundle\Command\Code\Generator\WSDL\Server</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.routing.name">itc:wsdl:route</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.routing.description">IT Cloud WSDL Routes Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.routing.name">generator:wsdl:route</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.routing.description">ITCloud WSDL Routes Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.routing.class">SK\ITCBundle\Command\Code\Generator\WSDL\Route</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.config.name">itc:wsdl:config</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.config.description">IT Cloud WSDL Conifg Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.config.name">generator:wsdl:config</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.config.description">ITCloud WSDL Conifg Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.config.class">SK\ITCBundle\Command\Code\Generator\WSDL\Config</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.view.name">itc:wsdl:view</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.view.description">IT Cloud WSDL Views Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.view.name">generator:wsdl:view</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.view.description">ITCloud WSDL Views Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.view.class">SK\ITCBundle\Command\Code\Generator\WSDL\View</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.route.name">itc:wsdl:route</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.route.description">IT Cloud WSDL Route Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.route.name">generator:wsdl:route</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.route.description">ITCloud WSDL Route Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.route.class">SK\ITCBundle\Command\Code\Generator\WSDL\Route</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.security.name">itc:wsdl:security</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.security.description">IT Cloud WSDL Security Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.security.name">generator:wsdl:security</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.security.description">ITCloud WSDL Security Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.security.class">SK\ITCBundle\Command\Code\Generator\WSDL\Security</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.parameter.name">itc:wsdl:parameter</parameter>
-		<parameter key="sk.itcbundle.command.code.generator.wsdl.parameter.description">IT Cloud WSDL Parameter Generator</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.parameter.name">generator:wsdl:parameter</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.wsdl.parameter.description">ITCloud WSDL Parameter Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.parameter.class">SK\ITCBundle\Command\Code\Generator\WSDL\Parameter</parameter>
 
 		<!-- Google Translator -->
-		<parameter key="sk.itcbundle.command.google.translator.name">itc:google:trans</parameter>
-		<parameter key="sk.itcbundle.command.google.translator.description">IT Cloud Google Trans</parameter>
+		<parameter key="sk.itcbundle.command.google.translator.name">google:trans</parameter>
+		<parameter key="sk.itcbundle.command.google.translator.description">ITCloud Google Trans</parameter>
 		<parameter key="sk.itcbundle.command.google.translator.class">SK\ITCBundle\Command\Google\Translator</parameter>
 
-		<!-- Translation -->
-		<parameter key="sk.itcbundle.command.translation.translator.name">itc:translation:translate</parameter>
-		<parameter key="sk.itcbundle.command.translation.translator.description">IT Cloud Translation Translator</parameter>
-		<parameter key="sk.itcbundle.command.translation.translator.class">SK\ITCBundle\Command\Translation\Translator</parameter>
+		<!-- Code Reflection -->
+		<parameter key="sk.itcbundle.command.code.reflection.operations.name">reflection:operations</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.operations.description">ITCloud Reflection Classes Operations</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.operations.class">SK\ITCBundle\Command\Code\Reflection\OperationsCommand</parameter>
+
+		<parameter key="sk.itcbundle.command.code.reflection.operationsattr.name">reflection:operations:attr</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.operationsattr.description">ITCloud Reflection Classes Operations Attributes</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.operationsattr.class">SK\ITCBundle\Command\Code\Reflection\OperationsAttributesCommand</parameter>
+
+		<parameter key="sk.itcbundle.command.code.reflection.namespaces.name">reflection:namespaces</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.namespaces.description">ITCloud Reflection Namespaces</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.namespaces.class">SK\ITCBundle\Command\Code\Reflection\NamespacesCommand</parameter>
+
+		<parameter key="sk.itcbundle.command.code.reflection.files.name">reflection:files</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.files.description">ITCloud Reflection Files</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.files.class">SK\ITCBundle\Command\Code\Reflection\FilesCommand</parameter>
+
+		<parameter key="sk.itcbundle.command.code.reflection.classes.name">reflection:classes</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.classes.description">ITCloud Reflection Classes</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.classes.class">SK\ITCBundle\Command\Code\Reflection\ClassesCommand</parameter>
+
+		<parameter key="sk.itcbundle.command.code.reflection.bundles.name">reflection:bundles</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.bundles.description">ITCloud Reflection Bundles</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.bundles.class">SK\ITCBundle\Command\Code\Reflection\BundleCommand</parameter>
+
+		<parameter key="sk.itcbundle.command.code.reflection.classesattr.name">reflection:classes:attr</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.classesattr.description">ITCloud Reflection Classes Attributes</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.classesattr.class">SK\ITCBundle\Command\Code\Reflection\AttributesCommand</parameter>
 
 	</parameters>
 

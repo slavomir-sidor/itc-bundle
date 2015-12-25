@@ -103,12 +103,17 @@
 			<resource>
 
 				<directory>${project.basedir}</directory>
+				<filtering>true</filtering>
 
 				<excludes>
 					<exclude>**/target</exclude>
 					<exclude>**/.*</exclude>
 					<exclude>**/.*/</exclude>
 					<exclude>**/tests</exclude>
+					<exclude>phpunit.xml</exclude>
+					<exclude>pom.xml</exclude>
+					<exclude>Makefile</exclude>
+					<exclude>composer.*</exclude>
 				</excludes>
 
 			</resource>

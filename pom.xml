@@ -149,7 +149,7 @@
 					<executable>composer</executable>
 
 					<arguments>
-						<argument>update</argument>
+						<argument>install</argument>
 						<argument>--no-dev</argument>
 						<argument>--verbose</argument>
 						<argument>--optimize-autoloader</argument>

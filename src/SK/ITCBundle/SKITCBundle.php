@@ -1,5 +1,4 @@
 <?php
-
 /**
  * SK ITC Bundle
  *
@@ -11,5 +10,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SKITCBundle extends Bundle
 {
-
 }

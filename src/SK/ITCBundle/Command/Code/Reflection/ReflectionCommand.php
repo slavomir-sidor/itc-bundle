@@ -235,12 +235,14 @@ abstract class ReflectionCommand extends CodeCommand
 			'File',
 			"Owner",
 			"Group",
-			"Permissions"
+			"Permissions",
+			"Created",
+			"Modified",
 		);
 
 		$rows = [];
 
-		/* @var $file SplFileInfo*/
+		/* @var $file \SplFileInfo*/
 		foreach( $this->getFinder()
 			->files() as $file )
 		{
@@ -249,7 +251,9 @@ abstract class ReflectionCommand extends CodeCommand
 				$file->getRelativePathname(),
 				$file->getOwner(),
 				$file->getGroup(),
-				$file->getPerms()
+				$file->getPerms(),
+				date("d.m.Y h:m:s", $file->getCTime() ),
+				date("d.m.Y h:m:s", $file->getMTime() ),
 			);
 
 			$rows[] = $row;

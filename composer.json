@@ -10,7 +10,9 @@
 		}
 	},
 	"bin" : [
-		"bin/itc"
+		"bin/itc-console",
+		"bin/itc-socket",
+		"bin/itc-api"
 	],
 	"config" : {
 		"bin-dir" : "bin",
@@ -42,6 +44,7 @@
 		"sonata-project/formatter-bundle" : "^2.3",
 		"cboden/ratchet" : "^0.3.4",
 		"react/zmq" : "0.2.*|0.3.*",
-		"jenner/react-multi-process" : "^0.1.0"
+		"jenner/react-multi-process" : "^0.1.0",
+		"zerkalica/phpuml" : "dev-master"
 	}
 }

@@ -1,4 +1,5 @@
 #!/usr/bin/env php
+ 
 <?php
 /**
  * SK ITCBundle Console Application
@@ -7,16 +8,6 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
- 
-if (PHP_SAPI !== 'cli') {
-    echo 'Warning: ITC should be invoked via the CLI version of PHP, the '.PHP_SAPI.' SAPI is over web interface'.PHP_EOL;
-}
-
-// if you don't want to setup permissions the proper way, just uncomment the following PHP line
-// read http://symfony.com/doc/current/book/installation.html#configuration-and-setup for more information
-//umask(0000);
-
-set_time_limit(0);
 
 /**
  * @var Composer\Autoload\ClassLoader $loader

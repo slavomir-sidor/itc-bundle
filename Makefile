@@ -1,28 +1,65 @@
+# ITC Makefile
+MK=mkdir -p
+RM=rm -rf
+
+ITC_SOURCE:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+ITC_BIN=${ITC_SOURCE}/bin
+ITC_SRC=${ITC_SOURCE}/src
+ITC_DOC=${ITC_SOURCE}/doc
+ITC_LIB=${ITC_SOURCE}/vendor
+
+# ITC COMPOSER
+ITC_COMPOSER_PRG=composer
+ITC_COMPOSER_OPTIONS=\
+	--verbose \
+	--profile -o
+ITC_COMPOSER_CMD=${ITC_COMPOSER_PRG} ${ITC_COMPOSER_OPTIONS}
+ITC_COMPOSER_VENDOR=${ITCDIR}/vendor
+ITC_COMPOSER_VENDOR_RM=${RM} ${ITCDIR_VENDOR}
+ITC_COMPOSER_VENDOR_MK=${MK} ${ITCDIR_VENDOR}
+ITC_COMPOSER_LOCK=${ITC_SOURCE}/composer.lock
+ITC_COMPOSER_LOCK_RM=${RM} ${ITC_COMPOSER_LOCK}
+ITC_COMPOSER_CLEAN=${ITC_COMPOSER_CMD} clear
+ITC_COMPOSER_INSTALL=${ITC_COMPOSER_CMD} install
+ITC_COMPOSER_UPDATE=${ITC_COMPOSER_CMD} update
+ITC_COMPOSER_CLEAN_ALL=${CLEAN_RM_LOCK} && ${COMPOSER_CLEAN} && ${COMPOSER_RM_VENDOR}
+
+# ITC PHPUNIT
+ITC_PHPUNIT_PRG=phpunit
+ITC_PHPUNIT_OPTIONS=\
+	--debug 
+ITC_PHPUNIT_CMD=${ITC_PHPUNIT_PRG} ${ITC_PHPUNIT_OPTIONS} 
+ITC_PHPUNIT_DOC=${ITCDIR_DOC}/phpunit
+ITC_PHPUNIT_DOC_RM=${RM} ${ITC_PHPUNIT_DOC}
+ITC_PHPUNIT_DOC_MK=${MK} ${ITC_PHPUNIT_DOC}
+ITC_PHPUNIT_DOC_GENERATE=${ITC_PHPUNIT_CMD}
+
+# ITC APIGEN
+ITC_APIGEN_DOC=${ITC_DOC}/api
+ITC_APIGEN_DOC_TITLE=ITC Bundle API
+
+ITC_APIGEN_CMD=apigen
+ITC_APIGEN_CMD_OPTIONS= \
+		-s src/ \
+		-s tests \
+		-d '${ITC_APIGEN_DOC}' \
+		--title='${ITC_APIGEN_DOC_TITLE}'
+
+ITC_APIGEN_DOC_GENERATE=${ITC_APIGEN_CMD} generate ${ITC_APIGEN_CMD_OPTIONS}
+ITC_APIGEN_DOC_CLEAN= ${RM} ${ITC_APIGEN_DOC}
+ 
 clean:
-	#rm -rf composer.lock
-	mkdir -p doc/phpunit
-	mkdir -p doc/api
-	# rm -rf vendor/
-	composer clear
-
-
+	
 update:
-	composer install
-	composer dumpautoload --verbose --profile -o
-
 
 install:
-
+	sudo rm -rf /usr/bin/itc
+	sudo ln -s "${ITCDIR_BIN}/itc" /usr/bin/itc
 
 test:
 	phpunit
 
-cover:
-	mkdi doc/phpunit
-	phpunit --coverage-text --coverage-html=doc/phpunit
-
-apidoc:
-	mkdir -p doc/api
-	apigen generate --title="ITC Bundle API" -d doc/api \
-		-s src/ \
-		-s tests
+doc:
+	${ITC_APIGEN_DOC_CLEAN}
+	${ITC_APIGEN_DOC_GENERATE}
+	

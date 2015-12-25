@@ -9,59 +9,8 @@
  */
 namespace SK\ITCBundle\Command\Code\Generator;
 
-use SK\ITCBundle\Command\Code\CodeCommand;
+use SK\ITCBundle\Command\Code\Reflection\ReflectionCommand;
 
-abstract class GeneratorCommand extends CodeCommand
+abstract class GeneratorCommand extends ReflectionCommand
 {
-
-	/**
-	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Destination directory
-	 *
-	 * @var string
-	 */
-	protected $dest;
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function getDest()
-	{
-
-		if( NULL == $this->dest )
-		{
-			$this->setDest( $this->getRootDir() . DIRECTORY_SEPARATOR . "tests" );
-		}
-
-		if( ! file_exists( $this->dest ) )
-		{
-			@mkdir( $this->dest, 0777, true );
-		}
-
-		return $this->dest;
-
-	}
-
-	/**
-	 *
-	 * @param string $dest
-	 */
-	public function setDest(
-		$dest )
-	{
-
-		if( NULL == $this->dest )
-		{
-			$this->dest = $this->getRootDir() . DIRECTORY_SEPARATOR . $dest;
-		}
-
-		if( ! file_exists( $this->dest ) )
-		{
-			mkdir( $this->dest, 0777, true );
-		}
-
-		return $this;
-
-	}
-
 }

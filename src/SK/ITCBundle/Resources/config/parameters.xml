@@ -40,7 +40,7 @@
 		<parameter key="framework.fragments.path">_fragments</parameter>
 
 		<!-- Framework Router -->
-		<parameter key="framework.router.resource">%kernel.root_dir%/config/routing.xml</parameter>
+		<parameter key="framework.router.resource">%kernel.root_dir%/src/SK/ITCBundle/Resources/config/routing.xml</parameter>
 		<parameter key="framework.router.http_port">80</parameter>
 		<parameter key="framework.router.https_port">443</parameter>
 
@@ -96,7 +96,7 @@
 		<parameter key="framework.form.enabled">true</parameter>
 		<parameter key="framework.form.csrf_protection.enabled">true</parameter>
 
-		<parameter key="kernel.data_dir">%kernel.root_dir%/../var/data</parameter>
+		<parameter key="kernel.data_dir">%kernel.root_dir%/var/data</parameter>
 
 		<!-- Doctrine DBAL -->
 		<parameter key="doctrine.dbal.default_connection">%doctrine.dbal.connection.default.name%</parameter>
@@ -104,11 +104,11 @@
 		<!-- Doctrine DBAL: Connection Default -->
 		<parameter key="doctrine.dbal.connection.default.name">default</parameter>
 		<parameter key="doctrine.dbal.connection.default.driver">pdo_mysql</parameter>
-		<parameter key="doctrine.dbal.connection.default.dbname">egit_aaa</parameter>
-		<parameter key="doctrine.dbal.connection.default.host">mysql.cz.egit.aaa</parameter>
+		<parameter key="doctrine.dbal.connection.default.dbname">mysql</parameter>
+		<parameter key="doctrine.dbal.connection.default.host">127.0.0.1</parameter>
 		<parameter key="doctrine.dbal.connection.default.port">3306</parameter>
-		<parameter key="doctrine.dbal.connection.default.user">egit</parameter>
-		<parameter key="doctrine.dbal.connection.default.password">mlCPusShwRscaogL</parameter>
+		<parameter key="doctrine.dbal.connection.default.user">root</parameter>
+		<parameter key="doctrine.dbal.connection.default.password"></parameter>
 		<parameter key="doctrine.dbal.connection.default.logging">%kernel.debug%</parameter>
 		<parameter key="doctrine.dbal.connection.default.profiling">%kernel.debug%</parameter>
 		<parameter key="doctrine.dbal.connection.default.charset">UTF8</parameter>
@@ -118,7 +118,7 @@
 		<parameter key="doctrine.orm.default_entity_manager">%doctrine.orm.em.default.name%</parameter>
 		<parameter key="doctrine.orm.auto_generate_proxy_classes">false</parameter>
 		<parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
-		<parameter key="doctrine.orm.proxy_dir">%kernel.root_dir%/../src/AppBundle/Proxies</parameter>
+		<parameter key="doctrine.orm.proxy_dir">%kernel.root_dir%//Proxies</parameter>
 
 		<!-- Doctrine ORM : Entity Manager Default -->
 		<parameter key="doctrine.orm.em.default.name">default</parameter>

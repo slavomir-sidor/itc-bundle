@@ -18,6 +18,7 @@ use Symfony\Component\Console\Helper\ProgressBar;
 
 abstract class ReflectionCommand extends CodeCommand
 {
+
 	/**
 	 *
 	 * @param InputInterface $input
@@ -26,19 +27,20 @@ abstract class ReflectionCommand extends CodeCommand
 	protected function executeClassReflection()
 	{
 		$header = array(
-			'Type',
-			'Namespace Name',
 			'Final',
 			'Abstract',
+			'PHP Object',
+			'Namespace Name',
 			'Parent',
-			'Interfaces'
+			'Implements Interfaces'
 		);
 		$rows = array();
 
 		foreach( $this->getClassReflections() as $classReflection )
 		{
 			$row = [];
-
+			$row[] = $classReflection->isFinal() ? "Yes" : "No";
+			$row[] = $classReflection->isAbstract() ? "Yes" : "No";
 			if( $classReflection->isTrait() )
 			{
 				$row[] = "Trait";
@@ -51,14 +53,9 @@ abstract class ReflectionCommand extends CodeCommand
 			{
 				$row[] = "Class";
 			}
-
 			$row[] = $classReflection->getName();
-
-			$row[] = $classReflection->isFinal() ? "Yes" : "No";
-			$row[] = $classReflection->isAbstract() ? "Yes" : "No";
-
 			$row[] = implode( ",\n", $classReflection->getParentClassNameList() );
-			$row[] = implode( ", ", $classReflection->getInterfaceNames() );
+			$row[] = implode( ",\n", $classReflection->getInterfaceNames() );
 
 			$rows[] = $row;
 		}
@@ -237,7 +234,7 @@ abstract class ReflectionCommand extends CodeCommand
 			"Group",
 			"Permissions",
 			"Created",
-			"Modified",
+			"Modified"
 		);
 
 		$rows = [];
@@ -246,14 +243,13 @@ abstract class ReflectionCommand extends CodeCommand
 		foreach( $this->getFinder()
 			->files() as $file )
 		{
-
 			$row = array(
 				$file->getRelativePathname(),
 				$file->getOwner(),
 				$file->getGroup(),
 				$file->getPerms(),
-				date("d.m.Y h:m:s", $file->getCTime() ),
-				date("d.m.Y h:m:s", $file->getMTime() ),
+				date( "d.m.Y h:m:s", $file->getCTime() ),
+				date( "d.m.Y h:m:s", $file->getMTime() )
 			);
 
 			$rows[] = $row;

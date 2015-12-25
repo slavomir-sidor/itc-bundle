@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Command Abstract
  *
@@ -21,6 +22,7 @@ use TokenReflection\ReflectionFile;
 use TokenReflection\ReflectionClass;
 use TokenReflection\Broker\Backend;
 use TokenReflection\ReflectionMethod;
+use Assetic\Exception\Exception;
 
 abstract class CodeCommand extends AbstractCommand
 {
@@ -67,16 +69,15 @@ abstract class CodeCommand extends AbstractCommand
 	 */
 	public function getBroker()
 	{
-
 		if( null === $this->broker )
 		{
 			$backend = new Broker\Backend\Memory();
-			$broker = new Broker( $backend );
+			$broker = new Broker(
+				$backend );
 
 			$this->setBroker( $broker );
 		}
 		return $this->broker;
-
 	}
 
 	/**
@@ -84,10 +85,8 @@ abstract class CodeCommand extends AbstractCommand
 	 *
 	 * @return \Symfony\Component\Finder\Finder
 	 */
-	public function getFinder(
-		$name = null )
+	public function getFinder( $name = null )
 	{
-
 		if( null == $name )
 		{
 			$name = 0;
@@ -108,7 +107,6 @@ abstract class CodeCommand extends AbstractCommand
 			{
 				try
 				{
-
 					if( ! file_exists( $source ) )
 					{
 						$this->writeNotice( sprintf( "Finder Source '%s' not Exists.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
@@ -180,7 +178,8 @@ abstract class CodeCommand extends AbstractCommand
 						$finder->followLinks();
 					}
 
-					$this->writeNotice( sprintf( "Finder following links '%s'.", $followLinks ? 'yes' : 'no' ),
+					$this->writeNotice(
+						sprintf( "Finder following links '%s'.", $followLinks ? 'yes' : 'no' ),
 						OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
 				catch( \Exception $e )
@@ -199,7 +198,8 @@ abstract class CodeCommand extends AbstractCommand
 
 					$finder->ignoreDotFiles( $ignoreDotFiles );
 
-					$this->writeNotice( sprintf( "Finder ignoring dot files '%s'.", $ignoreDotFiles ? 'yes' : 'no' ),
+					$this->writeNotice(
+						sprintf( "Finder ignoring dot files '%s'.", $ignoreDotFiles ? 'yes' : 'no' ),
 						OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
 				catch( \Exception $e )
@@ -236,7 +236,8 @@ abstract class CodeCommand extends AbstractCommand
 					$finder->exclude( $this->getInput()
 						->getOption( "exclude" ) );
 
-					$this->writeNotice( sprintf( "Finder applying exclude '%s'.", implode( ",", $exclude ) ),
+					$this->writeNotice(
+						sprintf( "Finder applying exclude '%s'.", implode( ",", $exclude ) ),
 						OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
 				catch( \Exception $e )
@@ -249,7 +250,6 @@ abstract class CodeCommand extends AbstractCommand
 		}
 
 		return $this->finders[ $name ];
-
 	}
 
 	/**
@@ -257,14 +257,10 @@ abstract class CodeCommand extends AbstractCommand
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute(
-		InputInterface $input,
-		OutputInterface $output )
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
-
 		parent::execute( $input, $output );
 		$this->setSrc( $input->getArgument( 'src' ) );
-
 	}
 
 	/**
@@ -274,25 +270,37 @@ abstract class CodeCommand extends AbstractCommand
 	 */
 	protected function configure()
 	{
-
 		parent::configure();
 
 		$this->addOption( "bootstrap", "bs", InputOption::VALUE_OPTIONAL, "PHP Boostrap File." );
-		$this->addOption( "attributeName", "an", InputOption::VALUE_OPTIONAL,
+		$this->addOption(
+			"attributeName",
+			"an",
+			InputOption::VALUE_OPTIONAL,
 			"Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
 		$this->addOption( "ignoreDotFiles", "df", InputOption::VALUE_OPTIONAL, "Ignore DOT files.", true );
-		$this->addOption( "operationName", "on", InputOption::VALUE_OPTIONAL,
+		$this->addOption(
+			"operationName",
+			"on",
+			InputOption::VALUE_OPTIONAL,
 			"Operations name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
-		$this->addOption( "operationAttributeName", "oa", InputOption::VALUE_OPTIONAL,
+		$this->addOption(
+			"operationAttributeName",
+			"oa",
+			InputOption::VALUE_OPTIONAL,
 			"Operations Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
-		$this->addOption( "operationFilter", "op", InputOption::VALUE_OPTIONAL,
+		$this->addOption(
+			"operationFilter",
+			"op",
+			InputOption::VALUE_OPTIONAL,
 			"Operations filter : Abstract,Final, Private, Protected, Public, Static." );
-		$this->addOption( "parentClass", "pc", InputOption::VALUE_OPTIONAL, "Parent Class Name, e.g 'My\Class'" );
+
+		$this->addOption( "parentClass", "pc", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Parent Class Name, e.g 'My\Class'" );
 		$this->addOption( "fileSuffix", "fs", InputOption::VALUE_OPTIONAL, "File suffixes for given src, default all and not dot files.", "*.php" );
 		$this->addOption( "followLinks", "fl", InputOption::VALUE_OPTIONAL, "Follows links.", false );
-		$this->addOption( "is-interface", "ii", InputOption::VALUE_OPTIONAL, "Reflect Interfaces Objects Only.", false );
-		$this->addOption( "is-abstract", "ia", InputOption::VALUE_OPTIONAL, "Reflect Abstract Classes Only.", false );
-		$this->addOption( "is-final", "if", InputOption::VALUE_OPTIONAL, "Reflect Final Classes Only.", false );
+		$this->addOption( "is-interface", "ii", InputOption::VALUE_REQUIRED, "Reflect Interfaces Objects Only, possible values are (true|false)." );
+		$this->addOption( "is-abstract", "ia", InputOption::VALUE_REQUIRED, "Reflect Abstract Classes Only, possible values are (true|false)." );
+		$this->addOption( "is-final", "if", InputOption::VALUE_REQUIRED, "Reflect Final Classes Only, possible values are (true|false)." );
 		$this->addOption( "implements-interface", "imi", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Reflect Abstract Classes Only." );
 		$this->addOption( "exclude", "ed", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Exclude Directory from source" );
 
@@ -301,17 +309,14 @@ abstract class CodeCommand extends AbstractCommand
 			"./app",
 			"./tests"
 		) );
-
 	}
 
 	/**
 	 *
 	 * @param array $src
 	 */
-	public function setSrc(
-		array $src )
+	public function setSrc( array $src )
 	{
-
 		$root = $this->getRootDir();
 
 		foreach( $src as $directory )
@@ -325,7 +330,6 @@ abstract class CodeCommand extends AbstractCommand
 		}
 
 		return $this;
-
 	}
 
 	/**
@@ -333,10 +337,8 @@ abstract class CodeCommand extends AbstractCommand
 	 * @param string $class
 	 * @return array
 	 */
-	protected function getNamespace(
-		$class )
+	protected function getNamespace( $class )
 	{
-
 		$names = explode( "\\", $class );
 		$className = array_pop( $names );
 
@@ -344,7 +346,6 @@ abstract class CodeCommand extends AbstractCommand
 			'namespace' => implode( "\\", $names ),
 			'class' => $className
 		);
-
 	}
 
 	/**
@@ -354,81 +355,101 @@ abstract class CodeCommand extends AbstractCommand
 	 */
 	public function getClassReflections()
 	{
-
 		if( NULL === $this->classReflections )
 		{
+			/* This should be called pro forma due Broker Class reflection */
+			$fileReflections = $this->getFileRelections();
+
+			$input = $this->getInput();
 			/* @var $classReflections ReflectionClass[] */
-			$classReflections = [];
-
-			/* @var $exceptions \Exception[] */
-			$exceptions = [];
-
-			foreach( $this->getFinder()
-				->files() as $fileName )
-			{
-				try
-				{
-					/* @var $fileReflection ReflectionFile */
-					$fileReflection = $this->getBroker()
-						->processFile( $fileName );
-				}
-				catch( \Exception $exception )
-				{
-					$this->addException( $exception );
-				}
-			}
-
 			$classReflections = $this->getBroker()
 				->getClasses( Backend::TOKENIZED_CLASSES, Backend::INTERNAL_CLASSES );
 
-			$input = $this->getInput();
-
-			array_filter( $classReflections,
-				function (
-					$classReflection ) use (
-				$input )
+			$classReflections = array_filter(
+				$classReflections,
+				function ( ReflectionClass $classReflection ) use ($input )
 				{
-					$implementsInterface = $input->getOption( "implements-interface" );
-					$isInterface = $input->getOption( "is-interface" );
 					$isAbstract = $input->getOption( "is-abstract" );
+					if( NULL !== $isAbstract )
+					{
+
+						if( $isAbstract == "false" )
+						{
+
+							$isAbstract = false;
+						}
+						else
+						{
+							$isAbstract = true;
+						}
+						return ($isAbstract == $classReflection->isAbstract());
+					}
+
+					$isInterface = $input->getOption( "is-interface" );
+					if( NULL !== $isInterface )
+					{
+						if( $isInterface == "false" )
+						{
+							$isInterface = false;
+						}
+						else
+						{
+							$isInterface = true;
+						}
+						return ($isInterface == $classReflection->isInterface());
+					}
+
 					$isFinal = $input->getOption( "is-final" );
-					$parentClass = $input->getOption( "parentClass" );
-
-					if( NULL !== $parentClass )
+					if( NULL !== $isFinal )
 					{
-						return in_array( $parentClass, $classReflection->getParentClassNameList() );
+						if( $isFinal == "false" )
+						{
+							$isFinal = false;
+						}
+						else
+						{
+							$isFinal = true;
+						}
+						return ($isFinal == $classReflection->isFinal());
 					}
 
-					if( NULL !== $implementsInterface )
+					$parentClasses = $input->getOption( "parentClass" );
+					if( count( $parentClasses ) > 0 )
 					{
-						return in_array( $classReflection->getInterfaceNames(), $implementsInterface );
+						foreach( $parentClasses as $parentClass )
+						{
+							if( in_array( $parentClass, $classReflection->getParentClassNameList() ) )
+							{
+								return true;
+							}
+						}
+						return false;
 					}
 
-					if( true === $isInterface )
+					$implementsInterfaces = $input->getOption( "implements-interface" );
+					if( count( $implementsInterfaces ) > 0 )
 					{
-						return $classReflections->isInterface();
+						foreach( $implementsInterfaces as $implementsInterface )
+						{
+							if( in_array( $implementsInterface, $classReflection->getInterfaceNames() ) )
+							{
+								return true;
+							}
+						}
+						return false;
 					}
 
-					if( true === $isAbstract )
-					{
-						return $classReflection->isAbstract();
-					}
-
-					if( true === $isFinal )
-					{
-						return $classReflection->isFinal();
-					}
 					return true;
 				} );
+
 			$this->setClassReflections( $classReflections );
 
-			$this->writeNotice( sprintf( "Found '%d' classes with %d errors.", count( $classReflections ), count( $this->getExceptions() ) ),
-
+			$this->writeNotice(
+				sprintf( "Found '%d' classes with %d errors.", count( $classReflections ), count( $this->getExceptions() ) ),
 				OutputInterface::VERBOSITY_VERBOSE );
 		}
 
 		return $this->classReflections;
-
 	}
 
 	/**
@@ -437,19 +458,17 @@ abstract class CodeCommand extends AbstractCommand
 	 * @param string $className
 	 * @return ReflectionClass
 	 */
-	public function getClassReflection(
-		$className )
+	public function getClassReflection( $className )
 	{
-
 		$classReflections = $this->getClassReflections();
 
 		if( ! isset( $classReflections[ $className ] ) )
 		{
-			throw new \Exception( sprintf( "Class reflection '%s' is not set.", $className ) );
+			throw new \Exception(
+				sprintf( "Class reflection '%s' is not set.", $className ) );
 		}
 
 		return $classReflections[ $className ];
-
 	}
 
 	/**
@@ -458,13 +477,10 @@ abstract class CodeCommand extends AbstractCommand
 	 * @param ReflectionClass[] $classReflections
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setClassReflections(
-		$classReflections )
+	public function setClassReflections( $classReflections )
 	{
-
 		$this->classReflections = $classReflections;
 		return $this;
-
 	}
 
 	/**
@@ -475,22 +491,17 @@ abstract class CodeCommand extends AbstractCommand
 	 * @param string $name
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function setFinder(
-		Finder $finder,
-		$name = null )
+	public function setFinder( Finder $finder, $name = null )
 	{
-
 		if( null === $name )
 		{
 			$name = 0;
 		}
 
 		$this->finders[ $name ] = $finder;
-
 		$this->writeNotice( sprintf( "Finder Found %d files.", $finder->count() ), OutputInterface::VERBOSITY_VERBOSE );
 
 		return $this;
-
 	}
 
 	/**
@@ -500,13 +511,10 @@ abstract class CodeCommand extends AbstractCommand
 	 *        	SK ITCBundle Command Code Generator Broker
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function setBroker(
-		Broker $broker )
+	public function setBroker( Broker $broker )
 	{
-
 		$this->broker = $broker;
 		return $this;
-
 	}
 
 	/**
@@ -514,15 +522,14 @@ abstract class CodeCommand extends AbstractCommand
 	 *
 	 * @return ReflectionMethod[]
 	 */
-	public function getOperationsReflections(
-		$className = NULL )
+	public function getOperationsReflections( $className = NULL )
 	{
-
 		if( null === $this->operationsReflections )
 		{
 			$classReflections = $this->getClassReflections();
 
-			$this->writeInfo( sprintf( "Searching class operations in '%s' classes.", count( $classReflections ) ),
+			$this->writeInfo(
+				sprintf( "Searching class operations in '%s' classes.", count( $classReflections ) ),
 				OutputInterface::VERBOSITY_VERBOSE );
 
 			$operationsReflections = [];
@@ -559,7 +566,6 @@ abstract class CodeCommand extends AbstractCommand
 		}
 
 		return $this->operationsReflections;
-
 	}
 
 	/**
@@ -568,29 +574,66 @@ abstract class CodeCommand extends AbstractCommand
 	 * @param ReflectionMethod[] $operationsReflections
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function setOperationsReflections(
-		array $operationsReflections )
+	public function setOperationsReflections( array $operationsReflections )
 	{
-
 		$this->operationsReflections = $operationsReflections;
 
 		$this->writeInfo(
 			sprintf( "'%d' Operations in '%d' Classes.", count( $this->getOperationsReflections() ), count( $this->getClassReflections() ) ),
 			OutputInterface::VERBOSITY_VERBOSE );
 		return $this;
-
 	}
 
 	/**
 	 * Gets SK ITCBundle Command Code Generator File Reflections
 	 *
-	 * @return the ReflectionFile[]
+	 * @param string $filename
+	 *        	SK ITCBundle Command Code Generator File Reflections FileName
+	 * @return ReflectionFile
+	 * @throws \Exception
+	 */
+	public function getFileRelection( $filename )
+	{
+		$fileReflections = $this->getFileRelections();
+		if( in_array( $filename, $fileReflections ) )
+		{
+			return $fileReflections[ $filename ];
+		}
+		throw new \Exception(
+			sprintf( "No '%s' file reflection exists.", $filename ) );
+	}
+
+	/**
+	 * Gets SK ITCBundle Command Code Generator File Reflections
+	 *
+	 * @return ReflectionFile[]
 	 */
 	public function getFileRelections()
 	{
+		if( null === $this->fileRelections )
+		{
+			/* @var $fileReflection ReflectionFile[] */
+			$fileReflections = [];
+
+			foreach( $this->getFinder()
+				->files() as $fileName )
+			{
+				try
+				{
+					/* @var $fileReflection ReflectionFile */
+					$fileReflection = $this->getBroker()
+						->processFile( $fileName, true );
+					$fileReflections[] = $fileReflection;
+				}
+				catch( \Exception $exception )
+				{
+					$this->addException( $exception );
+				}
+			}
+			$this->setFileRelections( $fileReflections );
+		}
 
 		return $this->fileRelections;
-
 	}
 
 	/**
@@ -599,13 +642,22 @@ abstract class CodeCommand extends AbstractCommand
 	 * @param ReflectionFile[] $fileRelections
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function setFileRelections(
-		$fileRelections )
+	public function setFileRelections( array $fileRelections )
 	{
-
 		$this->fileRelections = $fileRelections;
 		return $this;
-
 	}
 
+	/**
+	 * Sets SK ITCBundle Command Code Generator File Reflection
+	 *
+	 * @param ReflectionFile $fileRelection
+	 *        	SK ITCBundle Command Code Generator File Reflection
+	 * @return \SK\ITCBundle\Command\Code\CodeCommand
+	 */
+	public function setFileRelection( array $fileRelections )
+	{
+		$this->fileRelections = $fileRelections;
+		return $this;
+	}
 }

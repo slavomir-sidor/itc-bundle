@@ -15,43 +15,20 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\Table;
 use Monolog\Logger;
 
-abstract class AbstractCommand extends ContainerAwareCommand
+abstract class TableCommand extends ContainerAwareCommand
 {
 
 	/**
-	 * SK ITCBundle Abstract Command Input
 	 *
-	 * @var InputInterface
+	 * @var array
 	 */
-	protected $input;
+	protected $header;
 
 	/**
-	 * SK ITCBundle Abstract Command Output
 	 *
-	 * @var OutputInterface
+	 * @var array
 	 */
-	protected $output;
-
-	/**
-	 * SK ITCBundle Abstract Command Exceptions
-	 *
-	 * @var \Exception[]
-	 */
-	protected $exceptions;
-
-	/**
-	 * SK ITCBundle Abstract Command Logger
-	 *
-	 * @var Logger
-	 */
-	protected $logger;
-
-	/**
-	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Root directory
-	 *
-	 * @var string
-	 */
-	protected $rootDir;
+	protected $rows;
 
 	/**
 	 * Constructs SK ITCBundle Abstract Command

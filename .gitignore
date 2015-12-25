@@ -1,12 +1,12 @@
 /target/
 /vendor/
+/doc/
 /bin/yuicompressor.jar
-/bin/yuicompressor.jar
+/bin/phpuml
 /bin/behat
 /bin/doctrine-dbal
 /bin/doctrine-migrations
 /bin/sql-formatter
 /composer.lock
-/.settings/
-/.project
-/.buildpath
+/.*
+!.gitignore

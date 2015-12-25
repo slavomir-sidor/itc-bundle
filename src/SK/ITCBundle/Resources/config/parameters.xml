@@ -22,4 +22,153 @@
 		<import resource="WS/parameters.xml" />
 	</imports>
 
+	<parameters>
+
+		<!-- Kernel -->
+		<parameter key="kernel.debug">true</parameter>
+		<parameter key="kernel.secret">ITC IS REALLY SECURE!</parameter>
+
+		<!-- Framework -->
+		<parameter key="framework.http_method_override">true</parameter>
+		<parameter key="framework.default_locale">cs</parameter>
+		<parameter key="framework.secret">%kernel.secret%</parameter>
+		<parameter key="framework.trusted_proxies">192.0.0.1, 10.0.0.0/8</parameter>
+		<parameter key="framework.test">false</parameter>
+
+		<!-- Framework Fragments -->
+		<parameter key="framework.fragments.enabled">true</parameter>
+		<parameter key="framework.fragments.path">_fragments</parameter>
+
+		<!-- Framework Router -->
+		<parameter key="framework.router.resource">%kernel.root_dir%/config/routing.xml</parameter>
+		<parameter key="framework.router.http_port">80</parameter>
+		<parameter key="framework.router.https_port">443</parameter>
+
+		<!-- Framework Annotations -->
+		<parameter key="framework.annotations.cache">file</parameter>
+		<parameter key="framework.annotations.debug">%kernel.debug%</parameter>
+		<parameter key="framework.annotations.file_cache_dir">%kernel.cache_dir%/annotations</parameter>
+
+		<!-- Framework CSFR Protection -->
+		<parameter key="framework.csfr_protection.enabled">true</parameter>
+		<parameter key="framework.csfr_protection.field_name">csfr-protection</parameter>
+
+		<!-- Framework Profiler -->
+		<parameter key="framework.profiler.enabled">true</parameter>
+
+		<!-- Framework ESI -->
+		<parameter key="framework.esi.enabled">true</parameter>
+
+		<!-- Framework Translator -->
+		<parameter key="framework.translator.fallback">%framework.default_locale%</parameter>
+		<parameter key="framework.translator.locales">cs|en|fr|de</parameter>
+
+		<!-- Framework Translator -->
+		<parameter key="framework.translator.fallback">en</parameter>
+		<parameter key="framework.translator.enabled">true</parameter>
+
+		<!-- Framework Form -->
+		<parameter key="framework.form.enabled">true</parameter>
+		<parameter key="framework.form.csfr_protection.enabled">true</parameter>
+
+		<!-- Framework Templating -->
+		<parameter key="framework.templating.engines">twig</parameter>
+
+		<!-- Framework Validation -->
+		<parameter key="framework.validation.enable_annotations">TRUE</parameter>
+
+		<!-- Framework Session -->
+		<parameter key="framework.session.save_path">%kernel.cache_dir%/sessions</parameter>
+
+		<!-- Assetic -->
+		<parameter key="assetic.debug">%kernel.debug%</parameter>
+		<parameter key="assetic.charset">%kernel.charset%</parameter>
+		<parameter key="assetic.use_controller">TRUE</parameter>
+		<parameter key="assetic.read_from">%kernel.root_dir%/../web</parameter>
+		<parameter key="assetic.write_to">%assetic.read_from%</parameter>
+		<parameter key="assetic.java">java</parameter>
+		<parameter key="assetic.dump_on_warmup">true</parameter>
+		<parameter key="assetic.filter.yui_js.jar">%kernel.root_dir%/../vendor/packagist/yuicompressor-bin/bin/yuicompressor.jar</parameter>
+		<parameter key="assetic.filter.yui_css.jar">%kernel.root_dir%/../vendor/packagist/yuicompressor-bin/bin/yuicompressor.jar</parameter>
+
+		<!-- Twig -->
+		<parameter key="twig.auto_reload">%kernel.debug%</parameter>
+		<parameter key="twig.autoescape">true</parameter>
+		<parameter key="twig.cache">%kernel.cache_dir%/twig</parameter>
+		<parameter key="twig.charset">%kernel.charset%</parameter>
+		<parameter key="twig.debug">%kernel.debug%</parameter>
+		<parameter key="twig.base_template_class">Twig_Template</parameter>
+		<parameter key="twig.strict_variables">TRUE</parameter>
+
+		<!-- Doctrine ORM -->
+		<parameter key="doctrine.orm.auto-generate-proxy-classes">TRUE</parameter>
+		<parameter key="doctrine.orm.auto-mapping">TRUE</parameter>
+
+		<parameter key="swiftmailer.transport">smtp</parameter>
+		<parameter key="swiftmailer.host">127.0.0.1</parameter>
+		<parameter key="swiftmailer.user"></parameter>
+		<parameter key="swiftmailer.password"></parameter>
+
+		<!-- Debug -->
+		<parameter key="debug.max_items">4096</parameter>
+		<parameter key="debug.max_string_length">10000</parameter>
+		<parameter key="debug.container.dump">%kernel.cache_dir%/%kernel.container_class%.xml</parameter>
+		<parameter key="debug.error_handler.throw_at">-1</parameter>
+
+		<!-- Monolog -->
+		<parameter key="monolog.logger.main.name">main</parameter>
+		<parameter key="monolog.logger.main.type">rotating_file</parameter>
+		<parameter key="monolog.logger.main.path">%kernel.logs_dir%/%kernel.environment%.log</parameter>
+		<parameter key="monolog.logger.main.level">debug</parameter>
+		<parameter key="monolog.logger.main.max_files">256</parameter>
+		<parameter key="monolog.logger.main.handler">nested</parameter>
+
+		<parameter key="monolog.logger.console.name">console</parameter>
+		<parameter key="monolog.logger.console.type">console</parameter>
+		<parameter key="monolog.logger.console.level">DEBUG</parameter>
+
+		<!-- Security -->
+		<parameter
+			key="jms_security_extra"
+			type="collection">
+
+			<parameter key="secure_all_services">false</parameter>
+			<parameter key="expressions">true</parameter>
+
+		</parameter>
+
+		<!-- Framework Form -->
+		<parameter key="framework.form.enabled">true</parameter>
+		<parameter key="framework.form.csrf_protection.enabled">true</parameter>
+
+		<parameter key="kernel.data_dir">%kernel.root_dir%/../var/data</parameter>
+
+		<!-- Doctrine DBAL -->
+		<parameter key="doctrine.dbal.default_connection">%doctrine.dbal.connection.default.name%</parameter>
+
+		<!-- Doctrine DBAL: Connection Default -->
+		<parameter key="doctrine.dbal.connection.default.name">default</parameter>
+		<parameter key="doctrine.dbal.connection.default.driver">pdo_mysql</parameter>
+		<parameter key="doctrine.dbal.connection.default.dbname">egit_aaa</parameter>
+		<parameter key="doctrine.dbal.connection.default.host">mysql.cz.egit.aaa</parameter>
+		<parameter key="doctrine.dbal.connection.default.port">3306</parameter>
+		<parameter key="doctrine.dbal.connection.default.user">egit</parameter>
+		<parameter key="doctrine.dbal.connection.default.password">mlCPusShwRscaogL</parameter>
+		<parameter key="doctrine.dbal.connection.default.logging">%kernel.debug%</parameter>
+		<parameter key="doctrine.dbal.connection.default.profiling">%kernel.debug%</parameter>
+		<parameter key="doctrine.dbal.connection.default.charset">UTF8</parameter>
+
+		<!-- Doctrine ORM -->
+		<parameter key="doctrine.orm.auto_mapping">true</parameter>
+		<parameter key="doctrine.orm.default_entity_manager">%doctrine.orm.em.default.name%</parameter>
+		<parameter key="doctrine.orm.auto_generate_proxy_classes">false</parameter>
+		<parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
+		<parameter key="doctrine.orm.proxy_dir">%kernel.root_dir%/../src/AppBundle/Proxies</parameter>
+
+		<!-- Doctrine ORM : Entity Manager Default -->
+		<parameter key="doctrine.orm.em.default.name">default</parameter>
+		<parameter key="doctrine.orm.em.default.connection">%doctrine.dbal.default_connection%</parameter>
+
+	</parameters>
+
 </container>

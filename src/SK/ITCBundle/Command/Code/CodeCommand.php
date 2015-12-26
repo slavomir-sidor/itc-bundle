@@ -290,18 +290,35 @@ abstract class CodeCommand extends AbstractCommand
 			"oa",
 			InputOption::VALUE_OPTIONAL,
 			"Operations Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
-		$this->addOption(
-			"operationFilter",
-			"op",
-			InputOption::VALUE_OPTIONAL,
-			"Operations filter : Abstract,Final, Private, Protected, Public, Static." );
 
+		$this->addOption( "accessibility", "ac", InputOption::VALUE_OPTIONAL, "Operations and attributes accessibility: protected, public, private." );
 		$this->addOption( "parentClass", "pc", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Parent Class Name, e.g 'My\Class'" );
 		$this->addOption( "fileSuffix", "fs", InputOption::VALUE_OPTIONAL, "File suffixes for given src, default all and not dot files.", "*.php" );
 		$this->addOption( "followLinks", "fl", InputOption::VALUE_OPTIONAL, "Follows links.", false );
+
 		$this->addOption( "is-interface", "ii", InputOption::VALUE_REQUIRED, "Reflect Interfaces Objects Only, possible values are (true|false)." );
 		$this->addOption( "is-abstract", "ia", InputOption::VALUE_REQUIRED, "Reflect Abstract Classes Only, possible values are (true|false)." );
 		$this->addOption( "is-final", "if", InputOption::VALUE_REQUIRED, "Reflect Final Classes Only, possible values are (true|false)." );
+		$this->addOption(
+			"is-private",
+			"ip",
+			InputOption::VALUE_REQUIRED,
+			"Reflect Private Operations or Attributes, possible values are (true|false)." );
+		$this->addOption(
+			"is-protected",
+			"id",
+			InputOption::VALUE_REQUIRED,
+			"Reflect Protected Operations or Attributes, possible values are (true|false)." );
+		$this->addOption(
+			"is-public",
+			"ic",
+			InputOption::VALUE_REQUIRED,
+			"Reflect Public Operations or Attributes, possible values are (true|false)." );
+		$this->addOption(
+			"is-static",
+			"is",
+			InputOption::VALUE_REQUIRED,
+			"Reflect Static Operations or Attributes, possible values are (true|false)." );
 		$this->addOption( "implements-interface", "imi", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Reflect Abstract Classes Only." );
 		$this->addOption( "exclude", "ed", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Exclude Directory from source" );
 
@@ -360,7 +377,7 @@ abstract class CodeCommand extends AbstractCommand
 		{
 			/* This should be called pro forma due Broker Class reflection */
 			$fileReflections = $this->getFileRelections();
-			$this->writeInfo( sprintf( "Searching class reflection in '%d' files.", count( $fileReflections ) ), OutputInterface::VERBOSITY_VERBOSE );
+			$this->writeInfo( sprintf( "Searching class reflection in '%d' files.", count( $fileReflections ) ) );
 
 			$input = $this->getInput();
 			/* @var $classReflections ReflectionClass[] */
@@ -455,8 +472,7 @@ abstract class CodeCommand extends AbstractCommand
 					"Found '%d' classes with '%d' errors in '%d' files.",
 					count( $classReflections ),
 					count( $this->getExceptions() ),
-					count( $fileReflections ) ),
-				OutputInterface::VERBOSITY_VERBOSE );
+					count( $fileReflections ) ) );
 		}
 
 		return $this->classReflections;
@@ -537,9 +553,7 @@ abstract class CodeCommand extends AbstractCommand
 		{
 			$classReflections = $this->getClassReflections();
 
-			$this->writeInfo(
-				sprintf( "Searching class operations in '%s' classes.", count( $classReflections ) ),
-				OutputInterface::VERBOSITY_VERBOSE );
+			$this->writeInfo( sprintf( "Searching class operations in '%s' classes.", count( $classReflections ) ) );
 
 			$operationsReflections = [];
 
@@ -558,15 +572,15 @@ abstract class CodeCommand extends AbstractCommand
 
 			foreach( $classReflections as $classReflection )
 			{
-
 				/* @var $operationReflection ReflectionMethod[] */
 				$classOperationReflections = $classReflection->getMethods();
 
 				foreach( $classOperationReflections as $operationReflection )
 				{
 					$this->writeNotice(
-							sprintf( "Processing operation reflection '%s'.", $operationReflection->getName() ),
-							OutputInterface::VERBOSITY_VERBOSE );
+						sprintf( "Processing operation reflection '%s'.", $operationReflection->getName() ),
+						OutputInterface::VERBOSITY_VERBOSE );
+
 					if( $operationPattern !== "" && ! preg_match( $operationPattern, $operationReflection->getName() ) )
 					{
 						continue;
@@ -577,8 +591,7 @@ abstract class CodeCommand extends AbstractCommand
 
 			$this->setOperationsReflections( $operationsReflections );
 			$this->writeInfo(
-				sprintf( "Found '%d' Operations in '%d' Classes.", count( $this->getOperationsReflections() ), count( $this->getClassReflections() ) ),
-				OutputInterface::VERBOSITY_VERBOSE );
+				sprintf( "Found '%d' Operations in '%d' Classes.", count( $this->getOperationsReflections() ), count( $this->getClassReflections() ) ) );
 		}
 
 		return $this->operationsReflections;
@@ -627,7 +640,7 @@ abstract class CodeCommand extends AbstractCommand
 			$src = $this->getInput()
 				->getArgument( 'src' );
 
-			$this->writeInfo( sprintf( "Searching files in '%s' sources.", implode( "', '", $src ) ), OutputInterface::VERBOSITY_VERBOSE );
+			$this->writeInfo( sprintf( "Searching files in '%s' sources.", implode( "', '", $src ) ) );
 
 			/* @var $fileReflection ReflectionFile[] */
 			$fileReflections = [];
@@ -650,8 +663,7 @@ abstract class CodeCommand extends AbstractCommand
 			$this->setFileRelections( $fileReflections );
 
 			$this->writeInfo(
-				sprintf( "Found '%d' files reflected with '%d' exceptions.", count( $fileReflections ), count( $this->getExceptions() ) ),
-				OutputInterface::VERBOSITY_VERBOSE );
+				sprintf( "Found '%d' files reflected with '%d' exceptions.", count( $fileReflections ), count( $this->getExceptions() ) ) );
 		}
 
 		return $this->fileRelections;

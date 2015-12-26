@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>sk.itcloud</groupId>
 		<artifactId>itc-project</artifactId>
-		<version>0.0.21-SNAPSHOT</version>
+		<version>0.0.22-SNAPSHOT</version>
 	</parent>
 
 	<groupId>sk.itcloud.symfony</groupId>

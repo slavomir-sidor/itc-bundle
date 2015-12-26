@@ -207,13 +207,11 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	public function writeException( \Exception $exception )
 	{
 		$this->getOutput()
-			->writeln(
-			sprintf( " <fg=black;bg=red>Error %s %s</fg=black;bg=red>", $exception->getCode(), $exception->getMessage() ),
+			->writeln( sprintf( " <fg=black;bg=red>Error %s %s</fg=black;bg=red>", $exception->getCode(), $exception->getMessage() ),
 			OutputInterface::VERBOSITY_VERBOSE );
 
 		$this->getOutput()
-			->writeln(
-			sprintf( " <fg=black;bg=red>Trace %s</fg=black;bg=red>", $exception->getTraceAsString() ),
+			->writeln( sprintf( " <fg=black;bg=red>Trace %s</fg=black;bg=red>", $exception->getTraceAsString() ),
 			OutputInterface::VERBOSITY_VERY_VERBOSE );
 	}
 
@@ -226,7 +224,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	{
 		if( count( $this->getExceptions() ) > 0 )
 		{
-			$this->writeInfo( sprintf("Exceptions: %d", count( $this->getExceptions() )) );
+			$this->writeInfo( sprintf( "Exceptions: %d", count( $this->getExceptions() ) ) );
 			foreach( $this->getExceptions() as $exception )
 			{
 				$this->writeException( $exception );
@@ -305,25 +303,20 @@ abstract class AbstractCommand extends ContainerAwareCommand
 			}
 		}
 		$tableColspan = count( $columns );
-		$table = new Table(
-			$this->getOutput() );
-		$table->setStyle( 'default' );
+		$table = $this->getTable();
 		$table->setHeaders( $this->getTableHeaders( $columns ) );
-		$table->setRows( $rows );
+		$table->addRows( $rows );
 
 		$table->addRow( array(
-			new TableSeparator(
-				array(
-					'colspan' => $tableColspan
-				) )
+			new TableSeparator( array(
+				'colspan' => $tableColspan
+			) )
 		) );
 		$table->addRow(
 			array(
-				new TableCell(
-					sprintf( "Found %s results.", count( $rows ) ),
-					array(
-						'colspan' => $tableColspan
-					) )
+				new TableCell( sprintf( "Found %s results.", count( $rows ) ), array(
+					'colspan' => $tableColspan
+				) )
 			) );
 		$table->render();
 		return $this;
@@ -420,11 +413,9 @@ abstract class AbstractCommand extends ContainerAwareCommand
 			$output = $this->getOutput();
 
 			$tableHeaders[] = array(
-				new TableCell(
-					sprintf( "%s", $this->getDescription() ),
-					array(
-						'colspan' => $tableColspan
-					) )
+				new TableCell( sprintf( "%s", $this->getDescription() ), array(
+					'colspan' => $tableColspan
+				) )
 			);
 			$tableHeaders[] = $columns;
 
@@ -453,15 +444,26 @@ abstract class AbstractCommand extends ContainerAwareCommand
 		return $this;
 	}
 
+	/**
+	 */
 	public function getTable()
 	{
+		if( null === $this->table )
+		{
+			$table = new Table( $this->getOutput() );
+			$table->setStyle( 'default' );
+			$this->setTable( $table );
+		}
 		return $this->table;
 	}
 
+	/**
+	 *
+	 * @param Table $table
+	 */
 	public function setTable( Table $table )
 	{
 		$this->table = $table;
 		return $this;
 	}
-
 }

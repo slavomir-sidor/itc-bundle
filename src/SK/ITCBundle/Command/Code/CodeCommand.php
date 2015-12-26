@@ -23,6 +23,7 @@ use TokenReflection\ReflectionClass;
 use TokenReflection\Broker\Backend;
 use TokenReflection\ReflectionMethod;
 use Assetic\Exception\Exception;
+use Symfony\Component\Process\ProcessBuilder;
 
 abstract class CodeCommand extends AbstractCommand
 {
@@ -305,9 +306,9 @@ abstract class CodeCommand extends AbstractCommand
 		$this->addOption( "exclude", "ed", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Exclude Directory from source" );
 
 		$this->addArgument( 'src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
-			"./src",
-			"./app",
-			"./tests"
+			"src/",
+			"app/",
+			"tests/"
 		) );
 	}
 
@@ -359,6 +360,7 @@ abstract class CodeCommand extends AbstractCommand
 		{
 			/* This should be called pro forma due Broker Class reflection */
 			$fileReflections = $this->getFileRelections();
+			$this->writeInfo( sprintf( "Searching class reflection in '%d' files.", count( $fileReflections ) ), OutputInterface::VERBOSITY_VERBOSE );
 
 			$input = $this->getInput();
 			/* @var $classReflections ReflectionClass[] */
@@ -369,6 +371,10 @@ abstract class CodeCommand extends AbstractCommand
 				$classReflections,
 				function ( ReflectionClass $classReflection ) use ($input )
 				{
+					$this->writeNotice(
+						sprintf( "Processing class reflection '%s'.", $classReflection->getName() ),
+						OutputInterface::VERBOSITY_VERBOSE );
+
 					$isAbstract = $input->getOption( "is-abstract" );
 					if( NULL !== $isAbstract )
 					{
@@ -444,8 +450,12 @@ abstract class CodeCommand extends AbstractCommand
 
 			$this->setClassReflections( $classReflections );
 
-			$this->writeNotice(
-				sprintf( "Found '%d' classes with %d errors.", count( $classReflections ), count( $this->getExceptions() ) ),
+			$this->writeInfo(
+				sprintf(
+					"Found '%d' classes with '%d' errors in '%d' files.",
+					count( $classReflections ),
+					count( $this->getExceptions() ),
+					count( $fileReflections ) ),
 				OutputInterface::VERBOSITY_VERBOSE );
 		}
 
@@ -499,7 +509,6 @@ abstract class CodeCommand extends AbstractCommand
 		}
 
 		$this->finders[ $name ] = $finder;
-		$this->writeNotice( sprintf( "Finder Found %d files.", $finder->count() ), OutputInterface::VERBOSITY_VERBOSE );
 
 		return $this;
 	}
@@ -555,6 +564,9 @@ abstract class CodeCommand extends AbstractCommand
 
 				foreach( $classOperationReflections as $operationReflection )
 				{
+					$this->writeNotice(
+							sprintf( "Processing operation reflection '%s'.", $operationReflection->getName() ),
+							OutputInterface::VERBOSITY_VERBOSE );
 					if( $operationPattern !== "" && ! preg_match( $operationPattern, $operationReflection->getName() ) )
 					{
 						continue;
@@ -562,7 +574,11 @@ abstract class CodeCommand extends AbstractCommand
 					$operationsReflections[] = $operationReflection;
 				}
 			}
+
 			$this->setOperationsReflections( $operationsReflections );
+			$this->writeInfo(
+				sprintf( "Found '%d' Operations in '%d' Classes.", count( $this->getOperationsReflections() ), count( $this->getClassReflections() ) ),
+				OutputInterface::VERBOSITY_VERBOSE );
 		}
 
 		return $this->operationsReflections;
@@ -577,10 +593,6 @@ abstract class CodeCommand extends AbstractCommand
 	public function setOperationsReflections( array $operationsReflections )
 	{
 		$this->operationsReflections = $operationsReflections;
-
-		$this->writeInfo(
-			sprintf( "'%d' Operations in '%d' Classes.", count( $this->getOperationsReflections() ), count( $this->getClassReflections() ) ),
-			OutputInterface::VERBOSITY_VERBOSE );
 		return $this;
 	}
 
@@ -612,6 +624,11 @@ abstract class CodeCommand extends AbstractCommand
 	{
 		if( null === $this->fileRelections )
 		{
+			$src = $this->getInput()
+				->getArgument( 'src' );
+
+			$this->writeInfo( sprintf( "Searching files in '%s' sources.", implode( "', '", $src ) ), OutputInterface::VERBOSITY_VERBOSE );
+
 			/* @var $fileReflection ReflectionFile[] */
 			$fileReflections = [];
 
@@ -631,6 +648,10 @@ abstract class CodeCommand extends AbstractCommand
 				}
 			}
 			$this->setFileRelections( $fileReflections );
+
+			$this->writeInfo(
+				sprintf( "Found '%d' files reflected with '%d' exceptions.", count( $fileReflections ), count( $this->getExceptions() ) ),
+				OutputInterface::VERBOSITY_VERBOSE );
 		}
 
 		return $this->fileRelections;

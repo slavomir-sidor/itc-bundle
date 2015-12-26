@@ -15,6 +15,8 @@ use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Console\Helper\Table;
 use TokenReflection\ReflectionMethod;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Helper\TableSeparator;
+use Symfony\Component\Console\Helper\TableCell;
 
 abstract class ReflectionCommand extends CodeCommand
 {
@@ -115,35 +117,35 @@ abstract class ReflectionCommand extends CodeCommand
 			'Accessibility',
 			'Abstract',
 			'Static',
+			'Parameters',
 			'Returns'
 		);
 		$rows = [];
 		$reflection = $this->getOperationsReflections();
 
-		$className="";
-
+		$declaringClassName="";
 		foreach( $reflection as $operationReflection )
 		{
-			$operationReflection=$operationReflection->getDeclaringClass()
-					->getName();
-			if($className!=){
-				$className
-			}
-			$rows[] = $row;
-			$row=array();
-
 			$row = array(
-				$operationReflection->getName(),
-				$operationReflection->isPrivate() ? "Private" : $operationReflection->isProtected() ? "Protected" : "Public",
-				$operationReflection->isAbstract() ? "Yes" : "No",
-				$operationReflection->isStatic() ? "Yes" : "No",
-				""
+					$operationReflection->getName(),
+					$operationReflection->isPrivate() ? "Private" : $operationReflection->isProtected() ? "Protected" : "Public",
+					$operationReflection->isAbstract() ? "Yes" : "No",
+					$operationReflection->isStatic() ? "Yes" : "No",
+					""
 			);
 
-			$rows[] = $row;
+			if($declaringClassName!=$operationReflection->getDeclaringClassName()){
+				$declaringClassName=$operationReflection->getDeclaringClassName();
+				$rows[] = [new TableCell('Object', array('colspan' => 5))];
+				$rows[] = [new TableCell($declaringClassName, array('colspan' => 5))];
+				$rows[] = $row;
+				$rows[] = [new TableSeparator()];
+			} else {
+				$rows[] = $row;
+			}
 		}
 
-		$this->writeTable( $rows, $header );
+		$this->writeTable( $rows, $header,120 );
 		$this->writeExceptions();
 	}
 

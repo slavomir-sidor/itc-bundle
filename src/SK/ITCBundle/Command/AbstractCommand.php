@@ -19,6 +19,7 @@ use Symfony\Component\Console\Helper\TableCell;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Formatter\OutputFormatterInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Symfony\Component\Console\Helper\TableSeparator;
 
 abstract class AbstractCommand extends ContainerAwareCommand
 {
@@ -62,7 +63,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *
 	 * @var array
 	 */
-	protected $tableHeader;
+	protected $tableHeaders;
 
 	/**
 	 *
@@ -252,7 +253,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	public function writeInfo( $message, $verbosity = OutputInterface::VERBOSITY_VERBOSE )
 	{
 		$output = $this->getOutput();
-		$output->writeln( sprintf( '<fg=green>%s</fg=green>', $message ), $verbosity );
+		$output->writeln( sprintf( '<fg=white>%s</fg=white>', $message ), $verbosity );
 		return $this;
 	}
 
@@ -275,13 +276,13 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *
 	 * @param array $rows
 	 *        	SK ITCBundle Abstract Command Table Rows
-	 * @param array $header
+	 * @param array $columns
 	 *        	SK ITCBundle Abstract Command Table Header
 	 * @param int $maxColWidth
 	 * @param int $verbosity
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeTable( $rows = array(), $header = array(), $maxColWidth = 60, $verbosity = OutputInterface::VERBOSITY_NORMAL )
+	public function writeTable( $rows = array(), $columns = array(), $maxColWidth = 60, $verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
 		$style = new TableStyle();
 
@@ -297,11 +298,27 @@ abstract class AbstractCommand extends ContainerAwareCommand
 				$rows[ $iRow ][ $iCol ] = wordwrap( $col, $maxColWidth, "\n", true );
 			}
 		}
+		$tableColspan = count( $columns );
 		$table = new Table(
 			$this->getOutput() );
 		$table->setStyle( 'default' );
-		$table->setHeaders( $header );
+		$table->setHeaders( $this->getTableHeaders( $columns ) );
 		$table->setRows( $rows );
+
+		$table->addRow( array(
+			new TableSeparator(
+				array(
+					'colspan' => $tableColspan
+				) )
+		) );
+		$table->addRow(
+			array(
+				new TableCell(
+					sprintf( "Found %s results.", count( $rows ) ),
+					array(
+						'colspan' => $tableColspan
+					) )
+			) );
 		$table->render();
 		return $this;
 	}
@@ -316,7 +333,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	public function writeNotice( $message, $verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
 		$this->getOutput()
-			->writeln( "<fg=yellow>{$message}</fg=yellow>", $verbosity );
+			->writeln( "<fg=blue>{$message}</fg=blue>", $verbosity );
 		return $this;
 	}
 
@@ -385,43 +402,39 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *
 	 * @return array
 	 */
-	protected function getTableHeaders(array $columns)
+	protected function getTableHeaders( array $columns )
 	{
-		if(null===$this->tableHeader){
-			$tableHeader=array(
+		if( null === $this->tableHeaders )
+		{
+			$tableHeaders = [];
+			$tableColspan = count( $columns );
+
+			$definition = $this->getDefinition();
+			$input = $this->getInput();
+			$output = $this->getOutput();
+
+			$tableHeaders[] = array(
+				new TableCell(
+					sprintf( "%s", $this->getDescription() ),
 					array(
-							new TableCell(
-									sprintf('Sources:'),
-									array(
-											'colspan' => count($columns)
-									) )
-					),
-					$columns
+						'colspan' => $tableColspan
+					) )
 			);
-			//$this->getDefinition();
+			$tableHeaders[] = $columns;
 
-			$this->setTableHeader($tableHeader);
+			$this->setTableHeaders( $tableHeaders );
 		}
-		return $this->tableHeader;
+		return $this->tableHeaders;
 	}
 
 	/**
 	 *
-	 * @param array $tableHeader
+	 * @param array $tableHeaders
 	 */
-	protected function setTableHeader( array $tableHeader )
+	protected function setTableHeaders( array $tableHeaders )
 	{
-		$this->tableHeader = $tableHeader;
+		$this->tableHeaders = $tableHeaders;
 		return $this;
-	}
-
-	/**
-	 *
-	 * @return the array
-	 */
-	protected function getTableRows()
-	{
-		return $this->tableRows;
 	}
 
 	/**
@@ -433,5 +446,4 @@ abstract class AbstractCommand extends ContainerAwareCommand
 		$this->tableRows = $tableRows;
 		return $this;
 	}
-
 }

@@ -15,6 +15,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\Table;
 use Monolog\Logger;
 use Symfony\Component\Console\Helper\TableStyle;
+use Symfony\Component\Console\Helper\TableCell;
+use Symfony\Component\Console\Formatter\OutputFormatter;
+use Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 abstract class AbstractCommand extends ContainerAwareCommand
 {
@@ -53,6 +57,18 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 * @var string
 	 */
 	protected $rootDir;
+
+	/**
+	 *
+	 * @var array
+	 */
+	protected $tableHeader;
+
+	/**
+	 *
+	 * @var array
+	 */
+	protected $tableRows;
 
 	/**
 	 * Constructs SK ITCBundle Abstract Command
@@ -222,7 +238,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	public function writeLine( $message = "\n", $verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
 		$this->getOutput()
-			->writeln( $message );
+			->writeln( $message, $verbosity );
 		return $this;
 	}
 
@@ -233,7 +249,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Info Message
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeInfo( $message, $verbosity = OutputInterface::VERBOSITY_NORMAL )
+	public function writeInfo( $message, $verbosity = OutputInterface::VERBOSITY_VERBOSE )
 	{
 		$output = $this->getOutput();
 		$output->writeln( sprintf( '<fg=green>%s</fg=green>', $message ), $verbosity );
@@ -283,7 +299,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 		}
 		$table = new Table(
 			$this->getOutput() );
-		//$table->setStyle( $style );
+		$table->setStyle( 'default' );
 		$table->setHeaders( $header );
 		$table->setRows( $rows );
 		$table->render();
@@ -364,4 +380,58 @@ abstract class AbstractCommand extends ContainerAwareCommand
 		$this->rootDir = $rootDir;
 		return $this;
 	}
+
+	/**
+	 *
+	 * @return array
+	 */
+	protected function getTableHeaders(array $columns)
+	{
+		if(null===$this->tableHeader){
+			$tableHeader=array(
+					array(
+							new TableCell(
+									sprintf('Sources:'),
+									array(
+											'colspan' => count($columns)
+									) )
+					),
+					$columns
+			);
+			//$this->getDefinition();
+
+			$this->setTableHeader($tableHeader);
+		}
+		return $this->tableHeader;
+	}
+
+	/**
+	 *
+	 * @param array $tableHeader
+	 */
+	protected function setTableHeader( array $tableHeader )
+	{
+		$this->tableHeader = $tableHeader;
+		return $this;
+	}
+
+	/**
+	 *
+	 * @return the array
+	 */
+	protected function getTableRows()
+	{
+		return $this->tableRows;
+	}
+
+	/**
+	 *
+	 * @param array $tableRows
+	 */
+	protected function setTableRows( array $tableRows )
+	{
+		$this->tableRows = $tableRows;
+		return $this;
+	}
+
 }

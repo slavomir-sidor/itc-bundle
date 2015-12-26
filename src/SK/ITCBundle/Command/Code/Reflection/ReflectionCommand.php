@@ -20,6 +20,7 @@ use Symfony\Component\Console\Helper\TableCell;
 
 abstract class ReflectionCommand extends CodeCommand
 {
+
 	/**
 	 *
 	 * @param InputInterface $input
@@ -28,12 +29,12 @@ abstract class ReflectionCommand extends CodeCommand
 	protected function executeClassReflection()
 	{
 		$header = array(
-				'PHP Object',
-				'Final',
-				'Abstract',
-				'Namespace Name',
-				'Parent',
-				'Implements Interfaces'
+			'PHP Object',
+			'Final',
+			'Abstract',
+			'Namespace Name',
+			'Parent',
+			'Implements Interfaces'
 		);
 
 		$rows = array();
@@ -123,29 +124,53 @@ abstract class ReflectionCommand extends CodeCommand
 		$rows = [];
 		$reflection = $this->getOperationsReflections();
 
-		$declaringClassName="";
+		$declaringClassName = "";
 		foreach( $reflection as $operationReflection )
 		{
 			$row = array(
-					$operationReflection->getName(),
-					$operationReflection->isPrivate() ? "Private" : $operationReflection->isProtected() ? "Protected" : "Public",
-					$operationReflection->isAbstract() ? "Yes" : "No",
-					$operationReflection->isStatic() ? "Yes" : "No",
-					""
+				$operationReflection->getName(),
+				$operationReflection->isPrivate() ? "Private" : $operationReflection->isProtected() ? "Protected" : "Public",
+				$operationReflection->isAbstract() ? "Yes" : "No",
+				$operationReflection->isStatic() ? "Yes" : "No",
+				""
 			);
 
-			if($declaringClassName!=$operationReflection->getDeclaringClassName()){
-				$declaringClassName=$operationReflection->getDeclaringClassName();
-				$rows[] = [new TableCell('Object', array('colspan' => 5))];
-				$rows[] = [new TableCell($declaringClassName, array('colspan' => 5))];
+			if( $declaringClassName != $operationReflection->getDeclaringClassName() )
+			{
+				$declaringClassName = $operationReflection->getDeclaringClassName();
+				$rows[] = [
+					new TableCell(
+						'',
+						array(
+							'colspan' => 5
+						) )
+				];
+				$rows[] = [
+					new TableCell(
+						$declaringClassName,
+						array(
+							'colspan' => 5
+						) )
+				];
+				$rows[] = [
+					new TableCell(
+						'',
+						array(
+							'colspan' => 5
+						) )
+				];
 				$rows[] = $row;
-				$rows[] = [new TableSeparator()];
-			} else {
+				$rows[] = [
+					new TableSeparator()
+				];
+			}
+			else
+			{
 				$rows[] = $row;
 			}
 		}
 
-		$this->writeTable( $rows, $header,120 );
+		$this->writeTable( $rows, $header, 120 );
 		$this->writeExceptions();
 	}
 
@@ -237,23 +262,21 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeFilesReflection()
 	{
-		$header = array(
-			'File',
+		$header = $this->getTableHeaders( array(
 			"Owner",
 			"Group",
 			"Permissions",
 			"Created",
 			"Modified"
-		);
-
+		) );
 		$rows = [];
 
-		/* @var $file \SplFileInfo*/
-		foreach( $this->getFinder()
-			->files() as $file )
+		foreach( $this->getFileRelections() as $fileReflection )
 		{
+			$file = new \SplFileInfo(
+				$fileReflection->getName() );
 			$row = array(
-				$file->getRelativePathname(),
+				$fileReflection->getPrettyName(),
 				$file->getOwner(),
 				$file->getGroup(),
 				$file->getPerms(),
@@ -264,7 +287,7 @@ abstract class ReflectionCommand extends CodeCommand
 			$rows[] = $row;
 		}
 
-		$this->writeTable( $rows, $header );
+		$this->writeTable( $rows, $header, 120 );
 		$this->writeExceptions();
 	}
 }

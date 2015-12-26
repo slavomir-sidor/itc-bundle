@@ -262,15 +262,7 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeFilesReflection()
 	{
-		$header = $this->getTableHeaders( array(
-			"Owner",
-			"Group",
-			"Permissions",
-			"Created",
-			"Modified"
-		) );
 		$rows = [];
-
 		foreach( $this->getFileRelections() as $fileReflection )
 		{
 			$file = new \SplFileInfo(
@@ -283,11 +275,18 @@ abstract class ReflectionCommand extends CodeCommand
 				date( "d.m.Y h:m:s", $file->getCTime() ),
 				date( "d.m.Y h:m:s", $file->getMTime() )
 			);
-
 			$rows[] = $row;
 		}
 
-		$this->writeTable( $rows, $header, 120 );
+		$this->writeTable( $rows, array(
+			"Files",
+			"Owner",
+			"Group",
+			"Permissions",
+			"Created",
+			"Modified"
+		), 120 );
+
 		$this->writeExceptions();
 	}
 }

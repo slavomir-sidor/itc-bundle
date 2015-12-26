@@ -110,13 +110,13 @@ abstract class CodeCommand extends AbstractCommand
 				{
 					if( ! file_exists( $source ) )
 					{
-						$this->writeNotice( sprintf( "Finder Source '%s' not Exists.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+						$this->writeNotice( sprintf( "Finder Source '%s' not Exists.", $source ), OutputInterface::VERBOSITY_VERBOSE );
 					}
 
 					if( is_dir( $source ) )
 					{
 						$finder->in( $source );
-						$this->writeNotice( sprintf( "Finder Adding directory '%s'.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+						$this->writeInfo( sprintf( "Finder Adding directory '%s'.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 					}
 
 					if( is_file( $source ) )
@@ -125,7 +125,7 @@ abstract class CodeCommand extends AbstractCommand
 							$source
 						) );
 
-						$this->writeNotice( sprintf( "Finder Adding file '%s'.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+						$this->writeInfo( sprintf( "Finder Adding file '%s'.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 					}
 				}
 				catch( \Exception $e )
@@ -144,7 +144,7 @@ abstract class CodeCommand extends AbstractCommand
 				{
 					if( NULL === $bootstrap )
 					{
-						$this->writeNotice( sprintf( "Finder Boostrap not set.", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+						$this->writeInfo( sprintf( "Finder Boostrap not set.", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 					}
 					elseif( file_exists( $bootstrap ) )
 					{
@@ -153,11 +153,11 @@ abstract class CodeCommand extends AbstractCommand
 						$finder->append( array(
 							$bootstrap
 						) );
-						$this->writeNotice( sprintf( "Finder Adding Boostrap'%s'", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+						$this->writeInfo( sprintf( "Finder Adding Boostrap'%s'", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 					}
 					else
 					{
-						$this->writeNotice( sprintf( "Finder Boostrap '%s' not exists.", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+						$this->writeInfo( sprintf( "Finder Boostrap '%s' not exists.", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 					}
 				}
 				catch( \Exception $e )
@@ -179,7 +179,7 @@ abstract class CodeCommand extends AbstractCommand
 						$finder->followLinks();
 					}
 
-					$this->writeNotice(
+					$this->writeInfo(
 						sprintf( "Finder following links '%s'.", $followLinks ? 'yes' : 'no' ),
 						OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
@@ -199,7 +199,7 @@ abstract class CodeCommand extends AbstractCommand
 
 					$finder->ignoreDotFiles( $ignoreDotFiles );
 
-					$this->writeNotice(
+					$this->writeInfo(
 						sprintf( "Finder ignoring dot files '%s'.", $ignoreDotFiles ? 'yes' : 'no' ),
 						OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
@@ -218,7 +218,7 @@ abstract class CodeCommand extends AbstractCommand
 						->getOption( "fileSuffix" );
 					$finder->name( $fileSuffix );
 
-					$this->writeNotice( sprintf( "Finder applying file suffix '%s'.", $fileSuffix ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+					$this->writeInfo( sprintf( "Finder applying file suffix '%s'.", $fileSuffix ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
 				catch( \Exception $e )
 				{
@@ -237,7 +237,7 @@ abstract class CodeCommand extends AbstractCommand
 					$finder->exclude( $this->getInput()
 						->getOption( "exclude" ) );
 
-					$this->writeNotice(
+					$this->writeInfo(
 						sprintf( "Finder applying exclude '%s'.", implode( ",", $exclude ) ),
 						OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
@@ -388,7 +388,7 @@ abstract class CodeCommand extends AbstractCommand
 				$classReflections,
 				function ( ReflectionClass $classReflection ) use ($input )
 				{
-					$this->writeNotice(
+					$this->writeInfo(
 						sprintf( "Processing class reflection '%s'.", $classReflection->getName() ),
 						OutputInterface::VERBOSITY_VERBOSE );
 

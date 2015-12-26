@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Command Code Abstract Reflection
  *
@@ -17,6 +18,7 @@ use TokenReflection\ReflectionMethod;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableCell;
+use Symfony\Component\DependencyInjection\Variable;
 
 abstract class ReflectionCommand extends CodeCommand
 {
@@ -28,6 +30,7 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeClassReflection()
 	{
+
 		$header = array(
 			'PHP Object',
 			'Final',
@@ -54,9 +57,8 @@ abstract class ReflectionCommand extends CodeCommand
 			{
 				$row[] = "Class";
 			}
-			$row[] = $classReflection->isFinal() ? "Yes" : "No";
-			$row[] = $classReflection->isAbstract() ? "Yes" : "No";
-
+			$row[] = $classReflection->isFinal() ? "Final" : "";
+			$row[] = $classReflection->isAbstract() ? "Abstract" : "";
 			$row[] = $classReflection->getName();
 			$row[] = implode( "\n", $classReflection->getParentClassNameList() );
 			$row[] = implode( "\n", $classReflection->getInterfaceNames() );
@@ -66,6 +68,7 @@ abstract class ReflectionCommand extends CodeCommand
 
 		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
+
 	}
 
 	/**
@@ -75,10 +78,8 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeAttributesReflection()
 	{
-		$classReflections = $this->getClassReflections();
 
-		$header = array(
-			'Namespace Name',
+		$columns = array(
 			'Class',
 			'Attribute',
 			'Accessibility',
@@ -86,24 +87,23 @@ abstract class ReflectionCommand extends CodeCommand
 		);
 		$rows = array();
 
-		foreach( $classReflections as $classReflection )
+		foreach( $this->getClassReflections() as $classReflection )
 		{
 			$attributesReflections = $classReflection->getProperties();
 
 			foreach( $attributesReflections as $attributesReflection )
 			{
 				$rows[] = array(
-
-					$classReflection->getNamespaceName(),
-					$classReflection->getShortName(),
+					$classReflection->getName(),
 					$attributesReflection->getName(),
 					$attributesReflection->isPrivate() ? "Private" : $attributesReflection->isProtected() ? "Protected" : "Public",
 					$attributesReflection->isStatic() ? "Yes" : "No"
 				);
 			}
 		}
-		$this->writeTable( $rows, $header );
+		$this->writeTable( $rows, $columns, 120 );
 		$this->writeExceptions();
+
 	}
 
 	/**
@@ -113,64 +113,49 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeOperationsReflection()
 	{
-		$header = array(
-			'Class Operation',
+
+		$rows = [];
+		$declaringClassName = "";
+
+		foreach( $this->getOperationsReflections() as $operationReflection )
+		{
+			$operationsParametersReflections = $operationReflection->getParameters();
+			$operationsParameters = [];
+			foreach( $operationsParametersReflections as $parameter )
+			{
+				$operationsParameters[] = $parameter->getName();
+			}
+			$annotations = $operationReflection->getAnnotations();
+			$accesibility="";
+			if($operationReflection->isPrivate()){
+				$accesibility="Private";
+			}
+			if($operationReflection->isProtected()){
+				$accesibility="Protected";
+			}
+			if($operationReflection->isPublic()){
+				$accesibility="Public";
+			}
+
+			$rows[] = array(
+				$accesibility,
+				$operationReflection->isAbstract() ? "Abstract" : "",
+				$operationReflection->isStatic() ? "Static" : "",
+				sprintf( '%s::%s', $operationReflection->getDeclaringClassName(), $operationReflection->getName() ),
+				implode( ', ', $operationsParameters ),
+				(isset($annotations['return']) && isset($annotations['return'][0]))?$annotations['return'][0]:''
+			);
+		}
+
+		$this->writeTable( $rows, array(
 			'Accessibility',
 			'Abstract',
 			'Static',
+			'Operation',
 			'Parameters',
 			'Returns'
-		);
-		$rows = [];
-		$reflection = $this->getOperationsReflections();
+		), 120 );
 
-		$declaringClassName = "";
-		foreach( $reflection as $operationReflection )
-		{
-			$row = array(
-				$operationReflection->getName(),
-				$operationReflection->isPrivate() ? "Private" : $operationReflection->isProtected() ? "Protected" : "Public",
-				$operationReflection->isAbstract() ? "Yes" : "No",
-				$operationReflection->isStatic() ? "Yes" : "No",
-				""
-			);
-
-			if( $declaringClassName != $operationReflection->getDeclaringClassName() )
-			{
-				$declaringClassName = $operationReflection->getDeclaringClassName();
-				$rows[] = [
-					new TableCell(
-						'',
-						array(
-							'colspan' => 5
-						) )
-				];
-				$rows[] = [
-					new TableCell(
-						$declaringClassName,
-						array(
-							'colspan' => 5
-						) )
-				];
-				$rows[] = [
-					new TableCell(
-						'',
-						array(
-							'colspan' => 5
-						) )
-				];
-				$rows[] = $row;
-				$rows[] = [
-					new TableSeparator()
-				];
-			}
-			else
-			{
-				$rows[] = $row;
-			}
-		}
-
-		$this->writeTable( $rows, $header, 120 );
 		$this->writeExceptions();
 	}
 
@@ -181,6 +166,7 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeOperationsAttributesReflection()
 	{
+
 		$header = array(
 			'Class Name',
 			'Operation',
@@ -219,6 +205,7 @@ abstract class ReflectionCommand extends CodeCommand
 
 		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
+
 	}
 
 	/**
@@ -228,6 +215,7 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeNamespaceReflection()
 	{
+
 		$header = array(
 			'Namespace Name',
 			'Objects Count'
@@ -253,6 +241,7 @@ abstract class ReflectionCommand extends CodeCommand
 
 		$this->writeTable( $rows, $header );
 		$this->writeExceptions();
+
 	}
 
 	/**
@@ -262,11 +251,11 @@ abstract class ReflectionCommand extends CodeCommand
 	 */
 	protected function executeFilesReflection()
 	{
+
 		$rows = [];
 		foreach( $this->getFileRelections() as $fileReflection )
 		{
-			$file = new \SplFileInfo(
-				$fileReflection->getName() );
+			$file = new \SplFileInfo( $fileReflection->getName() );
 			$row = array(
 				$fileReflection->getPrettyName(),
 				$file->getOwner(),
@@ -288,5 +277,7 @@ abstract class ReflectionCommand extends CodeCommand
 		), 120 );
 
 		$this->writeExceptions();
+
 	}
+
 }

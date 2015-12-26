@@ -6,6 +6,7 @@
 
 	<imports>
 		<import resource="Assetic/parameters.xml" />
+		<import resource="Code/parameters.xml" />
 		<import resource="Application/parameters.xml" />
 		<import resource="Console/parameters.xml" />
 		<import resource="PHPUnit/parameters.xml" />

@@ -507,6 +507,9 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
 
@@ -521,6 +524,9 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
 
@@ -535,6 +541,9 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
 
@@ -549,6 +558,9 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
 
@@ -563,6 +575,9 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
 
@@ -578,6 +593,9 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
 
@@ -592,6 +610,9 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
 
@@ -606,6 +627,9 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
 
@@ -620,6 +644,9 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
 
@@ -634,6 +661,9 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
 
@@ -648,6 +678,10 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
+
 			<tag name="console.command" />
 
 		</service>
@@ -661,6 +695,9 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
 

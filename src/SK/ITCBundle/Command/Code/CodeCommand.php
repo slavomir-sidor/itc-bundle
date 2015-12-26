@@ -23,7 +23,8 @@ use TokenReflection\ReflectionClass;
 use TokenReflection\Broker\Backend;
 use TokenReflection\ReflectionMethod;
 use Assetic\Exception\Exception;
-use Symfony\Component\Process\ProcessBuilder;
+use Monolog\Logger;
+use SK\ITCBundle\Code\Reflection\Reflection;
 
 abstract class CodeCommand extends AbstractCommand
 {
@@ -64,21 +65,52 @@ abstract class CodeCommand extends AbstractCommand
 	protected $broker;
 
 	/**
+	 *
+	 * @var Reflection $reflection
+	 */
+	protected $reflection;
+
+	/**
+	 * Constructs SK ITCBundle Abstract Command
+	 *
+	 * @param string $name
+	 *        	SK ITCBundle Abstract Command Name
+	 * @param string $description
+	 *        	SK ITCBundle Abstract Command Description
+	 * @param Logger $logger
+	 *        	SK ITCBundle Abstract Command Logger
+	 * @param Reflection $reflection
+	 *        	SK ITCBundle Abstract Command Reflection
+	 */
+	public function __construct(
+		$name,
+		$description,
+		Logger $logger,
+		Reflection $reflection )
+	{
+
+		parent::__construct( $name, $description, $logger );
+		$this->setReflection( $reflection );
+
+	}
+
+	/**
 	 * Gets SK ITCBundle Command Code Generator Broker
 	 *
 	 * @return \TokenReflection\Broker
 	 */
 	public function getBroker()
 	{
+
 		if( null === $this->broker )
 		{
 			$backend = new Broker\Backend\Memory();
-			$broker = new Broker(
-				$backend );
+			$broker = new Broker( $backend );
 
 			$this->setBroker( $broker );
 		}
 		return $this->broker;
+
 	}
 
 	/**
@@ -86,8 +118,10 @@ abstract class CodeCommand extends AbstractCommand
 	 *
 	 * @return \Symfony\Component\Finder\Finder
 	 */
-	public function getFinder( $name = null )
+	public function getFinder(
+		$name = null )
 	{
+
 		if( null == $name )
 		{
 			$name = 0;
@@ -237,9 +271,7 @@ abstract class CodeCommand extends AbstractCommand
 					$finder->exclude( $this->getInput()
 						->getOption( "exclude" ) );
 
-					$this->writeInfo(
-						sprintf( "Finder applying exclude '%s'.", implode( ",", $exclude ) ),
-						OutputInterface::VERBOSITY_VERY_VERBOSE );
+					$this->writeInfo( sprintf( "Finder applying exclude '%s'.", implode( ",", $exclude ) ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
 				catch( \Exception $e )
 				{
@@ -251,17 +283,7 @@ abstract class CodeCommand extends AbstractCommand
 		}
 
 		return $this->finders[ $name ];
-	}
 
-	/**
-	 * (non-PHPdoc)
-	 *
-	 * @see \Symfony\Component\Console\Command\Command::execute()
-	 */
-	public function execute( InputInterface $input, OutputInterface $output )
-	{
-		parent::execute( $input, $output );
-		$this->setSrc( $input->getArgument( 'src' ) );
 	}
 
 	/**
@@ -271,6 +293,7 @@ abstract class CodeCommand extends AbstractCommand
 	 */
 	protected function configure()
 	{
+
 		parent::configure();
 
 		$this->addOption( "bootstrap", "bs", InputOption::VALUE_OPTIONAL, "PHP Boostrap File." );
@@ -284,7 +307,8 @@ abstract class CodeCommand extends AbstractCommand
 			"operationName",
 			"on",
 			InputOption::VALUE_OPTIONAL,
-			"Operations name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
+			"Operations name, e.g. '^myPrefix|mySuffix$', regular expression allowed.",
+			NULL );
 		$this->addOption(
 			"operationAttributeName",
 			"oa",
@@ -297,8 +321,10 @@ abstract class CodeCommand extends AbstractCommand
 		$this->addOption( "followLinks", "fl", InputOption::VALUE_OPTIONAL, "Follows links.", false );
 
 		$this->addOption( "is-interface", "ii", InputOption::VALUE_REQUIRED, "Reflect Interfaces Objects Only, possible values are (true|false)." );
-		$this->addOption( "is-abstract", "ia", InputOption::VALUE_REQUIRED, "Reflect Abstract Classes Only, possible values are (true|false)." );
+		$this->addOption( "is-trait", "it", InputOption::VALUE_REQUIRED, "Reflect Traits Objects Only, possible values are (true|false)." );
+		$this->addOption( "is-abstract-class", "ib", InputOption::VALUE_REQUIRED, "Reflect Abstract Classes Only, possible values are (true|false)." );
 		$this->addOption( "is-final", "if", InputOption::VALUE_REQUIRED, "Reflect Final Classes Only, possible values are (true|false)." );
+		$this->addOption( "is-abstract", "ia", InputOption::VALUE_REQUIRED, "Reflect Abstract Classes Only, possible values are (true|false)." );
 		$this->addOption(
 			"is-private",
 			"ip",
@@ -327,14 +353,17 @@ abstract class CodeCommand extends AbstractCommand
 			"app/",
 			"tests/"
 		) );
+
 	}
 
 	/**
 	 *
 	 * @param array $src
 	 */
-	public function setSrc( array $src )
+	public function setSrc(
+		array $src )
 	{
+
 		$root = $this->getRootDir();
 
 		foreach( $src as $directory )
@@ -348,6 +377,7 @@ abstract class CodeCommand extends AbstractCommand
 		}
 
 		return $this;
+
 	}
 
 	/**
@@ -355,8 +385,10 @@ abstract class CodeCommand extends AbstractCommand
 	 * @param string $class
 	 * @return array
 	 */
-	protected function getNamespace( $class )
+	protected function getNamespace(
+		$class )
 	{
+
 		$names = explode( "\\", $class );
 		$className = array_pop( $names );
 
@@ -364,6 +396,7 @@ abstract class CodeCommand extends AbstractCommand
 			'namespace' => implode( "\\", $names ),
 			'class' => $className
 		);
+
 	}
 
 	/**
@@ -373,6 +406,7 @@ abstract class CodeCommand extends AbstractCommand
 	 */
 	public function getClassReflections()
 	{
+
 		if( NULL === $this->classReflections )
 		{
 			/* This should be called pro forma due Broker Class reflection */
@@ -386,13 +420,15 @@ abstract class CodeCommand extends AbstractCommand
 
 			$classReflections = array_filter(
 				$classReflections,
-				function ( ReflectionClass $classReflection ) use ($input )
+				function (
+					$classReflection ) use (
+				$input )
 				{
 					$this->writeInfo(
 						sprintf( "Processing class reflection '%s'.", $classReflection->getName() ),
 						OutputInterface::VERBOSITY_VERBOSE );
 
-					$isAbstract = $input->getOption( "is-abstract" );
+					$isAbstract = $input->getOption( "is-abstract-class" );
 					if( NULL !== $isAbstract )
 					{
 
@@ -420,6 +456,20 @@ abstract class CodeCommand extends AbstractCommand
 							$isInterface = true;
 						}
 						return ($isInterface == $classReflection->isInterface());
+					}
+
+					$isTrait = $input->getOption( "is-trait" );
+					if( NULL !== $isTrait )
+					{
+						if( $isTrait == "false" )
+						{
+							$isTrait = false;
+						}
+						else
+						{
+							$isTrait = true;
+						}
+						return ($isTrait == $classReflection->isTrait());
 					}
 
 					$isFinal = $input->getOption( "is-final" );
@@ -476,6 +526,7 @@ abstract class CodeCommand extends AbstractCommand
 		}
 
 		return $this->classReflections;
+
 	}
 
 	/**
@@ -484,17 +535,19 @@ abstract class CodeCommand extends AbstractCommand
 	 * @param string $className
 	 * @return ReflectionClass
 	 */
-	public function getClassReflection( $className )
+	public function getClassReflection(
+		$className )
 	{
+
 		$classReflections = $this->getClassReflections();
 
 		if( ! isset( $classReflections[ $className ] ) )
 		{
-			throw new \Exception(
-				sprintf( "Class reflection '%s' is not set.", $className ) );
+			throw new \Exception( sprintf( "Class reflection '%s' is not set.", $className ) );
 		}
 
 		return $classReflections[ $className ];
+
 	}
 
 	/**
@@ -503,10 +556,13 @@ abstract class CodeCommand extends AbstractCommand
 	 * @param ReflectionClass[] $classReflections
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setClassReflections( $classReflections )
+	public function setClassReflections(
+		$classReflections )
 	{
+
 		$this->classReflections = $classReflections;
 		return $this;
+
 	}
 
 	/**
@@ -517,8 +573,11 @@ abstract class CodeCommand extends AbstractCommand
 	 * @param string $name
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function setFinder( Finder $finder, $name = null )
+	public function setFinder(
+		Finder $finder,
+		$name = null )
 	{
+
 		if( null === $name )
 		{
 			$name = 0;
@@ -527,6 +586,7 @@ abstract class CodeCommand extends AbstractCommand
 		$this->finders[ $name ] = $finder;
 
 		return $this;
+
 	}
 
 	/**
@@ -536,10 +596,13 @@ abstract class CodeCommand extends AbstractCommand
 	 *        	SK ITCBundle Command Code Generator Broker
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function setBroker( Broker $broker )
+	public function setBroker(
+		Broker $broker )
 	{
+
 		$this->broker = $broker;
 		return $this;
+
 	}
 
 	/**
@@ -547,27 +610,24 @@ abstract class CodeCommand extends AbstractCommand
 	 *
 	 * @return ReflectionMethod[]
 	 */
-	public function getOperationsReflections( $className = NULL )
+	public function getOperationsReflections()
 	{
+
 		if( null === $this->operationsReflections )
 		{
 			$classReflections = $this->getClassReflections();
-
 			$this->writeInfo( sprintf( "Searching class operations in '%s' classes.", count( $classReflections ) ) );
 
 			$operationsReflections = [];
+			$input = $this->getInput();
 
-			/**
-			 *
-			 * @todo add operation filter for class reflections
-			 *       $operationFilter = $this->getInput()->getOption('operationFilter');
-			 */
+			$operationPattern = NULL;
+			$operationName = $this->getInput()
+				->getOption( 'operationName' );
 
-			if( $this->getInput()
-				->hasOption( 'operationName' ) )
+			if( NULL !== $operationName )
 			{
-				$operationPattern = sprintf( "/%s/", $this->getInput()
-					->getOption( 'operationName' ) );
+				$operationPattern = sprintf( "/%s/", $operationName );
 			}
 
 			foreach( $classReflections as $classReflection )
@@ -575,26 +635,105 @@ abstract class CodeCommand extends AbstractCommand
 				/* @var $operationReflection ReflectionMethod[] */
 				$classOperationReflections = $classReflection->getMethods();
 
-				foreach( $classOperationReflections as $operationReflection )
-				{
-					$this->writeNotice(
-						sprintf( "Processing operation reflection '%s'.", $operationReflection->getName() ),
-						OutputInterface::VERBOSITY_VERBOSE );
-
-					if( $operationPattern !== "" && ! preg_match( $operationPattern, $operationReflection->getName() ) )
+				$classOperationReflections = array_filter(
+					$classOperationReflections,
+					function (
+						$classOperationReflection ) use (
+							$input,
+							$operationPattern )
 					{
-						continue;
-					}
-					$operationsReflections[] = $operationReflection;
-				}
-			}
+						/* @var $classOperationReflection ReflectionMethod */
+						$this->writeInfo(
+							sprintf( "Processing class operation reflection '%s'.", $classOperationReflection->getName() ),
+							OutputInterface::VERBOSITY_VERBOSE );
 
+						if( NULL !== $operationPattern )
+						{
+							return preg_match( $operationPattern, $classOperationReflection->getName() );
+						}
+
+						$isAbstract = $input->getOption( "is-abstract" );
+						if( NULL !== $isAbstract )
+						{
+
+							if( $isAbstract == "false" )
+							{
+
+								$isAbstract = false;
+							}
+							else
+							{
+								$isAbstract = true;
+							}
+							return ($isAbstract == $classOperationReflection->isAbstract());
+						}
+
+						$isPrivate = $input->getOption( "is-private" );
+						if( NULL !== $isPrivate )
+						{
+							if( $isPrivate == "false" )
+							{
+								$isPrivate = false;
+							}
+							else
+							{
+								$isPrivate = true;
+							}
+							return ($isPrivate == $classOperationReflection->isPrivate());
+						}
+
+						$isPublic = $input->getOption( "is-public" );
+						if( NULL !== $isPublic )
+						{
+							if( $isPublic == "false" )
+							{
+								$isPublic = false;
+							}
+							else
+							{
+								$isPublic = true;
+							}
+							return ($isPublic == $classOperationReflection->isPublic());
+						}
+
+						$isProtected = $input->getOption( "is-protected" );
+						if( NULL !== $isProtected )
+						{
+							if( $isProtected == "false" )
+							{
+								$isProtected = false;
+							}
+							else
+							{
+								$isProtected = true;
+							}
+							return ($isProtected == $classOperationReflection->isProtected());
+						}
+
+						$isStatic = $input->getOption( "is-static" );
+						if( NULL !== $isStatic )
+						{
+
+							if( $isStatic == "false" )
+							{
+
+								$isStatic = false;
+							}
+							else
+							{
+								$isStatic = true;
+							}
+							return ($isStatic == $classOperationReflection->isStatic());
+						}
+					} );
+				$operationsReflections=array_merge($operationsReflections,$classOperationReflections);
+			}
 			$this->setOperationsReflections( $operationsReflections );
 			$this->writeInfo(
 				sprintf( "Found '%d' Operations in '%d' Classes.", count( $this->getOperationsReflections() ), count( $this->getClassReflections() ) ) );
 		}
-
 		return $this->operationsReflections;
+
 	}
 
 	/**
@@ -603,10 +742,13 @@ abstract class CodeCommand extends AbstractCommand
 	 * @param ReflectionMethod[] $operationsReflections
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function setOperationsReflections( array $operationsReflections )
+	public function setOperationsReflections(
+		array $operationsReflections )
 	{
+
 		$this->operationsReflections = $operationsReflections;
 		return $this;
+
 	}
 
 	/**
@@ -617,15 +759,17 @@ abstract class CodeCommand extends AbstractCommand
 	 * @return ReflectionFile
 	 * @throws \Exception
 	 */
-	public function getFileRelection( $filename )
+	public function getFileRelection(
+		$filename )
 	{
+
 		$fileReflections = $this->getFileRelections();
 		if( in_array( $filename, $fileReflections ) )
 		{
 			return $fileReflections[ $filename ];
 		}
-		throw new \Exception(
-			sprintf( "No '%s' file reflection exists.", $filename ) );
+		throw new \Exception( sprintf( "No '%s' file reflection exists.", $filename ) );
+
 	}
 
 	/**
@@ -635,6 +779,7 @@ abstract class CodeCommand extends AbstractCommand
 	 */
 	public function getFileRelections()
 	{
+
 		if( null === $this->fileRelections )
 		{
 			$src = $this->getInput()
@@ -653,6 +798,7 @@ abstract class CodeCommand extends AbstractCommand
 					/* @var $fileReflection ReflectionFile */
 					$fileReflection = $this->getBroker()
 						->processFile( $fileName, true );
+
 					$fileReflections[] = $fileReflection;
 				}
 				catch( \Exception $exception )
@@ -667,6 +813,7 @@ abstract class CodeCommand extends AbstractCommand
 		}
 
 		return $this->fileRelections;
+
 	}
 
 	/**
@@ -675,10 +822,13 @@ abstract class CodeCommand extends AbstractCommand
 	 * @param ReflectionFile[] $fileRelections
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function setFileRelections( array $fileRelections )
+	public function setFileRelections(
+		array $fileRelections )
 	{
+
 		$this->fileRelections = $fileRelections;
 		return $this;
+
 	}
 
 	/**
@@ -688,9 +838,37 @@ abstract class CodeCommand extends AbstractCommand
 	 *        	SK ITCBundle Command Code Generator File Reflection
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function setFileRelection( array $fileRelections )
+	public function setFileRelection(
+		array $fileRelections )
 	{
+
 		$this->fileRelections = $fileRelections;
 		return $this;
+
 	}
+
+	/**
+	 *
+	 * @return the Reflection
+	 */
+	protected function getReflection()
+	{
+
+		return $this->reflection;
+
+	}
+
+	/**
+	 *
+	 * @param Reflection $reflection
+	 */
+	protected function setReflection(
+		Reflection $reflection )
+	{
+
+		$this->reflection = $reflection;
+		return $this;
+
+	}
+
 }

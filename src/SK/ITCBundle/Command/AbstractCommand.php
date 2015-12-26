@@ -72,6 +72,12 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	protected $tableRows;
 
 	/**
+	 *
+	 * @var Table
+	 */
+	protected $table;
+
+	/**
 	 * Constructs SK ITCBundle Abstract Command
 	 *
 	 * @param string $name
@@ -220,7 +226,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	{
 		if( count( $this->getExceptions() ) > 0 )
 		{
-			$this->writeInfo( "Occured %d exceptions", count( $this->getExceptions() ) );
+			$this->writeInfo( sprintf("Exceptions: %d", count( $this->getExceptions() )) );
 			foreach( $this->getExceptions() as $exception )
 			{
 				$this->writeException( $exception );
@@ -446,4 +452,16 @@ abstract class AbstractCommand extends ContainerAwareCommand
 		$this->tableRows = $tableRows;
 		return $this;
 	}
+
+	public function getTable()
+	{
+		return $this->table;
+	}
+
+	public function setTable( Table $table )
+	{
+		$this->table = $table;
+		return $this;
+	}
+
 }

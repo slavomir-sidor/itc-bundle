@@ -8,6 +8,7 @@
 
 		<import resource="Assetic/services.xml" />
 		<import resource="Application/services.xml" />
+		<import resource="Code/services.xml" />
 		<import resource="Console/services.xml" />
 		<import resource="Filesystem/services.xml" />
 		<import resource="Google/services.xml" />

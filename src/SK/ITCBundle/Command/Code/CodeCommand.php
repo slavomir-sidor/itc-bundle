@@ -30,45 +30,52 @@ abstract class CodeCommand extends AbstractCommand
 {
 
 	/**
-	 * SK ITCBundle Command Code Generator Class Reflection
-	 *
-	 * @var ReflectionClass[]
-	 */
-	protected $classReflections;
-
-	/**
-	 * SK ITCBundle Command Code Generator Operations Reflection
-	 *
-	 * @var ReflectionMethod[]
-	 */
-	protected $operationsReflections;
-
-	/**
-	 * SK ITCBundle Command Code Generator Finder
-	 *
-	 * @var Finder[]
-	 */
-	protected $finders = array();
-
-	/**
-	 * SK ITCBundle Command Code Generator Finder
-	 *
-	 * @var ReflectionFile[]
-	 */
-	protected $fileRelections;
-
-	/**
-	 * SK ITCBundle Command Code Generator Broker
-	 *
-	 * @var Broker
-	 */
-	protected $broker;
-
-	/**
 	 *
 	 * @var Reflection $reflection
 	 */
 	protected $reflection;
+
+	/**
+	 * SK ITCBundle Code Generator Finder
+	 *
+	 * @var array
+	 */
+	protected $files;
+
+	/**
+	 * SK ITCBundle Command Code Generator Class Reflection
+	 *
+	 * @var array
+	 */
+	protected $packages;
+
+	/**
+	 * SK ITCBundle Command Code Generator Class Reflection
+	 *
+	 * @var array
+	 */
+	protected $classes;
+
+	/**
+	 * SK ITCBundle Command Code Generator Operations Reflection
+	 *
+	 * @var array
+	 */
+	protected $properties;
+
+	/**
+	 * SK ITCBundle Command Code Generator Operations Reflection
+	 *
+	 * @var array
+	 */
+	protected $operations;
+
+	/**
+	 * SK ITCBundle Command Code Generator Operations Reflection
+	 *
+	 * @var array
+	 */
+	protected $parameters;
 
 	/**
 	 * Constructs SK ITCBundle Abstract Command
@@ -91,198 +98,6 @@ abstract class CodeCommand extends AbstractCommand
 
 		parent::__construct( $name, $description, $logger );
 		$this->setReflection( $reflection );
-
-	}
-
-	/**
-	 * Gets SK ITCBundle Command Code Generator Broker
-	 *
-	 * @return \TokenReflection\Broker
-	 */
-	public function getBroker()
-	{
-
-		if( null === $this->broker )
-		{
-			$backend = new Broker\Backend\Memory();
-			$broker = new Broker( $backend );
-
-			$this->setBroker( $broker );
-		}
-		return $this->broker;
-
-	}
-
-	/**
-	 * Gets SK ITCBundle Command Code Generator Finder
-	 *
-	 * @return \Symfony\Component\Finder\Finder
-	 */
-	public function getFinder(
-		$name = null )
-	{
-
-		if( null == $name )
-		{
-			$name = 0;
-		}
-
-		if( array_key_exists( $name, $this->finders ) )
-		{
-			return $this->finders[ $name ];
-		}
-		else
-		{
-			$finder = new Finder();
-
-			$src = $this->getInput()
-				->getArgument( "src" );
-
-			foreach( $src as $source )
-			{
-				try
-				{
-					if( ! file_exists( $source ) )
-					{
-						$this->writeNotice( sprintf( "Finder Source '%s' not Exists.", $source ), OutputInterface::VERBOSITY_VERBOSE );
-					}
-
-					if( is_dir( $source ) )
-					{
-						$finder->in( $source );
-						$this->writeInfo( sprintf( "Finder Adding directory '%s'.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
-					}
-
-					if( is_file( $source ) )
-					{
-						$finder->append( array(
-							$source
-						) );
-
-						$this->writeInfo( sprintf( "Finder Adding file '%s'.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
-					}
-				}
-				catch( \Exception $e )
-				{
-					$this->writeException( $e );
-				}
-			}
-
-			if( $this->getInput()
-				->hasOption( "bootstrap" ) )
-			{
-				$bootstrap = $this->getInput()
-					->getOption( "bootstrap" );
-
-				try
-				{
-					if( NULL === $bootstrap )
-					{
-						$this->writeInfo( sprintf( "Finder Boostrap not set.", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
-					}
-					elseif( file_exists( $bootstrap ) )
-					{
-						@require_once $bootstrap;
-
-						$finder->append( array(
-							$bootstrap
-						) );
-						$this->writeInfo( sprintf( "Finder Adding Boostrap'%s'", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
-					}
-					else
-					{
-						$this->writeInfo( sprintf( "Finder Boostrap '%s' not exists.", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
-					}
-				}
-				catch( \Exception $e )
-				{
-					$this->writeException( $e );
-				}
-			}
-
-			if( $this->getInput()
-				->hasOption( "followLinks" ) )
-			{
-				try
-				{
-					$followLinks = $this->getInput()
-						->getOption( "followLinks" );
-
-					if( true === $followLinks )
-					{
-						$finder->followLinks();
-					}
-
-					$this->writeInfo(
-						sprintf( "Finder following links '%s'.", $followLinks ? 'yes' : 'no' ),
-						OutputInterface::VERBOSITY_VERY_VERBOSE );
-				}
-				catch( \Exception $e )
-				{
-					$this->writeException( $e );
-				}
-			}
-
-			if( $this->getInput()
-				->hasOption( "ignoreDotFiles" ) )
-			{
-				try
-				{
-					$ignoreDotFiles = $this->getInput()
-						->getOption( "ignoreDotFiles" );
-
-					$finder->ignoreDotFiles( $ignoreDotFiles );
-
-					$this->writeInfo(
-						sprintf( "Finder ignoring dot files '%s'.", $ignoreDotFiles ? 'yes' : 'no' ),
-						OutputInterface::VERBOSITY_VERY_VERBOSE );
-				}
-				catch( \Exception $e )
-				{
-					$this->writeException( $e );
-				}
-			}
-
-			if( $this->getInput()
-				->hasOption( "fileSuffix" ) )
-			{
-				try
-				{
-					$fileSuffix = $this->getInput()
-						->getOption( "fileSuffix" );
-					$finder->name( $fileSuffix );
-
-					$this->writeInfo( sprintf( "Finder applying file suffix '%s'.", $fileSuffix ), OutputInterface::VERBOSITY_VERY_VERBOSE );
-				}
-				catch( \Exception $e )
-				{
-					$this->writeException( $e );
-				}
-			}
-
-			$exclude = $this->getInput()
-				->getOption( "exclude" );
-
-			if( $this->getInput()
-				->hasOption( "exclude" ) && $exclude )
-			{
-				try
-				{
-					$finder->exclude( $this->getInput()
-						->getOption( "exclude" ) );
-
-					$this->writeInfo( sprintf( "Finder applying exclude '%s'.", implode( ",", $exclude ) ), OutputInterface::VERBOSITY_VERY_VERBOSE );
-				}
-				catch( \Exception $e )
-				{
-					$this->writeException( $e );
-				}
-			}
-
-			$this->setFinder( $finder, $name );
-		}
-
-		return $this->finders[ $name ];
 
 	}
 
@@ -358,30 +173,6 @@ abstract class CodeCommand extends AbstractCommand
 
 	/**
 	 *
-	 * @param array $src
-	 */
-	public function setSrc(
-		array $src )
-	{
-
-		$root = $this->getRootDir();
-
-		foreach( $src as $directory )
-		{
-			$directory = $root . DIRECTORY_SEPARATOR . $directory;
-
-			if( file_exists( $directory ) )
-			{
-				$this->src[] = $directory;
-			}
-		}
-
-		return $this;
-
-	}
-
-	/**
-	 *
 	 * @param string $class
 	 * @return array
 	 */
@@ -402,21 +193,21 @@ abstract class CodeCommand extends AbstractCommand
 	/**
 	 * Gets SK ITCBundle Command Code Generator Class Reflection
 	 *
-	 * @return ReflectionClass[]
+	 * @return array
 	 */
-	public function getClassReflections()
+	protected function getClassReflections()
 	{
 
 		if( NULL === $this->classReflections )
 		{
 			/* This should be called pro forma due Broker Class reflection */
-			$fileReflections = $this->getFileRelections();
-			$this->writeInfo( sprintf( "Searching class reflection in '%d' files.", count( $fileReflections ) ) );
+			$fileReflections = $this->getFileReflections();
 
+			$this->writeInfo( sprintf( "Searching class reflection in '%d' files.", count( $fileReflections ) ) );
 			$input = $this->getInput();
 			/* @var $classReflections ReflectionClass[] */
-			$classReflections = $this->getBroker()
-				->getClasses( Backend::TOKENIZED_CLASSES, Backend::INTERNAL_CLASSES );
+			$classReflections = $this->getReflection()
+				->getClassReflections();
 
 			$classReflections = array_filter(
 				$classReflections,
@@ -515,14 +306,32 @@ abstract class CodeCommand extends AbstractCommand
 					return true;
 				} );
 
-			$this->setClassReflections( $classReflections );
+			$rows = [];
+			foreach( $classReflections as $classReflection )
+			{
+				$row = [];
+				if( $classReflection->isTrait() )
+				{
+					$row[ 'object' ] = "Trait";
+				}
+				elseif( $classReflection->isInterface() )
+				{
+					$row[ 'object' ] = "Interface";
+				}
+				else
+				{
+					$row[ 'object' ] = "Class";
+				}
+				$row[ 'final' ] = $classReflection->isFinal() ? "Final" : "";
+				$row[ 'abstract' ] = $classReflection->isAbstract() ? "Abstract" : "";
+				$row[ 'name' ] = $classReflection->getName();
+				$row[ 'parent' ] = implode( "\n", $classReflection->getParentClassNameList() );
+				$row[ 'interface' ] = implode( "\n", $classReflection->getInterfaceNames() );
 
-			$this->writeInfo(
-				sprintf(
-					"Found '%d' classes with '%d' errors in '%d' files.",
-					count( $classReflections ),
-					count( $this->getExceptions() ),
-					count( $fileReflections ) ) );
+				$rows[] = $row;
+			}
+
+			$this->setClassReflections( $rows );
 		}
 
 		return $this->classReflections;
@@ -530,77 +339,17 @@ abstract class CodeCommand extends AbstractCommand
 	}
 
 	/**
-	 * Gets SK ITCBundle Command Code Generator Class Reflection
-	 *
-	 * @param string $className
-	 * @return ReflectionClass
-	 */
-	public function getClassReflection(
-		$className )
-	{
-
-		$classReflections = $this->getClassReflections();
-
-		if( ! isset( $classReflections[ $className ] ) )
-		{
-			throw new \Exception( sprintf( "Class reflection '%s' is not set.", $className ) );
-		}
-
-		return $classReflections[ $className ];
-
-	}
-
-	/**
 	 * Sets SK ITCBundle Command Code Generator Class Reflections
 	 *
-	 * @param ReflectionClass[] $classReflections
+	 * @param array $classReflections
 	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
 	 */
-	public function setClassReflections(
-		$classReflections )
+	protected function setClassReflections(
+		array $classReflections )
 	{
 
 		$this->classReflections = $classReflections;
-		return $this;
-
-	}
-
-	/**
-	 * Sets SK ITCBundle Command Code Generator Finder
-	 *
-	 * @param Finder $finder
-	 *        	SK ITCBundle Command Code Generator Finder
-	 * @param string $name
-	 * @return \SK\ITCBundle\Command\Code\CodeCommand
-	 */
-	public function setFinder(
-		Finder $finder,
-		$name = null )
-	{
-
-		if( null === $name )
-		{
-			$name = 0;
-		}
-
-		$this->finders[ $name ] = $finder;
-
-		return $this;
-
-	}
-
-	/**
-	 * Sets SK ITCBundle Command Code Generator Broker
-	 *
-	 * @param Broker $broker
-	 *        	SK ITCBundle Command Code Generator Broker
-	 * @return \SK\ITCBundle\Command\Code\CodeCommand
-	 */
-	public function setBroker(
-		Broker $broker )
-	{
-
-		$this->broker = $broker;
+		$this->writeInfo( sprintf( "Found '%d' classes.", count( $classReflections ) ) );
 		return $this;
 
 	}
@@ -610,12 +359,13 @@ abstract class CodeCommand extends AbstractCommand
 	 *
 	 * @return ReflectionMethod[]
 	 */
-	public function getOperationsReflections()
+	protected function getOperationsReflections()
 	{
 
 		if( null === $this->operationsReflections )
 		{
 			$classReflections = $this->getClassReflections();
+
 			$this->writeInfo( sprintf( "Searching class operations in '%s' classes.", count( $classReflections ) ) );
 
 			$operationsReflections = [];
@@ -630,8 +380,11 @@ abstract class CodeCommand extends AbstractCommand
 				$operationPattern = sprintf( "/%s/", $operationName );
 			}
 
-			foreach( $classReflections as $classReflection )
+			foreach( $classReflections as $className => $classReflection )
 			{
+				$classReflection = $this->getReflection()
+					->getClassReflection( $classReflection[ 'name' ] );
+
 				/* @var $operationReflection ReflectionMethod[] */
 				$classOperationReflections = $classReflection->getMethods();
 
@@ -639,8 +392,8 @@ abstract class CodeCommand extends AbstractCommand
 					$classOperationReflections,
 					function (
 						$classOperationReflection ) use (
-							$input,
-							$operationPattern )
+					$input,
+					$operationPattern )
 					{
 						/* @var $classOperationReflection ReflectionMethod */
 						$this->writeInfo(
@@ -726,11 +479,45 @@ abstract class CodeCommand extends AbstractCommand
 							return ($isStatic == $classOperationReflection->isStatic());
 						}
 					} );
-				$operationsReflections=array_merge($operationsReflections,$classOperationReflections);
+				$operationsReflections = array_merge( $operationsReflections, $classOperationReflections );
 			}
-			$this->setOperationsReflections( $operationsReflections );
-			$this->writeInfo(
-				sprintf( "Found '%d' Operations in '%d' Classes.", count( $this->getOperationsReflections() ), count( $this->getClassReflections() ) ) );
+
+			$rows = [];
+
+			foreach( $operationsReflections as $operationReflection )
+			{
+				$operationsParametersReflections = $operationReflection->getParameters();
+				$operationsParameters = [];
+				foreach( $operationsParametersReflections as $parameter )
+				{
+					$operationsParameters[] = $parameter->getName();
+				}
+				$annotations = $operationReflection->getAnnotations();
+				$accesibility = "";
+				if( $operationReflection->isPrivate() )
+				{
+					$accesibility = "Private";
+				}
+				if( $operationReflection->isProtected() )
+				{
+					$accesibility = "Protected";
+				}
+				if( $operationReflection->isPublic() )
+				{
+					$accesibility = "Public";
+				}
+
+				$rows[] = array(
+					$accesibility,
+					$operationReflection->isAbstract() ? "Abstract" : "",
+					$operationReflection->isStatic() ? "Static" : "",
+					sprintf( '%s::%s', $operationReflection->getDeclaringClassName(), $operationReflection->getName() ),
+					implode( ', ', $operationsParameters ),
+					(isset( $annotations[ 'return' ] ) && isset( $annotations[ 'return' ][ 0 ] )) ? $annotations[ 'return' ][ 0 ] : ''
+				);
+			}
+
+			$this->setOperationsReflections( $rows );
 		}
 		return $this->operationsReflections;
 
@@ -739,117 +526,56 @@ abstract class CodeCommand extends AbstractCommand
 	/**
 	 * Gets SK ITCBundle Command Code Generator Operations Reflections
 	 *
-	 * @param ReflectionMethod[] $operationsReflections
+	 * @param array $operationsReflections
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function setOperationsReflections(
+	protected function setOperationsReflections(
 		array $operationsReflections )
 	{
 
 		$this->operationsReflections = $operationsReflections;
+		$this->writeInfo(
+			sprintf( "Found '%d' Operations in '%d' Classes.", count( $this->getOperationsReflections() ), count( $this->getClassReflections() ) ) );
 		return $this;
 
 	}
 
 	/**
-	 * Gets SK ITCBundle Command Code Generator File Reflections
+	 * Gets SK ITCBundle Command Code Generator Operations Reflections
 	 *
-	 * @param string $filename
-	 *        	SK ITCBundle Command Code Generator File Reflections FileName
-	 * @return ReflectionFile
-	 * @throws \Exception
+	 * @param array $operationsReflections
+	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function getFileRelection(
-		$filename )
+	protected function setOperationsAttributes(
+		array $operationsReflections )
 	{
 
-		$fileReflections = $this->getFileRelections();
-		if( in_array( $filename, $fileReflections ) )
-		{
-			return $fileReflections[ $filename ];
-		}
-		throw new \Exception( sprintf( "No '%s' file reflection exists.", $filename ) );
-
-	}
-
-	/**
-	 * Gets SK ITCBundle Command Code Generator File Reflections
-	 *
-	 * @return ReflectionFile[]
-	 */
-	public function getFileRelections()
-	{
-
-		if( null === $this->fileRelections )
-		{
-			$src = $this->getInput()
-				->getArgument( 'src' );
-
-			$this->writeInfo( sprintf( "Searching files in '%s' sources.", implode( "', '", $src ) ) );
-
-			/* @var $fileReflection ReflectionFile[] */
-			$fileReflections = [];
-
-			foreach( $this->getFinder()
-				->files() as $fileName )
-			{
-				try
-				{
-					/* @var $fileReflection ReflectionFile */
-					$fileReflection = $this->getBroker()
-						->processFile( $fileName, true );
-
-					$fileReflections[] = $fileReflection;
-				}
-				catch( \Exception $exception )
-				{
-					$this->addException( $exception );
-				}
-			}
-			$this->setFileRelections( $fileReflections );
-
-			$this->writeInfo(
-				sprintf( "Found '%d' files reflected with '%d' exceptions.", count( $fileReflections ), count( $this->getExceptions() ) ) );
-		}
-
-		return $this->fileRelections;
+		$this->operationsReflections = $operationsReflections;
+		$this->writeInfo(
+			sprintf( "Found '%d' Operations in '%d' Classes.", count( $this->getOperationsReflections() ), count( $this->getClassReflections() ) ) );
+		return $this;
 
 	}
 
 	/**
 	 * Sets SK ITCBundle Command Code Generator File Reflections
 	 *
-	 * @param ReflectionFile[] $fileRelections
+	 * @param array $fileRelections
 	 * @return \SK\ITCBundle\Command\Code\CodeCommand
 	 */
-	public function setFileRelections(
+	protected function setFileReflections(
 		array $fileRelections )
 	{
 
 		$this->fileRelections = $fileRelections;
-		return $this;
-
-	}
-
-	/**
-	 * Sets SK ITCBundle Command Code Generator File Reflection
-	 *
-	 * @param ReflectionFile $fileRelection
-	 *        	SK ITCBundle Command Code Generator File Reflection
-	 * @return \SK\ITCBundle\Command\Code\CodeCommand
-	 */
-	public function setFileRelection(
-		array $fileRelections )
-	{
-
-		$this->fileRelections = $fileRelections;
+		$this->writeInfo( sprintf( "Found '%d' files.", count( $fileRelections ) ) );
 		return $this;
 
 	}
 
 	/**
 	 *
-	 * @return the Reflection
+	 * @return Reflection
 	 */
 	protected function getReflection()
 	{
@@ -867,6 +593,322 @@ abstract class CodeCommand extends AbstractCommand
 	{
 
 		$this->reflection = $reflection;
+		return $this;
+
+	}
+
+	/**
+	 *
+	 * @return array
+	 */
+	protected function getFiles()
+	{
+		if(null===$this->files){
+			$src = $this->getInput()
+			->getArgument( "src" );
+
+			$this->writeInfo( sprintf( "Searching files in '%s' sources.", implode( "', '", $src ) ) );
+			$finder = $this->getReflection()
+			->getFinder();
+			/**
+			 * Finder has to have at minimum one file.
+			 */
+			$canContinue = false;
+			foreach( $src as $source )
+			{
+				try
+				{
+					if( ! file_exists( $source ) )
+					{
+						$this->writeNotice( sprintf( "Finder Source '%s' not Exists.", $source ), OutputInterface::VERBOSITY_VERBOSE );
+					}
+
+					if( is_dir( $source ) )
+					{
+						$canContinue = true;
+						$finder->in( $source );
+						$this->writeInfo( sprintf( "Finder Adding directory '%s'.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+					}
+
+					if( is_file( $source ) )
+					{
+						$canContinue = true;
+						$finder->append( array(
+								$source
+						) );
+
+						$this->writeInfo( sprintf( "Finder Adding file '%s'.", $source ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+					}
+				}
+				catch( \Exception $e )
+				{
+					$this->writeException( $e );
+				}
+			}
+
+			if( $this->getInput()
+					->hasOption( "bootstrap" ) )
+			{
+				$bootstrap = $this->getInput()
+				->getOption( "bootstrap" );
+
+				try
+				{
+					if( NULL === $bootstrap )
+					{
+						$this->writeInfo( sprintf( "Finder Boostrap not set.", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+					}
+					elseif( file_exists( $bootstrap ) )
+					{
+						@require_once $bootstrap;
+
+						$finder->append( array(
+								$bootstrap
+						) );
+						$this->writeInfo( sprintf( "Finder Adding Boostrap'%s'", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+					}
+					else
+					{
+						$this->writeInfo( sprintf( "Finder Boostrap '%s' not exists.", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+					}
+				}
+				catch( \Exception $e )
+				{
+					$this->writeException( $e );
+				}
+			}
+
+			if( $this->getInput()
+					->hasOption( "followLinks" ) )
+			{
+				try
+				{
+					$followLinks = $this->getInput()
+					->getOption( "followLinks" );
+
+					if( true === $followLinks )
+					{
+						$finder->followLinks();
+					}
+
+					$this->writeInfo(
+							sprintf( "Finder following links '%s'.", $followLinks ? 'yes' : 'no' ),
+							OutputInterface::VERBOSITY_VERY_VERBOSE );
+				}
+				catch( \Exception $e )
+				{
+					$this->writeException( $e );
+				}
+			}
+
+			if( $this->getInput()
+					->hasOption( "ignoreDotFiles" ) )
+			{
+				try
+				{
+					$ignoreDotFiles = $this->getInput()
+					->getOption( "ignoreDotFiles" );
+
+					$finder->ignoreDotFiles( $ignoreDotFiles );
+
+					$this->writeInfo(
+							sprintf( "Finder ignoring dot files '%s'.", $ignoreDotFiles ? 'yes' : 'no' ),
+							OutputInterface::VERBOSITY_VERY_VERBOSE );
+				}
+				catch( \Exception $e )
+				{
+					$this->writeException( $e );
+				}
+			}
+
+			if( $this->getInput()
+					->hasOption( "fileSuffix" ) )
+			{
+				try
+				{
+					$fileSuffix = $this->getInput()
+					->getOption( "fileSuffix" );
+					$finder->name( $fileSuffix );
+
+					$this->writeInfo( sprintf( "Finder applying file suffix '%s'.", $fileSuffix ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+				}
+				catch( \Exception $e )
+				{
+					$this->writeException( $e );
+				}
+			}
+
+			$exclude = $this->getInput()
+			->getOption( "exclude" );
+
+			if( $this->getInput()
+					->hasOption( "exclude" ) && $exclude )
+			{
+				try
+				{
+					$finder->exclude( $this->getInput()
+							->getOption( "exclude" ) );
+
+					$this->writeInfo( sprintf( "Finder applying exclude '%s'.", implode( ",", $exclude ) ), OutputInterface::VERBOSITY_VERY_VERBOSE );
+				}
+				catch( \Exception $e )
+				{
+					$this->writeException( $e );
+				}
+			}
+
+			$fileReflections = [];
+			/* @var FileReflection $fileReflection */
+			foreach( $this->getReflection()
+					->getFiles() as $fileReflection )
+			{
+				$file = new \SplFileInfo( $fileReflection->getName() );
+				$row = array(
+						$file->getPathName(),
+						$file->getOwner(),
+						$file->getGroup(),
+						$file->getPerms(),
+						date( "d.m.Y h:m:s", $file->getCTime() ),
+						date( "d.m.Y h:m:s", $file->getMTime() )
+				);
+				$fileReflections[] = $row;
+			}
+
+			$this->setFiles( $fileReflections );
+		}
+		return $this->files;
+
+	}
+
+	/**
+	 *
+	 * @param array $files
+	 */
+	protected function setFiles(
+		array $files )
+	{
+
+		$this->files = $files;
+		return $this;
+
+	}
+
+	/**
+	 *
+	 * @return array
+	 */
+	protected function getPackages()
+	{
+
+		return $this->packages;
+
+	}
+
+	/**
+	 *
+	 * @param array $packages
+	 */
+	protected function setPackages(
+		array $packages )
+	{
+
+		$this->packages = $packages;
+		return $this;
+
+	}
+
+	/**
+	 *
+	 * @return array
+	 */
+	protected function getClasses()
+	{
+
+		return $this->classes;
+
+	}
+
+	/**
+	 *
+	 * @param array $classes
+	 */
+	protected function setClasses(
+		array $classes )
+	{
+
+		$this->classes = $classes;
+		return $this;
+
+	}
+
+	/**
+	 *
+	 * @return array
+	 */
+	protected function getProperties()
+	{
+
+		return $this->properties;
+
+	}
+
+	/**
+	 *
+	 * @param array $properties
+	 */
+	protected function setProperties(
+		array $properties )
+	{
+
+		$this->properties = $properties;
+		return $this;
+
+	}
+
+	/**
+	 *
+	 * @return array
+	 */
+	protected function getOperations()
+	{
+
+		return $this->operations;
+
+	}
+
+	/**
+	 *
+	 * @param array $operations
+	 */
+	protected function setOperations(
+		array $operations )
+	{
+
+		$this->operations = $operations;
+		return $this;
+
+	}
+
+	/**
+	 *
+	 * @return array
+	 */
+	protected function getParameters()
+	{
+
+		return $this->parameters;
+
+	}
+
+	/**
+	 *
+	 * @param array $parameters
+	 */
+	protected function setParameters(
+		array $parameters )
+	{
+
+		$this->parameters = $parameters;
 		return $this;
 
 	}

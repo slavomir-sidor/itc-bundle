@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Command Code Reflection Namespaces
  *
@@ -11,7 +12,7 @@ namespace SK\ITCBundle\Command\Code\Reflection;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class NamespacesCommand extends ReflectionCommand
+class PackageCommand extends ReflectionCommand
 {
 
 	/**
@@ -19,9 +20,18 @@ class NamespacesCommand extends ReflectionCommand
 	 *
 	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute(
+		InputInterface $input,
+		OutputInterface $output )
 	{
+
 		parent::execute( $input, $output );
-		$this->executeNamespaceReflection();
+
+		$this->writeTable( $this->getPackages(), array(
+			'Namespace Name',
+			'Objects Count'
+		) );
+
 	}
+
 }

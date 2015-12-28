@@ -23,6 +23,14 @@ class FilesCommand extends ReflectionCommand
 	public function execute( InputInterface $input, OutputInterface $output )
 	{
 		parent::execute( $input, $output );
-		$this->executeFilesReflection();
+
+		$this->writeTable( $this->getFiles(), array(
+			"Files",
+			"Owner",
+			"Group",
+			"Permissions",
+			"Created",
+			"Modified"
+		), 120 );
 	}
 }

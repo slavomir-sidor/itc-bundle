@@ -22,6 +22,14 @@ class ClassesCommand extends ReflectionCommand
 	public function execute( InputInterface $input, OutputInterface $output )
 	{
 		parent::execute( $input, $output );
-		$this->executeClassReflection();
+
+		$this->writeTable( $this->getClassReflections(), array(
+			'PHP Object',
+			'Final',
+			'Abstract',
+			'Namespace Name',
+			'Parent',
+			'Implements Interfaces'
+		), 60 );
 	}
 }

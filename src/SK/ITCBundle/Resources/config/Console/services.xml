@@ -619,11 +619,11 @@
 		</service>
 
 		<service
-			id="sk.itcbundle.command.code.reflection.namespaces"
-			class="%sk.itcbundle.command.code.reflection.namespaces.class%">
+			id="sk.itcbundle.command.code.reflection.package"
+			class="%sk.itcbundle.command.code.reflection.package.class%">
 
-			<argument type="string">%sk.itcbundle.command.code.reflection.namespaces.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.reflection.namespaces.description%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.package.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.package.description%</argument>
 			<argument
 				type="service"
 				id="logger" />
@@ -658,23 +658,6 @@
 
 			<argument type="string">%sk.itcbundle.command.code.reflection.classes.name%</argument>
 			<argument type="string">%sk.itcbundle.command.code.reflection.classes.description%</argument>
-			<argument
-				type="service"
-				id="logger" />
-			<argument
-				type="service"
-				id="sk.itcbundle.code.reflection" />
-
-			<tag name="console.command" />
-
-		</service>
-
-		<service
-			id="sk.itcbundle.command.code.reflection.bundles"
-			class="%sk.itcbundle.command.code.reflection.bundles.class%">
-
-			<argument type="string">%sk.itcbundle.command.code.reflection.bundles.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.reflection.bundles.description%</argument>
 			<argument
 				type="service"
 				id="logger" />

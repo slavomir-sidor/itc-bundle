@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITC Bundle Application Console Kernel
  *
@@ -6,12 +7,13 @@
  */
 namespace SK\ITCBundle\Application;
 
+use JMS\SerializerBundle\JMSSerializerBundle;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
-use SK\ITCBundle\SKITCBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Component\DependencyInjection\Variable;
+use SK\ITCBundle\SKITCBundle;
 
 class ConsoleKernel extends Kernel
 {
@@ -24,10 +26,12 @@ class ConsoleKernel extends Kernel
 	 */
 	public function registerBundles()
 	{
+
 		$bundles = array(
 			new FrameworkBundle(),
-			new SKITCBundle(),
-			new MonologBundle()
+			new JMSSerializerBundle(),
+			new MonologBundle(),
+			new SKITCBundle()
 		);
 
 		if( in_array( $this->getEnvironment(), array(
@@ -39,6 +43,7 @@ class ConsoleKernel extends Kernel
 		}
 
 		return $bundles;
+
 	}
 
 	/**
@@ -49,7 +54,9 @@ class ConsoleKernel extends Kernel
 	 */
 	public function getRootDir()
 	{
-		return __DIR__.'/../../../..';
+
+		return __DIR__ . '/../../../..';
+
 	}
 
 	/**
@@ -60,7 +67,9 @@ class ConsoleKernel extends Kernel
 	 */
 	public function getCacheDir()
 	{
+
 		return $this->getRootDir() . '/cache/' . $this->getEnvironment();
+
 	}
 
 	/**
@@ -71,26 +80,32 @@ class ConsoleKernel extends Kernel
 	 */
 	public function getLogDir()
 	{
+
 		return $this->getRootDir() . '/logs';
+
 	}
 
 	/**
 	 *
 	 * @param LoaderInterface $loader
 	 */
-	public function registerContainerConfiguration( LoaderInterface $loader )
+	public function registerContainerConfiguration(
+		LoaderInterface $loader )
 	{
+
 		$environment = $this->getEnvironment();
-		$config = dirname(__DIR__) . sprintf( '/Resources/config/%s/config.xml', $environment );
+		$config = dirname( __DIR__ ) . sprintf( '/Resources/config/%s/config.xml', $environment );
 
 		if( ! file_exists( $config ) )
 		{
-			$config = dirname(__DIR__) . sprintf( '/Resources/config/config.xml' );
+			$config = dirname( __DIR__ ) . sprintf( '/Resources/config/config.xml' );
 		}
 
 		if( file_exists( $config ) )
 		{
 			$loader->load( $config );
 		}
+
 	}
+
 }

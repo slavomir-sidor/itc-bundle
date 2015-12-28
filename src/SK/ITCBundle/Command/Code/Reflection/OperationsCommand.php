@@ -20,9 +20,25 @@ class OperationsCommand extends ReflectionCommand
 	 *
 	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute(
+		InputInterface $input,
+		OutputInterface $output )
 	{
+
 		parent::execute( $input, $output );
-		$this->executeOperationsReflection();
+
+		$this->writeTable(
+			$this->getOperationsReflections(),
+			array(
+				'Accessibility',
+				'Abstract',
+				'Static',
+				'Operation',
+				'Parameters',
+				'Returns'
+			),
+			120 );
+
 	}
+
 }

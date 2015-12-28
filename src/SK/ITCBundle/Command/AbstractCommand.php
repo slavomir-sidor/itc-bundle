@@ -39,13 +39,6 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	protected $output;
 
 	/**
-	 * SK ITCBundle Abstract Command Exceptions
-	 *
-	 * @var \Exception[]
-	 */
-	protected $exceptions;
-
-	/**
 	 * SK ITCBundle Abstract Command Logger
 	 *
 	 * @var Logger
@@ -87,11 +80,16 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 * @param Logger $logger
 	 *        	SK ITCBundle Abstract Command Logger
 	 */
-	public function __construct( $name, $description, Logger $logger )
+	public function __construct(
+		$name,
+		$description,
+		Logger $logger )
 	{
+
 		parent::__construct( $name );
 		$this->setDescription( $description );
 		$this->setLogger( $logger );
+
 	}
 
 	/**
@@ -99,10 +97,14 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	public function execute(
+		InputInterface $input,
+		OutputInterface $output )
 	{
+
 		$this->setInput( $input );
 		$this->setOutput( $output );
+
 	}
 
 	/**
@@ -112,7 +114,9 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	protected function configure()
 	{
+
 		parent::configure();
+
 	}
 
 	/**
@@ -122,7 +126,9 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	public function getInput()
 	{
+
 		return $this->input;
+
 	}
 
 	/**
@@ -130,10 +136,13 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *
 	 * @param InputInterface $input
 	 */
-	public function setInput( InputInterface $input )
+	public function setInput(
+		InputInterface $input )
 	{
+
 		$this->input = $input;
 		return $this;
+
 	}
 
 	/**
@@ -143,7 +152,9 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	public function getOutput()
 	{
+
 		return $this->output;
+
 	}
 
 	/**
@@ -151,86 +162,13 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *
 	 * @param OutputInterface $output
 	 */
-	public function setOutput( OutputInterface $output )
+	public function setOutput(
+		OutputInterface $output )
 	{
+
 		$this->output = $output;
 		return $this;
-	}
 
-	/**
-	 * Gets SK ITCBundle Abstract Command Exception
-	 *
-	 * @return \Exception[]
-	 */
-	public function getExceptions()
-	{
-		if( null == $this->exceptions )
-		{
-			$this->exceptions = array();
-		}
-		return $this->exceptions;
-	}
-
-	/**
-	 * Sets SK ITCBundle Abstract Command Exception
-	 *
-	 * @param \Exception[] $exceptions
-	 *        	SK ITCBundle Abstract Command Exceptions
-	 * @return \SK\ITCBundle\Command\Code\CodeCommand SK ITCBundle Abstract Command
-	 */
-	public function setExceptions( array $exceptions )
-	{
-		$this->exceptions = $exceptions;
-		return $this;
-	}
-
-	/**
-	 * Adds SK ITCBundle Abstract Command Exception
-	 *
-	 * @param \Exception $exception
-	 *        	SK ITCBundle Abstract Command Exception
-	 * @return \SK\ITCBundle\Command\Code\CodeCommand
-	 */
-	public function addException( \Exception $exception )
-	{
-		$this->exceptions[] = $exception;
-		return $this;
-	}
-
-	/**
-	 * Writes SK ITCBundle Abstract Command Exception
-	 *
-	 * @param \Exception $exception
-	 *        	SK ITCBundle Abstract Command Exception
-	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
-	 */
-	public function writeException( \Exception $exception )
-	{
-		$this->getOutput()
-			->writeln( sprintf( " <fg=black;bg=red>Error %s %s</fg=black;bg=red>", $exception->getCode(), $exception->getMessage() ),
-			OutputInterface::VERBOSITY_VERBOSE );
-
-		$this->getOutput()
-			->writeln( sprintf( " <fg=black;bg=red>Trace %s</fg=black;bg=red>", $exception->getTraceAsString() ),
-			OutputInterface::VERBOSITY_VERY_VERBOSE );
-	}
-
-	/**
-	 * Writes SK ITCBundle Abstract Command Exceptions
-	 *
-	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
-	 */
-	public function writeExceptions()
-	{
-		if( count( $this->getExceptions() ) > 0 )
-		{
-			$this->writeInfo( sprintf( "Exceptions: %d", count( $this->getExceptions() ) ) );
-			foreach( $this->getExceptions() as $exception )
-			{
-				$this->writeException( $exception );
-			}
-		}
-		return $this;
 	}
 
 	/**
@@ -240,11 +178,15 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Info Line
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeLine( $message = "\n", $verbosity = OutputInterface::VERBOSITY_NORMAL )
+	public function writeLine(
+		$message = "\n",
+		$verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
+
 		$this->getOutput()
 			->writeln( $message, $verbosity );
 		return $this;
+
 	}
 
 	/**
@@ -254,11 +196,15 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Info Message
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeInfo( $message, $verbosity = OutputInterface::VERBOSITY_VERBOSE )
+	public function writeInfo(
+		$message,
+		$verbosity = OutputInterface::VERBOSITY_VERBOSE )
 	{
+
 		$output = $this->getOutput();
 		$output->writeln( sprintf( '<fg=white>%s</fg=white>', $message ), $verbosity );
 		return $this;
+
 	}
 
 	/**
@@ -268,11 +214,14 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Header Message
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeHeader( $message )
+	public function writeHeader(
+		$message )
 	{
+
 		$output = $this->getOutput();
 		$output->writeln( ' <fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>" );
 		return $this;
+
 	}
 
 	/**
@@ -286,8 +235,13 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 * @param int $verbosity
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeTable( $rows = array(), $columns = array(), $maxColWidth = 60, $verbosity = OutputInterface::VERBOSITY_NORMAL )
+	public function writeTable(
+		$rows = array(),
+		$columns = array(),
+		$maxColWidth = 60,
+		$verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
+
 		$style = new TableStyle();
 
 		// customize the style
@@ -305,21 +259,30 @@ abstract class AbstractCommand extends ContainerAwareCommand
 		$tableColspan = count( $columns );
 		$table = $this->getTable();
 		$table->setHeaders( $this->getTableHeaders( $columns ) );
-		$table->addRows( $rows );
-
-		$table->addRow( array(
-			new TableSeparator( array(
-				'colspan' => $tableColspan
-			) )
-		) );
-		$table->addRow(
-			array(
-				new TableCell( sprintf( "Found %s results.", count( $rows ) ), array(
+		foreach( $rows as $row )
+		{
+			$table->addRow( $row );
+			$table->addRow( array(
+				new TableSeparator( array(
 					'colspan' => $tableColspan
 				) )
 			) );
+		}
+		$table->addRow(
+			array(
+				new TableCell( "",array(
+					'colspan' => $tableColspan
+				) )
+			) );
+		$table->addRow(
+				array(
+						new TableCell( sprintf( "Found %s results.", count( $rows ) ), array(
+								'colspan' => $tableColspan
+						) )
+				) );
 		$table->render();
 		return $this;
+
 	}
 
 	/**
@@ -329,11 +292,15 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Notice Message
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeNotice( $message, $verbosity = OutputInterface::VERBOSITY_NORMAL )
+	public function writeNotice(
+		$message,
+		$verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
+
 		$this->getOutput()
 			->writeln( "<fg=blue>{$message}</fg=blue>", $verbosity );
 		return $this;
+
 	}
 
 	/**
@@ -343,8 +310,10 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Debug Message
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeDebug( $message )
+	public function writeDebug(
+		$message )
 	{
+
 		$input = $this->getInput();
 		$output = $this->getOutput();
 
@@ -353,6 +322,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 			$output->writeln( ' <fg=blue;bg=white>DEBUG:</fg=blue;bg=white> ' . $message );
 		}
 		return $this;
+
 	}
 
 	/**
@@ -362,7 +332,9 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	public function getLogger()
 	{
+
 		return $this->logger;
+
 	}
 
 	/**
@@ -372,9 +344,12 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Logger
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function setLogger( Logger $logger )
+	public function setLogger(
+		Logger $logger )
 	{
+
 		$this->logger = $logger;
+
 	}
 
 	/**
@@ -383,26 +358,33 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	public function getRootDir()
 	{
+
 		if( NULL === $this->rootDir )
 		{
 			$this->setRootDir( getcwd() );
 		}
 
 		return $this->rootDir;
+
 	}
 
-	public function setRootDir( $rootDir )
+	public function setRootDir(
+		$rootDir )
 	{
+
 		$this->rootDir = $rootDir;
 		return $this;
+
 	}
 
 	/**
 	 *
 	 * @return array
 	 */
-	protected function getTableHeaders( array $columns )
+	protected function getTableHeaders(
+		array $columns )
 	{
+
 		if( null === $this->tableHeaders )
 		{
 			$tableHeaders = [];
@@ -422,32 +404,40 @@ abstract class AbstractCommand extends ContainerAwareCommand
 			$this->setTableHeaders( $tableHeaders );
 		}
 		return $this->tableHeaders;
+
 	}
 
 	/**
 	 *
 	 * @param array $tableHeaders
 	 */
-	protected function setTableHeaders( array $tableHeaders )
+	protected function setTableHeaders(
+		array $tableHeaders )
 	{
+
 		$this->tableHeaders = $tableHeaders;
 		return $this;
+
 	}
 
 	/**
 	 *
 	 * @param array $tableRows
 	 */
-	protected function setTableRows( array $tableRows )
+	protected function setTableRows(
+		array $tableRows )
 	{
+
 		$this->tableRows = $tableRows;
 		return $this;
+
 	}
 
 	/**
 	 */
 	public function getTable()
 	{
+
 		if( null === $this->table )
 		{
 			$table = new Table( $this->getOutput() );
@@ -455,15 +445,20 @@ abstract class AbstractCommand extends ContainerAwareCommand
 			$this->setTable( $table );
 		}
 		return $this->table;
+
 	}
 
 	/**
 	 *
 	 * @param Table $table
 	 */
-	public function setTable( Table $table )
+	public function setTable(
+		Table $table )
 	{
+
 		$this->table = $table;
 		return $this;
+
 	}
+
 }

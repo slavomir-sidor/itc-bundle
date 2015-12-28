@@ -45,6 +45,7 @@
 		"react/zmq" : "0.2.*|0.3.*",
 		"jenner/react-multi-process" : "^0.1.0",
 		"zerkalica/phpuml" : "dev-master",
-		"sauce/sausage" : "*"
+		"sauce/sausage" : "*",
+		"jms/serializer-bundle": "^1.1"
 	}
 }

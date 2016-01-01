@@ -25,6 +25,7 @@ use TokenReflection\ReflectionMethod;
 use Assetic\Exception\Exception;
 use Monolog\Logger;
 use SK\ITCBundle\Code\Reflection\Reflection;
+use TokenReflection\ReflectionNamespace;
 
 abstract class CodeCommand extends AbstractCommand
 {
@@ -799,7 +800,17 @@ abstract class CodeCommand extends AbstractCommand
 	 */
 	protected function getPackages()
 	{
-
+		if(NULL===$this->packages){
+			$packages=array();
+			/* @var $package ReflectionNamespace */
+			foreach ($this->getReflection()->getPackages() as $package){
+				$packages[$package->getName()]=array(
+					'name'=>$package->getName(),
+					'count'=>$package->getClasses()
+				);
+			}
+			$this->setPackages($packages);
+		}
 		return $this->packages;
 
 	}

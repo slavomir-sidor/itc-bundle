@@ -10,7 +10,7 @@ namespace SK\ITCBundle\Command\Code\Reflection;
 
 use TokenReflection\Php\ReflectionClass;
 
-class ClassesCommand extends ReflectionCommand
+class ClassCommand extends ReflectionCommand
 {
 
 	protected $columns = array(

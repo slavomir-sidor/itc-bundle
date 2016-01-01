@@ -18,6 +18,7 @@ use Assetic\Exception\Exception;
 use Monolog\Logger;
 use SK\ITCBundle\Code\Reflection\Reflection;
 use SK\ITCBundle\Command\TableCommand;
+use Symfony\Component\Console\Input\InputInterface;
 
 class ReflectionCommand extends TableCommand
 {

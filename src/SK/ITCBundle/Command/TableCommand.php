@@ -49,7 +49,7 @@ abstract class TableCommand extends AbstractCommand
 	protected function writeTable( $maxColWidth = 60 )
 	{
 		$headers = $this->getHeaders();
-		$tableColspan = count( $headers );
+		$colspan = count( $this->getColumns() );
 		$table = $this->getTable();
 		$table->setHeaders( $this->getHeaders( $headers ) );
 
@@ -63,21 +63,21 @@ abstract class TableCommand extends AbstractCommand
 			$table->addRow( $row );
 			$table->addRow( array(
 				new TableSeparator( array(
-					'colspan' => $tableColspan
+					'colspan' => $colspan
 				) )
 			) );
 		}
 
 		$table->addRow( array(
 			new TableCell( "", array(
-				'colspan' => $tableColspan
+				'colspan' => $colspan
 			) )
 		) );
 
 		$table->addRow(
 			array(
 				new TableCell( sprintf( "Found %s results.", count( $rows ) ), array(
-					'colspan' => $tableColspan
+					'colspan' => $colspan
 				) )
 			) );
 		$table->render();
@@ -94,18 +94,18 @@ abstract class TableCommand extends AbstractCommand
 		if( null === $this->headers )
 		{
 			$columns = $this->getColumns();
-			$tableColspan = count( $columns );
-			$tableHeaders = [];
-			$tableHeaders[] = array(
+			$colspan = count( $columns );
+			$headers = [];
+			$headers[] = array(
 				new TableCell( sprintf( "%s", $this->getDescription() ), array(
-					'colspan' => $tableColspan
+					'colspan' => $colspan
 				) )
 			);
-			$tableHeaders[] = $columns;
+			$headers[] = $columns;
 
-			$this->setTableHeaders( $tableHeaders );
+			$this->setHeaders( $headers );
 		}
-		return $this->tableHeaders;
+		return $this->headers;
 	}
 
 	/**

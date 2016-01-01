@@ -18,8 +18,7 @@ class AttributeCommand extends ReflectionCommand
 		'Attribute',
 		'Accessibility',
 		'Static',
-		'Default',
-		'Comment'
+		'Default'
 	);
 
 	protected function getRows()
@@ -27,8 +26,8 @@ class AttributeCommand extends ReflectionCommand
 		if( null === $this->rows )
 		{
 			$rows = [];
-			$reflections = $this->getReflection()
-				->getAttributes();
+
+			$reflections = $this->getReflection()->getAttributes();
 
 			/* @var $reflection ReflectionProperty */
 			foreach( $reflections as $reflection )
@@ -39,8 +38,7 @@ class AttributeCommand extends ReflectionCommand
 				$row[ 'Attribute' ] = $reflection->getName();
 				$row[ 'Accessibility' ] = self::getAccessibility( $reflection );
 				$row[ 'Static' ] = self::getStatic( $reflection );
-				$row[ 'Default' ] = $reflection->getDefaultValue();
-				$row[ 'Comment' ] = $reflection->getDocComment();
+				$row[ 'Default' ] = is_array($reflection->getDefaultValue())?'array':$reflection->getDefaultValue();
 
 				$rows[] = $row;
 			}

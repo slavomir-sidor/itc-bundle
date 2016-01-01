@@ -15,8 +15,7 @@ class PackageCommand extends ReflectionCommand
 {
 
 	protected $columns = array(
-		'Namespace Name',
-		'Objects Count'
+		'Namespace'
 	);
 
 	/**
@@ -35,8 +34,7 @@ class PackageCommand extends ReflectionCommand
 			{
 				$row=[];
 
-				$row['name'] = $package->getName();
-				$row['count'] = $package->getName();
+				$row['Namespace'] = $package->getName();
 
 				$rows[]=$row;
 			}

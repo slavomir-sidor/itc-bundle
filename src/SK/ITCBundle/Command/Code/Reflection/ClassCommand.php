@@ -26,7 +26,7 @@ class ClassCommand extends ReflectionCommand
 	 *
 	 * @return array
 	 */
-	protected function getClasses()
+	protected function getRows()
 	{
 		if( NULL === $this->rows )
 		{
@@ -50,6 +50,6 @@ class ClassCommand extends ReflectionCommand
 
 			$this->setRows( $rows );
 		}
-		return $this->classes;
+		return $this->rows;
 	}
 }

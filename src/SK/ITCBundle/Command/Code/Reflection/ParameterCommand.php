@@ -22,25 +22,25 @@ class ParameterCommand extends ReflectionCommand
 		'Default'
 	);
 
-
 	protected function getRows()
 	{
 		if( null === $this->rows )
 		{
 			$rows = [];
 
-			$reflections = $this->getReflection()->getParameters();
+			$reflections = $this->getReflection()
+				->getParameters();
 
 			/* @var $reflection  ReflectionParameter */
 			foreach( $reflections as $reflection )
 			{
 				$row = [];
 
-				$row[ 'Class' ]=$reflection->getDeclaringClassName();
+				$row[ 'Class' ] = $reflection->getDeclaringClassName();
 				$row[ 'Operation' ] = $reflection->getDeclaringFunctionName();
 				$row[ 'Parameter' ] = $reflection->getName();
-				$row[ 'Type' ] = $reflection->getPrettyName();
-				$row[ 'Default' ] = $reflection->getDefaultValueDefinition();
+				//$row[ 'Type' ] = $reflection->getOriginalTypeHint();
+				//$row[ 'Default' ] = is_array( $reflection->getDefaultValue() ) ? 'array' : $reflection->getDefaultValue();
 
 				$rows[] = $row;
 			}

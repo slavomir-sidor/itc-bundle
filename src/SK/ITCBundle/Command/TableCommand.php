@@ -101,8 +101,9 @@ abstract class TableCommand extends AbstractCommand
 					'colspan' => $colspan
 				) )
 			);
-			$headers[] = $columns;
-
+			if($columns){
+				$headers[] = $columns;
+			}
 			$this->setHeaders( $headers );
 		}
 		return $this->headers;

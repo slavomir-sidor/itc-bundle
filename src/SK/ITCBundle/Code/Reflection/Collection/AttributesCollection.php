@@ -4,7 +4,7 @@ namespace SK\ITCBundle\Code\Reflection\Collection;
 
 use PhpCollection\Map;
 
-class PropertyCollection extends Map
+class AttributesCollection extends Map
 {
 	/**
 	 *

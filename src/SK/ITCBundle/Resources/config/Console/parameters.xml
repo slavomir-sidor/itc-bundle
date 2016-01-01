@@ -162,25 +162,25 @@
 		<parameter key="sk.itcbundle.command.code.reflection.operations.description">ITCloud UML Classes Operations</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.operations.class">SK\ITCBundle\Command\Code\Reflection\OperationsCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.reflection.operationsattr.name">uml:parameter</parameter>
-		<parameter key="sk.itcbundle.command.code.reflection.operationsattr.description">ITCloud UML Classes Operations Attributes</parameter>
-		<parameter key="sk.itcbundle.command.code.reflection.operationsattr.class">SK\ITCBundle\Command\Code\Reflection\OperationsAttributesCommand</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.parameter.name">uml:parameter</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.parameter.description">ITCloud UML Classes Parameters</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.parameter.class">SK\ITCBundle\Command\Code\Reflection\ParameterCommand</parameter>
 
 		<parameter key="sk.itcbundle.command.code.reflection.package.name">uml:package</parameter>
-		<parameter key="sk.itcbundle.command.code.reflection.package.description">ITCloud UML Namespaces</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.package.description">ITCloud UML Classes Namespaces</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.package.class">SK\ITCBundle\Command\Code\Reflection\PackageCommand</parameter>
 
 		<parameter key="sk.itcbundle.command.code.reflection.files.name">uml:file</parameter>
-		<parameter key="sk.itcbundle.command.code.reflection.files.description">ITCloud UML Files</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.files.description">ITCloud UML Classes Files</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.files.class">SK\ITCBundle\Command\Code\Reflection\FilesCommand</parameter>
 
 		<parameter key="sk.itcbundle.command.code.reflection.classes.name">uml:class</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.classes.description">ITCloud UML Classes</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.classes.class">SK\ITCBundle\Command\Code\Reflection\ClassesCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.reflection.classesattr.name">uml:attribute</parameter>
-		<parameter key="sk.itcbundle.command.code.reflection.classesattr.description">ITCloud UML Classes Attributes</parameter>
-		<parameter key="sk.itcbundle.command.code.reflection.classesattr.class">SK\ITCBundle\Command\Code\Reflection\AttributesCommand</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.attribute.name">uml:attribute</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.attribute.description">ITCloud UML Classes Attributes</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.attribute.class">SK\ITCBundle\Command\Code\Reflection\AttributeCommand</parameter>
 
 	</parameters>
 

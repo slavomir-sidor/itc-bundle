@@ -53,24 +53,6 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	protected $rootDir;
 
 	/**
-	 *
-	 * @var array
-	 */
-	protected $tableHeaders;
-
-	/**
-	 *
-	 * @var array
-	 */
-	protected $tableRows;
-
-	/**
-	 *
-	 * @var Table
-	 */
-	protected $table;
-
-	/**
 	 * Constructs SK ITCBundle Abstract Command
 	 *
 	 * @param string $name
@@ -225,67 +207,6 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	}
 
 	/**
-	 * Writes SK ITCBundle Abstract Command Table
-	 *
-	 * @param array $rows
-	 *        	SK ITCBundle Abstract Command Table Rows
-	 * @param array $columns
-	 *        	SK ITCBundle Abstract Command Table Header
-	 * @param int $maxColWidth
-	 * @param int $verbosity
-	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
-	 */
-	public function writeTable(
-		$rows = array(),
-		$columns = array(),
-		$maxColWidth = 60,
-		$verbosity = OutputInterface::VERBOSITY_NORMAL )
-	{
-
-		$style = new TableStyle();
-
-		// customize the style
-		$style->setHorizontalBorderChar( '<fg=magenta>-</>' )
-			->setVerticalBorderChar( '<fg=magenta>|</>' )
-			->setCrossingChar( '<fg=magenta>+</>' );
-
-		foreach( $rows as $iRow => $row )
-		{
-			foreach( $row as $iCol => $col )
-			{
-				$rows[ $iRow ][ $iCol ] = wordwrap( $col, $maxColWidth, "\n", true );
-			}
-		}
-		$tableColspan = count( $columns );
-		$table = $this->getTable();
-		$table->setHeaders( $this->getTableHeaders( $columns ) );
-		foreach( $rows as $row )
-		{
-			$table->addRow( $row );
-			$table->addRow( array(
-				new TableSeparator( array(
-					'colspan' => $tableColspan
-				) )
-			) );
-		}
-		$table->addRow(
-			array(
-				new TableCell( "",array(
-					'colspan' => $tableColspan
-				) )
-			) );
-		$table->addRow(
-				array(
-						new TableCell( sprintf( "Found %s results.", count( $rows ) ), array(
-								'colspan' => $tableColspan
-						) )
-				) );
-		$table->render();
-		return $this;
-
-	}
-
-	/**
 	 * Writes SK ITCBundle Abstract Command Notice
 	 *
 	 * @param string $message
@@ -376,89 +297,4 @@ abstract class AbstractCommand extends ContainerAwareCommand
 		return $this;
 
 	}
-
-	/**
-	 *
-	 * @return array
-	 */
-	protected function getTableHeaders(
-		array $columns )
-	{
-
-		if( null === $this->tableHeaders )
-		{
-			$tableHeaders = [];
-			$tableColspan = count( $columns );
-
-			$definition = $this->getDefinition();
-			$input = $this->getInput();
-			$output = $this->getOutput();
-
-			$tableHeaders[] = array(
-				new TableCell( sprintf( "%s", $this->getDescription() ), array(
-					'colspan' => $tableColspan
-				) )
-			);
-			$tableHeaders[] = $columns;
-
-			$this->setTableHeaders( $tableHeaders );
-		}
-		return $this->tableHeaders;
-
-	}
-
-	/**
-	 *
-	 * @param array $tableHeaders
-	 */
-	protected function setTableHeaders(
-		array $tableHeaders )
-	{
-
-		$this->tableHeaders = $tableHeaders;
-		return $this;
-
-	}
-
-	/**
-	 *
-	 * @param array $tableRows
-	 */
-	protected function setTableRows(
-		array $tableRows )
-	{
-
-		$this->tableRows = $tableRows;
-		return $this;
-
-	}
-
-	/**
-	 */
-	public function getTable()
-	{
-
-		if( null === $this->table )
-		{
-			$table = new Table( $this->getOutput() );
-			$table->setStyle( 'default' );
-			$this->setTable( $table );
-		}
-		return $this->table;
-
-	}
-
-	/**
-	 *
-	 * @param Table $table
-	 */
-	public function setTable(
-		Table $table )
-	{
-
-		$this->table = $table;
-		return $this;
-
-	}
-
 }

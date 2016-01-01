@@ -602,11 +602,11 @@
 		</service>
 
 		<service
-			id="sk.itcbundle.command.code.reflection.operationsattr"
-			class="%sk.itcbundle.command.code.reflection.operationsattr.class%">
+			id="sk.itcbundle.command.code.reflection.parameter"
+			class="%sk.itcbundle.command.code.reflection.parameter.class%">
 
-			<argument type="string">%sk.itcbundle.command.code.reflection.operationsattr.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.reflection.operationsattr.description%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.parameter.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.parameter.description%</argument>
 			<argument
 				type="service"
 				id="logger" />
@@ -670,11 +670,11 @@
 		</service>
 
 		<service
-			id="sk.itcbundle.command.code.reflection.classesattr"
-			class="%sk.itcbundle.command.code.reflection.classesattr.class%">
+			id="sk.itcbundle.command.code.reflection.attribute"
+			class="%sk.itcbundle.command.code.reflection.attribute.class%">
 
-			<argument type="string">%sk.itcbundle.command.code.reflection.classesattr.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.reflection.classesattr.description%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.attribute.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.attribute.description%</argument>
 			<argument
 				type="service"
 				id="logger" />

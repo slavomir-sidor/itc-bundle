@@ -8,28 +8,48 @@
  */
 namespace SK\ITCBundle\Command\Code\Reflection;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use TokenReflection\Php\ReflectionClass;
 
 class ClassesCommand extends ReflectionCommand
 {
 
-	/**
-	 * (non-PHPdoc)
-	 *
-	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
-	 */
-	public function execute( InputInterface $input, OutputInterface $output )
-	{
-		parent::execute( $input, $output );
+	protected $columns = array(
+		'PHP Object',
+		'Final',
+		'Abstract',
+		'Namespace Name',
+		'Parent',
+		'Implements Interfaces'
+	);
 
-		$this->writeTable( $this->getClasses(), array(
-			'PHP Object',
-			'Final',
-			'Abstract',
-			'Namespace Name',
-			'Parent',
-			'Implements Interfaces'
-		), 60 );
+	/**
+	 *
+	 * @return array
+	 */
+	protected function getClasses()
+	{
+		if( NULL === $this->rows )
+		{
+			$rows = [];
+
+			/* @var $reflection ReflectionClass[] */
+			foreach( $this->getReflection()
+				->getClasses() as $reflection )
+			{
+				$row = [];
+
+				$row[ 'object' ] = self::getObjectType( $reflection );
+				$row[ 'final' ] = $reflection->isFinal() ? "Final" : "";
+				$row[ 'abstract' ] = $reflection->isAbstract() ? "Abstract" : "";
+				$row[ 'name' ] = $reflection->getName();
+				$row[ 'parent' ] = implode( "\n", $reflection->getParentClassNameList() );
+				$row[ 'interface' ] = implode( "\n", $reflection->getInterfaceNames() );
+
+				$rows[] = $row;
+			}
+
+			$this->setRows( $rows );
+		}
+		return $this->classes;
 	}
 }

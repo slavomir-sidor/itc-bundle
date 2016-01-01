@@ -9,36 +9,57 @@
  */
 namespace SK\ITCBundle\Command\Code\Reflection;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use TokenReflection\Php\ReflectionMethod;
 
 class OperationsCommand extends ReflectionCommand
 {
 
-	/**
-	 * (non-PHPdoc)
-	 *
-	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
-	 */
-	public function execute(
-		InputInterface $input,
-		OutputInterface $output )
+	protected $columns = array(
+		'Class',
+		'Accessibility',
+		'Abstract',
+		'Static',
+		'Operation',
+		'Parameters',
+		'Returns'
+	);
+
+	protected function getRows()
 	{
+		if( null === $this->rows )
+		{
+			$rows = [];
 
-		parent::execute( $input, $output );
+			$reflections = $this->getReflection()
+				->getOperations();
 
-		$this->writeTable(
-			$this->getOperationsReflections(),
-			array(
-				'Accessibility',
-				'Abstract',
-				'Static',
-				'Operation',
-				'Parameters',
-				'Returns'
-			),
-			120 );
+			/* @var $reflection ReflectionMethod */
+			foreach( $reflections as $reflection )
+			{
+				$row = [];
 
+				$parameters = $reflection->getParameters();
+				$operationsParameters = [];
+				foreach( $parameters as $parameter )
+				{
+					$operationsParameters[] = $parameter->getName();
+				}
+
+				$row[ 'Class' ]=$reflection->getDeclaringClassName();
+				$row[ 'Accessibility' ] =self::getAccessibility($reflection);
+				$row[ 'Abstract' ] =self::getAbstract($reflection);
+				$row[ 'Static' ] =self::getStatic($reflection);
+				$row[ 'Operation' ] = $reflection->getName();
+				$row[ 'Parameters' ] = implode( ', ', $operationsParameters );
+				$row[ 'Returns' ] = '';
+				//(isset($annotations['return']) && isset($annotations['return'][0]))?$annotations['return'][0]:''
+
+				$rows[] = $row;
+			}
+
+			$this->setRows( $rows );
+		}
+
+		return $this->rows;
 	}
-
 }

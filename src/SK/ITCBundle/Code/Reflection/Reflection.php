@@ -16,6 +16,7 @@ use SK\ITCBundle\Code\Reflection\Collection\ClassCollection;
 use SK\ITCBundle\Code\Reflection\Collection\OperationCollection;
 use SK\ITCBundle\Code\Reflection\Collection\PropertyCollection;
 use SK\ITCBundle\Code\Reflection\Collection\ParameterCollection;
+use Symfony\Component\DependencyInjection\Variable;
 
 class Reflection
 {
@@ -261,7 +262,7 @@ class Reflection
 					$file = $this->getBroker()
 						->processFile( $fileName, true );
 
-					$files[ $file->getName() ] = $file;
+					$files->set($file->getName(), $file);
 				}
 				catch( \Exception $exception )
 				{

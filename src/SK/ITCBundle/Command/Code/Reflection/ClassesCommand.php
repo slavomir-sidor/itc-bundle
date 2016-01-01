@@ -23,7 +23,7 @@ class ClassesCommand extends ReflectionCommand
 	{
 		parent::execute( $input, $output );
 
-		$this->writeTable( $this->getClassReflections(), array(
+		$this->writeTable( $this->getClasses(), array(
 			'PHP Object',
 			'Final',
 			'Abstract',

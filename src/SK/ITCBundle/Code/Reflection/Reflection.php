@@ -14,9 +14,8 @@ use SK\ITCBundle\Code\Reflection\Collection\PackageCollection;
 use SK\ITCBundle\Code\Reflection\Collection\FileCollection;
 use SK\ITCBundle\Code\Reflection\Collection\ClassCollection;
 use SK\ITCBundle\Code\Reflection\Collection\OperationCollection;
-use SK\ITCBundle\Code\Reflection\Collection\PropertyCollection;
 use SK\ITCBundle\Code\Reflection\Collection\ParameterCollection;
-use Symfony\Component\DependencyInjection\Variable;
+use SK\ITCBundle\Code\Reflection\Collection\AttributesCollection;
 
 class Reflection
 {
@@ -43,7 +42,7 @@ class Reflection
 	 *
 	 * @var PropertyCollection
 	 */
-	protected $properties;
+	protected $attributes;
 
 	/**
 	 *
@@ -362,29 +361,29 @@ class Reflection
 
 	/**
 	 *
-	 * @return PropertyCollection
+	 * @return AttributesCollection
 	 */
-	public function getProperties()
+	public function getAttributes()
 	{
 
-		if( null === $this->properties )
+		if( null === $this->attributes)
 		{
-			$properties = new PropertyCollection();
+			$attributes = new AttributesCollection();
 			foreach( $this->getClasses() as $class )
 			{
-				$properties->addMap( $class->getProperties() );
+				$attributes->addMap( $class->getProperties() );
 			}
-			$this->setProperties( $properties );
+			$this->setAttributes( $attributes );
 		}
 		return $this->properties;
 
 	}
 
-	public function setProperties(
-		PropertyCollection $properties )
+	public function setAttributes(
+		AttributesCollection $attributes )
 	{
 
-		$this->properties = $properties;
+		$this->attributes = $attributes;
 		return $this;
 
 	}

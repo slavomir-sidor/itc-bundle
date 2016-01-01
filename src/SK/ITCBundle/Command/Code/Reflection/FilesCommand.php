@@ -9,28 +9,50 @@
  */
 namespace SK\ITCBundle\Command\Code\Reflection;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Zend\Code\Reflection\FileReflection;
 
 class FilesCommand extends ReflectionCommand
 {
 
-	/**
-	 * (non-PHPdoc)
-	 *
-	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
-	 */
-	public function execute( InputInterface $input, OutputInterface $output )
-	{
-		parent::execute( $input, $output );
+	protected $columns = array(
+		"Files",
+		"Owner",
+		"Group",
+		"Permissions",
+		"Created",
+		"Modified"
+	);
 
-		$this->writeTable( $this->getFiles(), array(
-			"Files",
-			"Owner",
-			"Group",
-			"Permissions",
-			"Created",
-			"Modified"
-		), 120 );
+	protected function getRows()
+	{
+		if( null === $this->rows )
+		{
+			$rows = [];
+
+			$reflections = $this->getReflection()
+				->getFiles();
+
+			/* @var $reflection FileReflection  */
+			foreach( $reflections as $reflection )
+			{
+				$row = [];
+
+				$file = new \SplFileInfo( $reflection->getName() );
+				$row = array(
+					"Files" => $file->getPathName(),
+					"Owner" => $file->getOwner(),
+					"Group" => $file->getGroup(),
+					"Permissions" => $file->getPerms(),
+					"Created" => date( "d.m.Y h:m:s", $file->getCTime() ),
+					"Modified" => date( "d.m.Y h:m:s", $file->getMTime() )
+				);
+
+				$rows[] = $row;
+			}
+
+			$this->setRows( $rows );
+		}
+
+		return $this->rows;
 	}
 }

@@ -9,29 +9,41 @@
  */
 namespace SK\ITCBundle\Command\Code\Reflection;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use TokenReflection\ReflectionNamespace;
 
 class PackageCommand extends ReflectionCommand
 {
 
+	protected $columns = array(
+		'Namespace Name',
+		'Objects Count'
+	);
+
 	/**
-	 * (non-PHPdoc)
 	 *
-	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
+	 * @return array
 	 */
-	public function execute(
-		InputInterface $input,
-		OutputInterface $output )
+	protected function getRows()
 	{
+		if( NULL === $this->rows )
+		{
+			$rows = [];
 
-		parent::execute( $input, $output );
+			/* @var $package ReflectionNamespace */
+			foreach( $this->getReflection()
+				->getPackages() as $package )
+			{
+				$row=[];
 
-		$this->writeTable( $this->getPackages(), array(
-			'Namespace Name',
-			'Objects Count'
-		) );
+				$row['name'] = $package->getName();
+				$row['count'] = $package->getName();
 
+				$rows[]=$row;
+			}
+
+			$this->setRows( $rows );
+		}
+
+		return $this->rows;
 	}
-
 }

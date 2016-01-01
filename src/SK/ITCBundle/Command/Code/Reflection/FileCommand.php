@@ -11,7 +11,7 @@ namespace SK\ITCBundle\Command\Code\Reflection;
 
 use Zend\Code\Reflection\FileReflection;
 
-class FilesCommand extends ReflectionCommand
+class FileCommand extends ReflectionCommand
 {
 
 	protected $columns = array(

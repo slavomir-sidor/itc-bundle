@@ -11,7 +11,7 @@ namespace SK\ITCBundle\Command\Code\Reflection;
 
 use TokenReflection\Php\ReflectionMethod;
 
-class OperationsCommand extends ReflectionCommand
+class OperationCommand extends ReflectionCommand
 {
 
 	protected $columns = array(

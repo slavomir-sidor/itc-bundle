@@ -51,8 +51,8 @@ class ReflectionCommand extends TableCommand
 	 */
 	public function __construct( $name, $description, Logger $logger, Reflection $reflection )
 	{
-		parent::__construct($name, $description, $logger);
-		$this->setReflection($reflection);
+		parent::__construct( $name, $description, $logger );
+		$this->setReflection( $reflection );
 	}
 
 	/**
@@ -64,39 +64,42 @@ class ReflectionCommand extends TableCommand
 	{
 		parent::configure();
 
-		$this->addOption("bootstrap", "bs", InputOption::VALUE_OPTIONAL, "PHP Boostrap File.");
-		$this->addOption("attributeName", "an", InputOption::VALUE_OPTIONAL,
-			"Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed.");
-		$this->addOption("ignoreDotFiles", "df", InputOption::VALUE_OPTIONAL, "Ignore DOT files.", true);
-		$this->addOption("operationName", "on", InputOption::VALUE_OPTIONAL,
-			"Operations name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL);
-		$this->addOption("operationAttributeName", "oa", InputOption::VALUE_OPTIONAL,
-			"Operations Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed.");
+		$this->addOption( "bootstrap", "bs", InputOption::VALUE_OPTIONAL, "PHP Boostrap File." );
+		$this->addOption( "attributeName", "an", InputOption::VALUE_OPTIONAL,
+			"Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
+		$this->addOption( "ignoreDotFiles", "df", InputOption::VALUE_OPTIONAL, "Ignore DOT files.", true );
+		$this->addOption( "operationName", "on", InputOption::VALUE_OPTIONAL,
+			"Operations name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
+		$this->addOption( "className", "cn", InputOption::VALUE_OPTIONAL, "Class name, e.g. '^myPrefix|mySuffix$', regular expression allowed.",
+			NULL );
+		$this->addOption( "parameterName", "pn", InputOption::VALUE_OPTIONAL,
+			"Class operation parameter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
+		$this->addOption( "accessibility", "ac", InputOption::VALUE_OPTIONAL, "Operations and attributes accessibility: protected, public, private." );
+		$this->addOption( "parentClass", "pc", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Parent Class Name, e.g 'My\Class'" );
+		$this->addOption( "fileSuffix", "fs", InputOption::VALUE_OPTIONAL, "File suffixes for given src, default all and not dot files.", "*.php" );
+		$this->addOption( "followLinks", "fl", InputOption::VALUE_OPTIONAL, "Follows links.", false );
+		$this->addOption( "isInterface", "ii", InputOption::VALUE_REQUIRED, "Reflect Interfaces Objects Only, possible values are (true|false)." );
+		$this->addOption( "isTrait", "it", InputOption::VALUE_REQUIRED, "Reflect Traits Objects Only, possible values are (true|false)." );
+		$this->addOption( "isAbstractClass", "ib", InputOption::VALUE_REQUIRED, "Reflect Abstract Classes Only, possible values are (true|false)." );
+		$this->addOption( "isFinal", "if", InputOption::VALUE_REQUIRED, "Reflect Final Classes Only, possible values are (true|false)." );
+		$this->addOption( "isAbstractOperation", "ia", InputOption::VALUE_REQUIRED,
+			"Reflect Abstract Operation Only, possible values are (true|false)." );
+		$this->addOption( "isPrivate", "ip", InputOption::VALUE_REQUIRED,
+			"Reflect Private Operations or Attributes, possible values are (true|false)." );
+		$this->addOption( "isProtected", "id", InputOption::VALUE_REQUIRED,
+			"Reflect Protected Operations or Attributes, possible values are (true|false)." );
+		$this->addOption( "isPublic", "ic", InputOption::VALUE_REQUIRED,
+			"Reflect Public Operations or Attributes, possible values are (true|false)." );
+		$this->addOption( "isStatic", "is", InputOption::VALUE_REQUIRED,
+			"Reflect Static Operations or Attributes, possible values are (true|false)." );
+		$this->addOption( "implementsInterface", "imi", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Reflect Abstract Classes Only." );
+		$this->addOption( "exclude", "ed", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Exclude Directory from source" );
 
-		$this->addOption("accessibility", "ac", InputOption::VALUE_OPTIONAL, "Operations and attributes accessibility: protected, public, private.");
-		$this->addOption("parentClass", "pc", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Parent Class Name, e.g 'My\Class'");
-		$this->addOption("fileSuffix", "fs", InputOption::VALUE_OPTIONAL, "File suffixes for given src, default all and not dot files.", "*.php");
-		$this->addOption("followLinks", "fl", InputOption::VALUE_OPTIONAL, "Follows links.", false);
-		$this->addOption("isInterface", "ii", InputOption::VALUE_REQUIRED, "Reflect Interfaces Objects Only, possible values are (true|false).");
-		$this->addOption("isTrait", "it", InputOption::VALUE_REQUIRED, "Reflect Traits Objects Only, possible values are (true|false).");
-		$this->addOption("isAbstractClass", "ib", InputOption::VALUE_REQUIRED, "Reflect Abstract Classes Only, possible values are (true|false).");
-		$this->addOption("isFinal", "if", InputOption::VALUE_REQUIRED, "Reflect Final Classes Only, possible values are (true|false).");
-		$this->addOption("isAbstractOperation", "ia", InputOption::VALUE_REQUIRED,
-			"Reflect Abstract Operation Only, possible values are (true|false).");
-		$this->addOption("isPrivate", "ip", InputOption::VALUE_REQUIRED,
-			"Reflect Private Operations or Attributes, possible values are (true|false).");
-		$this->addOption("isProtected", "id", InputOption::VALUE_REQUIRED,
-			"Reflect Protected Operations or Attributes, possible values are (true|false).");
-		$this->addOption("isPublic", "ic", InputOption::VALUE_REQUIRED, "Reflect Public Operations or Attributes, possible values are (true|false).");
-		$this->addOption("isStatic", "is", InputOption::VALUE_REQUIRED, "Reflect Static Operations or Attributes, possible values are (true|false).");
-		$this->addOption("implementsInterface", "imi", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Reflect Abstract Classes Only.");
-		$this->addOption("exclude", "ed", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Exclude Directory from source");
-
-		$this->addArgument('src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
+		$this->addArgument( 'src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
 			"src/",
 			"app/",
 			"tests/"
-		));
+		) );
 	}
 
 	/**
@@ -106,15 +109,15 @@ class ReflectionCommand extends TableCommand
 	 */
 	public function execute( InputInterface $input, OutputInterface $output )
 	{
-		parent::execute($input, $output);
+		parent::execute( $input, $output );
 
-		$src = $this->getInput()->getArgument("src");
-		$this->writeInfo(sprintf("Searching files in '%s' sources.", implode("', '", $src)));
+		$src = $this->getInput()->getArgument( "src" );
+		$this->writeInfo( sprintf( "Searching files in '%s' sources.", implode( "', '", $src ) ) );
 
 		$canContinue = false;
 		foreach( $src as $source )
 		{
-			if( file_exists($source) || is_dir($source) )
+			if( file_exists( $source ) || is_dir( $source ) )
 			{
 				$canContinue = true;
 			}
@@ -122,29 +125,29 @@ class ReflectionCommand extends TableCommand
 
 		if( ! $canContinue )
 		{
-			$this->writeInfo(sprintf("Sources '%s' doesn't exists.", implode("', '", $src)));
+			$this->writeInfo( sprintf( "Sources '%s' doesn't exists.", implode( "', '", $src ) ) );
 			return;
 		}
 
-		if( $this->getInput()->hasOption("bootstrap") )
+		if( $this->getInput()->hasOption( "bootstrap" ) )
 		{
-			$bootstrap = $this->getInput()->getOption("bootstrap");
+			$bootstrap = $this->getInput()->getOption( "bootstrap" );
 
 			try
 			{
-				if( file_exists($bootstrap) )
+				if( file_exists( $bootstrap ) )
 				{
 					@require_once $bootstrap;
-					$this->writeInfo(sprintf("Finder Adding Boostrap'%s'", $bootstrap), OutputInterface::VERBOSITY_VERY_VERBOSE);
+					$this->writeInfo( sprintf( "Finder Adding Boostrap'%s'", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
 			}
 			catch( \Exception $e )
 			{
-				$this->writeException($e);
+				$this->writeException( $e );
 			}
 		}
 
-		$this->writeTable(80);
+		$this->writeTable( 80 );
 	}
 
 	/**
@@ -153,7 +156,7 @@ class ReflectionCommand extends TableCommand
 	 */
 	protected function getReflection()
 	{
-		return $this->reflection->setSettings($this->getReflectionSettings());
+		return $this->reflection->setSettings( $this->getReflectionSettings() );
 	}
 
 	/**
@@ -184,7 +187,7 @@ class ReflectionCommand extends TableCommand
 					{
 						case "src":
 							{
-								$reflectionSettings->setSrc($value);
+								$reflectionSettings->setSrc( $value );
 								break;
 							}
 					}
@@ -199,103 +202,108 @@ class ReflectionCommand extends TableCommand
 					{
 						case "attributeName":
 							{
-								$reflectionSettings->setAttributeName($value);
+								$reflectionSettings->setAttributeName( $value );
 								break;
 							}
 						case "ignoreDotFiles":
 							{
-								$reflectionSettings->setIgnoreDotFiles($value);
+								$reflectionSettings->setIgnoreDotFiles( $value );
+								break;
+							}
+						case "className":
+							{
+								$reflectionSettings->setClassName( $value );
 								break;
 							}
 						case "operationName":
 							{
-								$reflectionSettings->setOperationName($value);
+								$reflectionSettings->setOperationName( $value );
 								break;
 							}
-						case "operationAttributeName":
+						case "parameterName":
 							{
-								$reflectionSettings->setOperationAttributeName($value);
+								$reflectionSettings->setParameterName( $value );
 								break;
 							}
 						case "accessibility":
 							{
-								$reflectionSettings->setAccessibility($value);
+								$reflectionSettings->setAccessibility( $value );
 								break;
 							}
 						case "parentClass":
 							{
-								$reflectionSettings->setParentClass($value);
+								$reflectionSettings->setParentClass( $value );
 								break;
 							}
 						case "fileSuffix":
 							{
-								$reflectionSettings->setFileSuffix($value);
+								$reflectionSettings->setFileSuffix( $value );
 								break;
 							}
 						case "followLinks":
 							{
-								$reflectionSettings->setFollowLinks($value);
+								$reflectionSettings->setFollowLinks( $value );
 								break;
 							}
 						case "isInterface":
 							{
-								$reflectionSettings->setIsInterface($value);
+								$reflectionSettings->setIsInterface( $value );
 								break;
 							}
 						case "isTrait":
 							{
-								$reflectionSettings->setIsTrait($value);
+								$reflectionSettings->setIsTrait( $value );
 								break;
 							}
 						case "isAbstractClass":
 							{
-								$reflectionSettings->setIsAbstractClass($value);
+								$reflectionSettings->setIsAbstractClass( $value );
 								break;
 							}
 						case "isFinal":
 							{
-								$reflectionSettings->setIsFinal($value);
+								$reflectionSettings->setIsFinal( $value );
 								break;
 							}
 						case "isAbstractOperation":
 							{
-								$reflectionSettings->setIsAbstractOperation($value);
+								$reflectionSettings->setIsAbstractOperation( $value );
 								break;
 							}
 						case "isPrivate":
 							{
-								$reflectionSettings->setIsPrivate($value);
+								$reflectionSettings->setIsPrivate( $value );
 								break;
 							}
 						case "isProtected":
 							{
-								$reflectionSettings->setIsProtected($value);
+								$reflectionSettings->setIsProtected( $value );
 								break;
 							}
 						case "isPublic":
 							{
-								$reflectionSettings->setIsPublic($value);
+								$reflectionSettings->setIsPublic( $value );
 								break;
 							}
 						case "isStatic":
 							{
-								$reflectionSettings->setIsStatic($value);
+								$reflectionSettings->setIsStatic( $value );
 								break;
 							}
 						case "implementsInterface":
 							{
-								$reflectionSettings->setImplementsInterface($value);
+								$reflectionSettings->setImplementsInterface( $value );
 								break;
 							}
 						case "exclude":
 							{
-								$reflectionSettings->setExclude($value);
+								$reflectionSettings->setExclude( $value );
 								break;
 							}
 					}
 				}
 			}
-			$this->setReflectionSettings($reflectionSettings);
+			$this->setReflectionSettings( $reflectionSettings );
 		}
 
 		return $this->reflectionSettings;
@@ -318,7 +326,7 @@ class ReflectionCommand extends TableCommand
 	 */
 	protected static function getAccessibility( IReflection $reflection )
 	{
-		return $reflection->isPrivate() ? "Private" : ($reflection->isProtected() ? "Protected" : "Public");
+		return $reflection->isPrivate() ? "Private" : ( $reflection->isProtected() ? "Protected" : "Public" );
 	}
 
 	/**
@@ -348,6 +356,6 @@ class ReflectionCommand extends TableCommand
 	 */
 	protected static function getObjectType( $reflection )
 	{
-		return $reflection->isTrait() ? "Trait" : ($reflection->isInterface() ? "Interface" : "Class");
+		return $reflection->isTrait() ? "Trait" : ( $reflection->isInterface() ? "Interface" : "Class" );
 	}
 }

@@ -50,7 +50,7 @@ class Kernel extends HttpKernel
 	 */
 	public function getRootDir()
 	{
-		return __DIR__ . '/../../../..';
+		return __DIR__ . '/../../../../..';
 	}
 
 	/**

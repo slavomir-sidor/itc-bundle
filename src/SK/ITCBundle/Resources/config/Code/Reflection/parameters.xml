@@ -7,7 +7,7 @@
 	<parameters>
 
 		<!-- Code Reflection -->
-		<parameter key="sk.itcbundle.code.reflection.class">SK\ITCBundle\Code\Reflection\Reflection</parameter>
+		<parameter key="sk.itcbundle.code.reflection.class">SK\ITCBundle\Code\Reflection</parameter>
 
 	</parameters>
 

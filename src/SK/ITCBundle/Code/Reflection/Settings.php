@@ -20,13 +20,19 @@ class Settings
 	 *
 	 * @var string
 	 */
+	protected $className;
+
+	/**
+	 *
+	 * @var string
+	 */
 	protected $operationName;
 
 	/**
 	 *
 	 * @var string
 	 */
-	protected $operationAttributeName;
+	protected $parameterName;
 
 	/**
 	 *
@@ -188,19 +194,19 @@ class Settings
 	 *
 	 * @return string
 	 */
-	public function getOperationAttributeName()
+	public function getParameterName()
 	{
-		return $this->operationAttributeName;
+		return $this->parameterName;
 	}
 
 	/**
 	 *
 	 * @param
-	 *        	$operationAttributeName
+	 *        	$parameterName
 	 */
-	public function setOperationAttributeName( $operationAttributeName )
+	public function setParameterName( $parameterName )
 	{
-		$this->operationAttributeName = $operationAttributeName;
+		$this->parameterName = $parameterName;
 		return $this;
 	}
 
@@ -520,4 +526,25 @@ class Settings
 		$this->src = $src;
 		return $this;
 	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getClassName()
+	{
+		return $this->className;
+	}
+
+	/**
+	 *
+	 * @param
+	 *        	$className
+	 */
+	public function setClassName( $className )
+	{
+		$this->className = $className;
+		return $this;
+	}
+
 }

@@ -90,7 +90,7 @@ class Reflection
 	 */
 	public function __construct( Logger $logger )
 	{
-		$this->setLogger($logger);
+		$this->setLogger( $logger );
 	}
 
 	/**
@@ -101,11 +101,10 @@ class Reflection
 	{
 		if( null === $this->broker )
 		{
-			$backend = new Broker\Backend\Memory();
-			$broker = new Broker($backend);
-
-			$this->setBroker($broker);
+			$broker = new Broker( new Broker\Backend\Memory() );
+			$this->setBroker( $broker );
 		}
+
 		return $this->broker;
 	}
 
@@ -117,7 +116,7 @@ class Reflection
 	{
 		if( NULL !== $settings )
 		{
-			$this->setSettings($settings);
+			$this->setSettings( $settings );
 		}
 
 		if( null === $this->classes )
@@ -133,12 +132,101 @@ class Reflection
 					/* @var $class ReflectionClass */
 					foreach( $namespace->getClasses() as $class )
 					{
-						$classes->set($class->getName(), $class);
+						$classes->set( $class->getName(), $class );
 					}
 				}
 			}
 
-			$this->setClasses($classes);
+			$settings = $this->getSettings();
+
+			$classes = $classes->filter(
+				function ( $class ) use ($settings )
+				{
+					if( NULL !== $settings->getClassName() )
+					{
+						return preg_match( '/' . $settings->getClassName() . '/', $class->getName() );
+					}
+					return true;
+				} );
+
+			$classes = $classes->filter(
+				function ( $class ) use ($settings )
+				{
+
+					if( NULL !== $settings->getIsAbstractClass() )
+					{
+						return ( $settings->getIsAbstractClass() == $class->isAbstract() );
+					}
+					return true;
+				} );
+
+			$classes = $classes->filter(
+				function ( $class ) use ($settings )
+				{
+					if( NULL !== $settings->getIsFinal() )
+					{
+						return ( $settings->getIsFinal() == $class->isFinal() );
+					}
+					return true;
+				} );
+
+			$classes = $classes->filter(
+				function ( $class ) use ($settings )
+				{
+					if( NULL !== $settings->getIsInterface() )
+					{
+						return ( $settings->getIsInterface() == $class->isInterface() );
+					}
+					return true;
+				} );
+
+			$classes = $classes->filter(
+				function ( $class ) use ($settings )
+				{
+					if( NULL !== $settings->getIsTrait() )
+					{
+						return ( $settings->getIsTrait() == $class->isTrait() );
+					}
+					return true;
+				} );
+
+			$classes = $classes->filter(
+				function ( $class ) use ($settings )
+				{
+					if( count( $settings->getParentClass() ) > 0 )
+					{
+						foreach( $settings->getParentClass() as $parentClass )
+						{
+							if( in_array( $parentClass, $class->getParentClassNameList() ) )
+							{
+								return true;
+							}
+						}
+
+						return false;
+					}
+					return true;
+				} );
+
+			$classes = $classes->filter(
+				function ( $class ) use ($settings )
+				{
+					if( count( $settings->getImplementsInterface() ) > 0 )
+					{
+						foreach( $settings->getImplementsInterface() as $interface )
+						{
+							if( in_array( $interface, $class->getInterfaceNames() ) )
+							{
+								return true;
+							}
+						}
+						return false;
+					}
+
+					return true;
+				} );
+
+			$this->setClasses( $classes );
 		}
 		return $this->classes;
 	}
@@ -161,25 +249,100 @@ class Reflection
 	{
 		if( NULL !== $settings )
 		{
-			$this->setSettings($settings);
+			$this->setSettings( $settings );
 		}
 
 		if( null === $this->operations )
 		{
-			$operations = [];
+			$operations = new OperationCollection();
 
 			/* @var $class ReflectionClass */
 			foreach( $this->getClasses() as $class )
 			{
-				/* @var $class ReflectionMethods */
+				/* @var $operation ReflectionMethod */
 				foreach( $class->getMethods() as $operation )
 				{
-					$operations[] = $operation;
+					$operations->set( $class->getName() . $operation->getName(), $operation );
 				}
 			}
 
-			$this->setOperations(new OperationCollection($operations));
+			$settings = $this->getSettings();
+
+			$operations = $operations->filter(
+				function ( $operation ) use ($settings )
+				{
+					if( NULL !== $settings->getOperationName() )
+					{
+						return ( bool ) preg_match( sprintf( "/%s/", $settings->getOperationName() ), $operation->getName() );
+					}
+
+					return true;
+				} );
+			$operations = $operations->filter(
+				function ( $operation ) use ($settings )
+				{
+					if( NULL !== $settings->getIsAbstractOperation() )
+					{
+						return ( $settings->getIsAbstractOperation() == $operation->isAbstract() );
+					}
+					return true;
+				} );
+
+			$operations = $operations->filter(
+				function ( $operation ) use ($settings )
+				{
+					if( NULL !== $settings->getIsPrivate() )
+					{
+						return ( $settings->getIsPrivate() == $operation->isPrivate() );
+					}
+
+					return true;
+				} );
+
+			$operations = $operations->filter(
+				function ( $operation ) use ($settings )
+				{
+					if( NULL !== $settings->getIsProtected() )
+					{
+						return ( $settings->getIsProtected() == $operation->isProtected() );
+					}
+					return true;
+				} );
+
+			$operations = $operations->filter(
+				function ( $operation ) use ($settings )
+				{
+					if( NULL !== $settings->getIsPublic() )
+					{
+						return ( $settings->getIsPublic() == $operation->isPublic() );
+					}
+					return true;
+				} );
+
+			$operations = $operations->filter(
+				function ( $operation ) use ($settings )
+				{
+					if( NULL !== $settings->getIsStatic() )
+					{
+						return ( $settings->getIsStatic() == $operation->isStatic() );
+					}
+					return true;
+				} );
+
+			$operations = $operations->filter(
+				function ( $operation ) use ($settings )
+				{
+					if( NULL !== $settings->getIsStatic() )
+					{
+						return ( $settings->getIsStatic() == $operation->isStatic() );
+					}
+
+					return true;
+				} );
+
+			$this->setOperations( $operations );
 		}
+
 		return $this->operations;
 	}
 
@@ -206,16 +369,16 @@ class Reflection
 
 			foreach( $settings->getSrc() as $source )
 			{
-				if( is_dir($source) )
+				if( is_dir( $source ) )
 				{
-					$finder->in($source);
+					$finder->in( $source );
 				}
 
-				if( is_file($source) )
+				if( is_file( $source ) )
 				{
-					$finder->append(array(
+					$finder->append( array(
 						$source
-					));
+					) );
 				}
 			}
 
@@ -224,11 +387,11 @@ class Reflection
 				$finder->followLinks();
 			}
 
-			$finder->ignoreDotFiles($settings->getIgnoreDotFiles());
-			$finder->name($settings->getFileSuffix());
-			$finder->exclude($settings->getExclude());
+			$finder->ignoreDotFiles( $settings->getIgnoreDotFiles() );
+			$finder->name( $settings->getFileSuffix() );
+			$finder->exclude( $settings->getExclude() );
 
-			$this->setFinder($finder);
+			$this->setFinder( $finder );
 		}
 
 		return $this->finder;
@@ -253,7 +416,7 @@ class Reflection
 	{
 		if( NULL !== $settings )
 		{
-			$this->setSettings($settings);
+			$this->setSettings( $settings );
 		}
 
 		if( null === $this->files )
@@ -266,16 +429,16 @@ class Reflection
 				try
 				{
 					/* @var $fileReflection ReflectionFile */
-					$file = $this->getBroker()->processFile($fileName, true);
-					$files->set($file->getName(), $file);
+					$file = $this->getBroker()->processFile( $fileName, true );
+					$files->set( $file->getName(), $file );
 				}
 				catch( \Exception $exception )
 				{
-					$this->getLogger()->log(Logger::NOTICE, $exception->getMessage());
+					$this->getLogger()->log( Logger::NOTICE, $exception->getMessage() );
 				}
 			}
 
-			$this->setFiles($files);
+			$this->setFiles( $files );
 		}
 		return $this->files;
 	}
@@ -328,7 +491,7 @@ class Reflection
 	{
 		if( NULL !== $settings )
 		{
-			$this->setSettings($settings);
+			$this->setSettings( $settings );
 		}
 
 		if( null === $this->packages )
@@ -341,11 +504,11 @@ class Reflection
 				/* @var $package ReflectionNamespace */
 				foreach( $file->getNamespaces() as $package )
 				{
-					$packages->set($package->getName(), $package);
+					$packages->set( $package->getName(), $package );
 				}
 			}
 
-			$this->setPackages($packages);
+			$this->setPackages( $packages );
 		}
 		return $this->packages;
 	}
@@ -364,24 +527,74 @@ class Reflection
 	{
 		if( NULL !== $settings )
 		{
-			$this->setSettings($settings);
+			$this->setSettings( $settings );
 		}
 
 		if( null === $this->attributes )
 		{
-			$attributes = [];
+			$attributes = new AttributesCollection();
 
 			/* @var $class ReflectionClass */
-			foreach( $this->getClasses($settings) as $class )
+			foreach( $this->getClasses() as $class )
 			{
-				/* @var $property ReflectionProperty */
-				foreach( $class->getProperties($settings) as $attribute )
+				/* @var $attribute ReflectionProperty */
+				foreach( $class->getProperties() as $attribute )
 				{
-					$attributes[] = $attribute;
+					$attributes->set( $class->getName() . $attribute->getName(), $attribute );
 				}
 			}
 
-			$this->setAttributes(new AttributesCollection($attributes));
+			$settings = $this->getSettings();
+
+			$attributes = $attributes->filter(
+
+				function ( $attribute ) use ($settings )
+				{
+					if( NULL !== $settings->getAttributeName() )
+					{
+						return ( bool ) preg_match( sprintf( "/%s/", $settings->getAttributeName() ), $attribute->getName() );
+					}
+
+					return true;
+				} );
+
+			$attributes = $attributes->filter(
+
+				function ( $attribute ) use ($settings )
+				{
+					if( NULL !== $settings->getIsPrivate() )
+					{
+						return ( $attribute->isPrivate() === $settings->getIsPrivate() );
+					}
+
+					return true;
+				} );
+
+			$attributes = $attributes->filter(
+
+				function ( $attribute ) use ($settings )
+				{
+					if( NULL !== $settings->getIsProtected() )
+					{
+						return ( $attribute->isProtected() === $settings->getIsProtected() );
+					}
+
+					return true;
+				} );
+
+			$attributes = $attributes->filter(
+
+				function ( $attribute ) use ($settings )
+				{
+					if( NULL !== $settings->getIsPrivate() )
+					{
+						return ( $attribute->isPrivate() === $settings->getIsPrivate() );
+					}
+
+					return true;
+				} );
+
+			$this->setAttributes( $attributes );
 		}
 
 		return $this->attributes;
@@ -405,23 +618,38 @@ class Reflection
 	{
 		if( NULL !== $settings )
 		{
-			$this->setSettings($settings);
+			$this->setSettings( $settings );
 		}
 
 		if( null === $this->parameters )
 		{
-			$parameters = [];
+			$parameters = new ParameterCollection( );
 
-			/* @var $class ReflectionMethods */
-			foreach( $this->getOperations() as $operation )
+			/* @var $operation ReflectionMethods */
+			foreach( $this->getOperations() as $key=>$operation )
 			{
+				/* @var $parameter ReflectionParameter */
 				foreach( $operation->getParameters() as $parameter )
 				{
-					$parameters[] = $parameter;
+					$parameters->set($key.$parameter->getName(), $parameter);
 				}
 			}
 
-			$this->setParameters(new ParameterCollection($parameters));
+			$settings = $this->getSettings();
+
+			$parameters = $parameters->filter(
+
+				function ( $parameter ) use ($settings )
+				{
+					if( NULL !== $settings->getParameterName() )
+					{
+						return ( bool ) preg_match( sprintf( "/%s/", $settings->getParameterName() ), $parameter->getName() );
+					}
+
+					return true;
+			} );
+
+			$this->setParameters( $parameters  );
 		}
 		return $this->parameters;
 	}

@@ -1,5 +1,5 @@
 <?php
-namespace SK\ITCBundle\Code\Reflection;
+namespace SK\ITCBundle\Code;
 
 use Monolog\Logger;
 use TokenReflection\Broker;
@@ -17,6 +17,7 @@ use SK\ITCBundle\Code\Reflection\Collection\ParameterCollection;
 use SK\ITCBundle\Code\Reflection\Collection\AttributesCollection;
 use TokenReflection\ReflectionNamespace;
 use TokenReflection\Php\ReflectionClass;
+use SK\ITCBundle\Code\Reflection\Settings;
 
 class Reflection
 {
@@ -76,6 +77,12 @@ class Reflection
 	protected $logger;
 
 	/**
+	 *
+	 * @var Settings
+	 */
+	protected $settings;
+
+	/**
 	 * Constructs SK ITCBundle Code Generator
 	 *
 	 * @param Logger $logger
@@ -83,21 +90,21 @@ class Reflection
 	 */
 	public function __construct( Logger $logger )
 	{
-		$this->setLogger( $logger );
+		$this->setLogger($logger);
 	}
 
 	/**
 	 *
 	 * @return Broker
 	 */
-	public function getBroker()
+	protected function getBroker()
 	{
 		if( null === $this->broker )
 		{
 			$backend = new Broker\Backend\Memory();
-			$broker = new Broker( $backend );
+			$broker = new Broker($backend);
 
-			$this->setBroker( $broker );
+			$this->setBroker($broker);
 		}
 		return $this->broker;
 	}
@@ -106,8 +113,13 @@ class Reflection
 	 *
 	 * @return ClassCollection
 	 */
-	public function getClasses()
+	public function getClasses( Settings $settings = NULL )
 	{
+		if( NULL !== $settings )
+		{
+			$this->setSettings($settings);
+		}
+
 		if( null === $this->classes )
 		{
 			$classes = new ClassCollection();
@@ -121,12 +133,12 @@ class Reflection
 					/* @var $class ReflectionClass */
 					foreach( $namespace->getClasses() as $class )
 					{
-						$classes->set( $class->getName(), $class );
+						$classes->set($class->getName(), $class);
 					}
 				}
 			}
 
-			$this->setClasses( $classes );
+			$this->setClasses($classes);
 		}
 		return $this->classes;
 	}
@@ -135,7 +147,7 @@ class Reflection
 	 *
 	 * @param ClassCollection $classes
 	 */
-	public function setClasses( ClassCollection $classes )
+	protected function setClasses( ClassCollection $classes )
 	{
 		$this->classes = $classes;
 		return $this;
@@ -145,8 +157,13 @@ class Reflection
 	 *
 	 * @return OperationCollection
 	 */
-	public function getOperations()
+	public function getOperations( Settings $settings = NULL )
 	{
+		if( NULL !== $settings )
+		{
+			$this->setSettings($settings);
+		}
+
 		if( null === $this->operations )
 		{
 			$operations = [];
@@ -161,7 +178,7 @@ class Reflection
 				}
 			}
 
-			$this->setOperations( new OperationCollection( $operations ) );
+			$this->setOperations(new OperationCollection($operations));
 		}
 		return $this->operations;
 	}
@@ -170,7 +187,7 @@ class Reflection
 	 *
 	 * @param OperationCollection $operationsReflections
 	 */
-	public function setOperations( OperationCollection $operations )
+	protected function setOperations( OperationCollection $operations )
 	{
 		$this->operations = $operations;
 		return $this;
@@ -180,13 +197,40 @@ class Reflection
 	 *
 	 * @return Finder
 	 */
-	public function getFinder()
+	protected function getFinder()
 	{
 		if( null === $this->finder )
 		{
 			$finder = new Finder();
-			$this->setFinder( $finder );
+			$settings = $this->getSettings();
+
+			foreach( $settings->getSrc() as $source )
+			{
+				if( is_dir($source) )
+				{
+					$finder->in($source);
+				}
+
+				if( is_file($source) )
+				{
+					$finder->append(array(
+						$source
+					));
+				}
+			}
+
+			if( true === $settings->getFollowLinks() )
+			{
+				$finder->followLinks();
+			}
+
+			$finder->ignoreDotFiles($settings->getIgnoreDotFiles());
+			$finder->name($settings->getFileSuffix());
+			$finder->exclude($settings->getExclude());
+
+			$this->setFinder($finder);
 		}
+
 		return $this->finder;
 	}
 
@@ -195,7 +239,7 @@ class Reflection
 	 * @param Finder $finder
 	 * @return Reflection
 	 */
-	public function setFinder( Finder $finder )
+	protected function setFinder( Finder $finder )
 	{
 		$this->finder = $finder;
 		return $this;
@@ -203,23 +247,15 @@ class Reflection
 
 	/**
 	 *
-	 * @param string $filename
-	 *        	SK ITCBundle Command Code Generator File Reflections FileName
-	 * @return ReflectionFile
-	 * @throws \Exception
-	 */
-	public function getFile( $filename )
-	{
-		return $this->getFiles()
-			->get( $filename );
-	}
-
-	/**
-	 *
 	 * @return FileCollection
 	 */
-	public function getFiles()
+	public function getFiles( Settings $settings = NULL )
 	{
+		if( NULL !== $settings )
+		{
+			$this->setSettings($settings);
+		}
+
 		if( null === $this->files )
 		{
 			$files = new FileCollection();
@@ -230,19 +266,16 @@ class Reflection
 				try
 				{
 					/* @var $fileReflection ReflectionFile */
-					$file = $this->getBroker()
-						->processFile( $fileName, true );
-
-					$files->set( $file->getName(), $file );
+					$file = $this->getBroker()->processFile($fileName, true);
+					$files->set($file->getName(), $file);
 				}
 				catch( \Exception $exception )
 				{
-					$this->getLogger()
-						->log( Logger::NOTICE, $exception->getMessage() );
+					$this->getLogger()->log(Logger::NOTICE, $exception->getMessage());
 				}
 			}
 
-			$this->setFiles( $files );
+			$this->setFiles($files);
 		}
 		return $this->files;
 	}
@@ -251,7 +284,7 @@ class Reflection
 	 *
 	 * @param FileCollection $files
 	 */
-	public function setFiles( FileCollection $files )
+	protected function setFiles( FileCollection $files )
 	{
 		$this->files = $files;
 		return $this;
@@ -261,7 +294,7 @@ class Reflection
 	 *
 	 * @param Broker $broker
 	 */
-	public function setBroker( Broker $broker )
+	protected function setBroker( Broker $broker )
 	{
 		$this->broker = $broker;
 		return $this;
@@ -271,7 +304,7 @@ class Reflection
 	 *
 	 * @return Logger
 	 */
-	public function getLogger()
+	protected function getLogger()
 	{
 		return $this->logger;
 	}
@@ -281,7 +314,7 @@ class Reflection
 	 * @param Logger $logger
 	 * @return Reflection
 	 */
-	public function setLogger( Logger $logger )
+	protected function setLogger( Logger $logger )
 	{
 		$this->logger = $logger;
 		return $this;
@@ -291,8 +324,13 @@ class Reflection
 	 *
 	 * @return PackageCollection
 	 */
-	public function getPackages()
+	public function getPackages( Settings $settings = NULL )
 	{
+		if( NULL !== $settings )
+		{
+			$this->setSettings($settings);
+		}
+
 		if( null === $this->packages )
 		{
 			$packages = new PackageCollection();
@@ -303,16 +341,16 @@ class Reflection
 				/* @var $package ReflectionNamespace */
 				foreach( $file->getNamespaces() as $package )
 				{
-					$packages->set( $package->getName(), $package );
+					$packages->set($package->getName(), $package);
 				}
 			}
 
-			$this->setPackages( $packages );
+			$this->setPackages($packages);
 		}
 		return $this->packages;
 	}
 
-	public function setPackages( PackageCollection $packages )
+	protected function setPackages( PackageCollection $packages )
 	{
 		$this->packages = $packages;
 		return $this;
@@ -322,23 +360,28 @@ class Reflection
 	 *
 	 * @return AttributesCollection
 	 */
-	public function getAttributes()
+	public function getAttributes( Settings $settings = NULL )
 	{
+		if( NULL !== $settings )
+		{
+			$this->setSettings($settings);
+		}
+
 		if( null === $this->attributes )
 		{
 			$attributes = [];
 
 			/* @var $class ReflectionClass */
-			foreach( $this->getClasses() as $class )
+			foreach( $this->getClasses($settings) as $class )
 			{
 				/* @var $property ReflectionProperty */
-				foreach( $class->getProperties() as $attribute )
+				foreach( $class->getProperties($settings) as $attribute )
 				{
 					$attributes[] = $attribute;
 				}
 			}
 
-			$this->setAttributes( new AttributesCollection( $attributes ) );
+			$this->setAttributes(new AttributesCollection($attributes));
 		}
 
 		return $this->attributes;
@@ -348,7 +391,7 @@ class Reflection
 	 *
 	 * @param AttributesCollection $attributes
 	 */
-	public function setAttributes( AttributesCollection $attributes )
+	protected function setAttributes( AttributesCollection $attributes )
 	{
 		$this->attributes = $attributes;
 		return $this;
@@ -358,8 +401,13 @@ class Reflection
 	 *
 	 * @return ParameterCollection
 	 */
-	public function getParameters()
+	public function getParameters( Settings $settings = NULL )
 	{
+		if( NULL !== $settings )
+		{
+			$this->setSettings($settings);
+		}
+
 		if( null === $this->parameters )
 		{
 			$parameters = [];
@@ -373,14 +421,37 @@ class Reflection
 				}
 			}
 
-			$this->setParameters( new ParameterCollection( $parameters ) );
+			$this->setParameters(new ParameterCollection($parameters));
 		}
 		return $this->parameters;
 	}
 
-	public function setParameters( ParameterCollection $parameters )
+	/**
+	 *
+	 * @param ParameterCollection $parameters
+	 */
+	protected function setParameters( ParameterCollection $parameters )
 	{
 		$this->parameters = $parameters;
+		return $this;
+	}
+
+	/**
+	 *
+	 * @return Settings
+	 */
+	public function getSettings()
+	{
+		return $this->settings;
+	}
+
+	/**
+	 *
+	 * @param Settings $settings
+	 */
+	public function setSettings( Settings $settings )
+	{
+		$this->settings = $settings;
 		return $this;
 	}
 }

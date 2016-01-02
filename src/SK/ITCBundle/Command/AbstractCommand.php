@@ -12,14 +12,7 @@ namespace SK\ITCBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\Table;
 use Monolog\Logger;
-use Symfony\Component\Console\Helper\TableStyle;
-use Symfony\Component\Console\Helper\TableCell;
-use Symfony\Component\Console\Formatter\OutputFormatter;
-use Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use Symfony\Component\Console\Helper\TableSeparator;
 
 abstract class AbstractCommand extends ContainerAwareCommand
 {
@@ -46,13 +39,6 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	protected $logger;
 
 	/**
-	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Root directory
-	 *
-	 * @var string
-	 */
-	protected $rootDir;
-
-	/**
 	 * Constructs SK ITCBundle Abstract Command
 	 *
 	 * @param string $name
@@ -62,16 +48,11 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 * @param Logger $logger
 	 *        	SK ITCBundle Abstract Command Logger
 	 */
-	public function __construct(
-		$name,
-		$description,
-		Logger $logger )
+	public function __construct( $name, $description, Logger $logger )
 	{
-
-		parent::__construct( $name );
-		$this->setDescription( $description );
-		$this->setLogger( $logger );
-
+		parent::__construct($name);
+		$this->setDescription($description);
+		$this->setLogger($logger);
 	}
 
 	/**
@@ -79,14 +60,10 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute(
-		InputInterface $input,
-		OutputInterface $output )
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
-
-		$this->setInput( $input );
-		$this->setOutput( $output );
-
+		$this->setInput($input);
+		$this->setOutput($output);
 	}
 
 	/**
@@ -96,9 +73,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	protected function configure()
 	{
-
 		parent::configure();
-
 	}
 
 	/**
@@ -108,9 +83,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	public function getInput()
 	{
-
 		return $this->input;
-
 	}
 
 	/**
@@ -118,13 +91,10 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *
 	 * @param InputInterface $input
 	 */
-	public function setInput(
-		InputInterface $input )
+	public function setInput( InputInterface $input )
 	{
-
 		$this->input = $input;
 		return $this;
-
 	}
 
 	/**
@@ -134,9 +104,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	public function getOutput()
 	{
-
 		return $this->output;
-
 	}
 
 	/**
@@ -144,13 +112,10 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *
 	 * @param OutputInterface $output
 	 */
-	public function setOutput(
-		OutputInterface $output )
+	public function setOutput( OutputInterface $output )
 	{
-
 		$this->output = $output;
 		return $this;
-
 	}
 
 	/**
@@ -160,15 +125,10 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Info Line
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeLine(
-		$message = "\n",
-		$verbosity = OutputInterface::VERBOSITY_NORMAL )
+	public function writeLine( $message = "\n", $verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
-
-		$this->getOutput()
-			->writeln( $message, $verbosity );
+		$this->getOutput()->writeln($message, $verbosity);
 		return $this;
-
 	}
 
 	/**
@@ -178,15 +138,11 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Info Message
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeInfo(
-		$message,
-		$verbosity = OutputInterface::VERBOSITY_VERBOSE )
+	public function writeInfo( $message, $verbosity = OutputInterface::VERBOSITY_VERBOSE )
 	{
-
 		$output = $this->getOutput();
-		$output->writeln( sprintf( '<fg=white>%s</fg=white>', $message ), $verbosity );
+		$output->writeln(sprintf('<fg=white>%s</fg=white>', $message), $verbosity);
 		return $this;
-
 	}
 
 	/**
@@ -196,14 +152,11 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Header Message
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeHeader(
-		$message )
+	public function writeHeader( $message )
 	{
-
 		$output = $this->getOutput();
-		$output->writeln( ' <fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>" );
+		$output->writeln(' <fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>");
 		return $this;
-
 	}
 
 	/**
@@ -213,15 +166,10 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Notice Message
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeNotice(
-		$message,
-		$verbosity = OutputInterface::VERBOSITY_NORMAL )
+	public function writeNotice( $message, $verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
-
-		$this->getOutput()
-			->writeln( "<fg=blue>{$message}</fg=blue>", $verbosity );
+		$this->getOutput()->writeln("<fg=blue>{$message}</fg=blue>", $verbosity);
 		return $this;
-
 	}
 
 	/**
@@ -231,19 +179,16 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Debug Message
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function writeDebug(
-		$message )
+	public function writeDebug( $message )
 	{
-
 		$input = $this->getInput();
 		$output = $this->getOutput();
 
-		if( self::OPTION_VERBOSE_OUTPUT_YES == $input->getOption( "verbose" ) )
+		if( self::OPTION_VERBOSE_OUTPUT_YES == $input->getOption("verbose") )
 		{
-			$output->writeln( ' <fg=blue;bg=white>DEBUG:</fg=blue;bg=white> ' . $message );
+			$output->writeln(' <fg=blue;bg=white>DEBUG:</fg=blue;bg=white> ' . $message);
 		}
 		return $this;
-
 	}
 
 	/**
@@ -253,9 +198,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	public function getLogger()
 	{
-
 		return $this->logger;
-
 	}
 
 	/**
@@ -265,36 +208,8 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 *        	SK ITCBundle Abstract Command Logger
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	public function setLogger(
-		Logger $logger )
+	public function setLogger( Logger $logger )
 	{
-
 		$this->logger = $logger;
-
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function getRootDir()
-	{
-
-		if( NULL === $this->rootDir )
-		{
-			$this->setRootDir( getcwd() );
-		}
-
-		return $this->rootDir;
-
-	}
-
-	public function setRootDir(
-		$rootDir )
-	{
-
-		$this->rootDir = $rootDir;
-		return $this;
-
 	}
 }

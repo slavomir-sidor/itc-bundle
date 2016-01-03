@@ -4,16 +4,16 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Application;
+namespace SK\ITCBundle\Application\Console;
 
-use Symfony\Component\HttpKernel\Kernel;
+use JMS\SerializerBundle\JMSSerializerBundle;
+use Symfony\Component\HttpKernel\Kernel as HttpKernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
-use SK\ITCBundle\SKITCBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
-use Symfony\Component\DependencyInjection\Variable;
+use SK\ITCBundle\SKITCBundle;
 
-class ConsoleKernel extends Kernel
+class Kernel extends HttpKernel
 {
 
 	/**
@@ -26,18 +26,19 @@ class ConsoleKernel extends Kernel
 	{
 		$bundles = array(
 			new FrameworkBundle(),
-			new SKITCBundle(),
-			new MonologBundle()
+			new JMSSerializerBundle(),
+			new MonologBundle(),
+			new SKITCBundle()
 		);
-
-		if( in_array( $this->getEnvironment(), array(
+		
+		if( in_array($this->getEnvironment(), array(
 			'dev',
 			'test'
-		), true ) )
+		), true) )
 		{
 			// $bundles[] =
 		}
-
+		
 		return $bundles;
 	}
 
@@ -49,7 +50,7 @@ class ConsoleKernel extends Kernel
 	 */
 	public function getRootDir()
 	{
-		return __DIR__.'/../../../..';
+		return __DIR__ . '/../../../../..';
 	}
 
 	/**
@@ -76,21 +77,21 @@ class ConsoleKernel extends Kernel
 
 	/**
 	 *
-	 * @param LoaderInterface $loader
+	 * @param LoaderInterface $loader        	
 	 */
 	public function registerContainerConfiguration( LoaderInterface $loader )
 	{
 		$environment = $this->getEnvironment();
-		$config = dirname(__DIR__) . sprintf( '/Resources/config/%s/config.xml', $environment );
-
-		if( ! file_exists( $config ) )
+		$config = dirname(__DIR__) . sprintf('/Resources/config/%s/config.xml', $environment);
+		
+		if( ! file_exists($config) )
 		{
-			$config = dirname(__DIR__) . sprintf( '/Resources/config/config.xml' );
+			$config = dirname(__DIR__) . sprintf('/Resources/config/config.xml');
 		}
-
-		if( file_exists( $config ) )
+		
+		if( file_exists($config) )
 		{
-			$loader->load( $config );
+			$loader->load($config);
 		}
 	}
 }

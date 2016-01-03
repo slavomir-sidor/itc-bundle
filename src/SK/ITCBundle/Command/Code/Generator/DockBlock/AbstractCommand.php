@@ -66,7 +66,7 @@ class AbstractCommand extends GeneratorCommand
 		foreach ($this->getFileRelections() as $reflection)
 		{
 			$row = array( $reflection->getPrettyName(),$reflection->getDocComment());
-var_dump($reflection);
+
 			$rows[] = $row;
 			continue;
 			if( $classReflection->getDocBlock() )

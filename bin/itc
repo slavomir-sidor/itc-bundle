@@ -23,5 +23,5 @@ if ($debug) {
 }
 
 (new \SK\ITCBundle\Application\Console(
-    new \SK\ITCBundle\Application\Console\Kernel($env, $debug)
+    new \SK\ITCBundle\Application\ConsoleKernel($env, $debug)
 ))->run ();

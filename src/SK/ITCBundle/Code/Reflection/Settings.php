@@ -6,6 +6,12 @@ class Settings
 
 	/**
 	 *
+	 * @var Settings
+	 */
+	private static $instance;
+
+	/**
+	 *
 	 * @var string $attributeName
 	 */
 	protected $attributeName;
@@ -129,6 +135,24 @@ class Settings
 	 * @var array $src
 	 */
 	protected $src;
+
+	/**
+	 */
+	private function __construct()
+	{}
+
+	/**
+	 *
+	 * @return \SK\ITCBundle\Code\Reflection\Settings
+	 */
+	public static function getInstance()
+	{
+		if( NULL === self::$instance )
+		{
+			self::$instance = new Settings();
+		}
+		return self::$instance;
+	}
 
 	/**
 	 *
@@ -546,5 +570,4 @@ class Settings
 		$this->className = $className;
 		return $this;
 	}
-
 }

@@ -4,16 +4,16 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Application\Console;
+namespace SK\ITCBundle\Application;
 
 use JMS\SerializerBundle\JMSSerializerBundle;
-use Symfony\Component\HttpKernel\Kernel as HttpKernel;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
 use SK\ITCBundle\SKITCBundle;
 
-class Kernel extends HttpKernel
+class ConsoleKernel extends Kernel
 {
 
 	/**
@@ -30,7 +30,7 @@ class Kernel extends HttpKernel
 			new MonologBundle(),
 			new SKITCBundle()
 		);
-		
+
 		if( in_array($this->getEnvironment(), array(
 			'dev',
 			'test'
@@ -38,7 +38,7 @@ class Kernel extends HttpKernel
 		{
 			// $bundles[] =
 		}
-		
+
 		return $bundles;
 	}
 
@@ -77,18 +77,18 @@ class Kernel extends HttpKernel
 
 	/**
 	 *
-	 * @param LoaderInterface $loader        	
+	 * @param LoaderInterface $loader
 	 */
 	public function registerContainerConfiguration( LoaderInterface $loader )
 	{
 		$environment = $this->getEnvironment();
 		$config = dirname(__DIR__) . sprintf('/Resources/config/%s/config.xml', $environment);
-		
+
 		if( ! file_exists($config) )
 		{
 			$config = dirname(__DIR__) . sprintf('/Resources/config/config.xml');
 		}
-		
+
 		if( file_exists($config) )
 		{
 			$loader->load($config);

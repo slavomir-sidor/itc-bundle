@@ -196,19 +196,20 @@ class ReflectionCommand extends TableCommand
 	{
 		if( NULL === $this->reflectionSettings )
 		{
-			$reflectionSettings = new Settings();
+			$reflectionSettings = Settings::getInstance();
 
 			foreach( $this->getInput()->getArguments() as $name => $value )
 			{
 				if( NULL !== $value )
 				{
-					switch( $name )
+					$setter = sprintf( "set%s", ucfirst( $name ) );
+
+					if( method_exists( $reflectionSettings, $setter ) )
 					{
-						case "src":
-							{
-								$reflectionSettings->setSrc( $value );
-								break;
-							}
+						call_user_func( array(
+							$reflectionSettings,
+							$setter
+						), $value );
 					}
 				}
 			}
@@ -217,111 +218,18 @@ class ReflectionCommand extends TableCommand
 			{
 				if( NULL !== $value )
 				{
-					switch( $name )
+					$setter = sprintf( "set%s", ucfirst( $name ) );
+
+					if( method_exists( $reflectionSettings, $setter ) )
 					{
-						case "attributeName":
-							{
-								$reflectionSettings->setAttributeName( $value );
-								break;
-							}
-						case "ignoreDotFiles":
-							{
-								$reflectionSettings->setIgnoreDotFiles( $value );
-								break;
-							}
-						case "className":
-							{
-								$reflectionSettings->setClassName( $value );
-								break;
-							}
-						case "operationName":
-							{
-								$reflectionSettings->setOperationName( $value );
-								break;
-							}
-						case "parameterName":
-							{
-								$reflectionSettings->setParameterName( $value );
-								break;
-							}
-						case "accessibility":
-							{
-								$reflectionSettings->setAccessibility( $value );
-								break;
-							}
-						case "parentClass":
-							{
-								$reflectionSettings->setParentClass( $value );
-								break;
-							}
-						case "fileSuffix":
-							{
-								$reflectionSettings->setFileSuffix( $value );
-								break;
-							}
-						case "followLinks":
-							{
-								$reflectionSettings->setFollowLinks( $value );
-								break;
-							}
-						case "isInterface":
-							{
-								$reflectionSettings->setIsInterface( $value );
-								break;
-							}
-						case "isTrait":
-							{
-								$reflectionSettings->setIsTrait( $value );
-								break;
-							}
-						case "isAbstractClass":
-							{
-								$reflectionSettings->setIsAbstractClass( $value );
-								break;
-							}
-						case "isFinal":
-							{
-								$reflectionSettings->setIsFinal( $value );
-								break;
-							}
-						case "isAbstractOperation":
-							{
-								$reflectionSettings->setIsAbstractOperation( $value );
-								break;
-							}
-						case "isPrivate":
-							{
-								$reflectionSettings->setIsPrivate( $value );
-								break;
-							}
-						case "isProtected":
-							{
-								$reflectionSettings->setIsProtected( $value );
-								break;
-							}
-						case "isPublic":
-							{
-								$reflectionSettings->setIsPublic( $value );
-								break;
-							}
-						case "isStatic":
-							{
-								$reflectionSettings->setIsStatic( $value );
-								break;
-							}
-						case "implementsInterface":
-							{
-								$reflectionSettings->setImplementsInterface( $value );
-								break;
-							}
-						case "exclude":
-							{
-								$reflectionSettings->setExclude( $value );
-								break;
-							}
+						call_user_func( array(
+							$reflectionSettings,
+							$setter
+						), $value );
 					}
 				}
 			}
+
 			$this->setReflectionSettings( $reflectionSettings );
 		}
 

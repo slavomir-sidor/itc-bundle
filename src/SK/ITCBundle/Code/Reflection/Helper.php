@@ -76,4 +76,14 @@ trait Helper
 	{
 		return $reflection->isTrait() ? "Trait" : ( $reflection->isInterface() ? "Interface" : "Class" );
 	}
+
+	/**
+	 *
+	 * @param IReflection $reflection
+	 * @return string
+	 */
+	protected static function getAttributeType( $reflection )
+	{
+		return implode( ",", array_values( is_array($reflection->getAnnotation( "var" ))?$reflection->getAnnotation( "var" ):[] ) );
+	}
 }

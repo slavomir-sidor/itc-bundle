@@ -12,6 +12,10 @@ use Symfony\Component\HttpKernel\KernelInterface;
 class Console extends Application
 {
 
+	/**
+	 *
+	 * @var string
+	 */
 	private static $logo = '
 
 IIIIIIIIIITTTTTTTTTTTTTTTTTTTTTTT       CCCCCCCCCCCCC

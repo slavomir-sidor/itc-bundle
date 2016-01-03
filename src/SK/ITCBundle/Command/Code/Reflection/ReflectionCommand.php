@@ -337,44 +337,4 @@ class ReflectionCommand extends TableCommand
 		$this->reflectionSettings = $reflectionSettings;
 		return $this;
 	}
-
-	/**
-	 *
-	 * @param IReflection $reflection
-	 * @return string
-	 */
-	protected static function getAccessibility( IReflection $reflection )
-	{
-		return $reflection->isPrivate() ? "Private" : ( $reflection->isProtected() ? "Protected" : "Public" );
-	}
-
-	/**
-	 *
-	 * @param IReflection $reflection
-	 * @return string
-	 */
-	protected static function getStatic( IReflection $reflection )
-	{
-		return $reflection->isStatic() ? "Yes" : "No";
-	}
-
-	/**
-	 *
-	 * @param IReflection $reflection
-	 * @return string
-	 */
-	protected static function getAbstract( IReflection $reflection )
-	{
-		return $reflection->isAbstract() ? "Yes" : "No";
-	}
-
-	/**
-	 *
-	 * @param unknown $reflection
-	 * @return string
-	 */
-	protected static function getObjectType( $reflection )
-	{
-		return $reflection->isTrait() ? "Trait" : ( $reflection->isInterface() ? "Interface" : "Class" );
-	}
 }

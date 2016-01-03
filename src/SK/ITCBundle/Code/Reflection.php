@@ -6,18 +6,18 @@ use TokenReflection\Broker;
 use Symfony\Component\Finder\Finder;
 use TokenReflection\Broker\Backend;
 use TokenReflection\ReflectionFile;
+use TokenReflection\ReflectionNamespace;
+use TokenReflection\Php\ReflectionClass;
 use TokenReflection\Php\ReflectionProperty;
 use TokenReflection\Php\ReflectionMethod;
 use TokenReflection\Php\ReflectionParameter;
+use SK\ITCBundle\Code\Reflection\Settings;
 use SK\ITCBundle\Code\Reflection\Collection\PackageCollection;
 use SK\ITCBundle\Code\Reflection\Collection\FileCollection;
 use SK\ITCBundle\Code\Reflection\Collection\ClassCollection;
 use SK\ITCBundle\Code\Reflection\Collection\OperationCollection;
 use SK\ITCBundle\Code\Reflection\Collection\ParameterCollection;
 use SK\ITCBundle\Code\Reflection\Collection\AttributesCollection;
-use TokenReflection\ReflectionNamespace;
-use TokenReflection\Php\ReflectionClass;
-use SK\ITCBundle\Code\Reflection\Settings;
 
 class Reflection
 {

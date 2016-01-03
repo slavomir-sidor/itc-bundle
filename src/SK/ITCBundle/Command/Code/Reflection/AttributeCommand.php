@@ -8,42 +8,35 @@
  */
 namespace SK\ITCBundle\Command\Code\Reflection;
 
-use TokenReflection\Php\ReflectionProperty;
-
 class AttributeCommand extends ReflectionCommand
 {
 
-	protected $columns = array(
-		'Class',
-		'Attribute',
-		'Accessibility',
-		'Static',
-		'Default'
-	);
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \SK\ITCBundle\Command\TableCommand::getColumns()
+	 */
+	protected function getColumns()
+	{
+		return $this->getReflection()
+			->getAttributes()
+			->getColumns();
+	}
 
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \SK\ITCBundle\Command\TableCommand::getRows()
+	 */
 	protected function getRows()
 	{
 		if( null === $this->rows )
 		{
-			$rows = [];
-
-			$reflections = $this->getReflection()->getAttributes();
-
-			/* @var $reflection ReflectionProperty */
-			foreach( $reflections as $reflection )
-			{
-				$row = [];
-
-				$row[ 'Class' ] = $reflection->getDeclaringClassName();
-				$row[ 'Attribute' ] = $reflection->getName();
-				$row[ 'Accessibility' ] = self::getAccessibility( $reflection );
-				$row[ 'Static' ] = self::getStatic( $reflection );
-				$row[ 'Default' ] = is_array($reflection->getDefaultValue())?'array':$reflection->getDefaultValue();
-
-				$rows[] = $row;
-			}
-
-			$this->setRows( $rows );
+			$this->setRows( $this->getReflection()
+				->getAttributes()
+				->toArray() );
 		}
 
 		return $this->rows;

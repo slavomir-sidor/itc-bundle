@@ -9,43 +9,35 @@
  */
 namespace SK\ITCBundle\Command\Code\Reflection;
 
-use TokenReflection\Php\ReflectionParameter;
-
 class ParameterCommand extends ReflectionCommand
 {
 
-	protected $columns = array(
-		'Class Name',
-		'Operation',
-		'Parameter',
-		'Type',
-		'Default'
-	);
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \SK\ITCBundle\Command\TableCommand::getColumns()
+	 */
+	protected function getColumns()
+	{
+		return $this->getReflection()
+			->getParameters()
+			->getColumns();
+	}
 
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \SK\ITCBundle\Command\TableCommand::getRows()
+	 */
 	protected function getRows()
 	{
 		if( null === $this->rows )
 		{
-			$rows = [];
-
-			$reflections = $this->getReflection()
-				->getParameters();
-
-			/* @var $reflection  ReflectionParameter */
-			foreach( $reflections as $reflection )
-			{
-				$row = [];
-
-				$row[ 'Class' ] = $reflection->getDeclaringClassName();
-				$row[ 'Operation' ] = $reflection->getDeclaringFunctionName();
-				$row[ 'Parameter' ] = $reflection->getName();
-				//$row[ 'Type' ] = $reflection->getOriginalTypeHint();
-				//$row[ 'Default' ] = is_array( $reflection->getDefaultValue() ) ? 'array' : $reflection->getDefaultValue();
-
-				$rows[] = $row;
-			}
-
-			$this->setRows( $rows );
+			$this->setRows( $this->getReflection()
+				->getParameters()
+				->toArray() );
 		}
 
 		return $this->rows;

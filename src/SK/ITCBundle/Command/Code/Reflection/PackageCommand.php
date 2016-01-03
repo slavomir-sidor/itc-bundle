@@ -1,5 +1,4 @@
 <?php
-
 /**
  * SK ITCBundle Command Code Reflection Namespaces
  *
@@ -9,37 +8,35 @@
  */
 namespace SK\ITCBundle\Command\Code\Reflection;
 
-use TokenReflection\ReflectionNamespace;
-
 class PackageCommand extends ReflectionCommand
 {
 
-	protected $columns = array(
-		'Namespace'
-	);
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \SK\ITCBundle\Command\TableCommand::getColumns()
+	 */
+	protected function getColumns()
+	{
+		return $this->getReflection()
+			->getPackages()
+			->getColumns();
+	}
 
 	/**
 	 *
-	 * @return array
+	 * {@inheritDoc}
+	 *
+	 * @see \SK\ITCBundle\Command\TableCommand::getRows()
 	 */
 	protected function getRows()
 	{
 		if( NULL === $this->rows )
 		{
-			$rows = [];
-
-			/* @var $package ReflectionNamespace */
-			foreach( $this->getReflection()
-				->getPackages() as $package )
-			{
-				$row=[];
-
-				$row['Namespace'] = $package->getName();
-
-				$rows[]=$row;
-			}
-
-			$this->setRows( $rows );
+			$this->setRows( $this->getReflection()
+				->getPackages()
+				->toArray() );
 		}
 
 		return $this->rows;

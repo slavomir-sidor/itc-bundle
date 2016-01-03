@@ -144,8 +144,9 @@ class Reflection
 				{
 					if( NULL !== $settings->getClassName() )
 					{
-						return preg_match( '/' . $settings->getClassName() . '/', $class->getName() );
+						return ( bool ) preg_match( sprintf( "/%s/", preg_quote( $settings->getClassName() ) ), $class->getName() );
 					}
+
 					return true;
 				} );
 
@@ -157,6 +158,7 @@ class Reflection
 					{
 						return ( $settings->getIsAbstractClass() == $class->isAbstract() );
 					}
+
 					return true;
 				} );
 
@@ -167,6 +169,7 @@ class Reflection
 					{
 						return ( $settings->getIsFinal() == $class->isFinal() );
 					}
+
 					return true;
 				} );
 
@@ -177,6 +180,7 @@ class Reflection
 					{
 						return ( $settings->getIsInterface() == $class->isInterface() );
 					}
+
 					return true;
 				} );
 
@@ -187,6 +191,7 @@ class Reflection
 					{
 						return ( $settings->getIsTrait() == $class->isTrait() );
 					}
+
 					return true;
 				} );
 
@@ -205,6 +210,7 @@ class Reflection
 
 						return false;
 					}
+
 					return true;
 				} );
 
@@ -220,6 +226,7 @@ class Reflection
 								return true;
 							}
 						}
+
 						return false;
 					}
 
@@ -273,7 +280,7 @@ class Reflection
 				{
 					if( NULL !== $settings->getOperationName() )
 					{
-						return ( bool ) preg_match( sprintf( "/%s/", $settings->getOperationName() ), $operation->getName() );
+						return ( bool ) preg_match( sprintf( "/%s/", preg_quote( $settings->getOperationName() ) ), $operation->getName() );
 					}
 
 					return true;
@@ -623,15 +630,15 @@ class Reflection
 
 		if( null === $this->parameters )
 		{
-			$parameters = new ParameterCollection( );
+			$parameters = new ParameterCollection();
 
 			/* @var $operation ReflectionMethods */
-			foreach( $this->getOperations() as $key=>$operation )
+			foreach( $this->getOperations() as $key => $operation )
 			{
 				/* @var $parameter ReflectionParameter */
 				foreach( $operation->getParameters() as $parameter )
 				{
-					$parameters->set($key.$parameter->getName(), $parameter);
+					$parameters->set( $key . $parameter->getName(), $parameter );
 				}
 			}
 
@@ -647,9 +654,9 @@ class Reflection
 					}
 
 					return true;
-			} );
+				} );
 
-			$this->setParameters( $parameters  );
+			$this->setParameters( $parameters );
 		}
 		return $this->parameters;
 	}

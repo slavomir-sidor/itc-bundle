@@ -3,6 +3,7 @@ namespace SK\ITCBundle\Code\Reflection;
 
 use TokenReflection\Php\IReflection;
 use TokenReflection\Php\ReflectionClass;
+use TokenReflection\Php\ReflectionParameter;
 
 trait Helper
 {
@@ -85,5 +86,15 @@ trait Helper
 	protected static function getAttributeType( $reflection )
 	{
 		return implode( ",", array_values( is_array($reflection->getAnnotation( "var" ))?$reflection->getAnnotation( "var" ):[] ) );
+	}
+
+	/**
+	 *
+	 * @param ReflectionParameter $reflection
+	 * @return string
+	 */
+	protected static function getAttributeDefault( $reflection )
+	{
+		return is_array( $reflection->getDefaultValue() ) ? 'array' : $reflection->getDefaultValue();
 	}
 }

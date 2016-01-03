@@ -64,36 +64,55 @@ class ReflectionCommand extends TableCommand
 	{
 		parent::configure();
 
-		$this->addOption( "bootstrap", "bs", InputOption::VALUE_OPTIONAL, "PHP Boostrap File." );
+		$this->addOption( "bootstrap", "bs", InputOption::VALUE_OPTIONAL, "PHP Boostrap File. If you need your own project specific bootrap." );
+
+		/* File Filters */
+		$this->addOption( "fileSuffix", "fs", InputOption::VALUE_OPTIONAL, "Files filter suffixes for given src, default all and not dot files.",
+						"*.php" );
+		$this->addOption( "ignoreDotFiles", "df", InputOption::VALUE_OPTIONAL, "Files filter ignore DOT files.", true );
+		$this->addOption( "followLinks", "fl", InputOption::VALUE_OPTIONAL, "Files filter follows links.", false );
+		$this->addOption( "exclude", "ed", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+						"Files filter excludes directory(ies) from given source" );
+
+		/* Class Filters */
+		$this->addOption( "className", "cn", InputOption::VALUE_OPTIONAL,
+						"Classes filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
+		$this->addOption( "parentClass", "pc", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+						"Classes filter parent Class Name, e.g 'My\Class'" );
+		$this->addOption( "isInterface", "ii", InputOption::VALUE_REQUIRED,
+						"Classes filter reflects interfaces objects only, possible values are (true|false)." );
+		$this->addOption( "isTrait", "it", InputOption::VALUE_REQUIRED,
+						"Classes filter reflects traits objects only, possible values are (true|false)." );
+		$this->addOption( "isAbstractClass", "ib", InputOption::VALUE_REQUIRED,
+						"Classes filter reflect abstract classes only, possible values are (true|false)." );
+		$this->addOption( "isFinal", "if", InputOption::VALUE_REQUIRED,
+						"Classes filter reflect Final Classes Only, possible values are (true|false)." );
+		$this->addOption( "implementsInterface", "imi", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+						"Classes filter reflect abstract classes only." );
+
+		/* Attribute Filters */
 		$this->addOption( "attributeName", "an", InputOption::VALUE_OPTIONAL,
-			"Attributes name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
-		$this->addOption( "ignoreDotFiles", "df", InputOption::VALUE_OPTIONAL, "Ignore DOT files.", true );
+						"Attributes filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
+
+		/* Operation Filters */
 		$this->addOption( "operationName", "on", InputOption::VALUE_OPTIONAL,
-			"Operations name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
-		$this->addOption( "className", "cn", InputOption::VALUE_OPTIONAL, "Class name, e.g. '^myPrefix|mySuffix$', regular expression allowed.",
-			NULL );
-		$this->addOption( "parameterName", "pn", InputOption::VALUE_OPTIONAL,
-			"Class operation parameter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
-		$this->addOption( "accessibility", "ac", InputOption::VALUE_OPTIONAL, "Operations and attributes accessibility: protected, public, private." );
-		$this->addOption( "parentClass", "pc", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Parent Class Name, e.g 'My\Class'" );
-		$this->addOption( "fileSuffix", "fs", InputOption::VALUE_OPTIONAL, "File suffixes for given src, default all and not dot files.", "*.php" );
-		$this->addOption( "followLinks", "fl", InputOption::VALUE_OPTIONAL, "Follows links.", false );
-		$this->addOption( "isInterface", "ii", InputOption::VALUE_REQUIRED, "Reflect Interfaces Objects Only, possible values are (true|false)." );
-		$this->addOption( "isTrait", "it", InputOption::VALUE_REQUIRED, "Reflect Traits Objects Only, possible values are (true|false)." );
-		$this->addOption( "isAbstractClass", "ib", InputOption::VALUE_REQUIRED, "Reflect Abstract Classes Only, possible values are (true|false)." );
-		$this->addOption( "isFinal", "if", InputOption::VALUE_REQUIRED, "Reflect Final Classes Only, possible values are (true|false)." );
+						"Operations filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
 		$this->addOption( "isAbstractOperation", "ia", InputOption::VALUE_REQUIRED,
-			"Reflect Abstract Operation Only, possible values are (true|false)." );
+						"Operations filter reflect abstract Operation Only, possible values are (true|false)." );
+
+		/* Parameter Filters */
+		$this->addOption( "parameterName", "pn", InputOption::VALUE_OPTIONAL,
+						"Parameters filter parameter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
+
+		/* Attributes and Operations Filters */
 		$this->addOption( "isPrivate", "ip", InputOption::VALUE_REQUIRED,
-			"Reflect Private Operations or Attributes, possible values are (true|false)." );
+						"Attributes and Operations filter reflects private only or exclude it, (true|false)." );
 		$this->addOption( "isProtected", "id", InputOption::VALUE_REQUIRED,
-			"Reflect Protected Operations or Attributes, possible values are (true|false)." );
+						"Attributes and Operations filter reflects protected only or exclude it, (true|false)." );
 		$this->addOption( "isPublic", "ic", InputOption::VALUE_REQUIRED,
-			"Reflect Public Operations or Attributes, possible values are (true|false)." );
+						"Attributes and Operations filter reflects public only or exclude it, (true|false)." );
 		$this->addOption( "isStatic", "is", InputOption::VALUE_REQUIRED,
-			"Reflect Static Operations or Attributes, possible values are (true|false)." );
-		$this->addOption( "implementsInterface", "imi", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Reflect Abstract Classes Only." );
-		$this->addOption( "exclude", "ed", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, "Exclude Directory from source" );
+						"Attributes and Operations filter reflects static only or exclude it, (true|false)." );
 
 		$this->addArgument( 'src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
 			"src/",

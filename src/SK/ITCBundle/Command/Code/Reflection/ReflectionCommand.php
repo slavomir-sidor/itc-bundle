@@ -98,7 +98,7 @@ class ReflectionCommand extends TableCommand
 		$this->addOption( "operationName", "on", InputOption::VALUE_OPTIONAL,
 						"Operations filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
 		$this->addOption( "isAbstractOperation", "ia", InputOption::VALUE_REQUIRED,
-						"Operations filter reflect abstract Operation Only, possible values are (true|false)." );
+						"Operations filter reflect abstract Operation Only, possible values are (1|0)." );
 
 		/* Parameter Filters */
 		$this->addOption( "parameterName", "pn", InputOption::VALUE_OPTIONAL,
@@ -106,13 +106,13 @@ class ReflectionCommand extends TableCommand
 
 		/* Attributes and Operations Filters */
 		$this->addOption( "isPrivate", "ip", InputOption::VALUE_REQUIRED,
-						"Attributes and Operations filter reflects private only or exclude it, (true|false)." );
+						"Attributes and Operations filter reflects private only or exclude it, (1|0)." );
 		$this->addOption( "isProtected", "id", InputOption::VALUE_REQUIRED,
-						"Attributes and Operations filter reflects protected only or exclude it, (true|false)." );
+						"Attributes and Operations filter reflects protected only or exclude it, (1|0)." );
 		$this->addOption( "isPublic", "ic", InputOption::VALUE_REQUIRED,
-						"Attributes and Operations filter reflects public only or exclude it, (true|false)." );
+						"Attributes and Operations filter reflects public only or exclude it, (1|0)." );
 		$this->addOption( "isStatic", "is", InputOption::VALUE_REQUIRED,
-						"Attributes and Operations filter reflects static only or exclude it, (true|false)." );
+						"Attributes and Operations filter reflects static only or exclude it, (1|0)." );
 
 		$this->addArgument( 'src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
 			"src/",

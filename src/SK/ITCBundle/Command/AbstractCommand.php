@@ -12,14 +12,7 @@ namespace SK\ITCBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\Table;
 use Monolog\Logger;
-use Symfony\Component\Console\Helper\TableStyle;
-use Symfony\Component\Console\Helper\TableCell;
-use Symfony\Component\Console\Formatter\OutputFormatter;
-use Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use Symfony\Component\Console\Helper\TableSeparator;
 
 abstract class AbstractCommand extends ContainerAwareCommand
 {
@@ -39,43 +32,11 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	protected $output;
 
 	/**
-	 * SK ITCBundle Abstract Command Exceptions
-	 *
-	 * @var \Exception[]
-	 */
-	protected $exceptions;
-
-	/**
 	 * SK ITCBundle Abstract Command Logger
 	 *
 	 * @var Logger
 	 */
 	protected $logger;
-
-	/**
-	 * SK ITCBundle Command Code Generator PHPUnit Abstract Generator Generator Root directory
-	 *
-	 * @var string
-	 */
-	protected $rootDir;
-
-	/**
-	 *
-	 * @var array
-	 */
-	protected $tableHeaders;
-
-	/**
-	 *
-	 * @var array
-	 */
-	protected $tableRows;
-
-	/**
-	 *
-	 * @var Table
-	 */
-	protected $table;
 
 	/**
 	 * Constructs SK ITCBundle Abstract Command
@@ -89,9 +50,9 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	public function __construct( $name, $description, Logger $logger )
 	{
-		parent::__construct( $name );
-		$this->setDescription( $description );
-		$this->setLogger( $logger );
+		parent::__construct($name);
+		$this->setDescription($description);
+		$this->setLogger($logger);
 	}
 
 	/**
@@ -101,8 +62,8 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	public function execute( InputInterface $input, OutputInterface $output )
 	{
-		$this->setInput( $input );
-		$this->setOutput( $output );
+		$this->setInput($input);
+		$this->setOutput($output);
 	}
 
 	/**
@@ -158,82 +119,6 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	}
 
 	/**
-	 * Gets SK ITCBundle Abstract Command Exception
-	 *
-	 * @return \Exception[]
-	 */
-	public function getExceptions()
-	{
-		if( null == $this->exceptions )
-		{
-			$this->exceptions = array();
-		}
-		return $this->exceptions;
-	}
-
-	/**
-	 * Sets SK ITCBundle Abstract Command Exception
-	 *
-	 * @param \Exception[] $exceptions
-	 *        	SK ITCBundle Abstract Command Exceptions
-	 * @return \SK\ITCBundle\Command\Code\CodeCommand SK ITCBundle Abstract Command
-	 */
-	public function setExceptions( array $exceptions )
-	{
-		$this->exceptions = $exceptions;
-		return $this;
-	}
-
-	/**
-	 * Adds SK ITCBundle Abstract Command Exception
-	 *
-	 * @param \Exception $exception
-	 *        	SK ITCBundle Abstract Command Exception
-	 * @return \SK\ITCBundle\Command\Code\CodeCommand
-	 */
-	public function addException( \Exception $exception )
-	{
-		$this->exceptions[] = $exception;
-		return $this;
-	}
-
-	/**
-	 * Writes SK ITCBundle Abstract Command Exception
-	 *
-	 * @param \Exception $exception
-	 *        	SK ITCBundle Abstract Command Exception
-	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
-	 */
-	public function writeException( \Exception $exception )
-	{
-		$this->getOutput()
-			->writeln( sprintf( " <fg=black;bg=red>Error %s %s</fg=black;bg=red>", $exception->getCode(), $exception->getMessage() ),
-			OutputInterface::VERBOSITY_VERBOSE );
-
-		$this->getOutput()
-			->writeln( sprintf( " <fg=black;bg=red>Trace %s</fg=black;bg=red>", $exception->getTraceAsString() ),
-			OutputInterface::VERBOSITY_VERY_VERBOSE );
-	}
-
-	/**
-	 * Writes SK ITCBundle Abstract Command Exceptions
-	 *
-	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
-	 */
-	public function writeExceptions()
-	{
-		if( count( $this->getExceptions() ) > 0 )
-		{
-			$this->writeInfo( sprintf( "Exceptions: %d", count( $this->getExceptions() ) ) );
-			foreach( $this->getExceptions() as $exception )
-			{
-				$this->writeException( $exception );
-			}
-		}
-		return $this;
-	}
-
-	/**
 	 * Writes SK ITCBundle Abstract Command Line
 	 *
 	 * @param string $message
@@ -242,8 +127,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	public function writeLine( $message = "\n", $verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
-		$this->getOutput()
-			->writeln( $message, $verbosity );
+		$this->getOutput()->writeln($message, $verbosity);
 		return $this;
 	}
 
@@ -257,7 +141,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	public function writeInfo( $message, $verbosity = OutputInterface::VERBOSITY_VERBOSE )
 	{
 		$output = $this->getOutput();
-		$output->writeln( sprintf( '<fg=white>%s</fg=white>', $message ), $verbosity );
+		$output->writeln(sprintf('<fg=white>%s</fg=white>', $message), $verbosity);
 		return $this;
 	}
 
@@ -271,54 +155,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	public function writeHeader( $message )
 	{
 		$output = $this->getOutput();
-		$output->writeln( ' <fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>" );
-		return $this;
-	}
-
-	/**
-	 * Writes SK ITCBundle Abstract Command Table
-	 *
-	 * @param array $rows
-	 *        	SK ITCBundle Abstract Command Table Rows
-	 * @param array $columns
-	 *        	SK ITCBundle Abstract Command Table Header
-	 * @param int $maxColWidth
-	 * @param int $verbosity
-	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
-	 */
-	public function writeTable( $rows = array(), $columns = array(), $maxColWidth = 60, $verbosity = OutputInterface::VERBOSITY_NORMAL )
-	{
-		$style = new TableStyle();
-
-		// customize the style
-		$style->setHorizontalBorderChar( '<fg=magenta>-</>' )
-			->setVerticalBorderChar( '<fg=magenta>|</>' )
-			->setCrossingChar( '<fg=magenta>+</>' );
-
-		foreach( $rows as $iRow => $row )
-		{
-			foreach( $row as $iCol => $col )
-			{
-				$rows[ $iRow ][ $iCol ] = wordwrap( $col, $maxColWidth, "\n", true );
-			}
-		}
-		$tableColspan = count( $columns );
-		$table = $this->getTable();
-		$table->setHeaders( $this->getTableHeaders( $columns ) );
-		$table->addRows( $rows );
-
-		$table->addRow( array(
-			new TableSeparator( array(
-				'colspan' => $tableColspan
-			) )
-		) );
-		$table->addRow(
-			array(
-				new TableCell( sprintf( "Found %s results.", count( $rows ) ), array(
-					'colspan' => $tableColspan
-				) )
-			) );
-		$table->render();
+		$output->writeln(' <fg=white;bg=magenta>' . $message . "</fg=white;bg=magenta>");
 		return $this;
 	}
 
@@ -331,8 +168,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	 */
 	public function writeNotice( $message, $verbosity = OutputInterface::VERBOSITY_NORMAL )
 	{
-		$this->getOutput()
-			->writeln( "<fg=blue>{$message}</fg=blue>", $verbosity );
+		$this->getOutput()->writeln("<fg=blue>{$message}</fg=blue>", $verbosity);
 		return $this;
 	}
 
@@ -348,9 +184,9 @@ abstract class AbstractCommand extends ContainerAwareCommand
 		$input = $this->getInput();
 		$output = $this->getOutput();
 
-		if( self::OPTION_VERBOSE_OUTPUT_YES == $input->getOption( "verbose" ) )
+		if( self::OPTION_VERBOSE_OUTPUT_YES == $input->getOption("verbose") )
 		{
-			$output->writeln( ' <fg=blue;bg=white>DEBUG:</fg=blue;bg=white> ' . $message );
+			$output->writeln(' <fg=blue;bg=white>DEBUG:</fg=blue;bg=white> ' . $message);
 		}
 		return $this;
 	}
@@ -375,95 +211,5 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	public function setLogger( Logger $logger )
 	{
 		$this->logger = $logger;
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function getRootDir()
-	{
-		if( NULL === $this->rootDir )
-		{
-			$this->setRootDir( getcwd() );
-		}
-
-		return $this->rootDir;
-	}
-
-	public function setRootDir( $rootDir )
-	{
-		$this->rootDir = $rootDir;
-		return $this;
-	}
-
-	/**
-	 *
-	 * @return array
-	 */
-	protected function getTableHeaders( array $columns )
-	{
-		if( null === $this->tableHeaders )
-		{
-			$tableHeaders = [];
-			$tableColspan = count( $columns );
-
-			$definition = $this->getDefinition();
-			$input = $this->getInput();
-			$output = $this->getOutput();
-
-			$tableHeaders[] = array(
-				new TableCell( sprintf( "%s", $this->getDescription() ), array(
-					'colspan' => $tableColspan
-				) )
-			);
-			$tableHeaders[] = $columns;
-
-			$this->setTableHeaders( $tableHeaders );
-		}
-		return $this->tableHeaders;
-	}
-
-	/**
-	 *
-	 * @param array $tableHeaders
-	 */
-	protected function setTableHeaders( array $tableHeaders )
-	{
-		$this->tableHeaders = $tableHeaders;
-		return $this;
-	}
-
-	/**
-	 *
-	 * @param array $tableRows
-	 */
-	protected function setTableRows( array $tableRows )
-	{
-		$this->tableRows = $tableRows;
-		return $this;
-	}
-
-	/**
-	 */
-	public function getTable()
-	{
-		if( null === $this->table )
-		{
-			$table = new Table( $this->getOutput() );
-			$table->setStyle( 'default' );
-			$this->setTable( $table );
-		}
-		return $this->table;
-	}
-
-	/**
-	 *
-	 * @param Table $table
-	 */
-	public function setTable( Table $table )
-	{
-		$this->table = $table;
-		return $this;
 	}
 }

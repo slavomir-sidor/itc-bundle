@@ -9,275 +9,332 @@
  */
 namespace SK\ITCBundle\Command\Code\Reflection;
 
-use SK\ITCBundle\Command\Code\CodeCommand;
-use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Finder\SplFileInfo;
-use Symfony\Component\Console\Helper\Table;
-use TokenReflection\ReflectionMethod;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Helper\TableSeparator;
-use Symfony\Component\Console\Helper\TableCell;
-use Symfony\Component\DependencyInjection\Variable;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Assetic\Exception\Exception;
+use Monolog\Logger;
+use SK\ITCBundle\Code\Reflection;
+use SK\ITCBundle\Command\TableCommand;
+use SK\ITCBundle\Code\Reflection\Settings;
+use TokenReflection\IReflection;
 
-abstract class ReflectionCommand extends CodeCommand
+class ReflectionCommand extends TableCommand
 {
 
 	/**
 	 *
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
+	 * @var Reflection
 	 */
-	protected function executeClassReflection()
-	{
-
-		$header = array(
-			'PHP Object',
-			'Final',
-			'Abstract',
-			'Namespace Name',
-			'Parent',
-			'Implements Interfaces'
-		);
-
-		$rows = array();
-
-		foreach( $this->getClassReflections() as $classReflection )
-		{
-			$row = [];
-			if( $classReflection->isTrait() )
-			{
-				$row[] = "Trait";
-			}
-			elseif( $classReflection->isInterface() )
-			{
-				$row[] = "Interface";
-			}
-			else
-			{
-				$row[] = "Class";
-			}
-			$row[] = $classReflection->isFinal() ? "Final" : "";
-			$row[] = $classReflection->isAbstract() ? "Abstract" : "";
-			$row[] = $classReflection->getName();
-			$row[] = implode( "\n", $classReflection->getParentClassNameList() );
-			$row[] = implode( "\n", $classReflection->getInterfaceNames() );
-
-			$rows[] = $row;
-		}
-
-		$this->writeTable( $rows, $header );
-		$this->writeExceptions();
-
-	}
+	protected $reflection;
 
 	/**
 	 *
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
+	 * @var Settings
 	 */
-	protected function executeAttributesReflection()
+	protected $reflectionSettings;
+
+	/**
+	 * Constructs SK ITCBundle Abstract Command
+	 *
+	 * @param string $name
+	 *        	SK ITCBundle Abstract Command Name
+	 * @param string $description
+	 *        	SK ITCBundle Abstract Command Description
+	 * @param Logger $logger
+	 *        	SK ITCBundle Abstract Command Logger
+	 * @param Reflection $reflection
+	 *        	SK ITCBundle Abstract Command Reflection
+	 */
+	public function __construct( $name, $description, Logger $logger, Reflection $reflection )
 	{
-
-		$columns = array(
-			'Class',
-			'Attribute',
-			'Accessibility',
-			'Static'
-		);
-		$rows = array();
-
-		foreach( $this->getClassReflections() as $classReflection )
-		{
-			$attributesReflections = $classReflection->getProperties();
-
-			foreach( $attributesReflections as $attributesReflection )
-			{
-				$rows[] = array(
-					$classReflection->getName(),
-					$attributesReflection->getName(),
-					$attributesReflection->isPrivate() ? "Private" : $attributesReflection->isProtected() ? "Protected" : "Public",
-					$attributesReflection->isStatic() ? "Yes" : "No"
-				);
-			}
-		}
-		$this->writeTable( $rows, $columns, 120 );
-		$this->writeExceptions();
-
+		parent::__construct( $name, $description, $logger );
+		$this->setReflection( $reflection );
 	}
 
 	/**
+	 * (non-PHPdoc)
 	 *
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
+	 * @see \Symfony\Component\Console\Command\Command::configure()
 	 */
-	protected function executeOperationsReflection()
+	protected function configure()
 	{
+		parent::configure();
 
-		$rows = [];
-		$declaringClassName = "";
+		$this->addOption( "bootstrap", "bs", InputOption::VALUE_OPTIONAL, "PHP Boostrap File. If you need your own project specific bootrap." );
 
-		foreach( $this->getOperationsReflections() as $operationReflection )
-		{
-			$operationsParametersReflections = $operationReflection->getParameters();
-			$operationsParameters = [];
-			foreach( $operationsParametersReflections as $parameter )
-			{
-				$operationsParameters[] = $parameter->getName();
-			}
-			$annotations = $operationReflection->getAnnotations();
-			$accesibility="";
-			if($operationReflection->isPrivate()){
-				$accesibility="Private";
-			}
-			if($operationReflection->isProtected()){
-				$accesibility="Protected";
-			}
-			if($operationReflection->isPublic()){
-				$accesibility="Public";
-			}
+		/* File Filters */
+		$this->addOption( "fileSuffix", "fs", InputOption::VALUE_OPTIONAL, "Files filter suffixes for given src, default all and not dot files.",
+						"*.php" );
+		$this->addOption( "ignoreDotFiles", "df", InputOption::VALUE_OPTIONAL, "Files filter ignore DOT files.", true );
+		$this->addOption( "followLinks", "fl", InputOption::VALUE_OPTIONAL, "Files filter follows links.", false );
+		$this->addOption( "exclude", "ed", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+						"Files filter excludes directory(ies) from given source" );
 
-			$rows[] = array(
-				$accesibility,
-				$operationReflection->isAbstract() ? "Abstract" : "",
-				$operationReflection->isStatic() ? "Static" : "",
-				sprintf( '%s::%s', $operationReflection->getDeclaringClassName(), $operationReflection->getName() ),
-				implode( ', ', $operationsParameters ),
-				(isset($annotations['return']) && isset($annotations['return'][0]))?$annotations['return'][0]:''
-			);
-		}
+		/* Class Filters */
+		$this->addOption( "className", "cn", InputOption::VALUE_OPTIONAL,
+						"Classes filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
+		$this->addOption( "parentClass", "pc", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+						"Classes filter parent Class Name, e.g 'My\Class'" );
+		$this->addOption( "isInterface", "ii", InputOption::VALUE_REQUIRED,
+						"Classes filter reflects interfaces objects only, possible values are (true|false)." );
+		$this->addOption( "isTrait", "it", InputOption::VALUE_REQUIRED,
+						"Classes filter reflects traits objects only, possible values are (true|false)." );
+		$this->addOption( "isAbstractClass", "ib", InputOption::VALUE_REQUIRED,
+						"Classes filter reflect abstract classes only, possible values are (true|false)." );
+		$this->addOption( "isFinal", "if", InputOption::VALUE_REQUIRED,
+						"Classes filter reflect Final Classes Only, possible values are (true|false)." );
+		$this->addOption( "implementsInterface", "imi", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+						"Classes filter reflect abstract classes only." );
 
-		$this->writeTable( $rows, array(
-			'Accessibility',
-			'Abstract',
-			'Static',
-			'Operation',
-			'Parameters',
-			'Returns'
-		), 120 );
+		/* Attribute Filters */
+		$this->addOption( "attributeName", "an", InputOption::VALUE_OPTIONAL,
+						"Attributes filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
 
-		$this->writeExceptions();
+		/* Operation Filters */
+		$this->addOption( "operationName", "on", InputOption::VALUE_OPTIONAL,
+						"Operations filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
+		$this->addOption( "isAbstractOperation", "ia", InputOption::VALUE_REQUIRED,
+						"Operations filter reflect abstract Operation Only, possible values are (true|false)." );
+
+		/* Parameter Filters */
+		$this->addOption( "parameterName", "pn", InputOption::VALUE_OPTIONAL,
+						"Parameters filter parameter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
+
+		/* Attributes and Operations Filters */
+		$this->addOption( "isPrivate", "ip", InputOption::VALUE_REQUIRED,
+						"Attributes and Operations filter reflects private only or exclude it, (true|false)." );
+		$this->addOption( "isProtected", "id", InputOption::VALUE_REQUIRED,
+						"Attributes and Operations filter reflects protected only or exclude it, (true|false)." );
+		$this->addOption( "isPublic", "ic", InputOption::VALUE_REQUIRED,
+						"Attributes and Operations filter reflects public only or exclude it, (true|false)." );
+		$this->addOption( "isStatic", "is", InputOption::VALUE_REQUIRED,
+						"Attributes and Operations filter reflects static only or exclude it, (true|false)." );
+
+		$this->addArgument( 'src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
+			"src/",
+			"app/",
+			"tests/"
+		) );
 	}
 
 	/**
+	 * (non-PHPdoc)
 	 *
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
+	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
 	 */
-	protected function executeOperationsAttributesReflection()
+	public function execute( InputInterface $input, OutputInterface $output )
 	{
+		parent::execute( $input, $output );
 
-		$header = array(
-			'Class Name',
-			'Operation',
-			'Attribute',
-			'Type',
-			'Default'
-		);
+		$src = $this->getInput()->getArgument( "src" );
+		$this->writeInfo( sprintf( "Searching files in '%s' sources.", implode( "', '", $src ) ) );
 
-		$rows = [];
-		$reflections = $this->getClassReflections();
-
-		foreach( $reflections as $classReflection )
+		$canContinue = false;
+		foreach( $src as $source )
 		{
-			$operationReflections = $classReflection->getMethods();
-
-			foreach( $operationReflections as $operationReflection )
+			if( file_exists( $source ) || is_dir( $source ) )
 			{
+				$canContinue = true;
+			}
+		}
 
-				$attributeReflections = $operationReflection->getParameters();
+		if( ! $canContinue )
+		{
+			$this->writeInfo( sprintf( "Sources '%s' doesn't exists.", implode( "', '", $src ) ) );
+			return;
+		}
 
-				foreach( $attributeReflections as $attributeReflection )
+		if( $this->getInput()->hasOption( "bootstrap" ) )
+		{
+			$bootstrap = $this->getInput()->getOption( "bootstrap" );
+
+			try
+			{
+				if( file_exists( $bootstrap ) )
 				{
-					$row = array(
-						$classReflection->getName(),
-						$operationReflection->getName(),
-						$attributeReflection->getName(),
-						// $attributeReflection->getType(),
-						$attributeReflection->isDefaultValueAvailable() ? is_string( $attributeReflection->getDefaultValue() ) ? $attributeReflection->getDefaultValue() : "" : ""
-					);
-					// ($operationReflections->getDocBlock()) ? $classOperationReflection->getDocBlock()->getShortDescription() : ""
-
-					$rows[] = $row;
+					@require_once $bootstrap;
+					$this->writeInfo( sprintf( "Finder Adding Boostrap'%s'", $bootstrap ), OutputInterface::VERBOSITY_VERY_VERBOSE );
 				}
 			}
-		}
-
-		$this->writeTable( $rows, $header );
-		$this->writeExceptions();
-
-	}
-
-	/**
-	 *
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
-	 */
-	protected function executeNamespaceReflection()
-	{
-
-		$header = array(
-			'Namespace Name',
-			'Objects Count'
-		);
-
-		$reflections = $this->getClassReflections();
-
-		$rows = [];
-
-		foreach( $reflections as $classReflection )
-		{
-
-			if( ! isset( $rows[ $classReflection->getNamespaceName() ] ) )
+			catch( \Exception $e )
 			{
-				$rows[ $classReflection->getNamespaceName() ] = array(
-
-					$classReflection->getNamespaceName(),
-					0
-				);
+				$this->writeException( $e );
 			}
-			++ $rows[ $classReflection->getNamespaceName() ][ 1 ];
 		}
 
-		$this->writeTable( $rows, $header );
-		$this->writeExceptions();
-
+		$this->writeTable( 80 );
 	}
 
 	/**
 	 *
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
+	 * @return Reflection
 	 */
-	protected function executeFilesReflection()
+	protected function getReflection()
 	{
-
-		$rows = [];
-		foreach( $this->getFileRelections() as $fileReflection )
-		{
-			$file = new \SplFileInfo( $fileReflection->getName() );
-			$row = array(
-				$fileReflection->getPrettyName(),
-				$file->getOwner(),
-				$file->getGroup(),
-				$file->getPerms(),
-				date( "d.m.Y h:m:s", $file->getCTime() ),
-				date( "d.m.Y h:m:s", $file->getMTime() )
-			);
-			$rows[] = $row;
-		}
-
-		$this->writeTable( $rows, array(
-			"Files",
-			"Owner",
-			"Group",
-			"Permissions",
-			"Created",
-			"Modified"
-		), 120 );
-
-		$this->writeExceptions();
-
+		return $this->reflection->setSettings( $this->getReflectionSettings() );
 	}
 
+	/**
+	 *
+	 * @param Reflection $reflection
+	 */
+	protected function setReflection( Reflection $reflection )
+	{
+		$this->reflection = $reflection;
+		return $this;
+	}
+
+	/**
+	 *
+	 * @return Settings
+	 */
+	protected function getReflectionSettings()
+	{
+		if( NULL === $this->reflectionSettings )
+		{
+			$reflectionSettings = new Settings();
+
+			foreach( $this->getInput()->getArguments() as $name => $value )
+			{
+				if( NULL !== $value )
+				{
+					switch( $name )
+					{
+						case "src":
+							{
+								$reflectionSettings->setSrc( $value );
+								break;
+							}
+					}
+				}
+			}
+
+			foreach( $this->getInput()->getOptions() as $name => $value )
+			{
+				if( NULL !== $value )
+				{
+					switch( $name )
+					{
+						case "attributeName":
+							{
+								$reflectionSettings->setAttributeName( $value );
+								break;
+							}
+						case "ignoreDotFiles":
+							{
+								$reflectionSettings->setIgnoreDotFiles( $value );
+								break;
+							}
+						case "className":
+							{
+								$reflectionSettings->setClassName( $value );
+								break;
+							}
+						case "operationName":
+							{
+								$reflectionSettings->setOperationName( $value );
+								break;
+							}
+						case "parameterName":
+							{
+								$reflectionSettings->setParameterName( $value );
+								break;
+							}
+						case "accessibility":
+							{
+								$reflectionSettings->setAccessibility( $value );
+								break;
+							}
+						case "parentClass":
+							{
+								$reflectionSettings->setParentClass( $value );
+								break;
+							}
+						case "fileSuffix":
+							{
+								$reflectionSettings->setFileSuffix( $value );
+								break;
+							}
+						case "followLinks":
+							{
+								$reflectionSettings->setFollowLinks( $value );
+								break;
+							}
+						case "isInterface":
+							{
+								$reflectionSettings->setIsInterface( $value );
+								break;
+							}
+						case "isTrait":
+							{
+								$reflectionSettings->setIsTrait( $value );
+								break;
+							}
+						case "isAbstractClass":
+							{
+								$reflectionSettings->setIsAbstractClass( $value );
+								break;
+							}
+						case "isFinal":
+							{
+								$reflectionSettings->setIsFinal( $value );
+								break;
+							}
+						case "isAbstractOperation":
+							{
+								$reflectionSettings->setIsAbstractOperation( $value );
+								break;
+							}
+						case "isPrivate":
+							{
+								$reflectionSettings->setIsPrivate( $value );
+								break;
+							}
+						case "isProtected":
+							{
+								$reflectionSettings->setIsProtected( $value );
+								break;
+							}
+						case "isPublic":
+							{
+								$reflectionSettings->setIsPublic( $value );
+								break;
+							}
+						case "isStatic":
+							{
+								$reflectionSettings->setIsStatic( $value );
+								break;
+							}
+						case "implementsInterface":
+							{
+								$reflectionSettings->setImplementsInterface( $value );
+								break;
+							}
+						case "exclude":
+							{
+								$reflectionSettings->setExclude( $value );
+								break;
+							}
+					}
+				}
+			}
+			$this->setReflectionSettings( $reflectionSettings );
+		}
+
+		return $this->reflectionSettings;
+	}
+
+	/**
+	 *
+	 * @param Settings $reflectionSettings
+	 */
+	protected function setReflectionSettings( Settings $reflectionSettings )
+	{
+		$this->reflectionSettings = $reflectionSettings;
+		return $this;
+	}
 }

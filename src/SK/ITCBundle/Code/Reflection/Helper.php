@@ -2,6 +2,7 @@
 namespace SK\ITCBundle\Code\Reflection;
 
 use TokenReflection\Php\IReflection;
+use TokenReflection\Php\ReflectionClass;
 
 trait Helper
 {
@@ -34,6 +35,36 @@ trait Helper
 	protected static function getAbstract( $reflection )
 	{
 		return $reflection->isAbstract() ? "Yes" : "No";
+	}
+
+	/**
+	 *
+	 * @param ReflectionClass $reflection
+	 * @return string
+	 */
+	protected static function getParents( $reflection )
+	{
+		return implode( "\n", $reflection->getParentClassNameList() );
+	}
+
+	/**
+	 *
+	 * @param ReflectionClass $reflection
+	 * @return string
+	 */
+	protected static function getInterfaces( $reflection )
+	{
+		return implode( "\n", $reflection->getInterfaceNames() );
+	}
+
+	/**
+	 *
+	 * @param IReflection $reflection
+	 * @return string
+	 */
+	protected static function getFinal( $reflection )
+	{
+		return $reflection->isFinal() ? "Yes" : "No";
 	}
 
 	/**

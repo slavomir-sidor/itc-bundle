@@ -44,7 +44,7 @@ class AttributesCollection extends Collection
 			$row['Class'] = $reflection->getDeclaringClassName();
 			$row['Attribute'] = $reflection->getName();
 			$row['Type'] = self::getAttributeType( $reflection );
-			$row['Default'] = is_array( $reflection->getDefaultValue() ) ? 'array' : $reflection->getDefaultValue();
+			$row['Default'] = self::getAttributeDefault($reflection);
 
 			$rows[] = $row;
 		}

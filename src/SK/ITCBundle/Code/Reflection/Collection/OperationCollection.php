@@ -39,21 +39,13 @@ class OperationCollection extends Collection
 		{
 			$row = [];
 
-			$parameters = $reflection->getParameters();
-			$operationsParameters = [];
-			foreach( $parameters as $parameter )
-			{
-				$operationsParameters[] = $parameter->getName();
-			}
-
 			$row['Class'] = $reflection->getDeclaringClassName();
 			$row['Accessibility'] = self::getAccessibility( $reflection );
 			$row['Abstract'] = self::getAbstract( $reflection );
 			$row['Static'] = self::getStatic( $reflection );
 			$row['Operation'] = $reflection->getName();
-			$row['Parameters'] = implode( ', ', $operationsParameters );
-			$row['Returns'] = '';
-			// (isset($annotations['return']) && isset($annotations['return'][0]))?$annotations['return'][0]:''
+			$row['Parameters'] = self::getOperationParameters($reflection);
+			$row['Returns'] = self::getOperationReturns($reflection);
 
 			$rows[] = $row;
 		}

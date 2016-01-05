@@ -1,9 +1,11 @@
 <?php
 namespace SK\ITCBundle\Code\Reflection;
 
-use TokenReflection\Php\IReflection;
-use TokenReflection\Php\ReflectionClass;
-use TokenReflection\Php\ReflectionParameter;
+use TokenReflection\IReflection;
+use TokenReflection\ReflectionClass;
+use TokenReflection\ReflectionParameter;
+use TokenReflection\ReflectionProperty;
+use TokenReflection\Php\ReflectionMethod;
 
 trait Helper
 {
@@ -13,7 +15,7 @@ trait Helper
 	 * @param IReflection $reflection
 	 * @return string
 	 */
-	protected static function getAccessibility( $reflection )
+	protected static function getAccessibility( IReflection $reflection )
 	{
 		return $reflection->isPrivate() ? "Private" : ( $reflection->isProtected() ? "Protected" : "Public" );
 	}
@@ -23,7 +25,7 @@ trait Helper
 	 * @param IReflection $reflection
 	 * @return string
 	 */
-	protected static function getStatic( $reflection )
+	protected static function getStatic( IReflection $reflection )
 	{
 		return $reflection->isStatic() ? "Yes" : "No";
 	}
@@ -33,7 +35,7 @@ trait Helper
 	 * @param IReflection $reflection
 	 * @return string
 	 */
-	protected static function getAbstract( $reflection )
+	protected static function getAbstract( IReflection $reflection )
 	{
 		return $reflection->isAbstract() ? "Yes" : "No";
 	}
@@ -43,7 +45,7 @@ trait Helper
 	 * @param ReflectionClass $reflection
 	 * @return string
 	 */
-	protected static function getParents( $reflection )
+	protected static function getParents( ReflectionClass $reflection )
 	{
 		return implode( "\n", $reflection->getParentClassNameList() );
 	}
@@ -53,29 +55,50 @@ trait Helper
 	 * @param ReflectionClass $reflection
 	 * @return string
 	 */
-	protected static function getInterfaces( $reflection )
+	protected static function getInterfaces( ReflectionClass $reflection )
 	{
 		return implode( "\n", $reflection->getInterfaceNames() );
 	}
 
 	/**
 	 *
-	 * @param IReflection $reflection
+	 * @param ReflectionClass $reflection
 	 * @return string
 	 */
-	protected static function getFinal( $reflection )
+	protected static function getFinal( ReflectionClass $reflection )
 	{
 		return $reflection->isFinal() ? "Yes" : "No";
 	}
 
 	/**
 	 *
-	 * @param IReflection $reflection
+	 * @param ReflectionClass $reflection
 	 * @return string
 	 */
-	protected static function getObjectType( $reflection )
+	protected static function getObjectType( ReflectionClass $reflection )
 	{
 		return $reflection->isTrait() ? "Trait" : ( $reflection->isInterface() ? "Interface" : "Class" );
+	}
+
+	/**
+	 *
+	 * @param ReflectionProperty $reflection
+	 * @return string
+	 */
+	protected static function getAttributeType( ReflectionProperty $reflection )
+	{
+		$var=$reflection->getAnnotation( "var" );
+		return implode( ",", array_values( is_array( $var ) ? $var : [] ) );
+	}
+
+	/**
+	 *
+	 * @param ReflectionProperty $reflection
+	 * @return string
+	 */
+	protected static function getAttributeDefault( ReflectionProperty $reflection )
+	{
+		return is_array( $reflection->getDefaultValue() ) ? 'array' : $reflection->getDefaultValue();
 	}
 
 	/**
@@ -83,9 +106,28 @@ trait Helper
 	 * @param IReflection $reflection
 	 * @return string
 	 */
-	protected static function getAttributeType( $reflection )
+	protected static function getOperationParameters( IReflection $reflection )
 	{
-		return implode( ",", array_values( is_array($reflection->getAnnotation( "var" ))?$reflection->getAnnotation( "var" ):[] ) );
+		$parameters = $reflection->getParameters();
+		$operationsParameters = [];
+
+		foreach( $parameters as $parameter )
+		{
+			$operationsParameters[] = $parameter->getName();
+		}
+
+		return implode( ', ', $operationsParameters );
+	}
+
+	/**
+	 *
+	 * @param ReflectionMethod $reflection
+	 * @return string
+	 */
+	protected static function getOperationReturns( IReflection $reflection )
+	{
+		$return=$reflection->getAnnotation( "return" );
+		return implode( ",", array_values( is_array( $return ) ? $return : [] ) );
 	}
 
 	/**
@@ -93,8 +135,20 @@ trait Helper
 	 * @param ReflectionParameter $reflection
 	 * @return string
 	 */
-	protected static function getAttributeDefault( $reflection )
+	protected static function getParameterType( ReflectionParameter $reflection )
 	{
-		return is_array( $reflection->getDefaultValue() ) ? 'array' : $reflection->getDefaultValue();
+		$operationReflection=$reflection->getDeclaringFunction();
+
+		return implode( ",", array_values( is_array( $return ) ? $return : [] ) );
+	}
+
+	/**
+	 *
+	 * @param ReflectionParameter $reflection
+	 * @return string
+	 */
+	protected static function getParameterDefaultValue( ReflectionParameter $reflection )
+	{
+		return $reflection->isOptional()?$reflection->getDefaultValue():'';
 	}
 }

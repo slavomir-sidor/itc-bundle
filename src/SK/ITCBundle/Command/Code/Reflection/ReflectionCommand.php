@@ -80,13 +80,13 @@ class ReflectionCommand extends TableCommand
 		$this->addOption( "parentClass", "pc", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
 						"Classes filter parent Class Name, e.g 'My\Class'" );
 		$this->addOption( "isInterface", "ii", InputOption::VALUE_REQUIRED,
-						"Classes filter reflects interfaces objects only, possible values are (true|false)." );
+						"Classes filter reflects interfaces objects only, (1|0)." );
 		$this->addOption( "isTrait", "it", InputOption::VALUE_REQUIRED,
-						"Classes filter reflects traits objects only, possible values are (true|false)." );
+						"Classes filter reflects traits objects only, (1|0)." );
 		$this->addOption( "isAbstractClass", "ib", InputOption::VALUE_REQUIRED,
-						"Classes filter reflect abstract classes only, possible values are (true|false)." );
+						"Classes filter reflect abstract classes only, (1|0)." );
 		$this->addOption( "isFinal", "if", InputOption::VALUE_REQUIRED,
-						"Classes filter reflect Final Classes Only, possible values are (true|false)." );
+						"Classes filter reflect Final Classes Only, (1|0)." );
 		$this->addOption( "implementsInterface", "imi", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
 						"Classes filter reflect abstract classes only." );
 
@@ -103,6 +103,8 @@ class ReflectionCommand extends TableCommand
 		/* Parameter Filters */
 		$this->addOption( "parameterName", "pn", InputOption::VALUE_OPTIONAL,
 						"Parameters filter parameter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
+		$this->addOption( "parameterRequired", "pr", InputOption::VALUE_OPTIONAL,
+			"Parameters filter parameter is required or optional, .", NULL );
 
 		/* Attributes and Operations Filters */
 		$this->addOption( "isPrivate", "ip", InputOption::VALUE_REQUIRED,
@@ -166,7 +168,7 @@ class ReflectionCommand extends TableCommand
 			}
 		}
 
-		$this->writeTable( 80 );
+		$this->writeTable( 50 );
 	}
 
 	/**

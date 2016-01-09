@@ -510,6 +510,9 @@
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator" />
 
 			<tag name="console.command" />
 
@@ -527,6 +530,9 @@
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator" />
 
 			<tag name="console.command" />
 
@@ -544,6 +550,9 @@
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator" />
 
 			<tag name="console.command" />
 
@@ -561,6 +570,9 @@
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator" />
 
 			<tag name="console.command" />
 
@@ -578,6 +590,9 @@
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator" />
 
 			<tag name="console.command" />
 

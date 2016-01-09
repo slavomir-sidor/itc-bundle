@@ -3,18 +3,45 @@ namespace SK\ITCBundle\Command\Code\Generator\DockBlock;
 
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
+use TokenReflection\ReflectionFile;
 
 class FileCommand extends AbstractCommand
 {
 
 	/**
-	 * (non-PHPdoc)
 	 *
-	 * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
+	 * {@inheritDoc}
+	 *
+	 * @see \SK\ITCBundle\Command\TableCommand::getColumns()
 	 */
-	public function execute( InputInterface $input, OutputInterface $output )
+	protected function getColumns()
 	{
-		parent::execute( $input, $output );
-		$this->executeFileDockBlock( $input, $output );
+		return $this->getReflection()
+			->getFiles()
+			->getColumns();
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \SK\ITCBundle\Command\TableCommand::getRows()
+	 */
+	protected function getRows()
+	{
+		if( null === $this->rows )
+		{
+			$this->setRows( $this->getReflection()
+				->getFiles()
+				->toArray() );
+
+			/* @var $file ReflectionFile */
+			foreach( $this->getReflection()->getFiles() as $file )
+			{
+
+			}
+		}
+
+		return $this->rows;
 	}
 }

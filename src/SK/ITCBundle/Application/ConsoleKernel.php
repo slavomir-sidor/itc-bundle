@@ -50,7 +50,7 @@ class ConsoleKernel extends Kernel
 	 */
 	public function getRootDir()
 	{
-		return __DIR__ . '/../../../../..';
+		return __DIR__ . '/../../../..';
 	}
 
 	/**

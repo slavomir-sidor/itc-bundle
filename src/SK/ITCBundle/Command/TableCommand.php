@@ -82,6 +82,7 @@ abstract class TableCommand extends AbstractCommand
 					'colspan' => $colspan
 				) )
 			) );
+
 		$table->render();
 
 		return $this;

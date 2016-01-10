@@ -1,25 +1,22 @@
 <?php
 namespace SK\ITCBundle\Code;
 
-use Monolog\Logger;
-use TokenReflection\Broker;
-use Symfony\Component\Finder\Finder;
-use TokenReflection\Broker\Backend;
 use TokenReflection\ReflectionFile;
 use TokenReflection\ReflectionNamespace;
 use TokenReflection\Php\ReflectionClass;
 use TokenReflection\Php\ReflectionProperty;
 use TokenReflection\Php\ReflectionMethod;
 use TokenReflection\Php\ReflectionParameter;
-use SK\ITCBundle\Code\Reflection\Settings;
-use SK\ITCBundle\Code\Reflection\Collection\PackageCollection;
-use SK\ITCBundle\Code\Reflection\Collection\FileCollection;
-use SK\ITCBundle\Code\Reflection\Collection\ClassCollection;
-use SK\ITCBundle\Code\Reflection\Collection\OperationCollection;
-use SK\ITCBundle\Code\Reflection\Collection\ParameterCollection;
-use SK\ITCBundle\Code\Reflection\Collection\AttributesCollection;
+use SK\ITCBundle\Code\Generator\Settings;
+use SK\ITCBundle\Code\Generator\Collection\PackageCollection;
+use SK\ITCBundle\Code\Generator\Collection\FileCollection;
+use SK\ITCBundle\Code\Generator\Collection\ClassCollection;
+use SK\ITCBundle\Code\Generator\Collection\OperationCollection;
+use SK\ITCBundle\Code\Generator\Collection\ParameterCollection;
+use SK\ITCBundle\Code\Generator\Collection\AttributesCollection;
+use Monolog\Logger;
 
-class Generator extends Reflection
+class Generator
 {
 
 	/**
@@ -60,15 +57,15 @@ class Generator extends Reflection
 
 	/**
 	 *
-	 * @var Finder
+	 * @var Settings
 	 */
-	protected $finder;
+	protected $settings;
 
 	/**
 	 *
-	 * @var Broker
+	 * @var Reflection
 	 */
-	protected $broker;
+	protected $reflection;
 
 	/**
 	 *
@@ -77,35 +74,15 @@ class Generator extends Reflection
 	protected $logger;
 
 	/**
-	 *
-	 * @var Settings
-	 */
-	protected $settings;
-
-	/**
 	 * Constructs SK ITCBundle Code Generator
 	 *
 	 * @param Logger $logger
-	 *        	SK ITCBundle Abstract Command Logger
+	 * @param Reflection $reflection
 	 */
-	public function __construct( Logger $logger )
+	public function __construct( Logger $logger, Reflection $reflection )
 	{
 		$this->setLogger( $logger );
-	}
-
-	/**
-	 *
-	 * @return Broker
-	 */
-	protected function getBroker()
-	{
-		if( null === $this->broker )
-		{
-			$broker = new Broker( new Broker\Backend\Memory() );
-			$this->setBroker( $broker );
-		}
-
-		return $this->broker;
+		$this->setReflection( $reflection );
 	}
 
 	/**
@@ -365,58 +342,6 @@ class Generator extends Reflection
 
 	/**
 	 *
-	 * @return Finder
-	 */
-	protected function getFinder()
-	{
-		if( null === $this->finder )
-		{
-			$finder = new Finder();
-			$settings = $this->getSettings();
-
-			foreach( $settings->getSrc() as $source )
-			{
-				if( is_dir( $source ) )
-				{
-					$finder->in( $source );
-				}
-
-				if( is_file( $source ) )
-				{
-					$finder->append( array(
-						$source
-					) );
-				}
-			}
-
-			if( true === $settings->getFollowLinks() )
-			{
-				$finder->followLinks();
-			}
-
-			$finder->ignoreDotFiles( $settings->getIgnoreDotFiles() );
-			$finder->name( $settings->getFileSuffix() );
-			$finder->exclude( $settings->getExclude() );
-
-			$this->setFinder( $finder );
-		}
-
-		return $this->finder;
-	}
-
-	/**
-	 *
-	 * @param Finder $finder
-	 * @return Reflection
-	 */
-	protected function setFinder( Finder $finder )
-	{
-		$this->finder = $finder;
-		return $this;
-	}
-
-	/**
-	 *
 	 * @return FileCollection
 	 */
 	public function getFiles( Settings $settings = NULL )
@@ -428,24 +353,14 @@ class Generator extends Reflection
 
 		if( null === $this->files )
 		{
-			$files = new FileCollection();
-			$finder = $this->getFinder();
-
-			foreach( $finder->files() as $fileName )
+			$reflections = parent::getFiles();
+			$files = [];
+			foreach( $reflections as $reflection )
 			{
-				try
-				{
-					/* @var $fileReflection ReflectionFile */
-					$file = $this->getBroker()->processFile( $fileName, true );
-					$files->set( $file->getName(), $file );
-				}
-				catch( \Exception $exception )
-				{
-					$this->getLogger()->log( Logger::NOTICE, $exception->getMessage() );
-				}
+				$files[] = \Zend\Code\Generator\FileGenerator::fromReflectedFileName( $reflection->getName() );
 			}
 
-			$this->setFiles( $files );
+			$this->setFiles( new FileCollection( $files ) );
 		}
 		return $this->files;
 	}
@@ -457,36 +372,6 @@ class Generator extends Reflection
 	protected function setFiles( FileCollection $files )
 	{
 		$this->files = $files;
-		return $this;
-	}
-
-	/**
-	 *
-	 * @param Broker $broker
-	 */
-	protected function setBroker( Broker $broker )
-	{
-		$this->broker = $broker;
-		return $this;
-	}
-
-	/**
-	 *
-	 * @return Logger
-	 */
-	protected function getLogger()
-	{
-		return $this->logger;
-	}
-
-	/**
-	 *
-	 * @param Logger $logger
-	 * @return Reflection
-	 */
-	protected function setLogger( Logger $logger )
-	{
-		$this->logger = $logger;
 		return $this;
 	}
 
@@ -689,4 +574,43 @@ class Generator extends Reflection
 		$this->settings = $settings;
 		return $this;
 	}
+
+	/**
+	 *
+	 * @return Reflection
+	 */
+	protected function getReflection()
+	{
+		return $this->reflection;
+	}
+
+	/**
+	 *
+	 * @param Reflection $reflection
+	 */
+	protected function setReflection( Reflection $reflection )
+	{
+		$this->reflection = $reflection;
+		return $this;
+	}
+
+	/**
+	 *
+	 * @return the Logger
+	 */
+	protected function getLogger()
+	{
+		return $this->logger;
+	}
+
+	/**
+	 *
+	 * @param Logger $logger
+	 */
+	protected function setLogger( Logger $logger )
+	{
+		$this->logger = $logger;
+		return $this;
+	}
+
 }

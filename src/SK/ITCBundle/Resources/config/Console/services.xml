@@ -498,12 +498,13 @@
 		<!-- </service> -->
 
 		<!-- Generator Docblock Commands -->
-		<service
-			id="sk.itcbundle.command.code.generator.dockblock.all"
-			class="%sk.itcbundle.command.code.generator.dockblock.all.class%">
 
-			<argument type="string">%sk.itcbundle.command.code.generator.dockblock.all.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.generator.dockblock.all.description%</argument>
+		<service
+			id="sk.itcbundle.command.code.generator.docblock.file"
+			class="%sk.itcbundle.command.code.generator.docblock.file.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.docblock.file.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.docblock.file.description%</argument>
 			<argument
 				type="service"
 				id="logger" />
@@ -519,11 +520,11 @@
 		</service>
 
 		<service
-			id="sk.itcbundle.command.code.generator.dockblock.attribute"
-			class="%sk.itcbundle.command.code.generator.dockblock.attribute.class%">
+			id="sk.itcbundle.command.code.generator.docblock.package"
+			class="%sk.itcbundle.command.code.generator.docblock.package.class%">
 
-			<argument type="string">%sk.itcbundle.command.code.generator.dockblock.attribute.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.generator.dockblock.attribute.description%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.docblock.package.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.docblock.package.description%</argument>
 			<argument
 				type="service"
 				id="logger" />
@@ -539,11 +540,11 @@
 		</service>
 
 		<service
-			id="sk.itcbundle.command.code.generator.dockblock.class"
-			class="%sk.itcbundle.command.code.generator.dockblock.class.class%">
+			id="sk.itcbundle.command.code.generator.docblock.class"
+			class="%sk.itcbundle.command.code.generator.docblock.class.class%">
 
-			<argument type="string">%sk.itcbundle.command.code.generator.dockblock.class.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.generator.dockblock.class.description%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.docblock.class.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.docblock.class.description%</argument>
 			<argument
 				type="service"
 				id="logger" />
@@ -559,11 +560,11 @@
 		</service>
 
 		<service
-			id="sk.itcbundle.command.code.generator.dockblock.file"
-			class="%sk.itcbundle.command.code.generator.dockblock.file.class%">
+			id="sk.itcbundle.command.code.generator.docblock.attribute"
+			class="%sk.itcbundle.command.code.generator.docblock.attribute.class%">
 
-			<argument type="string">%sk.itcbundle.command.code.generator.dockblock.file.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.generator.dockblock.file.description%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.docblock.attribute.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.docblock.attribute.description%</argument>
 			<argument
 				type="service"
 				id="logger" />
@@ -579,11 +580,31 @@
 		</service>
 
 		<service
-			id="sk.itcbundle.command.code.generator.dockblock.operation"
-			class="%sk.itcbundle.command.code.generator.dockblock.operation.class%">
+			id="sk.itcbundle.command.code.generator.docblock.operation"
+			class="%sk.itcbundle.command.code.generator.docblock.operation.class%">
 
-			<argument type="string">%sk.itcbundle.command.code.generator.dockblock.operation.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.generator.dockblock.operation.description%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.docblock.operation.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.docblock.operation.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.generator" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.docblock.parameter"
+			class="%sk.itcbundle.command.code.generator.docblock.parameter.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.docblock.parameter.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.docblock.parameter.description%</argument>
 			<argument
 				type="service"
 				id="logger" />
@@ -599,29 +620,13 @@
 		</service>
 
 		<!-- Reflection Commands -->
-		<service
-			id="sk.itcbundle.command.code.reflection.operations"
-			class="%sk.itcbundle.command.code.reflection.operations.class%">
-
-			<argument type="string">%sk.itcbundle.command.code.reflection.operations.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.reflection.operations.description%</argument>
-			<argument
-				type="service"
-				id="logger" />
-			<argument
-				type="service"
-				id="sk.itcbundle.code.reflection" />
-
-			<tag name="console.command" />
-
-		</service>
 
 		<service
-			id="sk.itcbundle.command.code.reflection.parameter"
-			class="%sk.itcbundle.command.code.reflection.parameter.class%">
+			id="sk.itcbundle.command.code.reflection.file"
+			class="%sk.itcbundle.command.code.reflection.file.class%">
 
-			<argument type="string">%sk.itcbundle.command.code.reflection.parameter.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.reflection.parameter.description%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.file.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.file.description%</argument>
 			<argument
 				type="service"
 				id="logger" />
@@ -651,28 +656,11 @@
 		</service>
 
 		<service
-			id="sk.itcbundle.command.code.reflection.files"
-			class="%sk.itcbundle.command.code.reflection.files.class%">
+			id="sk.itcbundle.command.code.reflection.class"
+			class="%sk.itcbundle.command.code.reflection.class.class%">
 
-			<argument type="string">%sk.itcbundle.command.code.reflection.files.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.reflection.files.description%</argument>
-			<argument
-				type="service"
-				id="logger" />
-			<argument
-				type="service"
-				id="sk.itcbundle.code.reflection" />
-
-			<tag name="console.command" />
-
-		</service>
-
-		<service
-			id="sk.itcbundle.command.code.reflection.classes"
-			class="%sk.itcbundle.command.code.reflection.classes.class%">
-
-			<argument type="string">%sk.itcbundle.command.code.reflection.classes.name%</argument>
-			<argument type="string">%sk.itcbundle.command.code.reflection.classes.description%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.class.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.class.description%</argument>
 			<argument
 				type="service"
 				id="logger" />
@@ -690,6 +678,40 @@
 
 			<argument type="string">%sk.itcbundle.command.code.reflection.attribute.name%</argument>
 			<argument type="string">%sk.itcbundle.command.code.reflection.attribute.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.reflection.operation"
+			class="%sk.itcbundle.command.code.reflection.operation.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.reflection.operation.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.operation.description%</argument>
+			<argument
+				type="service"
+				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.reflection.parameter"
+			class="%sk.itcbundle.command.code.reflection.parameter.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.reflection.parameter.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.reflection.parameter.description%</argument>
 			<argument
 				type="service"
 				id="logger" />

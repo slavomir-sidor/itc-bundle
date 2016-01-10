@@ -133,9 +133,11 @@ class ReflectionCommand extends TableCommand
 		parent::execute( $input, $output );
 
 		$src = $this->getInput()->getArgument( "src" );
+
 		$this->writeInfo( sprintf( "Searching files in '%s' sources.", implode( "', '", $src ) ) );
 
 		$canContinue = false;
+
 		foreach( $src as $source )
 		{
 			if( file_exists( $source ) || is_dir( $source ) )

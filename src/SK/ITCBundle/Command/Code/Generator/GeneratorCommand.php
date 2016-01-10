@@ -38,7 +38,18 @@ abstract class GeneratorCommand extends ReflectionCommand
 	public function __construct( $name, $description, Logger $logger, Reflection $reflection, Generator $generator )
 	{
 		parent::__construct( $name, $description, $logger, $reflection );
+
 		$this->setGenerator( $generator );
+	}
+
+	/**
+	 * (non-PHPdoc)
+	 *
+	 * @see \Symfony\Component\Console\Command\Command::configure()
+	 */
+	protected function configure()
+	{
+		parent::configure();
 	}
 
 	/**

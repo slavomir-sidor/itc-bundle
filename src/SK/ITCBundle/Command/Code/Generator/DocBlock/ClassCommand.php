@@ -34,8 +34,9 @@ class ClassCommand extends DocBlockCommand
 	{
 		if( NULL === $this->rows )
 		{
-			$items = $this->getReflection()->getClasses();
-			$this->setRows( $items->toArray() );
+			$this->setRows( $this->getReflection()
+				->getClasses()
+				->toArray() );
 		}
 
 		return $this->rows;

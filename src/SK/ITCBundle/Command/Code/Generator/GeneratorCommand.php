@@ -54,7 +54,7 @@ abstract class GeneratorCommand extends ReflectionCommand
 
 	/**
 	 *
-	 * @return Generator
+	 * @return the Generator
 	 */
 	protected function getGenerator()
 	{

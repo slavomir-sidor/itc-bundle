@@ -1,24 +1,18 @@
 <?php
-/**
- * SK ITCBundle Controller AbstractController
- */
-
 
 namespace SK\ITCBundle\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class AbstractController extends Symfony\Bundle\FrameworkBundle\Controller\Controller
+class AbstractController extends Controller
 {
 
-    /**
-     *
-     */
-    public function __construct()
-    {
-    }
+	/**
+	 */
+	public function __construct()
+	{
 
+	
+	}
 
 }
-

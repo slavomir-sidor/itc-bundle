@@ -14,6 +14,10 @@
 				type="service"
 				id="logger" />
 
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
+
 		</service>
 
 	</services>

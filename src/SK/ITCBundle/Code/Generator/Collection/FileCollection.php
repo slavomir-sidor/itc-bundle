@@ -1,15 +1,15 @@
 <?php
-namespace SK\ITCBundle\Code\Reflection\Collection;
+namespace SK\ITCBundle\Code\Generator\Collection;
 
 use TokenReflection\ReflectionFile;
-use SK\ITCBundle\Code\Reflection\Collection;
+use SK\ITCBundle\Code\Reflection\Collection\FileCollection as ReflectionFileCollection;
 
-class FileCollection extends Collection
+class FileCollection extends ReflectionFileCollection
 {
 
 	/**
 	 *
-	 * @var ReflectionFile[]
+	 * @var FileGenerator[]
 	 */
 	protected $elements;
 
@@ -34,7 +34,7 @@ class FileCollection extends Collection
 		$rows = [];
 		$currentDir = getcwd() . DIRECTORY_SEPARATOR;
 
-		/* @var $reflection FileReflection  */
+		/* @var $reflection ReflectionFile  */
 		foreach( $this->getIterator() as $reflection )
 		{
 			$row = [];

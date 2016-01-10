@@ -1,10 +1,10 @@
 <?php
-namespace SK\ITCBundle\Code\Reflection\Collection;
+namespace SK\ITCBundle\Code\Generator\Collection;
 
-use SK\ITCBundle\Code\Reflection\Collection;
 use TokenReflection\ReflectionNamespace;
+use SK\ITCBundle\Code\Reflection\Collection\PackageCollection as ReflectionPackageCollection;
 
-class PackageCollection extends Collection
+class PackageCollection extends ReflectionPackageCollection
 {
 
 	/**

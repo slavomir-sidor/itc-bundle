@@ -1,10 +1,10 @@
 <?php
-namespace SK\ITCBundle\Code\Reflection\Collection;
+namespace SK\ITCBundle\Code\Generator\Collection;
 
-use SK\ITCBundle\Code\Reflection\Collection;
+use SK\ITCBundle\Code\Reflection\Collection\ParameterCollection as ReflectionParameterCollection;
 use TokenReflection\Php\ReflectionParameter;
 
-class ParameterCollection extends Collection
+class ParameterCollection extends ReflectionParameterCollection
 {
 
 	/**

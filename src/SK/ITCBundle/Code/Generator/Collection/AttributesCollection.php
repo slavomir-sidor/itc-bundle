@@ -1,10 +1,10 @@
 <?php
-namespace SK\ITCBundle\Code\Reflection\Collection;
+namespace SK\ITCBundle\Code\Generator\Collection;
 
-use SK\ITCBundle\Code\Reflection\Collection;
 use TokenReflection\Php\ReflectionProperty;
+use SK\ITCBundle\Code\Reflection\Collection\AttributesCollection as ReflectionAttributesCollection;
 
-class AttributesCollection extends Collection
+class AttributesCollection extends ReflectionAttributesCollection
 {
 
 	/**
@@ -44,7 +44,7 @@ class AttributesCollection extends Collection
 			$row['Class'] = $reflection->getDeclaringClassName();
 			$row['Attribute'] = $reflection->getName();
 			$row['Type'] = self::getAttributeType( $reflection );
-			$row['Default'] = self::getAttributeDefault($reflection);
+			$row['Default'] = self::getAttributeDefault( $reflection );
 
 			$rows[] = $row;
 		}

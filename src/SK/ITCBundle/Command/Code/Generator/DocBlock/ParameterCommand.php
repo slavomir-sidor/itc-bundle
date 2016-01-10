@@ -1,11 +1,14 @@
 <?php
-namespace SK\ITCBundle\Command\Code\Generator\DockBlock;
+/**
+ * SK ITCBundle Command Code Reflection Operations Attributes
+ *
+ * @licence GNU GPL
+ *
+ * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
+ */
+namespace SK\ITCBundle\Command\Code\Generator\DocBlock;
 
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputInterface;
-use TokenReflection\Php\ReflectionClass;
-
-class ClassCommand extends AbstractCommand
+class ParameterCommand extends DocBlockCommand
 {
 
 	/**
@@ -17,7 +20,7 @@ class ClassCommand extends AbstractCommand
 	protected function getColumns()
 	{
 		return $this->getReflection()
-			->getClasses()
+			->getParameters()
 			->getColumns();
 	}
 
@@ -32,14 +35,8 @@ class ClassCommand extends AbstractCommand
 		if( null === $this->rows )
 		{
 			$this->setRows( $this->getReflection()
-				->getClasses()
+				->getParameters()
 				->toArray() );
-
-			/* @var $class ReflectionClass */
-			foreach( $this->getReflection()->getClasses() as $class )
-			{
-				print_R($class->g);
-			}
 		}
 
 		return $this->rows;

@@ -1,11 +1,14 @@
 <?php
-namespace SK\ITCBundle\Command\Code\Generator\DockBlock;
+/**
+ * SK ITCBundle Command Code Reflection Attributes
+ *
+ * @licence GNU GPL
+ *
+ * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
+ */
+namespace SK\ITCBundle\Command\Code\Generator\DocBlock;
 
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputInterface;
-use TokenReflection\ReflectionFile;
-
-class FileCommand extends AbstractCommand
+class AttributeCommand extends DocBlockCommand
 {
 
 	/**
@@ -17,7 +20,7 @@ class FileCommand extends AbstractCommand
 	protected function getColumns()
 	{
 		return $this->getReflection()
-			->getFiles()
+			->getAttributes()
 			->getColumns();
 	}
 
@@ -32,14 +35,8 @@ class FileCommand extends AbstractCommand
 		if( null === $this->rows )
 		{
 			$this->setRows( $this->getReflection()
-				->getFiles()
+				->getAttributes()
 				->toArray() );
-
-			/* @var $file ReflectionFile */
-			foreach( $this->getReflection()->getFiles() as $file )
-			{
-
-			}
 		}
 
 		return $this->rows;

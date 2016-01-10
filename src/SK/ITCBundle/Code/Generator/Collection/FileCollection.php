@@ -1,58 +1,57 @@
 <?php
+/**
+ * SK ITCBundle Code Generator Collection FileCollection
+ */
+
+
 namespace SK\ITCBundle\Code\Generator\Collection;
 
-use TokenReflection\ReflectionFile;
-use SK\ITCBundle\Code\Reflection\Collection\FileCollection as ReflectionFileCollection;
 
-class FileCollection extends ReflectionFileCollection
+use SK\ITCBundle\Code\Reflection\Collection\FileCollection as ReflectionFileCollection;
+use Zend\Code\Generator\FileGenerator;
+
+class FileCollection extends SK\ITCBundle\Code\Reflection\Collection\FileCollection
 {
 
-	/**
-	 *
-	 * @var FileGenerator[]
-	 */
-	protected $elements;
+    /**
+     * @var FileGenerator[]
+     */
+    protected $elements = null;
 
-	/**
-	 *
-	 * @var array
-	 */
-	protected $columns = array(
-		"Files",
-		"Owner",
-		"Group",
-		"Permissions",
-		"Created",
-		"Modified"
-	);
+    /**
+     * @var array
+     */
+    protected $columns = array(
+        'Files',
+        'Short Description',
+    );
 
-	/**
-	 * @return array
-	 */
-	public function toArray()
-	{
-		$rows = [];
-		$currentDir = getcwd() . DIRECTORY_SEPARATOR;
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $rows = [];
+        $currentDir = getcwd() . DIRECTORY_SEPARATOR;
 
-		/* @var $reflection ReflectionFile  */
-		foreach( $this->getIterator() as $reflection )
-		{
-			$row = [];
+        /* @var $item FileGenerator  */
+        foreach( $this->getIterator() as $name=>$item )
+        {
+        	$row = [];
 
-			$file = new \SplFileInfo( $reflection->getName() );
+        	$file = new \SplFileInfo( $name );
 
-			$row = array(
-				"Files" => str_replace( $currentDir, "", $file->getPathName() ),
-				"Owner" => $file->getOwner(),
-				"Group" => $file->getGroup(),
-				"Permissions" => $file->getPerms(),
-				"Created" => date( "d.m.Y h:m:s", $file->getCTime() ),
-				"Modified" => date( "d.m.Y h:m:s", $file->getMTime() )
-			);
+        	$row = array(
+        		"Files" => str_replace( $currentDir, "", $file->getPathName() ),
+        		"ShortDescription" => $item->getDocBlock()->getShortDescription()
+        	);
 
-			$rows[] = $row;
-		}
+        	$rows[] = $row;
+        }
 
-		return $rows;
-	}
+        return $rows;
+    }
+
+
 }
+

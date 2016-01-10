@@ -1,57 +1,58 @@
 <?php
-/**
- * SK ITCBundle Code Generator Collection FileCollection
- */
-
-
 namespace SK\ITCBundle\Code\Generator\Collection;
 
-
+use TokenReflection\ReflectionFile;
 use SK\ITCBundle\Code\Reflection\Collection\FileCollection as ReflectionFileCollection;
-use Zend\Code\Generator\FileGenerator;
 
-class FileCollection extends SK\ITCBundle\Code\Reflection\Collection\FileCollection
+class FileCollection extends ReflectionFileCollection
 {
 
-    /**
-     * @var FileGenerator[]
-     */
-    protected $elements = null;
+	/**
+	 *
+	 * @var FileGenerator[]
+	 */
+	protected $elements;
 
-    /**
-     * @var array
-     */
-    protected $columns = array(
-        'Files',
-        'Short Description',
-    );
+	/**
+	 *
+	 * @var array
+	 */
+	protected $columns = array(
+		"Files",
+		"Owner",
+		"Group",
+		"Permissions",
+		"Created",
+		"Modified"
+	);
 
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        $rows = [];
-        $currentDir = getcwd() . DIRECTORY_SEPARATOR;
+	/**
+	 * @return array
+	 */
+	public function toArray()
+	{
+		$rows = [];
+		$currentDir = getcwd() . DIRECTORY_SEPARATOR;
 
-        /* @var $item FileGenerator  */
-        foreach( $this->getIterator() as $name=>$item )
-        {
-        	$row = [];
+		/* @var $reflection ReflectionFile  */
+		foreach( $this->getIterator() as $reflection )
+		{
+			$row = [];
 
-        	$file = new \SplFileInfo( $name );
+			$file = new \SplFileInfo( $reflection->getName() );
 
-        	$row = array(
-        		"Files" => str_replace( $currentDir, "", $file->getPathName() ),
-        		"ShortDescription" => $item->getDocBlock()->getShortDescription()
-        	);
+			$row = array(
+				"Files" => str_replace( $currentDir, "", $file->getPathName() ),
+				"Owner" => $file->getOwner(),
+				"Group" => $file->getGroup(),
+				"Permissions" => $file->getPerms(),
+				"Created" => date( "d.m.Y h:m:s", $file->getCTime() ),
+				"Modified" => date( "d.m.Y h:m:s", $file->getMTime() )
+			);
 
-        	$rows[] = $row;
-        }
+			$rows[] = $row;
+		}
 
-        return $rows;
-    }
-
-
+		return $rows;
+	}
 }
-

@@ -8,9 +8,6 @@
  */
 namespace SK\ITCBundle\Command\Code\Generator\DocBlock;
 
-use Zend\Code\Generator\FileGenerator;
-use Zend\Code\Generator\DocBlockGenerator;
-
 class FileCommand extends DocBlockCommand
 {
 
@@ -37,42 +34,9 @@ class FileCommand extends DocBlockCommand
 	{
 		if( null === $this->rows )
 		{
-			$files = $this->getGenerator()->getFiles();
-
-			/* @var $file FileGenerator */
-			foreach( $files as $fileName=> $file )
-			{
-				$docBlock = $file->getDocBlock();
-
-				if( NULL === $docBlock )
-				{
-					$docBlock = new DocBlockGenerator();
-					$file->setDocBlock( $docBlock );
-				}
-
-				$classes = $file->getClasses();
-				$shortDescriptions = [];
-				foreach( $classes as $class )
-				{
-					$shortDescriptions[] = sprintf( "%s %s", implode( " ", explode( "\\", $file->getNamespace() ) ), $class->getName() );
-				}
-				$docBlock->setShortDescription( implode( "\n", $shortDescriptions ) );
-
-				$tags = $docBlock->getTags();
-
-				foreach( $tags as $tag )
-				{
-					switch( $tag->getName() )
-					{
-						default:
-							break;
-					}
-				}
-
-				$this->getGenerator()->generate( $file, $fileName );
-			}
-
-			$this->setRows( $files->toArray() );
+			$this->setRows( $this->getReflection()
+				->getFiles()
+				->toArray() );
 		}
 
 		return $this->rows;

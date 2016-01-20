@@ -6,18 +6,17 @@
  */
 namespace SK\ITCBundle\Application;
 
-use JMS\SerializerBundle\JMSSerializerBundle;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
+use JMS\SerializerBundle\JMSSerializerBundle;
 use SK\ITCBundle\SKITCBundle;
 
 class ConsoleKernel extends Kernel
 {
 
 	/**
-	 *
 	 * {@inheritDoc}
 	 *
 	 * @see \Symfony\Component\HttpKernel\KernelInterface::registerBundles()

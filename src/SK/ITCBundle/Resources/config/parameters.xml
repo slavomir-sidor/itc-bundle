@@ -96,7 +96,6 @@
 		<!-- Framework Form -->
 		<parameter key="framework.form.enabled">true</parameter>
 		<parameter key="framework.form.csrf_protection.enabled">true</parameter>
-
 		<parameter key="kernel.data_dir">%kernel.root_dir%/var/data</parameter>
 
 		<!-- Doctrine DBAL -->

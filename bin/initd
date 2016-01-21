@@ -1,0 +1,276 @@
+#!/bin/sh
+DIR="$(dirname "$0")"
+
+NAME="itc"
+CMD=$NAME
+PIDFILE="/var/run/${NAME}.pid"
+LOGFILE="/var/log/${NAME}.log"
+DESCRIPTION="Service $NAME"
+
+###############################################################################
+# Start init.d service $NAME $PIDFILE $CMD                                    #
+###############################################################################
+
+start()
+{
+	NAME=$0;
+	PIDFILE=$1;
+	CMD=$1
+
+	PID=pid $PIDFILE
+
+	MESSAGE_STATUS_START="%-50s" "Starting service $NAME..."
+	MESSAGE_STATUS_SUCCESS="%s\n" "Ok (Service already running)"
+	MESSAGE_STATUS_FAIL="%s\n" "Fail"
+
+	printf $MESSAGE_STATUS_START
+
+	if [ -z $PIDFILE ] && [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+
+		printf $MESSAGE_STATUS_SUCCESS
+
+		return 1
+
+	else
+
+		${CMD} & echo $! > ${PIDFILE}
+
+		PID=$($CMD > /dev/null 2>&1 & echo $!)
+
+		if [ -z $PID ]; then
+
+			printf $MESSAGE_STATUS_FAIL
+
+		else
+
+			echo $PID > $PIDFILE
+
+			printf $MESSAGE_STATUS_SUCCESS
+
+		fi
+	fi
+}
+
+###############################################################################
+# getpid $PIDFILE                                                             #
+###############################################################################
+
+pid()
+{
+	PIDFILE=$0
+
+	MESSAGE_STATUS_START="%-50s" "Starting service $NAME..."
+	MESSAGE_STATUS_SUCCESS="%s\n" "Ok (Service already running)"
+	MESSAGE_STATUS_FAIL="%s\n" "Fail"
+	MESSAGE_STATUS_CAN_NOT_READ="%s\n" "Cannot read $PIDFILE."
+
+	printf $MESSAGE_STATUS_START
+
+	if [ -f "$PIDFILE" ]; then
+
+		if [ -r "$PIDFILE" ]; then
+
+			pid=`cat "$PIDFILE"`
+
+			if [ "X$pid" != "X" ]; then
+
+				# It is possible that 'a' process with the pid exists but that it is not the
+				#  correct process.  This can happen in a number of cases, but the most
+				#  common is during system startup after an unclean shutdown.
+				# The ps statement below looks for the specific wrapper command running as
+				#  the pid.  If it is not found then the pid file is considered to be stale.
+
+				case "$DIST_OS" in
+
+					'macosx')
+
+						pidtest=`$PSEXE -ww -p $pid -o command | grep "wrapper.pidfile" | tail -1`
+						;;
+
+					'solaris')
+
+						pidtest=`$PSEXE ww $pid | grep "wrapper.pidfile" | tail -1`
+						;;
+
+					*)
+
+						pidtest=`$PSEXE -p $pid -o args | grep "wrapper.pidfile" | tail -1`
+						;;
+
+				esac
+
+				if [ "X$pidtest" = "X" ]; then
+
+					# This is a stale pid file.
+
+					rm -f "$PIDFILE"
+
+					printf $MESSAGE_STATUS_REMOVED_STALED_PID
+
+					pid=""
+
+				fi
+
+			fi
+
+		else
+
+			print $MESSAGE_STATUS_CAN_NOT_READ
+
+			exit 1
+
+		fi
+
+	fi
+
+}
+
+
+###############################################################################
+# Stop $NAME $PIDFILE $CMD                                                    #
+###############################################################################
+
+stop()
+{
+	NAME=$0;
+	PIDFILE=$1;
+	CMD=$1
+
+	PID=getpid $PIDFILE
+
+	MESSAGE_STATUS_STOP="%-50s" "Stoping service $NAME..."
+	MESSAGE_STATUS_NOT_RUNNING="%s\n" "(Service not running)"
+	MESSAGE_STATUS_SUCCESS="%s\n" "Ok"
+	MESSAGE_STATUS_FAIL="%s\n" "Fail"
+	MESSAGE_STATUS_NOT_WRITE_PID="%s\n" "Fail (Cannot removed pidfile)"
+
+	printf "%-50s" "Stopping service $NAME ..."
+
+	if [ ! -z "$PIDFILE" ] || [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+
+		printf $MESSAGE_STATUS_NOT_RUNNING
+
+	else
+
+		if [ -z "$PIDFILE" ] && [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+
+			PID=`cat $PIDFILE`
+
+			kill -HUP $PID
+
+			printf $MESSAGE_STATUS_SUCCESS
+
+		fi
+	fi
+
+	if [ -z "$PIDFILE" ]; then
+
+		if [ !-r "$PIDFILE" ]; then
+
+			printf $MESSAGE_STATUS_NOT_WRITE_PID
+
+		else
+ 
+			rm -rf "$PIDFILE"
+
+		fi
+	fi
+}
+
+###############################################################################
+# Status                                                                      #
+###############################################################################
+
+status()
+{
+	NAME=$0;
+	PIDFILE=$1;
+	CMD=$1
+
+	PID=getpid $PIDFILE
+	MESSAGE_STATUS="%-50s" "Checking service $NAME ..."
+	MESSAGE_STATUS_DEATH="%s\n" "Process dead but pidfile exists"
+	MESSAGE_STATUS_RUNNING="%s\n" "Ok"
+	MESSAGE_STATUS_NOT_RUNNING="%s\n" "Service not running"
+
+	printf $MESSAGE_STATUS
+
+	if [ -f $PIDFILE ]; then
+
+		PID=`cat $PIDFILE`
+
+		if [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+
+			printf $MESSAGE_STATUS_DEATH
+
+		else
+			printf $MESSAGE_STATUS_RUNNING
+		fi
+
+	else
+
+		printf $MESSAGE_STATUS_NOT_RUNNING
+
+	fi
+}
+
+###############################################################################
+# pidfile                                                                     #
+###############################################################################
+pidfile()
+{
+	PIDFILE=$0
+
+	echo $PIDFILE
+}
+
+###############################################################################
+# service                                                                     #
+###############################################################################
+
+MESSAGE_USAGE="Service $NAME usage $0 {start|stop|restart|status|pid|pidfile}"
+
+case "$1" in
+
+		start)
+
+			start $NAME $PIDFILE $CMD
+
+		;;
+
+		stop)
+
+			stop $NAME $PIDFILE $CMD
+
+		;;
+
+		restart)
+
+			stop $NAME $PIDFILE $CMD
+			start $NAME $PIDFILE $CMD
+
+		;;
+
+		status)
+
+			status $NAME $PIDFILE $CMD
+
+		;;
+
+		pid)
+
+			pid $PIDFILE
+
+		;;
+
+		pidfile)
+
+			pidfile $PIDFILE
+
+		;;
+
+	*)
+
+	echo $MESSAGE_USAGE
+
+esac

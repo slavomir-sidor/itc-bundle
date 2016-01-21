@@ -12,11 +12,13 @@ use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use SK\ITCBundle\SKITCBundle;
+use Symfony\Bundle\AsseticBundle\AsseticBundle;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
 
 class ConsoleKernel extends Kernel
 {
-
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see \Symfony\Component\HttpKernel\KernelInterface::registerBundles()
@@ -27,13 +29,15 @@ class ConsoleKernel extends Kernel
 			new FrameworkBundle(),
 			new JMSSerializerBundle(),
 			new MonologBundle(),
+			new AsseticBundle(),
+			new SecurityBundle(),
 			new SKITCBundle()
 		);
 
-		if( in_array($this->getEnvironment(), array(
+		if( in_array( $this->getEnvironment(), array(
 			'dev',
 			'test'
-		), true) )
+		), true ) )
 		{
 			// $bundles[] =
 		}
@@ -81,16 +85,16 @@ class ConsoleKernel extends Kernel
 	public function registerContainerConfiguration( LoaderInterface $loader )
 	{
 		$environment = $this->getEnvironment();
-		$config = dirname(__DIR__) . sprintf('/Resources/config/%s/config.xml', $environment);
+		$config = dirname( __DIR__ ) . sprintf( '/Resources/config/%s/config.xml', $environment );
 
-		if( ! file_exists($config) )
+		if( ! file_exists( $config ) )
 		{
-			$config = dirname(__DIR__) . sprintf('/Resources/config/config.xml');
+			$config = dirname( __DIR__ ) . sprintf( '/Resources/config/config.xml' );
 		}
 
-		if( file_exists($config) )
+		if( file_exists( $config ) )
 		{
-			$loader->load($config);
+			$loader->load( $config );
 		}
 	}
 }

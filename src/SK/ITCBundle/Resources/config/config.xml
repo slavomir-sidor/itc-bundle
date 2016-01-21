@@ -66,7 +66,7 @@
 	<assetic:config
 		debug="%assetic.debug%"
 		use-controller="%assetic.use_controller%"
-		read-from="%assetic.read_from"
+		read-from="%assetic.read_from%"
 		write-to="%assetic.write_to%"
 		java="%assetic.java%">
 

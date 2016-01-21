@@ -712,12 +712,32 @@
 
 			<argument type="string">%sk.itcbundle.command.code.reflection.parameter.name%</argument>
 			<argument type="string">%sk.itcbundle.command.code.reflection.parameter.description%</argument>
+
 			<argument
 				type="service"
 				id="logger" />
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.mylyn.report.name"
+			class="%sk.itcbundle.command.mylyn.report.class%">
+
+			<argument type="string">%sk.itcbundle.command.mylyn.report.name%</argument>
+			<argument type="string">%sk.itcbundle.command.mylyn.report.description%</argument>
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.command.mylyn.report.class" />
 
 			<tag name="console.command" />
 

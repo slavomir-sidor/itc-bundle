@@ -49,6 +49,7 @@
 		<parameter key="framework.annotations.cache">file</parameter>
 		<parameter key="framework.annotations.debug">%kernel.debug%</parameter>
 		<parameter key="framework.annotations.file_cache_dir">%kernel.cache_dir%/annotations</parameter>
+		<parameter key="framework.form.csfr_protection.enabled">true</parameter>
 
 		<!-- Framework CSFR Protection -->
 		<parameter key="framework.csfr_protection.enabled">true</parameter>
@@ -123,6 +124,27 @@
 		<!-- Doctrine ORM : Entity Manager Default -->
 		<parameter key="doctrine.orm.em.default.name">default</parameter>
 		<parameter key="doctrine.orm.em.default.connection">%doctrine.dbal.default_connection%</parameter>
+
+		<!-- Assetic -->
+		<parameter key="assetic.debug">%kernel.debug%</parameter>
+		<parameter key="assetic.charset">%kernel.charset%</parameter>
+		<parameter key="assetic.use_controller">TRUE</parameter>
+		<parameter key="assetic.read_from">%kernel.root_dir%/../web</parameter>
+		<parameter key="assetic.write_to">%assetic.read_from%</parameter>
+		<parameter key="assetic.java">java</parameter>
+		<parameter key="assetic.dump_on_warmup">true</parameter>
+		<parameter key="assetic.filter.yui_js.jar">%kernel.root_dir%/../vendor/packagist/yuicompressor-bin/bin/yuicompressor.jar</parameter>
+		<parameter key="assetic.filter.yui_css.jar">%kernel.root_dir%/../vendor/packagist/yuicompressor-bin/bin/yuicompressor.jar</parameter>
+
+		<!-- Twig -->
+		<parameter key="twig.auto_reload">%kernel.debug%</parameter>
+		<parameter key="twig.autoescape">true</parameter>
+		<parameter key="twig.cache">%kernel.cache_dir%/twig</parameter>
+		<parameter key="twig.charset">%kernel.charset%</parameter>
+		<parameter key="twig.debug">%kernel.debug%</parameter>
+		<parameter key="twig.base_template_class">Twig_Template</parameter>
+		<parameter key="twig.strict_variables">TRUE</parameter>
+
 
 	</parameters>
 

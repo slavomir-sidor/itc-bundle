@@ -1,0 +1,3 @@
+#export TOKEN='your Pivotal Tracker API token'
+#export PROJECT_ID=99
+#curl -X GET -H "X-TrackerToken: $TOKEN" "https://www.pivotaltracker.com/services/v5/projects/$PROJECT_ID/stories?date_format=millis&filter=label%3Aplans"

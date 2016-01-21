@@ -46,6 +46,7 @@
 		"jenner/react-multi-process" : "^0.1.0",
 		"zerkalica/phpuml" : "dev-master",
 		"sauce/sausage" : "*",
-		"jms/serializer-bundle" : "^1.1"
+		"jms/serializer-bundle" : "^1.1",
+		"twig/twig" : "1.23.3"
 	}
 }

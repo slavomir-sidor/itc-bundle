@@ -15,4 +15,4 @@ DESCRIPTION="ITC PHP Fast Process Management Socket"
 # Description:      $DESCRIPTION
 ### END INIT INFO
 
-source "$DIR/itc-initd"
+source "$DIR/itc-initd" $1

@@ -20,15 +20,16 @@ start()
 
 	PID=pid $PIDFILE
 
-	MESSAGE_STATUS_START="%-50s" "Starting service $NAME..."
-	MESSAGE_STATUS_SUCCESS="%s\n" "Ok (Service already running)"
-	MESSAGE_STATUS_FAIL="%s\n" "Fail"
+	MESSAGE_STATUS_START=$(printf"%-50s" "Starting service $NAME...")
+	MESSAGE_STATUS_SUCCESS_ALREADY_RUNNING=$(printf "%s\n" "Ok (Service already running)")
+	MESSAGE_STATUS_SUCCESS=$(printf "%s\n" "Ok")
+	MESSAGE_STATUS_FAIL=$(printf "%s\n" "Fail")
 
-	printf $MESSAGE_STATUS_START
+	echo $MESSAGE_STATUS_START
 
 	if [ -z $PIDFILE ] && [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
 
-		printf $MESSAGE_STATUS_SUCCESS
+		echo $MESSAGE_STATUS_SUCCESS_ALREADY_RUNNING
 
 		return 1
 
@@ -40,13 +41,13 @@ start()
 
 		if [ -z $PID ]; then
 
-			printf $MESSAGE_STATUS_FAIL
+			echo $MESSAGE_STATUS_FAIL
 
 		else
 
 			echo $PID > $PIDFILE
 
-			printf $MESSAGE_STATUS_SUCCESS
+			echo $MESSAGE_STATUS_SUCCESS
 
 		fi
 	fi
@@ -60,12 +61,13 @@ pid()
 {
 	PIDFILE=$0
 
-	MESSAGE_STATUS_START="%-50s" "Starting service $NAME..."
-	MESSAGE_STATUS_SUCCESS="%s\n" "Ok (Service already running)"
-	MESSAGE_STATUS_FAIL="%s\n" "Fail"
-	MESSAGE_STATUS_CAN_NOT_READ="%s\n" "Cannot read $PIDFILE."
+	MESSAGE_STATUS_START=$(print "%-50s" "Starting service $NAME...")
+	MESSAGE_STATUS_SUCCESS=$(printf "%s\n" "Ok (Service already running)")
+	MESSAGE_STATUS_FAIL=$(printf "%s\n" "Fail")
+	MESSAGE_STATUS_REMOVED_STALED_PID=$(printf "%s\n" "Stalled pid file removed")
+	MESSAGE_STATUS_CAN_NOT_READ=$(printf "%s\n" "Cannot read $PIDFILE.")
 
-	printf $MESSAGE_STATUS_START
+	echo $MESSAGE_STATUS_START
 
 	if [ -f "$PIDFILE" ]; then
 
@@ -106,7 +108,7 @@ pid()
 
 					rm -f "$PIDFILE"
 
-					printf $MESSAGE_STATUS_REMOVED_STALED_PID
+					echo $MESSAGE_STATUS_REMOVED_STALED_PID
 
 					pid=""
 
@@ -116,7 +118,7 @@ pid()
 
 		else
 
-			print $MESSAGE_STATUS_CAN_NOT_READ
+			echo $MESSAGE_STATUS_CAN_NOT_READ
 
 			exit 1
 
@@ -139,17 +141,17 @@ stop()
 
 	PID=getpid $PIDFILE
 
-	MESSAGE_STATUS_STOP="%-50s" "Stoping service $NAME..."
-	MESSAGE_STATUS_NOT_RUNNING="%s\n" "(Service not running)"
-	MESSAGE_STATUS_SUCCESS="%s\n" "Ok"
-	MESSAGE_STATUS_FAIL="%s\n" "Fail"
-	MESSAGE_STATUS_NOT_WRITE_PID="%s\n" "Fail (Cannot removed pidfile)"
+	MESSAGE_STATUS_STOP=$(printf "%-50s" "Stoping service $NAME...")
+	MESSAGE_STATUS_NOT_RUNNING=$(printf "%s\n" "(Service not running)")
+	MESSAGE_STATUS_SUCCESS=$(printf "%s\n" "Ok")
+	MESSAGE_STATUS_FAIL=$(printf "%s\n" "Fail")
+	MESSAGE_STATUS_NOT_WRITE_PID="$(printf %s\n" "Fail (Cannot removed pidfile)")
 
-	printf "%-50s" "Stopping service $NAME ..."
+	echo $MESSAGE_STATUS_STOP
 
 	if [ ! -z "$PIDFILE" ] || [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
 
-		printf $MESSAGE_STATUS_NOT_RUNNING
+		echo $MESSAGE_STATUS_NOT_RUNNING
 
 	else
 
@@ -159,7 +161,7 @@ stop()
 
 			kill -HUP $PID
 
-			printf $MESSAGE_STATUS_SUCCESS
+			echo $MESSAGE_STATUS_SUCCESS
 
 		fi
 	fi
@@ -168,7 +170,7 @@ stop()
 
 		if [ !-r "$PIDFILE" ]; then
 
-			printf $MESSAGE_STATUS_NOT_WRITE_PID
+			echo $MESSAGE_STATUS_NOT_WRITE_PID
 
 		else
  
@@ -179,22 +181,22 @@ stop()
 }
 
 ###############################################################################
-# Status                                                                      #
+# status $NAME $PIDFILE                                                       #
 ###############################################################################
 
 status()
 {
 	NAME=$0;
 	PIDFILE=$1;
-	CMD=$1
 
 	PID=getpid $PIDFILE
-	MESSAGE_STATUS="%-50s" "Checking service $NAME ..."
-	MESSAGE_STATUS_DEATH="%s\n" "Process dead but pidfile exists"
-	MESSAGE_STATUS_RUNNING="%s\n" "Ok"
-	MESSAGE_STATUS_NOT_RUNNING="%s\n" "Service not running"
 
-	printf $MESSAGE_STATUS
+	MESSAGE_STATUS=$(printf "%-50s" "Checking service $NAME ...")
+	MESSAGE_STATUS_DEATH=$(printf "%s\n" "Process dead but pidfile exists")
+	MESSAGE_STATUS_RUNNING=$(printf "%s\n" "Ok")
+	MESSAGE_STATUS_NOT_RUNNING=$(printf "%s\n" "Service not running")
+
+	echo $MESSAGE_STATUS
 
 	if [ -f $PIDFILE ]; then
 
@@ -202,15 +204,15 @@ status()
 
 		if [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
 
-			printf $MESSAGE_STATUS_DEATH
+			echo $MESSAGE_STATUS_DEATH
 
 		else
-			printf $MESSAGE_STATUS_RUNNING
+			echo $MESSAGE_STATUS_RUNNING
 		fi
 
 	else
 
-		printf $MESSAGE_STATUS_NOT_RUNNING
+		echo $MESSAGE_STATUS_NOT_RUNNING
 
 	fi
 }
@@ -254,7 +256,7 @@ case "$1" in
 
 		status)
 
-			status $NAME $PIDFILE $CMD
+			status $NAME $PIDFILE
 
 		;;
 
@@ -272,6 +274,8 @@ case "$1" in
 
 	*)
 
-	echo $MESSAGE_USAGE
+		echo $MESSAGE_USAGE
+
+	;;
 
 esac

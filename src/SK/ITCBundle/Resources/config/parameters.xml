@@ -69,6 +69,12 @@
 		<parameter key="framework.translator.fallback">en</parameter>
 		<parameter key="framework.translator.enabled">true</parameter>
 
+		<!-- Framework Templating -->
+		<parameter key="framework.templating.engines">twig</parameter>
+
+		<!-- Framework Validation -->
+		<parameter key="framework.validation.enable_annotations">TRUE</parameter>
+
 		<!-- Framework Session -->
 		<parameter key="framework.session.save_path">%kernel.cache_dir%/sessions</parameter>
 

@@ -19,6 +19,14 @@
 	},
 	"require" : {
 		"php" : ">=5.5.0",
+		"doctrine/orm" : "2.5.2",
+		"doctrine/doctrine-bundle" : "1.6.1",
+		"doctrine/doctrine-cache-bundle" : "1.2.2",
+		"doctrine/doctrine-migrations-bundle" : "1.1.1",
+		"doctrine/cache" : "1.5.4",
+		"doctrine/annotations" : "1.2.7",
+		"doctrine/dbal" : "2.5.2",
+		"doctrine/migrations" : "1.2.1",
 		"symfony/form" : "3.0.0",
 		"symfony/routing" : "3.0.0",
 		"symfony/http-foundation" : "3.0.0",
@@ -34,8 +42,7 @@
 		"packagist/yuicompressor-bin" : "2.4.8",
 		"twig/twig" : "1.23.3"
 	},
-
-	"require-dev":{
+	"require-dev" : {
 		"symfony/console" : "3.0.0",
 		"symfony/finder" : "^3.0",
 		"symfony/process" : "^3.0",

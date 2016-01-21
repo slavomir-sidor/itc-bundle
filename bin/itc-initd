@@ -1,10 +1,11 @@
 #!/bin/sh
 DIR="$(dirname "$0")"
 
-NAME="itc"
+#NAME="itc"
+PREFIX=/
 CMD=$NAME
-PIDFILE="/var/run/${NAME}.pid"
-LOGFILE="/var/log/${NAME}.log"
+PIDFILE="${PREFIX}var/run/${NAME}.pid"
+LOGFILE="${PREFIX}var/log/${NAME}.log"
 DESCRIPTION="Service $NAME"
 
 ###############################################################################

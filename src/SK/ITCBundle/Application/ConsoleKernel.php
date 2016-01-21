@@ -14,6 +14,9 @@ use JMS\SerializerBundle\JMSSerializerBundle;
 use SK\ITCBundle\SKITCBundle;
 use Symfony\Bundle\AsseticBundle\AsseticBundle;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
+use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 
 class ConsoleKernel extends Kernel
 {
@@ -27,10 +30,13 @@ class ConsoleKernel extends Kernel
 	{
 		$bundles = array(
 			new FrameworkBundle(),
+			new DoctrineBundle(),
 			new JMSSerializerBundle(),
 			new MonologBundle(),
 			new AsseticBundle(),
 			new SecurityBundle(),
+			new TwigBundle(),
+			new SwiftmailerBundle(),
 			new SKITCBundle()
 		);
 

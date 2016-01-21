@@ -57,9 +57,13 @@
 			enabled="%framework.translator.enabled%"
 			fallback="%framework.translator.fallback%" />
 
-		<framework:form enabled="%framework.form.enabled%">
+		<framework:templating>
+			<framework:engine>%framework.templating.engines%</framework:engine>
+		</framework:templating>
+
+		<!-- <framework:form enabled="%framework.form.enabled%">
 			<framework:csrf-protection enabled="%framework.form.csfr_protection.enabled%" />
-		</framework:form>
+		</framework:form> -->
 
 	</framework:config>
 
@@ -77,8 +81,7 @@
 		<assetic:bundle>SwiftmailerBundle</assetic:bundle>
 		<assetic:bundle>DoctrineBundle</assetic:bundle>
 		<assetic:bundle>AsseticBundle</assetic:bundle>
-		<assetic:bundle>ITCBundle</assetic:bundle>
-		<assetic:bundle>ORMBundle</assetic:bundle>
+		<assetic:bundle>SKITCBundle</assetic:bundle>
 
 		<assetic:filter name="cssrewrite" />
 
@@ -91,6 +94,10 @@
 			jar="%assetic.filter.yui_css.jar%" />
 
 	</assetic:config>
+
+	<twig:config
+		debug="%kernel.debug%"
+		strict-variables="%twig.strict_variables%" />
 
 	<monolog:config>
 

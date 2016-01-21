@@ -1,10 +1,10 @@
 #!/bin/sh
 
 DIR="$(dirname "$0")"
-CMD=${DIR}/../itc-fpm.sh
+CMD=${DIR}/../cgi-bin/itc-fpm.php
 NAME="itc-fpm"
 RUNAS=root
-DESCRIPTION="ITC PHP Fast Process Management Service"
+DESCRIPTION="ITC PHP Fast Process Management Socket"
 
 ### BEGIN INIT INFO
 # Provides:         $NAME
@@ -15,4 +15,4 @@ DESCRIPTION="ITC PHP Fast Process Management Service"
 # Description:      $DESCRIPTION
 ### END INIT INFO
 
-source "$SCRIPT"
+source "$DIR/itc-initd"

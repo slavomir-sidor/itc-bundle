@@ -34,7 +34,6 @@ class RESTKernel extends ITCConsoleKernel
 	{
 		$bundles = array(
 
-			new FrameworkBundle(),
 			new DoctrineBundle(),
 			new MonologBundle(),
 			new JMSSerializerBundle(),
@@ -42,8 +41,9 @@ class RESTKernel extends ITCConsoleKernel
 			new FOSRestBundle(),
 			new SwiftmailerBundle(),
 			new SecurityBundle(),
-			new AsseticBundle(),
 			new TwigBundle(),
+			new FrameworkBundle(),
+			new AsseticBundle(),
 			new ORMBundle()
 		)
 		// new SensioFrameworkExtraBundle(),

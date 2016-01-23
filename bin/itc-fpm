@@ -1,7 +1,8 @@
 #!/bin/sh
 
-DIR="$(dirname "$0")"
-CMD=${DIR}/../cgi-bin/itc-fpm.php
+SCRIPT=$(realpath "$0")
+DIR=$(dirname "$SCRIPT")
+CMD="${DIR}/../cgi-bin/itc-fpm.php"
 NAME="itc-fpm"
 RUNAS=root
 DESCRIPTION="ITC PHP Fast Process Management Socket"

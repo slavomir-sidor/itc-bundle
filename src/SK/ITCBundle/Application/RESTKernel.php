@@ -4,9 +4,8 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITC\ITCBundle\Application;
+namespace SK\ITCBundle\Application;
 
-use SK\ITCBundle\Application\ConsoleKernel as ITCConsoleKernel;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -20,8 +19,9 @@ use JMS\SerializerBundle\JMSSerializerBundle;
 use Nelmio\ApiDocBundle\NelmioApiDocBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Bundle\DebugBundle\DebugBundle;
+use SK\ITCBundle\SKITCBundle;
 
-class RESTKernel extends ITCConsoleKernel
+class RESTKernel extends Kernel
 {
 
 	/**
@@ -44,7 +44,7 @@ class RESTKernel extends ITCConsoleKernel
 			new TwigBundle(),
 			new FrameworkBundle(),
 			new AsseticBundle(),
-			new ORMBundle()
+			new SKITCBundle()
 		)
 		// new SensioFrameworkExtraBundle(),
 		;
@@ -70,7 +70,7 @@ class RESTKernel extends ITCConsoleKernel
 	 */
 	public function getRootDir()
 	{
-		return __DIR__ . '/../../../../..';
+		return __DIR__ . '/../../../..';
 	}
 
 	/**

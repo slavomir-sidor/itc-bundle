@@ -4,7 +4,7 @@
  * SK ITC Bundle Default Controller
  *
  * @licence GNU GPL
- * 
+ *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Controller;
@@ -17,67 +17,51 @@ use SK\ITCBundle\Response\Model;
 class FilesystemController extends Controller
 {
 
-	protected $excludeDirs = array( 
+	protected $excludeDirs = array(
 		'.git',
 		'target',
-		'var' 
+		'var'
 	);
 
 	public function indexAction()
 	{
-
 		return $this->render( 'SKITCBundle:Filesystem:index.html.twig', $this->getModel() );
-	
 	}
 
 	public function toolbarAction()
 	{
-
 		return $this->render( 'SKITCBundle:Filesystem:toolbar.html.twig', $this->getModel() );
-	
 	}
 
 	public function workspaceAction()
 	{
-
 		return $this->render( 'SKITCBundle:Filesystem:workspace.html.twig', $this->getModel() );
-	
 	}
 
 	public function createAction()
 	{
-
 		return $this->render( 'SKITCBundle:Filesystem:Create/index.html.twig', $this->getModel() );
-	
 	}
 
 	public function editAction()
 	{
-
 		return $this->render( 'SKITCBundle:Filesystem:Edit/index.html.twig', $this->getModel() );
-	
 	}
 
 	public function saveAction()
 	{
-
 		return $this->render( 'SKITCBundle:Filesystem:Save/index.html.twig', $this->getModel() );
-	
 	}
 
 	public function detailAction()
 	{
-
 		$model = $this->getModel();
 		return $this->render( 'SKITCBundle:Filesystem:Detail/index.html.twig', $model );
-	
 	}
 
 	public function deleteAction()
 	{
-
 		return $this->render( 'SKITCBundle:Filesystem:Delete/index.html.twig', $this->getModel() );
-	
 	}
 
 	/**
@@ -90,35 +74,33 @@ class FilesystemController extends Controller
 		// $model = new Model();
 		$model = array();
 		$request = $this->getRequest();
-		$model[ 'request' ] = $request;
-		$model[ 'currentRoute' ] = $request->get( '_route' );
-		
-		foreach( array( 
+		$model['request'] = $request;
+		$model['currentRoute'] = $request->get( '_route' );
+
+		foreach( array(
 			'cs_CZ',
 			'en_US',
-			'de_DE' 
+			'de_DE'
 		) as $locale )
-		{
-		}
-		
+		{}
+
 		$path = $request->get( 'path', '' );
-		$rootDir = $this->get( 'kernel' )
-			->getRootDir();
+		$rootDir = $this->get( 'kernel' )->getRootDir();
 		$rootDirInfo = new \SplFileInfo( $rootDir );
-		
+
 		$filesystemPath = sprintf( "%s/%s", $rootDirInfo->getPath(), $path );
 		$filesystemInfo = new \SplFileInfo( $filesystemPath );
 		// $pathInfo->getPathname()
-		$model[ 'path' ] = $path;
-		$model[ 'filesystemPath' ] = $filesystemPath;
-		$model[ 'filesystemPathInfo' ] = $filesystemInfo;
-		
+		$model['path'] = $path;
+		$model['filesystemPath'] = $filesystemPath;
+		$model['filesystemPathInfo'] = $filesystemInfo;
+
 		$kernel = $this->get( 'kernel' );
 		// $model['environments']=$kernel->
-		
+
 		if( is_dir( $filesystemPath ) )
 		{
-			$model[ 'finder' ] = $this->getFinder( $filesystemPath );
+			$model['finder'] = $this->getFinder( $filesystemPath );
 		}
 		else
 		{
@@ -151,40 +133,35 @@ class FilesystemController extends Controller
 					}
 			}
 			$geshi = new \GeSHi( $source, $language );
-			
-			$model[ 'highlight' ] = $geshi->parse_code();
-			$model[ 'source' ] = $source;
+
+			$model['highlight'] = $geshi->parse_code();
+			$model['source'] = $source;
 		}
-		
-		return array( 
-			'model' => $model 
+
+		return array(
+			'model' => $model
 		);
-	
 	}
 
 	/**
 	 *
-	 * @param string $path        	
+	 * @param string $path
 	 * @return \Symfony\Component\Finder\Finder
 	 */
-	protected function getFinder( 
-		$path )
+	protected function getFinder( $path )
 	{
-
 		$finder = new Finder();
-		
+
 		$finder->ignoreDotFiles( TRUE );
 		$finder->depth( 0 );
 		$finder->exclude( $this->excludeDirs );
-		
+
 		if( ! is_dir( $path ) )
 		{
 			return $finder;
 		}
 		$finder->in( $path );
-		
-		return $finder;
-	
-	}
 
+		return $finder;
+	}
 }

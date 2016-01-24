@@ -1,0 +1,40 @@
+DirectoryIndex itc.php
+Options FollowSymlinks
+
+<IfModule mod_negotiation.c>
+    Options -MultiViews
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+    RewriteRule ^(.*) - [E=BASE:%1]
+
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteRule ^app\.php(?:/(.*)|$) %{ENV:BASE}/$1 [R=301,L]
+
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+	RewriteCond %{HTTP_HOST} !^www\.*                                       [NC]
+    RewriteRule ^ %{ENV:BASE}/itc.php [E=environment:prod]                   [L]
+
+    RewriteCond %{HTTP_HOST} !^dev\.*                                       [NC]
+    RewriteRule ^ %{ENV:BASE}/itc.php [E=environment:dev]                    [L]
+
+	RewriteCond %{HTTP_HOST} !^test\.*                                      [NC]
+    RewriteRule ^ %{ENV:BASE}/itc.php [E=environment:test]                   [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        # When mod_rewrite is not available, we instruct a temporary redirect of
+        # the start page to the front controller explicitly so that the website
+        # and the generated links can still be used.
+        RedirectMatch 302 ^/$ /app.php/
+        # RedirectTemp cannot be used instead
+    </IfModule>
+</IfModule>

@@ -9,6 +9,7 @@
 
 use Symfony\Component\HttpFoundation\Request;
 use SK\ITCBundle\Application\RESTKernel;
+
 /**
  * @var Composer\Autoload\ClassLoader $loader
  */
@@ -27,10 +28,9 @@ $apcLoader = new Symfony\Component\ClassLoader\ApcClassLoader(sha1(__FILE__), $l
 $loader->unregister();
 $apcLoader->register(true);
 */
-
 //require_once __DIR__.'/../app/AppCache.php';
-
-$kernel = new RESTKernel('prod', false);
+$environment=isset($_SERVER['envi'])?$_SERVER['envi']:'dev';
+$kernel = new RESTKernel($environment, false);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
 

@@ -11,7 +11,8 @@
 	},
 	"bin" : [
 		"bin/itc",
-		"bin/itc-socket"
+		"bin/itc-socket",
+		"bin/initd"
 	],
 	"config" : {
 		"bin-dir" : "bin",
@@ -19,15 +20,18 @@
 	},
 	"require" : {
 		"php" : ">=5.5.0",
-		"symfony/console" : "3.0.0",
+		"doctrine/orm" : "2.5.2",
+		"doctrine/doctrine-bundle" : "1.6.1",
+		"doctrine/doctrine-cache-bundle" : "1.2.2",
+		"doctrine/doctrine-migrations-bundle" : "1.1.1",
+		"doctrine/cache" : "1.5.4",
+		"doctrine/annotations" : "1.2.7",
+		"doctrine/dbal" : "2.5.2",
+		"doctrine/migrations" : "1.2.1",
 		"symfony/form" : "3.0.0",
 		"symfony/routing" : "3.0.0",
 		"symfony/http-foundation" : "3.0.0",
 		"symfony/assetic-bundle" : "2.7.1",
-		"symfony/finder" : "^3.0",
-		"symfony/process" : "^3.0",
-		"symfony/event-dispatcher" : "^3.0",
-		"symfony/debug" : "3.0.0",
 		"symfony/security" : "^3.0",
 		"symfony/security-http" : "3.0.0",
 		"symfony/security-csrf" : "3.0.0",
@@ -35,7 +39,18 @@
 		"symfony/framework-bundle" : "3.0.0",
 		"symfony/monolog-bundle" : "^2.8",
 		"symfony/swiftmailer-bundle" : "^2.3",
+		"symfony/twig-bundle" : "3.0.1",
 		"packagist/yuicompressor-bin" : "2.4.8",
+		"twig/twig" : "1.23.3",
+		"nelmio/api-doc-bundle" : "2.11.2",
+		"friendsofsymfony/rest-bundle" : "1.7.7"
+	},
+	"require-dev" : {
+		"symfony/console" : "3.0.0",
+		"symfony/finder" : "^3.0",
+		"symfony/process" : "^3.0",
+		"symfony/event-dispatcher" : "^3.0",
+		"symfony/debug" : "3.0.0",
 		"zendframework/zend-code" : "2.6.1",
 		"zendframework/zend-soap" : "2.5.1",
 		"behat/behat" : "dev-master",
@@ -46,6 +61,6 @@
 		"jenner/react-multi-process" : "^0.1.0",
 		"zerkalica/phpuml" : "dev-master",
 		"sauce/sausage" : "*",
-		"jms/serializer-bundle": "^1.1"
+		"jms/serializer-bundle" : "^1.1"
 	}
 }

@@ -71,10 +71,10 @@
 	</route>
 
 	<route
-		id="itc_console_namespace"
-		path="/namespace/{_locale}">
+		id="itc_mylyn_report"
+		path="/{_locale}/mylyn/report">
 
-		<default key="_controller">SKITCBundle:Console:namespace</default>
+		<default key="_controller">SKITCBundle:Mylyn:report</default>
 		<default key="_locale">%framework.translator.fallback%</default>
 
 		<requirement key="_locale">%framework.translator.locales%</requirement>

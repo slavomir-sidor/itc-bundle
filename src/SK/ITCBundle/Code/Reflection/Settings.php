@@ -42,6 +42,12 @@ class Settings
 
 	/**
 	 *
+	 * @var boolean
+	 */
+	protected $parameterRequired;
+
+	/**
+	 *
 	 * @var string
 	 */
 	protected $accessibility;
@@ -570,4 +576,24 @@ class Settings
 		$this->className = $className;
 		return $this;
 	}
+
+	/**
+	 *
+	 * @return boolean
+	 */
+	public function getParameterRequired()
+	{
+		return $this->parameterRequired;
+	}
+
+	/**
+	 *
+	 * @param boolean $parameterRequired
+	 */
+	public function setParameterRequired( $parameterRequired )
+	{
+		$this->parameterRequired = $parameterRequired;
+		return $this;
+	}
+
 }

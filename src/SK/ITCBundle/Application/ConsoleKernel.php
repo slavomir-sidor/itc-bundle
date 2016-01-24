@@ -6,16 +6,20 @@
  */
 namespace SK\ITCBundle\Application;
 
-use JMS\SerializerBundle\JMSSerializerBundle;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
+use JMS\SerializerBundle\JMSSerializerBundle;
 use SK\ITCBundle\SKITCBundle;
+use Symfony\Bundle\AsseticBundle\AsseticBundle;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
+use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 
 class ConsoleKernel extends Kernel
 {
-
 	/**
 	 *
 	 * {@inheritDoc}
@@ -26,15 +30,20 @@ class ConsoleKernel extends Kernel
 	{
 		$bundles = array(
 			new FrameworkBundle(),
+			new DoctrineBundle(),
 			new JMSSerializerBundle(),
 			new MonologBundle(),
+			new AsseticBundle(),
+			new SecurityBundle(),
+			new TwigBundle(),
+			new SwiftmailerBundle(),
 			new SKITCBundle()
 		);
 
-		if( in_array($this->getEnvironment(), array(
+		if( in_array( $this->getEnvironment(), array(
 			'dev',
 			'test'
-		), true) )
+		), true ) )
 		{
 			// $bundles[] =
 		}
@@ -50,7 +59,7 @@ class ConsoleKernel extends Kernel
 	 */
 	public function getRootDir()
 	{
-		return __DIR__ . '/../../../../..';
+		return __DIR__ . '/../../../..';
 	}
 
 	/**
@@ -82,16 +91,16 @@ class ConsoleKernel extends Kernel
 	public function registerContainerConfiguration( LoaderInterface $loader )
 	{
 		$environment = $this->getEnvironment();
-		$config = dirname(__DIR__) . sprintf('/Resources/config/%s/config.xml', $environment);
+		$config = dirname( __DIR__ ) . sprintf( '/Resources/config/%s/config.xml', $environment );
 
-		if( ! file_exists($config) )
+		if( ! file_exists( $config ) )
 		{
-			$config = dirname(__DIR__) . sprintf('/Resources/config/config.xml');
+			$config = dirname( __DIR__ ) . sprintf( '/Resources/config/config.xml' );
 		}
 
-		if( file_exists($config) )
+		if( file_exists( $config ) )
 		{
-			$loader->load($config);
+			$loader->load( $config );
 		}
 	}
 }

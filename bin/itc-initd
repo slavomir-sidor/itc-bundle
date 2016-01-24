@@ -1,0 +1,255 @@
+DIR="$(dirname "$0")"
+
+if [ -z "$NAME" ]; then
+	NAME="itc"
+fi
+
+if [ -z "$PREFIX" ]; then
+	PREFIX=/
+fi
+
+if [ -z "$PIDFILE" ]; then
+	PIDFILE="${PREFIX}var/run/${NAME}.pid"
+fi
+
+if [ -z "$LOGFILE" ]; then
+	LOGFILE="${PREFIX}var/log/${NAME}.log"
+fi
+
+DESCRIPTION="Service $NAME"
+PSEXE="/usr/bin/ps"
+
+SERVICE_CMD=$1
+SERVICE_STATUS_FORMAT_MESSAGE="%-60s"
+SERVICE_STATUS_FORMAT_GREEN="\033[32m%s\e[0m"
+SERVICE_STATUS_FORMAT_ORANGE="\033[33m%s\e[0m"
+SERVICE_STATUS_FORMAT_RED="\033[31m%s\e[0m"
+
+SERVICE_STATUS=""
+SERVICE_STATUS_RUNNING=1
+SERVICE_STATUS_PIDFILE_NOT_READABLE=2
+SERVICE_STATUS_STOP=3
+SERVICE_STATUS_DEATH=4
+SERVICE_STATUS_PIDFILE_NOT_EXISTS=5
+
+###############################################################################
+# Start init.d service $NAME $PIDFILE $CMD                                    #
+###############################################################################
+
+start()
+{
+	printf $SERVICE_STATUS_FORMAT_MESSAGE "Starting service $NAME..."
+
+	testpid
+
+	case "$SERVICE_STATUS" in
+
+		$SERVICE_STATUS_RUNNING)
+
+			printf "$SERVICE_STATUS_FORMAT_GREEN $SERVICE_STATUS_FORMAT_ORANGE\n" "Ok" "[Service already running]"
+			;;
+
+		$SERVICE_STATUS_PIDFILE_NOT_READABLE)
+
+			printf $SERVICE_STATUS_FORMAT_RED $SERVICE_STATUS_FORMAT_ORANGE\n "Failed" "[Pidfile not writeable]"
+			;;
+
+		$SERVICE_STATUS_DEATH|$SERVICE_STATUS_STOP|$SERVICE_STATUS_PIDFILE_NOT_EXISTS)
+
+			rm -rf ${PIDFILE}
+			PID=$($CMD > /dev/null 2>&1 & echo $!)
+
+			# some scripts should write their own pid
+			if [ ! -f $PIDFILE ]; then
+				echo $PID > $PIDFILE
+			fi
+
+			printf "$SERVICE_STATUS_FORMAT_GREEN\n" "Ok"
+			;;
+
+	esac
+}
+
+###############################################################################
+# Stop $NAME $PIDFILE $CMD                                                    #
+###############################################################################
+
+stop()
+{
+	printf $SERVICE_STATUS_FORMAT_MESSAGE "Stoping service $NAME..."
+
+	testpid
+
+	case "$SERVICE_STATUS" in
+
+		$SERVICE_STATUS_RUNNING)
+			kill -TERM $PID
+			rm -rf "$PIDFILE"
+			printf "$SERVICE_STATUS_FORMAT_GREEN\n" "Stopped"
+			;;
+
+		$SERVICE_STATUS_STOP)
+
+			printf "$SERVICE_STATUS_FORMAT_GREEN %s\n" "Stopped" "[Service was not running]"
+			;;
+
+		$SERVICE_STATUS_PIDFILE_NOT_READABLE)
+
+			printf "$SERVICE_STATUS_FORMAT_GREEN $SERVICE_STATUS_FORMAT_ORANGE\n" "Failed (Pidfile is not readable)"
+			;;
+
+		$SERVICE_STATUS_PIDFILE_NOT_EXIST)
+
+			printf "$SERVICE_STATUS_FORMAT_RED\n" "Failed"
+			;;
+
+		$SERVICE_STATUS_DEATH)
+
+			rm -rf "$PIDFILE"
+			printf "$SERVICE_STATUS_FORMAT_GREEN $SERVICE_STATUS_FORMAT_ORANGE\n" "Ok" "(Pid files exist, removed)"
+			;;
+
+		*)
+
+			printf "Unknown service status.\n"
+			;;
+
+	esac
+}
+
+###############################################################################
+# getpid                                                                      #
+###############################################################################
+
+pid()
+{
+	PID=""
+
+	if [ -f $PIDFILE ]; then
+
+		if [ -r $PIDFILE ]; then
+
+			PID=`cat $PIDFILE`
+
+		else
+
+			SERVICE_STATUS=$SERVICE_STATUS_PIDFILE_NOT_READABLE
+
+		fi
+
+	else
+
+		SERVICE_STATUS=$SERVICE_STATUS_STOP
+
+	fi
+}
+
+###############################################################################
+# testpid                                                                     #
+###############################################################################
+
+testpid()
+{
+	pid
+
+	if [ $PID ]; then
+
+		SERVICE_TEST=$(ps -p$PID -o pid=)
+
+		if [ ! $SERVICE_TEST ]; then
+
+			SERVICE_STATUS=$SERVICE_STATUS_DEATH
+
+		else
+
+			SERVICE_STATUS=$SERVICE_STATUS_RUNNING
+
+		fi
+
+	fi
+}
+
+
+###############################################################################
+# status $NAME $PIDFILE                                                       #
+###############################################################################
+
+status()
+{
+	printf $SERVICE_STATUS_FORMAT_MESSAGE "Checking service $NAME status ... "
+
+	testpid
+
+	case "$SERVICE_STATUS" in
+
+		$SERVICE_STATUS_RUNNING)
+
+			printf "$SERVICE_STATUS_FORMAT_GREEN\n" "Running"
+			;;
+
+		$SERVICE_STATUS_STOP|$SERVICE_STATUS_PIDFILE_NOT_EXIST)
+
+			printf "$SERVICE_STATUS_FORMAT_GREEN\n" "Not Running"
+			;;
+
+		$SERVICE_STATUS_PIDFILE_NOT_READABLE)
+
+			printf "Failed '$SERVICE_STATUS_FORMAT_ORANGE' is not readable.\n" $PIDFILE
+			;;
+
+		$SERVICE_STATUS_DEATH)
+
+			printf "$SERVICE_STATUS_FORMAT_GREEN %s\n" "Stopped" "[Process dead but pidfile exists]"
+			;;
+
+		*)
+
+			printf "Unknown service status.\n"
+			;;
+
+	esac
+}
+
+###############################################################################
+# pidfile                                                                     #
+###############################################################################
+
+pidfile()
+{
+	testpid
+	printf "Service '$SERVICE_STATUS_FORMAT_GREEN' pidfile is '$SERVICE_STATUS_FORMAT_ORANGE'\n" $NAME $PIDFILE
+}
+
+###############################################################################
+# service                                                                     #
+###############################################################################
+
+case "$SERVICE_CMD" in
+
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+		start
+		;;
+	status)
+		status
+		;;
+	pid)
+		pid
+		;;
+	pidfile)
+		pidfile
+		;;
+	testpid)
+		testpid
+		;;
+	*)
+		printf "Service $SERVICE_STATUS_FORMAT_GREEN usage: $SERVICE_STATUS_FORMAT_ORANGE [$SERVICE_STATUS_FORMAT_ORANGE]\n" $NAME $NAME "start|stop|restart|status|pid|pidfile|testpid"
+	;;
+
+esac

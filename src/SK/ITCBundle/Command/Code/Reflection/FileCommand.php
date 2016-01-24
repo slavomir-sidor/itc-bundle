@@ -8,6 +8,8 @@
  */
 namespace SK\ITCBundle\Command\Code\Reflection;
 
+use TokenReflection\ReflectionFile;
+
 class FileCommand extends ReflectionCommand
 {
 

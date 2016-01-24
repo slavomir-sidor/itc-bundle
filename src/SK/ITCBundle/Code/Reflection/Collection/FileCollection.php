@@ -2,7 +2,7 @@
 namespace SK\ITCBundle\Code\Reflection\Collection;
 
 use TokenReflection\ReflectionFile;
-use SK\ITCBundle\Code\Reflection\Collection;
+use SK\ITCBundle\Code\Collection;
 
 class FileCollection extends Collection
 {

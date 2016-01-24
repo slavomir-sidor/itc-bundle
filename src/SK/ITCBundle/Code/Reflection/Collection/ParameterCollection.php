@@ -1,7 +1,7 @@
 <?php
 namespace SK\ITCBundle\Code\Reflection\Collection;
 
-use SK\ITCBundle\Code\Reflection\Collection;
+use SK\ITCBundle\Code\Collection;
 use TokenReflection\Php\ReflectionParameter;
 
 class ParameterCollection extends Collection
@@ -41,8 +41,9 @@ class ParameterCollection extends Collection
 			$row['Class'] = $reflection->getDeclaringClassName();
 			$row['Operation'] = $reflection->getDeclaringFunctionName();
 			$row['Parameter'] = $reflection->getName();
-			// $row[ 'Type' ] = $reflection->getOriginalTypeHint();
-			// $row[ 'Default' ] = is_array( $reflection->getDefaultValue() ) ? 'array' : $reflection->getDefaultValue();
+			$row[ 'Type' ] =self::getParameterType($reflection);
+			//$reflection->getOriginalTypeHint();
+			$row[ 'Default' ] = is_array( $reflection->getDefaultValue() ) ? 'array' : $reflection->getDefaultValue();
 
 			$rows[] = $row;
 		}

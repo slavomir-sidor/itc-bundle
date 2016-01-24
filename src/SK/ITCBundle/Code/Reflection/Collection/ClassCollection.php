@@ -2,7 +2,7 @@
 namespace SK\ITCBundle\Code\Reflection\Collection;
 
 use TokenReflection\Php\ReflectionClass;
-use SK\ITCBundle\Code\Reflection\Collection;
+use SK\ITCBundle\Code\Collection;
 
 class ClassCollection extends Collection
 {
@@ -49,11 +49,11 @@ class ClassCollection extends Collection
 			$row = [];
 
 			$row['object'] = self::getObjectType( $reflection );
-			$row['final'] = $reflection->isFinal() ? "Final" : "";
-			$row['abstract'] = $reflection->isAbstract() ? "Abstract" : "";
+			$row['final'] = self::getFinal( $reflection );
+			$row['abstract'] = self::getAbstract( $reflection );
 			$row['name'] = $reflection->getName();
-			$row['parent'] = implode( "\n", $reflection->getParentClassNameList() );
-			$row['interface'] = implode( "\n", $reflection->getInterfaceNames() );
+			$row['parent'] = self::getParents( $reflection );
+			$row['interface'] = self::getInterfaces( $reflection );
 
 			$rows[] = $row;
 		}

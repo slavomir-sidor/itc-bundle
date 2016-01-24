@@ -1,0 +1,19 @@
+#!/bin/sh
+
+SCRIPT=$(realpath "$0")
+DIR=$(dirname "$SCRIPT")
+CMD="${DIR}/../cgi-bin/itc-fpm.php"
+NAME="itc-fpm"
+RUNAS=root
+DESCRIPTION="ITC PHP Fast Process Management Socket"
+
+### BEGIN INIT INFO
+# Provides:         $NAME
+# Required-Start:	$local_fs $network $named $time $syslog
+# Required-Stop:	$local_fs $network $named $time $syslog
+# Default-Start:	2 3 4 5
+# Default-Stop:		0 1 6
+# Description:      $DESCRIPTION
+### END INIT INFO
+
+source "$DIR/itc-initd" $1

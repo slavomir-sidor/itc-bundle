@@ -1,7 +1,7 @@
 <?php
 namespace SK\ITCBundle\Code\Reflection\Collection;
 
-use SK\ITCBundle\Code\Reflection\Collection;
+use SK\ITCBundle\Code\Collection;
 use TokenReflection\Php\ReflectionProperty;
 
 class AttributesCollection extends Collection
@@ -18,10 +18,11 @@ class AttributesCollection extends Collection
 	 * @var array $columns
 	 */
 	protected $columns = array(
-		'Class',
-		'Attribute',
 		'Accessibility',
 		'Static',
+		'Class',
+		'Attribute',
+		'Type',
 		'Default'
 	);
 
@@ -38,11 +39,12 @@ class AttributesCollection extends Collection
 		{
 			$row = [];
 
-			$row['Class'] = $reflection->getDeclaringClassName();
-			$row['Attribute'] = $reflection->getName();
 			$row['Accessibility'] = self::getAccessibility( $reflection );
 			$row['Static'] = self::getStatic( $reflection );
-			$row['Default'] = is_array( $reflection->getDefaultValue() ) ? 'array' : $reflection->getDefaultValue();
+			$row['Class'] = $reflection->getDeclaringClassName();
+			$row['Attribute'] = $reflection->getName();
+			$row['Type'] = self::getAttributeType( $reflection );
+			$row['Default'] = self::getAttributeDefault($reflection);
 
 			$rows[] = $row;
 		}

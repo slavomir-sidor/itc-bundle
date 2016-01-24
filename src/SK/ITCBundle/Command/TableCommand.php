@@ -46,7 +46,7 @@ abstract class TableCommand extends AbstractCommand
 	 * @param int $maxColWidth
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	protected function writeTable( $maxColWidth = 60 )
+	protected function writeTable( $maxColWidth = 40 )
 	{
 		$headers = $this->getHeaders();
 		$colspan = count( $this->getColumns() );
@@ -54,12 +54,14 @@ abstract class TableCommand extends AbstractCommand
 		$table->setHeaders( $this->getHeaders( $headers ) );
 
 		$rows = $this->getRows();
+
 		foreach( $rows as $iRow => $row )
 		{
 			foreach( $row as $iCol => $col )
 			{
 				$rows[ $iRow ][ $iCol ] = wordwrap( $col, $maxColWidth, "\n", true );
 			}
+
 			$table->addRow( $row );
 			$table->addRow( array(
 				new TableSeparator( array(
@@ -80,6 +82,7 @@ abstract class TableCommand extends AbstractCommand
 					'colspan' => $colspan
 				) )
 			) );
+
 		$table->render();
 
 		return $this;

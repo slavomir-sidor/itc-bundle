@@ -1,0 +1,87 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          itc
+# Required-Start:    $local_fs $network $named $time $syslog
+# Required-Stop:     $local_fs $network $named $time $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Description:       Socket
+### END INIT INFO
+
+SCRIPT=/usr/bin/itc-socket
+RUNAS=root
+NAME="itc-socket"
+DESCRIPTION="ITC Socket"
+
+PIDFILE=/var/run/${NAME}.pid
+LOGFILE=/var/log/${NAME}.log
+
+start() {
+	printf "%-50s" "Starting service $NAME..."
+
+	if [ -z $PIDFILE ] && [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+		printf "%s\n" "Ok (Service already running)"
+		return 1
+	else
+${PROGLONG} & echo $! > ${PIDFILE}
+		PID=$($SCRIPT > /dev/null 2>&1 & echo $!)
+		
+        	if [ -z $PID ]; then
+	            printf "%s\n" "Fail"
+        	else
+	            echo $PID > $PIDFILE
+        	    printf "%s\n" "Ok (with pid: ${PID})"
+	        fi
+	fi
+}
+
+stop() {
+	printf "%-50s" "Stoping service $NAME ..."
+
+	if [ ! -z "$PIDFILE" ] || [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+		echo 'Ok (Service not running)' >&2
+	else 
+		if [ -z "$PIDFILE" ] && [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+			PID=`cat $PIDFILE`
+		  	kill -HUP $PID
+			echo 'Ok' >&2
+		fi
+	fi
+
+	if [ -z "$PIDFILE" ]; then
+		rm -rf "$PIDFILE"
+	fi
+}
+
+status() {
+        printf "%-50s" "Checking service $NAME ..."
+        if [ -f $PIDFILE ]; then
+            PID=`cat $PIDFILE`
+            if [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+                printf "%s\n" "Process dead but pidfile exists"
+            else
+                echo "Running"
+            fi
+        else
+            printf "%s\n" "Service not running"
+        fi
+}
+
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  status)
+    status
+    ;;
+  *)
+  echo "Usage: $0 {start|stop|restart|status}"
+esac

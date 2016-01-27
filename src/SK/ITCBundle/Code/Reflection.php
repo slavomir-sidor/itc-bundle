@@ -398,6 +398,11 @@ class Reflection
 			$finder->name( $settings->getFileSuffix() );
 			$finder->exclude( $settings->getExclude() );
 
+			if( NULL !== $settings->getDate() )
+			{
+				$finder->date( $settings->getDate() );
+			}
+
 			$this->setFinder( $finder );
 		}
 

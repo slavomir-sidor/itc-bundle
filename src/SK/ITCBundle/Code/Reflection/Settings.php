@@ -143,6 +143,12 @@ class Settings
 	protected $src;
 
 	/**
+	 *
+	 * @var string
+	 */
+	protected $date;
+
+	/**
 	 */
 	private function __construct()
 	{}
@@ -593,6 +599,25 @@ class Settings
 	public function setParameterRequired( $parameterRequired )
 	{
 		$this->parameterRequired = $parameterRequired;
+		return $this;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getDate()
+	{
+		return $this->date;
+	}
+
+	/**
+	 *
+	 * @param string $date
+	 */
+	public function setDate( $date )
+	{
+		$this->date = $date;
 		return $this;
 	}
 

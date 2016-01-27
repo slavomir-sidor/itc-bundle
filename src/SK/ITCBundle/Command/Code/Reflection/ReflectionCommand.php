@@ -68,53 +68,50 @@ class ReflectionCommand extends TableCommand
 
 		/* File Filters */
 		$this->addOption( "fileSuffix", "fs", InputOption::VALUE_OPTIONAL, "Files filter suffixes for given src, default all and not dot files.",
-						"*.php" );
+			"*.php" );
 		$this->addOption( "ignoreDotFiles", "df", InputOption::VALUE_OPTIONAL, "Files filter ignore DOT files.", true );
 		$this->addOption( "followLinks", "fl", InputOption::VALUE_OPTIONAL, "Files filter follows links.", false );
 		$this->addOption( "exclude", "ed", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-						"Files filter excludes directory(ies) from given source" );
+			"Files filter excludes directory(ies) from given source" );
+		$this->addOption( "--date", "dt", InputOption::VALUE_OPTIONAL,
+			"The date must be something that strtotime() is able to parse: 'since yesterday', 'until 2 days ago', '> now - 2 hours', '>= 2005-10-15'" );
 
 		/* Class Filters */
 		$this->addOption( "className", "cn", InputOption::VALUE_OPTIONAL,
-						"Classes filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
+			"Classes filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
 		$this->addOption( "parentClass", "pc", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-						"Classes filter parent Class Name, e.g 'My\Class'" );
-		$this->addOption( "isInterface", "ii", InputOption::VALUE_REQUIRED,
-						"Classes filter reflects interfaces objects only, (1|0)." );
-		$this->addOption( "isTrait", "it", InputOption::VALUE_REQUIRED,
-						"Classes filter reflects traits objects only, (1|0)." );
-		$this->addOption( "isAbstractClass", "ib", InputOption::VALUE_REQUIRED,
-						"Classes filter reflect abstract classes only, (1|0)." );
-		$this->addOption( "isFinal", "if", InputOption::VALUE_REQUIRED,
-						"Classes filter reflect Final Classes Only, (1|0)." );
+			"Classes filter parent Class Name, e.g 'My\Class'" );
+		$this->addOption( "isInterface", "ii", InputOption::VALUE_REQUIRED, "Classes filter reflects interfaces objects only, (1|0)." );
+		$this->addOption( "isTrait", "it", InputOption::VALUE_REQUIRED, "Classes filter reflects traits objects only, (1|0)." );
+		$this->addOption( "isAbstractClass", "ib", InputOption::VALUE_REQUIRED, "Classes filter reflect abstract classes only, (1|0)." );
+		$this->addOption( "isFinal", "if", InputOption::VALUE_REQUIRED, "Classes filter reflect Final Classes Only, (1|0)." );
 		$this->addOption( "implementsInterface", "imi", InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-						"Classes filter reflect abstract classes only." );
+			"Classes filter reflect abstract classes only." );
 
 		/* Attribute Filters */
 		$this->addOption( "attributeName", "an", InputOption::VALUE_OPTIONAL,
-						"Attributes filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
+			"Attributes filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed." );
 
 		/* Operation Filters */
 		$this->addOption( "operationName", "on", InputOption::VALUE_OPTIONAL,
-						"Operations filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
+			"Operations filter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
 		$this->addOption( "isAbstractOperation", "ia", InputOption::VALUE_REQUIRED,
-						"Operations filter reflect abstract Operation Only, possible values are (1|0)." );
+			"Operations filter reflect abstract Operation Only, possible values are (1|0)." );
 
 		/* Parameter Filters */
 		$this->addOption( "parameterName", "pn", InputOption::VALUE_OPTIONAL,
-						"Parameters filter parameter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
-		$this->addOption( "parameterRequired", "pr", InputOption::VALUE_OPTIONAL,
-			"Parameters filter parameter is required or optional, .", NULL );
+			"Parameters filter parameter name, e.g. '^myPrefix|mySuffix$', regular expression allowed.", NULL );
+		$this->addOption( "parameterRequired", "pr", InputOption::VALUE_OPTIONAL, "Parameters filter parameter is required or optional, .", NULL );
 
 		/* Attributes and Operations Filters */
 		$this->addOption( "isPrivate", "ip", InputOption::VALUE_REQUIRED,
-						"Attributes and Operations filter reflects private only or exclude it, (1|0)." );
+			"Attributes and Operations filter reflects private only or exclude it, (1|0)." );
 		$this->addOption( "isProtected", "id", InputOption::VALUE_REQUIRED,
-						"Attributes and Operations filter reflects protected only or exclude it, (1|0)." );
+			"Attributes and Operations filter reflects protected only or exclude it, (1|0)." );
 		$this->addOption( "isPublic", "ic", InputOption::VALUE_REQUIRED,
-						"Attributes and Operations filter reflects public only or exclude it, (1|0)." );
+			"Attributes and Operations filter reflects public only or exclude it, (1|0)." );
 		$this->addOption( "isStatic", "is", InputOption::VALUE_REQUIRED,
-						"Attributes and Operations filter reflects static only or exclude it, (1|0)." );
+			"Attributes and Operations filter reflects static only or exclude it, (1|0)." );
 
 		$this->addArgument( 'src', InputArgument::IS_ARRAY, 'PHP Source directory', array(
 			"src/",
@@ -176,6 +173,7 @@ class ReflectionCommand extends TableCommand
 	/**
 	 *
 	 * @return Reflection
+	 * @todo parametrize reflection settings
 	 */
 	protected function getReflection()
 	{

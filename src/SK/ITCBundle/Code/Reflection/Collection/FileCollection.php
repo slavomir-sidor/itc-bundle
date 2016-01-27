@@ -42,7 +42,7 @@ class FileCollection extends Collection
 			$file = new \SplFileInfo( $reflection->getName() );
 
 			$row = array(
-				"Files" => str_replace( $currentDir, "", $file->getPathName() ),
+				"File" => str_replace( $currentDir, "", $file->getPathName() ),
 				"Owner" => $file->getOwner(),
 				"Group" => $file->getGroup(),
 				"Permissions" => $file->getPerms(),

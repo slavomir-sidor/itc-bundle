@@ -37,7 +37,8 @@ class ConsoleKernel extends Kernel
 			new SecurityBundle(),
 			new TwigBundle(),
 			new SwiftmailerBundle(),
-			new SKITCBundle()
+			new SKITCBundle(),
+			new SensioFrameworkExtraBundle()
 		);
 
 		if( in_array( $this->getEnvironment(), array(

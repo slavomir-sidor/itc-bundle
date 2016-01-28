@@ -186,8 +186,8 @@
 		<parameter key="sk.itcbundle.command.code.reflection.parameter.description">ITCloud UML Classes Parameters</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.parameter.class">SK\ITCBundle\Command\Code\Reflection\ParameterCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.mylyn.report.name">uml:php</parameter>
-		<parameter key="sk.itcbundle.command.mylyn.report.description">ITCloud Mylyn Report</parameter>
+		<parameter key="sk.itcbundle.command.mylyn.report.name">mylyn:report</parameter>
+		<parameter key="sk.itcbundle.command.mylyn.report.description">ITCloud Mylyn Report Repository</parameter>
 		<parameter key="sk.itcbundle.command.mylyn.report.class">SK\ITCBundle\Command\Mylyn\ReportCommand</parameter>
 
 	</parameters>

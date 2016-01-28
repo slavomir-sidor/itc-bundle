@@ -42,7 +42,8 @@
 		"packagist/yuicompressor-bin" : "2.4.8",
 		"twig/twig" : "1.23.3",
 		"nelmio/api-doc-bundle" : "2.11.2",
-		"friendsofsymfony/rest-bundle" : "1.7.7"
+		"friendsofsymfony/rest-bundle" : "1.7.7",
+		"sensio/framework-extra-bundle" : "3.0.12"
 	},
 	"require-dev" : {
 		"symfony/console" : "3.0.0",

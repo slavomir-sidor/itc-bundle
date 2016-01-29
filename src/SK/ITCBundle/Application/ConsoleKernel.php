@@ -42,8 +42,8 @@ class ConsoleKernel extends Kernel
 			new AsseticBundle(),
 			new SensioFrameworkExtraBundle(),
 			new JMSSerializerBundle(),
-			new FOSRestBundle(),
 			new NelmioApiDocBundle(),
+			new FOSRestBundle(),
 			new SKITCBundle()
 		);
 

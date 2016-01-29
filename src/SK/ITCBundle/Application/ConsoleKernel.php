@@ -10,16 +10,20 @@ use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
-use JMS\SerializerBundle\JMSSerializerBundle;
-use SK\ITCBundle\SKITCBundle;
 use Symfony\Bundle\AsseticBundle\AsseticBundle;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
+use JMS\SerializerBundle\JMSSerializerBundle;
+use SK\ITCBundle\SKITCBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
+use FOS\RestBundle\FOSRestBundle;
+use Nelmio\ApiDocBundle\NelmioApiDocBundle;
+use Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle;
 
 class ConsoleKernel extends Kernel
 {
+
 	/**
 	 *
 	 * {@inheritDoc}
@@ -30,15 +34,17 @@ class ConsoleKernel extends Kernel
 	{
 		$bundles = array(
 			new FrameworkBundle(),
-			new DoctrineBundle(),
-			new JMSSerializerBundle(),
-			new MonologBundle(),
-			new AsseticBundle(),
 			new SecurityBundle(),
+			new DoctrineBundle(),
+			new MonologBundle(),
 			new TwigBundle(),
 			new SwiftmailerBundle(),
-			new SKITCBundle(),
-			new SensioFrameworkExtraBundle()
+			new AsseticBundle(),
+			new SensioFrameworkExtraBundle(),
+			new JMSSerializerBundle(),
+			new FOSRestBundle(),
+			new NelmioApiDocBundle(),
+			new SKITCBundle()
 		);
 
 		if( in_array( $this->getEnvironment(), array(

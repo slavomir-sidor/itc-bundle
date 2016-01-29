@@ -6,13 +6,20 @@
  */
 namespace SK\ITCBundle\Mylyn;
 
-use JMS\Serializer\Annotation\XmlRoot as XmlRoot;
-use JMS\Serializer\Annotation\XmlAttribute;
-use JMS\Serializer\Annotation\XmlValue;
+use JMS\Serializer\Annotation\XmlRoot;
 
-/** @XmlRoot("ContextState") */
+/**
+ * @XmlRoot("ContextState")
+ */
 class ContextState
 {
+
+	/**
+	 *
+	 * @var unknown
+	 */
+	protected $editor;
+
 	/**
 	 *
 	 * @var string $taskID
@@ -92,8 +99,7 @@ class ContextState
 
 	/**
 	 *
-	 * @param
-	 *        	string string $title
+	 * @param string $title
 	 */
 	public function setTitle( $title )
 	{
@@ -141,6 +147,6 @@ class ContextState
 
 	public function toArray()
 	{
-		return get_object_vars($this);
+		return get_object_vars( $this );
 	}
 }

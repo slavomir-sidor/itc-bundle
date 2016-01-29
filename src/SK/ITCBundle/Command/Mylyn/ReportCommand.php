@@ -107,10 +107,10 @@ class ReportCommand extends ReflectionCommand
 				$report->save( $outputFile );
 
 				$serializer = SerializerBuilder::create()->build();
-				$task = $serializer->deserialize( $xmldoc->saveXML(), 'SK\ITCBundle\Mylyn\ContextState', 'xml' );
+				// $task = $serializer->deserialize( $xmldoc->saveXML(), 'SK\ITCBundle\Mylyn\ContextState', 'xml' );
 				// $task = new ContextState( $row );
-
-				$tasks[] = $task->toArray();
+				// $task->toArray()
+				$tasks[] = [];
 			}
 
 			$this->setRows( $tasks );

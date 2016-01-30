@@ -60,9 +60,6 @@ abstract class TableCommand extends AbstractCommand
 			$rowModificated=[];
 			foreach( $columns as $iCol => $col )
 			{
-				var_dump( $iCol );
-				var_dump( array_key_exists( $iCol, $row ) );
-
 				if( array_key_exists( $iCol, $row ) )
 				{
 					$rowModificated[$iCol] = wordwrap( $row[$iCol], $maxColWidth, "\n", true );

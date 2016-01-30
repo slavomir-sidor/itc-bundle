@@ -60,8 +60,9 @@ abstract class TableCommand extends AbstractCommand
 			foreach( $row as $iCol => $col )
 			{
 				if( array_key_exists( $iCol, $columns ) )
-				{}
-				$rows[$iRow][$iCol] = wordwrap( $col, $maxColWidth, "\n", true );
+				{
+					$rows[$iRow][$iCol] = wordwrap( $col, $maxColWidth, "\n", true );
+				}
 			}
 
 			$table->addRow( $row );

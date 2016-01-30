@@ -48,10 +48,10 @@ abstract class TableCommand extends AbstractCommand
 	 */
 	protected function writeTable( $maxColWidth = 40 )
 	{
-		$headers = $this->getHeaders();
-		$colspan = count( $this->getColumns() );
+		$columns=$this->getColumns();
+		$colspan = count( $columns );
 		$table = $this->getTable();
-		$table->setHeaders( $this->getHeaders( $headers ) );
+		$table->setHeaders( $this->getHeaders() );
 
 		$rows = $this->getRows();
 
@@ -59,6 +59,9 @@ abstract class TableCommand extends AbstractCommand
 		{
 			foreach( $row as $iCol => $col )
 			{
+				if(array_key_exists($iCol, $columns)){
+
+				}
 				$rows[ $iRow ][ $iCol ] = wordwrap( $col, $maxColWidth, "\n", true );
 			}
 

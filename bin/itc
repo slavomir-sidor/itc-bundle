@@ -1,6 +1,7 @@
 #!/usr/bin/env php
- 
+
 <?php
+
 /**
  * SK ITCBundle Console Application
  *
@@ -10,19 +11,58 @@
  */
 
 /**
+ * SK ITCBundle Console Application Loader
+ *
  * @var Composer\Autoload\ClassLoader $loader
  */
 $loader = require __DIR__.'/../vendor/autoload.php';
 
+/**
+ * SK ITCBundle Console Application Doctrine Annotation
+ *
+ * @var \Doctrine\Common\Annotations\AnnotationRegistry
+ */
+\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(
+	array(
+		$loader,
+		'loadClass'
+	)
+);
+
+/**
+ * SK ITCBundle Console Application Arg Input
+ * 
+ * @var \Symfony\Component\Console\Input\ArgvInput
+ */
 $input = new \Symfony\Component\Console\Input\ArgvInput();
-$env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
-$debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('--no-debug', '')) && $env !== 'prod';
+
+/**
+ * SK ITCBundle Console Application Environment
+ *
+ * @var string
+ */
+$env = $input->getParameterOption(
+	array('--env', '-e'),
+	getenv('SYMFONY_ENV') ?: 'dev'
+);
+
+/**
+ * SK ITCBundle Console Application Debugging
+ *
+ * @var string
+ */
+$debug = getenv('SYMFONY_DEBUG') !== '0' 
+	&& !$input->hasParameterOption(array('--no-debug', ''))
+	&& $env !== 'prod';
 
 if ($debug)
 {
-    \Symfony\Component\Debug\Debug::enable();
+	\Symfony\Component\Debug\Debug::enable();
 }
 
+/**
+ * SK ITCBundle Console Application Run
+ */
 (new \SK\ITCBundle\Application\Console(
-    new \SK\ITCBundle\Application\ConsoleKernel($env, $debug)
+    new \SK\ITCBundle\Application\ConsoleKernel( $env, $debug )
 ))->run ();

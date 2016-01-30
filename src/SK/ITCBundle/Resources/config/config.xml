@@ -51,6 +51,7 @@
 		<framework:esi enabled="%framework.esi.enabled%" />
 
 		<framework:profiler enabled="%framework.profiler.enabled%" />
+
 		<framework:session save-path="%framework.session.save_path%" />
 
 		<framework:translator
@@ -61,9 +62,12 @@
 			<framework:engine>%framework.templating.engines%</framework:engine>
 		</framework:templating>
 
-		<!-- <framework:form enabled="%framework.form.enabled%">
-			<framework:csrf-protection enabled="%framework.form.csfr_protection.enabled%" />
-		</framework:form> -->
+		<framework:serializer
+			enabled="%framework.serializer.enabled%"
+			cache="%framework.serializer.cache%"
+			enable-annotations="%framework.serializer.enabled-annotations%" />
+
+		<!-- <framework:form enabled="%framework.form.enabled%"> <framework:csrf-protection enabled="%framework.form.csfr_protection.enabled%" /> </framework:form> -->
 
 	</framework:config>
 
@@ -81,6 +85,9 @@
 		<assetic:bundle>SwiftmailerBundle</assetic:bundle>
 		<assetic:bundle>DoctrineBundle</assetic:bundle>
 		<assetic:bundle>AsseticBundle</assetic:bundle>
+		<assetic:bundle>AsseticBundle</assetic:bundle>
+		<assetic:bundle>NelmioApiDocBundle</assetic:bundle>
+		<assetic:bundle>FOSRestBundle</assetic:bundle>
 		<assetic:bundle>SKITCBundle</assetic:bundle>
 
 		<assetic:filter name="cssrewrite" />
@@ -98,6 +105,37 @@
 	<twig:config
 		debug="%kernel.debug%"
 		strict-variables="%twig.strict_variables%" />
+
+	<doctrine:config>
+
+		<doctrine:dbal default-connection="%doctrine.dbal.default_connection%">
+
+			<doctrine:connection
+				name="%doctrine.dbal.connection.default.name%"
+				driver="%doctrine.dbal.connection.default.driver%"
+				dbname="%doctrine.dbal.connection.default.dbname%"
+				host="%doctrine.dbal.connection.default.host%"
+				port="%doctrine.dbal.connection.default.port%"
+				user="%doctrine.dbal.connection.default.user%"
+				password="%doctrine.dbal.connection.default.password%"
+				logging="%doctrine.dbal.connection.default.logging%"
+				profiling="%doctrine.dbal.connection.default.profiling%"
+				charset="%doctrine.dbal.connection.default.charset%">
+
+				<doctrine:mapping-type name="enum">string</doctrine:mapping-type>
+
+			</doctrine:connection>
+
+		</doctrine:dbal>
+
+		<doctrine:orm
+			auto-mapping="true"
+			auto-generate-proxy-classes="%doctrine.orm.auto_generate_proxy_classes%"
+			proxy-namespace="%doctrine.orm.proxy_namespace%"
+			proxy-dir="%doctrine.orm.proxy_dir%" />
+
+	</doctrine:config>
+
 
 	<monolog:config>
 

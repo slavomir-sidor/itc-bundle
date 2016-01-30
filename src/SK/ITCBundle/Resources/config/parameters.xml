@@ -78,6 +78,11 @@
 		<!-- Framework Session -->
 		<parameter key="framework.session.save_path">%kernel.cache_dir%/sessions</parameter>
 
+		<!-- Framework Serializer -->
+		<parameter key="framework.serializer.enabled">true</parameter>
+		<parameter key="framework.serializer.enabled-annotations">true</parameter>
+		<parameter key="framework.serializer.cache">serializer.mapping.cache.apc</parameter>
+
 		<!-- Monolog -->
 		<parameter key="monolog.logger.main.name">main</parameter>
 		<parameter key="monolog.logger.main.type">rotating_file</parameter>
@@ -125,7 +130,7 @@
 		<parameter key="doctrine.orm.default_entity_manager">%doctrine.orm.em.default.name%</parameter>
 		<parameter key="doctrine.orm.auto_generate_proxy_classes">false</parameter>
 		<parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
-		<parameter key="doctrine.orm.proxy_dir">%kernel.root_dir%//Proxies</parameter>
+		<parameter key="doctrine.orm.proxy_dir">%kernel.cache_dir%/Proxies</parameter>
 
 		<!-- Doctrine ORM : Entity Manager Default -->
 		<parameter key="doctrine.orm.em.default.name">default</parameter>

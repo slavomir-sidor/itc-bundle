@@ -9,12 +9,38 @@
 namespace SK\ITCBundle\Command\Mylyn;
 
 use SK\ITCBundle\Command\Code\Reflection\ReflectionCommand;
-use Symfony\Component\Console\Input\InputOption;
+use SK\ITCBundle\Code\Reflection;
 use SK\ITCBundle\Mylyn\Task;
+use Symfony\Component\Console\Input\InputOption;
 use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\Annotation\XmlRoot;
+use JMS\Serializer\Serializer;
+use Monolog\Logger;
 
 class ReportCommand extends ReflectionCommand
 {
+
+	/**
+	 *
+	 * @var Serializer
+	 */
+	protected $serializer;
+
+	/**
+	 * Constructs SK ITCBundle Abstract Command
+	 *
+	 * @param string $name
+	 * @param string $description
+	 * @param Logger $logger
+	 * @param Reflection $reflection
+	 * @param Serializer $serializer
+	 */
+	public function __construct( $name, $description, Logger $logger, Reflection $reflection, Serializer $serializer )
+	{
+		parent::__construct( $name, $description, $logger, $reflection );
+
+		$this->setSerializer( $serializer );
+	}
 
 	/**
 	 * (non-PHPdoc)
@@ -39,13 +65,15 @@ class ReportCommand extends ReflectionCommand
 			->getOption( 'ignoreDotFiles' )
 			->setDefault( FALSE );
 
+		/*
 		$this->getDefinition()
 			->getOption( 'date' )
 			->setDefault( "since yesterday" );
-
+*/
 		$srcDefault = array(
 			sprintf( "%s/domains/.metadata", $_SERVER['HOME'] )
 		);
+
 		$this->getDefinition()
 			->getArgument( 'src' )
 			->setDefault( $srcDefault );
@@ -106,16 +134,34 @@ class ReportCommand extends ReflectionCommand
 				$report = $xsl->transformToDoc( $xmldoc );
 				$report->save( $outputFile );
 
-				$serializer = SerializerBuilder::create()->build();
-				// $task = $serializer->deserialize( $xmldoc->saveXML(), 'SK\ITCBundle\Mylyn\ContextState', 'xml' );
-				// $task = new ContextState( $row );
-				// $task->toArray()
-				$tasks[] = [];
+				$serializer = $this->getSerializer();
+				$task = $serializer->deserialize( $xmldoc->saveXML(), 'SK\ITCBundle\Mylyn\ContextState', 'xml' );
+				print_R($task);
+				$tasks[] =[];// $task->toArray();
 			}
 
 			$this->setRows( $tasks );
 		}
 
 		return $this->rows;
+	}
+
+	/**
+	 *
+	 * @return Serializer
+	 */
+	public function getSerializer()
+	{
+		return $this->serializer;
+	}
+
+	/**
+	 *
+	 * @param Serializer $serializer
+	 */
+	public function setSerializer( Serializer $serializer )
+	{
+		$this->serializer = $serializer;
+		return $this;
 	}
 }

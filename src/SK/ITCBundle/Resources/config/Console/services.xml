@@ -740,6 +740,10 @@
 				type="service"
 				id="sk.itcbundle.code.reflection" />
 
+			<argument
+				type="service"
+				id="jms_serializer" />
+
 			<tag name="console.command" />
 
 		</service>

@@ -54,7 +54,6 @@ class ConsoleKernel extends Kernel
 		{
 			// $bundles[] =
 		}
-
 		return $bundles;
 	}
 

@@ -748,6 +748,83 @@
 
 		</service>
 
+		<!-- REST Commands -->
+		<service
+			id="sk.itcbundle.command.code.generator.rest.command"
+			class="%sk.itcbundle.command.code.generator.rest.command.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.rest.command.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.rest.command.description%</argument>
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.rest.form"
+			class="%sk.itcbundle.command.code.generator.rest.form.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.rest.form.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.rest.form.description%</argument>
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.rest.entity"
+			class="%sk.itcbundle.command.code.generator.rest.entity.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.rest.entity.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.rest.entity.description%</argument>
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.code.generator.rest.controller"
+			class="%sk.itcbundle.command.code.generator.rest.controller.class%">
+
+			<argument type="string">%sk.itcbundle.command.code.generator.rest.controller.name%</argument>
+			<argument type="string">%sk.itcbundle.command.code.generator.rest.controller.description%</argument>
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.code.reflection" />
+
+			<tag name="console.command" />
+
+		</service>
+
 	</services>
 
 </container>

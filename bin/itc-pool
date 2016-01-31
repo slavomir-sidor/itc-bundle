@@ -2,10 +2,10 @@
 
 SCRIPT=$(realpath "$0")
 DIR=$(dirname "$SCRIPT")
-CMD="${DIR}/../cgi-bin/itc-rest.php"
-NAME="itc-rest"
+CMD="${DIR}/../cgi-bin/itc-pool.php"
+NAME="itc-fpm"
 RUNAS=root
-DESCRIPTION="ITC PHP Fast Process Management REST"
+DESCRIPTION="ITC PHP Fast Process Management Socket"
 
 ### BEGIN INIT INFO
 # Provides:         $NAME

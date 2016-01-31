@@ -27,23 +27,23 @@
 		"doctrine/annotations" : "1.2.7",
 		"doctrine/dbal" : "2.5.2",
 		"doctrine/migrations" : "1.2.1",
-		"symfony/form" : "3.0.0",
-		"symfony/routing" : "3.0.0",
-		"symfony/http-foundation" : "3.0.0",
-		"symfony/assetic-bundle" : "2.7.1",
-		"symfony/security" : "^3.0",
-		"symfony/security-http" : "3.0.0",
-		"symfony/security-csrf" : "3.0.0",
-		"symfony/security-bundle" : "3.0.0",
-		"symfony/framework-bundle" : "3.0.0",
+		"symfony/form" : "^3.0.1",
+		"symfony/routing" : "^3.0.1",
+		"symfony/http-foundation" : "^3.0.1",
+		"symfony/security" : "^3.0.1",
+		"symfony/security-http" : "^3.0.1",
+		"symfony/security-csrf" : "^3.0.1",
+		"symfony/security-bundle" : "^3.0.1",
+		"symfony/framework-bundle" : "^3.0.1",
+		"symfony/twig-bundle" : "^3.0.1",
+		"symfony/console" : "^3.0.1",
+		"symfony/finder" : "^3.0.1",
+		"symfony/process" : "^3.0.1",
+		"symfony/event-dispatcher" : "^3.0.1",
+		"symfony/debug" : "^3.0.1",
 		"symfony/monolog-bundle" : "^2.8",
 		"symfony/swiftmailer-bundle" : "^2.3",
-		"symfony/twig-bundle" : "3.0.1",
-		"symfony/console" : "3.0.0",
-		"symfony/finder" : "^3.0",
-		"symfony/process" : "^3.0",
-		"symfony/event-dispatcher" : "^3.0",
-		"symfony/debug" : "3.0.0",
+		"symfony/assetic-bundle" : "2.7.1",
 		"packagist/yuicompressor-bin" : "2.4.8",
 		"twig/twig" : "1.23.3",
 		"nelmio/api-doc-bundle" : "2.11.2",
@@ -59,6 +59,15 @@
 		"jenner/react-multi-process" : "^0.1.0",
 		"zerkalica/phpuml" : "dev-master",
 		"sauce/sausage" : "*",
-		"jms/serializer-bundle" : "^1.1"
-	}
+		"jms/serializer-bundle" : "^1.1",
+		"alecsammon/php-raml-parser" : "dev-master"
+	},
+	"repositories" : [{
+			"type" : "vcs",
+			"url" : "git@github.com:slavomirkuzma/php-raml-parser.git"
+		}, {
+			"type" : "vcs",
+			"url" : "git@github.com:slavomirkuzma/itc-bundle.git"
+		}
+	]
 }

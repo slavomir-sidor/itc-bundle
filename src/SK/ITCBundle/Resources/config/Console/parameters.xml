@@ -190,6 +190,23 @@
 		<parameter key="sk.itcbundle.command.mylyn.report.description">ITCloud Mylyn Report Repository</parameter>
 		<parameter key="sk.itcbundle.command.mylyn.report.class">SK\ITCBundle\Command\Mylyn\ReportCommand</parameter>
 
+		<!-- REST -->
+		<parameter key="sk.itcbundle.command.code.generator.rest.command.name">itc:rest:command</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.command.description">ITCloud REST Generator Command</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.command.class">SK\ITCBundle\Command\Code\Generator\REST\CommandCommand</parameter>
+		
+		<parameter key="sk.itcbundle.command.code.generator.rest.controller.name">itc:rest:controller</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.controller.description">ITCloud REST Generator Controller</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.controller.class">SK\ITCBundle\Command\Code\Generator\REST\ControllerCommand</parameter>
+
+		<parameter key="sk.itcbundle.command.code.generator.rest.entity.name">itc:rest:entity</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.entity.description">ITCloud REST Generator Entity</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.entity.class">SK\ITCBundle\Command\Code\Generator\REST\EntityCommand</parameter>
+
+		<parameter key="sk.itcbundle.command.code.generator.rest.form.name">itc:rest:form</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.form.description">ITCloud REST Generator Form</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.form.class">SK\ITCBundle\Command\Code\Generator\REST\FormCommand</parameter>
+
 	</parameters>
 
 </container>

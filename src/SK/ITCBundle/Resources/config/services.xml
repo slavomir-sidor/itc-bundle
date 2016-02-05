@@ -24,4 +24,11 @@
 
 	</imports>
 
+	<services>
+		<service
+			id="sk.itcbundle.raml"
+			class="%sk.itcbundle.raml.class%">
+		</service>
+	</services>
+
 </container>

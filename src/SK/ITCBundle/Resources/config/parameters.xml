@@ -156,6 +156,8 @@
 		<parameter key="twig.base_template_class">Twig_Template</parameter>
 		<parameter key="twig.strict_variables">TRUE</parameter>
 
+		<parameter key="sk.itcbundle.raml.class">Raml\Parser</parameter>
+
 	</parameters>
 
 </container>

@@ -9,11 +9,9 @@
  */
 namespace SK\ITCBundle\Code\Generator\REST;
 
-class Command extends CodeGenerator
+use SK\ITCBundle\Code\Generator\CodeGenerator as ITCCodeGenerator;
+
+class CodeGenerator  extends ITCCodeGenerator
 {
 
-	public function __construct()
-	{
-		//$manager = new DisconnectedMetadataFactory( $this->getContainer()->get( 'doctrine' ) );
-	}
 }

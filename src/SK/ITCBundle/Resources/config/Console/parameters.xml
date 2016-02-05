@@ -207,6 +207,10 @@
 		<parameter key="sk.itcbundle.command.code.generator.rest.form.description">ITCloud REST Generator Form</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.rest.form.class">SK\ITCBundle\Command\Code\Generator\REST\FormCommand</parameter>
 
+		<parameter key="sk.itcbundle.command.code.generator.rest.service.name">itc:rest:service</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.service.description">ITCloud REST Generator Service</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.service.class">SK\ITCBundle\Command\Code\Generator\REST\ServiceCommand</parameter>
+
 	</parameters>
 
 </container>

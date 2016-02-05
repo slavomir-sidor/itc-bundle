@@ -9,8 +9,6 @@
  */
 namespace SK\ITCBundle\Code\Generator\REST;
 
-use SK\ITCBundle\Code\Generator\CodeGenerator;
-
 class FormCommand extends CodeGenerator
 {
 

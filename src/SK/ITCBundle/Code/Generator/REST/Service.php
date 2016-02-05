@@ -9,12 +9,12 @@
  */
 namespace SK\ITCBundle\Code\Generator\REST;
 
-use SK\ITCBundle\Code\Generator\CodeGenerator;
+use Doctrine\Bundle\DoctrineBundle\Mapping\DisconnectedMetadataFactory;
 
 class Service extends CodeGenerator
 {
 	public function __construct()
 	{
-		//$manager = new DisconnectedMetadataFactory( $this->getContainer()->get( 'doctrine' ) );
+		$manager = new DisconnectedMetadataFactory( $this->getContainer()->get( 'doctrine' ) );
 	}
 }

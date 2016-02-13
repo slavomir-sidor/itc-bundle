@@ -66,10 +66,10 @@ class ReportCommand extends ReflectionCommand
 			->setDefault( FALSE );
 
 		/*
-		$this->getDefinition()
-			->getOption( 'date' )
-			->setDefault( "since yesterday" );
-*/
+		 * $this->getDefinition()
+		 * ->getOption( 'date' )
+		 * ->setDefault( "since yesterday" );
+		 */
 		$srcDefault = array(
 			sprintf( "%s/domains/.metadata", $_SERVER['HOME'] )
 		);
@@ -111,7 +111,7 @@ class ReportCommand extends ReflectionCommand
 				->toArray();
 
 			$outputType = $this->getInput()->getOption( 'outputType' );
-			$outputFile = $this->getInput()->getOption( 'outputType' );
+			$outputFile = $this->getInput()->getOption( 'outputFile' );
 
 			$xslDir = $this->getContainer()
 				->get( 'kernel' )
@@ -136,8 +136,8 @@ class ReportCommand extends ReflectionCommand
 
 				$serializer = $this->getSerializer();
 				$task = $serializer->deserialize( $xmldoc->saveXML(), 'SK\ITCBundle\Mylyn\ContextState', 'xml' );
-				print_R($task);
-				$tasks[] =[];// $task->toArray();
+
+				$tasks[] = $task;
 			}
 
 			$this->setRows( $tasks );

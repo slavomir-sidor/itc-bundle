@@ -57,21 +57,28 @@ abstract class TableCommand extends AbstractCommand
 
 		foreach( $rows as $iRow => $row )
 		{
-			$rowModificated=[];
+			$rowModificated = [];
+
 			foreach( $columns as $iCol => $col )
 			{
-				if(is_int($iCol))
-				{
-					$iCol=$col;
-				}
 
-				if( array_key_exists( $iCol, $row ) )
+				if( is_int( $iCol ) )
 				{
-					$rowModificated[$iCol] = wordwrap( $row[$iCol], $maxColWidth, "\n", true );
+					$iCol = $col;
+					$rowColum = $col;
 				}
 				else
 				{
-					$rowModificated[$iCol] = "";
+					$rowColum = $row;
+				}
+
+				if( array_key_exists( $rowColum, $row ) )
+				{
+					$rowModificated[$rowColum] = wordwrap( $row[$rowColum], $maxColWidth, "\n", true );
+				}
+				else
+				{
+					$rowModificated[$rowColum] = "";
 				}
 			}
 

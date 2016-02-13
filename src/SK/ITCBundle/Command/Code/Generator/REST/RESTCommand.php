@@ -13,10 +13,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Monolog\Logger;
 use SK\ITCBundle\Code\Reflection;
-use SK\ITCBundle\Command\TableCommand;
 use Raml\Parser;
 use Raml\ApiDefinition;
 use Symfony\Component\Console\Input\InputOption;
+use Sensio\Bundle\GeneratorBundle\Command\GeneratorCommand;
+use SK\ITCBundle\Command\TableCommand;
 
 abstract class RESTCommand extends TableCommand
 {
@@ -62,7 +63,7 @@ abstract class RESTCommand extends TableCommand
 	{
 		parent::execute( $input, $output );
 
-		$this->writeTable( 50 );
+		$this->writeTable( 70 );
 	}
 
 	/**
@@ -76,6 +77,7 @@ abstract class RESTCommand extends TableCommand
 		parent::configure();
 
 		$outputDirectory = $_SERVER['PWD'] . DIRECTORY_SEPARATOR . 'src';
+
 		$this->addOption( "namespace", "ns", InputOption::VALUE_OPTIONAL, "REST API Target namespace.", "\\" );
 		$this->addOption( "outputDirectory", "o", InputOption::VALUE_OPTIONAL, "REST API Target namespace.", $outputDirectory );
 
@@ -126,5 +128,38 @@ abstract class RESTCommand extends TableCommand
 	{
 		$this->apiDefinition = $apiDefinition;
 		return $this;
+	}
+
+	protected function generate( $filename, $template, $parameters )
+	{
+		$dir = dirname( $filename );
+		if( ! file_exists( $dir ) )
+		{
+			mkdir( $dir, 0777, true );
+		}
+		return file_put_contents( $filename, $this->render( $template, $parameters ) );
+	}
+
+	protected function render( $template, $parameters )
+	{
+		$twig = $this->getTwigEnvironment();
+
+		return $twig->render( $template, $parameters );
+	}
+
+	/**
+	 * Get the twig environment that will render skeletons.
+	 *
+	 * @return \Twig_Environment
+	 */
+	protected function getTwigEnvironment()
+	{
+		return new \Twig_Environment( new \Twig_Loader_Filesystem( $this->skeletonDirs ),
+			array(
+				'debug' => true,
+				'cache' => false,
+				'strict_variables' => true,
+				'autoescape' => false
+			) );
 	}
 }

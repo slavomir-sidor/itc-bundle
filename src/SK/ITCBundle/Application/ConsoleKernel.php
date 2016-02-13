@@ -20,6 +20,7 @@ use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use FOS\RestBundle\FOSRestBundle;
 use Nelmio\ApiDocBundle\NelmioApiDocBundle;
 use Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle;
+use Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle;
 
 class ConsoleKernel extends Kernel
 {
@@ -52,7 +53,7 @@ class ConsoleKernel extends Kernel
 			'test'
 		), true ) )
 		{
-			// $bundles[] =
+			$bundles[] = new SensioGeneratorBundle();
 		}
 		return $bundles;
 	}

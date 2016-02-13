@@ -46,8 +46,10 @@ class ServiceCommand extends RESTCommand
 	protected function getRows()
 	{
 		$apiDefinition = $this->getApiDefinition();
+
 		$outputDirectory = $this->getInput()->getOption( 'outputDirectory' );
 		$namespace = $this->getInput()->getOption( 'namespace' );
+
 		$rows=$this->itemsToRows( $apiDefinition->getResources() );
 		return $rows;
 	}
@@ -63,6 +65,7 @@ class ServiceCommand extends RESTCommand
 		foreach( $items as $item )
 		{
 			$row = [];
+
 			$row['name'] = $item->getDisplayName();
 			$row['base'] = implode(",", $item->getBaseUriParameters());
 			$row['url'] = $item->getUri();
@@ -76,6 +79,7 @@ class ServiceCommand extends RESTCommand
 			{
 				$rows = array_merge( $rows, $this->itemsToRows( $item->getResources() ) );
 			}
+
 		}
 		return $rows;
 	}

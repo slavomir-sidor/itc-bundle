@@ -35,7 +35,7 @@
 		"symfony/security-csrf" : "^3.0.1",
 		"symfony/security-bundle" : "^3.0.1",
 		"symfony/framework-bundle" : "^3.0.1",
-		"symfony/twig-bundle" : "^3.0.1",
+		"symfony/twig-bundle" : "3.0.1",
 		"symfony/console" : "^3.0.1",
 		"symfony/finder" : "^3.0.1",
 		"symfony/process" : "^3.0.1",
@@ -46,11 +46,7 @@
 		"symfony/assetic-bundle" : "2.7.1",
 		"packagist/yuicompressor-bin" : "2.4.8",
 		"twig/twig" : "1.23.3",
-		"nelmio/api-doc-bundle" : "2.11.2",
-		"friendsofsymfony/rest-bundle" : "1.7.7",
 		"sensio/framework-extra-bundle" : "3.0.12",
-		"zendframework/zend-code" : "2.6.1",
-		"zendframework/zend-soap" : "2.5.1",
 		"behat/behat" : "dev-master",
 		"andrewsville/php-token-reflection" : "^1.4",
 		"sonata-project/formatter-bundle" : "^2.3",
@@ -61,7 +57,9 @@
 		"sauce/sausage" : "*",
 		"jms/serializer-bundle" : "^1.1",
 		"alecsammon/php-raml-parser" : "dev-master",
-		"sensio/generator-bundle" : "^3.0"
+		"sensio/generator-bundle" : "^3.0",
+		"creads/api2symfony" : "dev-master",
+		"creads/api2symfony-bundle" : "dev-master"
 	},
 	"repositories" : [{
 			"type" : "vcs",
@@ -69,6 +67,12 @@
 		}, {
 			"type" : "vcs",
 			"url" : "git@github.com:slavomirkuzma/itc-bundle.git"
+		}, {
+			"type" : "vcs",
+			"url" : "git@github.com:slavomirkuzma/api2symfony.git"
+		}, {
+			"type" : "vcs",
+			"url" : "git@github.com:slavomirkuzma/api2symfony-bundle.git"
 		}
 	]
 }

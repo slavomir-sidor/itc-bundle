@@ -18,7 +18,7 @@ class FileCollection extends Collection
 	 * @var array
 	 */
 	protected $columns = array(
-		"Files",
+		"File",
 		"Owner",
 		"Group",
 		"Permissions",

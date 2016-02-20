@@ -3,7 +3,7 @@ namespace SK\ITCBundle\Code\Reflection;
 
 use TokenReflection\IReflection;
 use TokenReflection\ReflectionClass;
-use TokenReflection\ReflectionParameter;
+use TokenReflection\Php\ReflectionParameter;
 use TokenReflection\ReflectionProperty;
 use TokenReflection\Php\ReflectionMethod;
 
@@ -137,9 +137,9 @@ trait Helper
 	 */
 	protected static function getParameterType( ReflectionParameter $reflection )
 	{
-		$operationReflection=$reflection->getDeclaringFunction();
+		//$operationReflection=$reflection->getDeclaringFunction();
 
-		return implode( ",", array_values( is_array( $return ) ? $return : [] ) );
+		return "";
 	}
 
 	/**

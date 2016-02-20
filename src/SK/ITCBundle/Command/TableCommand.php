@@ -46,7 +46,7 @@ abstract class TableCommand extends AbstractCommand
 	 * @param int $maxColWidth
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	protected function writeTable( $maxColWidth = 40 )
+	protected function writeTable( $maxColWidth = 120 )
 	{
 		$columns = $this->getColumns();
 		$colspan = count( $columns );
@@ -61,24 +61,19 @@ abstract class TableCommand extends AbstractCommand
 
 			foreach( $columns as $iCol => $col )
 			{
-
 				if( is_int( $iCol ) )
 				{
 					$iCol = $col;
-					$rowColum = $col;
-				}
-				else
-				{
-					$rowColum = $row;
+
 				}
 
-				if( array_key_exists( $rowColum, $row ) )
+				if( array_key_exists( $iCol, $row ) )
 				{
-					$rowModificated[$rowColum] = wordwrap( $row[$rowColum], $maxColWidth, "\n", true );
+					$rowModificated[$iCol] = wordwrap( $row[$iCol], $maxColWidth, "\n", true );
 				}
 				else
 				{
-					$rowModificated[$rowColum] = "";
+					$rowModificated[$iCol] = "";
 				}
 			}
 

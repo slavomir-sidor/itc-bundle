@@ -9,6 +9,7 @@
 			"SK\\ITCBundle" : "src/"
 		}
 	},
+	
 	"bin" : [
 		"bin/itc",
 		"bin/itc-initd"
@@ -73,6 +74,9 @@
 		}, {
 			"type" : "vcs",
 			"url" : "git@github.com:slavomirkuzma/api2symfony-bundle.git"
+		}, {
+			"type" : "vcs",
+			"url" : "git@github.com:slavomirkuzma/log-subscriber.git"
 		}
 	]
 }

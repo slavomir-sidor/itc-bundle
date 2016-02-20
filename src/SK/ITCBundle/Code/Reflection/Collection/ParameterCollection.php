@@ -18,11 +18,11 @@ class ParameterCollection extends Collection
 	 * @var array $columns
 	 */
 	protected $columns = array(
-		'Class Name',
-		'Operation',
-		'Parameter',
-		'Type',
-		'Default'
+		'Class'=>'Class Name',
+		'Operation'=>'Operation',
+		'Parameter'=>'Parameter',
+		'Type'=>'Type',
+		'Default'=>'Default'
 	);
 
 	/**
@@ -41,9 +41,14 @@ class ParameterCollection extends Collection
 			$row['Class'] = $reflection->getDeclaringClassName();
 			$row['Operation'] = $reflection->getDeclaringFunctionName();
 			$row['Parameter'] = $reflection->getName();
-			$row[ 'Type' ] =self::getParameterType($reflection);
+			$row[ 'Type' ] ="";//self::getParameterType($reflection);
 			//$reflection->getOriginalTypeHint();
-			$row[ 'Default' ] = is_array( $reflection->getDefaultValue() ) ? 'array' : $reflection->getDefaultValue();
+
+			if($reflection->isOptional())
+			{
+				//$row[ 'Default' ] = is_array( $reflection->getDefaultValue() ) ? 'array' : $reflection->getDefaultValue();
+			}
+			$row[ 'Default' ]="";
 
 			$rows[] = $row;
 		}

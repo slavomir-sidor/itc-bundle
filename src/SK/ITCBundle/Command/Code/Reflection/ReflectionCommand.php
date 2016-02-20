@@ -167,7 +167,7 @@ class ReflectionCommand extends TableCommand
 			}
 		}
 
-		$this->writeTable( 50 );
+		$this->writeTable( 120 );
 	}
 
 	/**

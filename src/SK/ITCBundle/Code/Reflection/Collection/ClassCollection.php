@@ -18,12 +18,12 @@ class ClassCollection extends Collection
 	 * @var array
 	 */
 	protected $columns = array(
-		'PHP Object',
-		'Final',
-		'Abstract',
-		'Namespace Name',
-		'Parent',
-		'Implements Interfaces'
+	 	'object'=>'PHP Object',
+		'final'=>'Final',
+		'abstract'=>'Abstract',
+		'name'=>'Namespace Name',
+		'parent'=>'Parent',
+		'interface'=>'Implements Interfaces'
 	);
 
 	/**

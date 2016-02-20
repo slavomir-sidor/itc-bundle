@@ -2,7 +2,7 @@
 namespace SK\ITCBundle\Code\Reflection\Collection;
 
 use SK\ITCBundle\Code\Collection;
-use TokenReflection\Php\ReflectionProperty;
+use TokenReflection\ReflectionProperty;
 
 class AttributesCollection extends Collection
 {

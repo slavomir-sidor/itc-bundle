@@ -17,8 +17,6 @@ use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use SK\ITCBundle\SKITCBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use FOS\RestBundle\FOSRestBundle;
-use Nelmio\ApiDocBundle\NelmioApiDocBundle;
 use Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle;
 use Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle;
 
@@ -43,8 +41,6 @@ class ConsoleKernel extends Kernel
 			new AsseticBundle(),
 			new SensioFrameworkExtraBundle(),
 			new JMSSerializerBundle(),
-			new NelmioApiDocBundle(),
-			new FOSRestBundle(),
 			new SKITCBundle()
 		);
 

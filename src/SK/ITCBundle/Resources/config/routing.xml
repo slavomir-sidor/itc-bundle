@@ -48,59 +48,1146 @@
 
 	</route>
 
-	<import
-		resource="@SKITCBundle/Resources/config/Filesystem/routing.xml"
-		prefix="/filesystem"
-		type="xml" />
+	<!-- Application -->
+	<route
+		id="itc_application"
+		path="{_locale}">
 
-	<import
-		resource="@SKITCBundle/Resources/config/Console/routing.xml"
-		prefix="/console"
-		type="xml" />
+		<default key="_controller">SKITCBundle:Application:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
 
-	<import
-		resource="@SKITCBundle/Resources/config/Application/routing.xml"
-		prefix="/application"
-		type="xml" />
+		<requirement key="_locale">%framework.translator.locales%</requirement>
 
-	<import
-		resource="@SKITCBundle/Resources/config/Maven/routing.xml"
-		prefix="/maven"
-		type="xml" />
+	</route>
 
-	<import
-		resource="@SKITCBundle/Resources/config/PHPCR/routing.xml"
-		prefix="/phpcr"
-		type="xml" />
+	<route
+		id="itc_application_filesystem"
+		path="/filesystem/{_locale}">
 
-	<import
-		resource="@SKITCBundle/Resources/config/PHPUnit/routing.xml"
-		prefix="/phpunit"
-		type="xml" />
+		<default key="_controller">SKITCBundle:Application:filesystem</default>
+		<default key="_locale">%framework.translator.fallback%</default>
 
-	<import
-		resource="@SKITCBundle/Resources/config/WS/routing.xml"
-		prefix="/ws"
-		type="xml" />
+		<requirement key="_locale">%framework.translator.locales%</requirement>
 
-	<import
-		resource="@SKITCBundle/Resources/config/Schema/routing.xml"
-		prefix="/schema"
-		type="xml" />
+	</route>
 
-	<import
-		resource="@SKITCBundle/Resources/config/Help/routing.xml"
-		prefix="/help"
-		type="xml" />
+	<route
+		id="itc_application_bundle"
+		path="/bundle/{_locale}">
 
-	<import
-		resource="@SKITCBundle/Resources/config/ITC/routing.xml"
-		prefix="/saas"
-		type="xml" />
+		<default key="_controller">SKITCBundle:Application:bundle</default>
+		<default key="_locale">%framework.translator.fallback%</default>
 
-	<import
-		resource="@SKITCBundle/Resources/config/DBAL/routing.xml"
-		prefix="/dbal"
-		type="xml" />
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_application_namespace"
+		path="/namespace/{_locale}">
+
+		<default key="_controller">SKITCBundle:Application:namespace</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_application_container"
+		path="/container/{_locale}">
+
+		<default key="_controller">SKITCBundle:Application:container</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_application_class"
+		path="/class/{_locale}">
+
+		<default key="_controller">SKITCBundle:Application:class</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_application_class_operation"
+		path="/class/operation/{_locale}">
+
+		<default key="_controller">SKITCBundle:Application:classOperation</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_application_class_attribute"
+		path="/class/attribute/{_locale}">
+
+		<default key="_controller">SKITCBundle:Application:classAttribute</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_application_class_file"
+		path="/class/file/{_locale}">
+
+		<default key="_controller">SKITCBundle:Application:classFile</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_application_class_schema"
+		path="/class/schema/{_locale}">
+
+		<default key="_controller">SKITCBundle:Application:classSchema</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_application_class_wsdl"
+		path="/class/wsdl/{_locale}">
+
+		<default key="_controller">SKITCBundle:Application:classWsdl</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_application_class_tests"
+		path="/class/tests/{_locale}">
+
+		<default key="_controller">SKITCBundle:Application:classTests</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_application_configuration"
+		path="/configuration/{_locale}">
+
+		<default key="_controller">SKITCBundle:Application:configuration</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_console"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:Console:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_console_toolbar"
+		path="/toolbar/{_locale}">
+
+		<default key="_controller">SKITCBundle:Console:toolbar</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_console_workspace"
+		path="/workspace/{_locale}">
+
+		<default key="_controller">SKITCBundle:Console:workspace</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_console_command"
+		path="/command/{_locale}">
+
+		<default key="_controller">SKITCBundle:Console:command</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_console_help"
+		path="/help/{_locale}">
+
+		<default key="_controller">SKITCBundle:Console:help</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_console_run"
+		path="/run/{_locale}">
+
+		<default key="_controller">SKITCBundle:Console:run</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_mylyn_report"
+		path="/{_locale}/mylyn/report">
+
+		<default key="_controller">SKITCBundle:Mylyn:report</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci"
+		path="">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:index</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci_jenkins"
+		path="/jenkins">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:jenkins</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci_tomcat"
+		path="/tomcat">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:tomcat</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci_nexus"
+		path="/nexus">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:nexus</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci_sonar"
+		path="/sonar">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:sonar</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci_admin"
+		path="/admin">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:admin</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ci_git"
+		path="/git">
+
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_controller">SKITCBundle:CI:git</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_dbal"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:DBAL:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_dbal_connection"
+		path="/connection/{_locale}">
+
+		<default key="_controller">SKITCBundle:DBAL:connection</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_dbal_orm"
+		path="/orm/{_locale}">
+
+		<default key="_controller">SKITCBundle:DBAL:orm</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_dbal_em"
+		path="/entity-manager/{_locale}">
+
+		<default key="_controller">SKITCBundle:DBAL:entityManager</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_dbal_entity"
+		path="/entity/{_locale}">
+
+		<default key="_controller">SKITCBundle:DBAL:entity</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_dbal_configuration"
+		path="/configuration/{_locale}">
+
+		<default key="_controller">SKITCBundle:DBAL:configuration</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+	</route>
+
+	<route
+		id="itc_filesystem"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:Filesystem:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_filesystem_toolbar"
+		path="/toolbar/{_locale}">
+
+		<default key="_controller">SKITCBundle:Filesystem:toolbar</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_filesystem_workspace"
+		path="/workspace/{_locale}">
+
+		<default key="_controller">SKITCBundle:Filesystem:workspace</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_filesystem_detail"
+		path="/detail/{_locale}">
+
+		<default key="_controller">SKITCBundle:Filesystem:detail</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_filesystem_edit"
+		path="/edit/{_locale}">
+
+		<default key="_controller">SKITCBundle:Filesystem:edit</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_filesystem_save"
+		methods="post"
+		path="/save/{_locale}">
+
+
+		<default key="_controller">SKITCBundle:Filesystem:save</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_filesystem_create"
+		path="/create/{_locale}">
+
+		<default key="_controller">SKITCBundle:Filesystem:create</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_filesystem_delete"
+		path="/delete/{_locale}">
+
+		<default key="_controller">SKITCBundle:Filesystem:delete</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_help"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:Help:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_help_bundle"
+		path="/bundle/{_locale}">
+
+		<default key="_controller">SKITCBundle:Help:bundle</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_help_schema"
+		path="/schema/{_locale}">
+
+		<default key="_controller">SKITCBundle:Help:schema</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_help_ws"
+		path="/ws/{_locale}">
+
+		<default key="_controller">SKITCBundle:Help:ws</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_help_phpunit"
+		path="/phpunit/{_locale}">
+
+		<default key="_controller">SKITCBundle:Help:phpunit</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+
+	<route
+		id="itc_help_dbal"
+		path="/dbal/{_locale}">
+
+		<default key="_controller">SKITCBundle:Help:dbal</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas"
+		path="{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas_jenkins"
+		path="/jenkins/{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:jenkins</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas_tomcat"
+		path="/tomcat/{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:tomcat</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas_nexus"
+		path="/nexus/{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:nexus</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas_sonar"
+		path="/sonar/{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:sonar</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas_admin"
+		path="/admin/{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:admin</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_saas_git"
+		path="/git/{_locale}">
+
+		<default key="_controller">SKITCBundle:ITC:git</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_maven"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:Maven:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<!-- PHPCR -->
+	<route
+		id="itc_phpcr"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPCR:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpcr_toolbar"
+		path="/toolbar/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPCR:toolbar</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpcr_workspace"
+		path="/workspace/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPCR:workspace</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpcr_query"
+		path="/query/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPCR:query</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpcr_query"
+		path="/query-result/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPCR:queryResult</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpcr_detail"
+		path="/detail/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPCR:detail</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpcr_edit"
+		path="/edit/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPCR:edit</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpcr_save"
+		methods="post"
+		path="/save/{_locale}">
+
+
+		<default key="_controller">SKITCBundle:PHPCR:save</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpcr_create"
+		path="/create/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPCR:create</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpcr_delete"
+		path="/delete/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPCR:delete</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<!-- PHPUnit -->
+	<route
+		id="itc_phpunit"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_toolbar"
+		path="/toolbar/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:toolbar</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_workspace"
+		path="/workspace/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:workspace</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_testsuite"
+		path="/testsuite/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:testsuite</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_test"
+		path="/test/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:test</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_case"
+		path="/case/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:case</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_group"
+		path="/group/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:group</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_run"
+		path="/run/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:run</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_report"
+		path="/report/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:report</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_bundle"
+		path="/bundle/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:bundle</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_generate_data"
+		path="/generate-data/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:generateData</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_generate_fcase"
+		path="/generate-fcase/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:generateFCase</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_generate_ptest"
+		path="/generate-pcase/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:generatePerformaceTest</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_configuration"
+		path="/configuration/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:configuration</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_configuration_filter"
+		path="/configuration/filter/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:configurationFilter</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_configuration_logging"
+		path="/configuration/logging/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:configurationLogging</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_phpunit_configuration_php"
+		path="/configuration/php/{_locale}">
+
+		<default key="_controller">SKITCBundle:PHPUnit:configurationPhp</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<!-- Schema -->
+	<route
+		id="itc_schema"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_toolbar"
+		path="/toolbar/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:toolbar</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_workspace"
+		path="/workspace/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:workspace</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_bundle"
+		path="/bundle/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:bundle</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_explorer"
+		path="/explorer/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:explorer</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_interchange"
+		path="/interchange/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:interchange</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_documentation"
+		path="/documentation/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:documentation</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_schema_help"
+		path="/help/{_locale}">
+
+		<default key="_controller">SKITCBundle:Schema:help</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<!-- WS -->
+	<route
+		id="itc_ws"
+		path="/{_locale}">
+
+		<default key="_controller">SKITCBundle:WS:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ws_toolbar"
+		path="/toolbar/{_locale}">
+
+		<default key="_controller">SKITCBundle:WS:toolbar</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ws_workspace"
+		path="/workspace/{_locale}">
+
+		<default key="_controller">SKITCBundle:WS:workspace</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ws_view"
+		path="/view/{_locale}">
+
+		<default key="_controller">SKITCBundle:WS:view</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ws_edit"
+		path="/edit/{_locale}">
+
+		<default key="_controller">SKITCBundle:WS:view</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ws_create"
+		path="/create/{_locale}">
+
+		<default key="_controller">SKITCBundle:WS:create</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ws_delete"
+		path="/delete/{_locale}">
+
+		<default key="_controller">SKITCBundle:WS:delete</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ws_bundle"
+		path="/bundle/{_locale}">
+
+		<default key="_controller">SKITCBundle:WS:bundle</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ws_class"
+		path="/class/{_locale}">
+
+		<default key="_controller">SKITCBundle:WS:class</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ws_wsdl"
+		path="/wsdl/{_locale}">
+
+		<default key="_controller">SKITCBundle:WS:wsdl</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ws_soap"
+		path="/soap/{_locale}">
+
+		<default key="_controller">SKITCBundle:WS:soap</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ws_rest"
+		path="/rest/{_locale}">
+
+		<default key="_controller">SKITCBundle:WS:rest</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
+
+	<route
+		id="itc_ws_json"
+		path="/json/{_locale}">
+
+		<default key="_controller/{_locale}">SKITCBundle:WS:json</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+
+		<requirement key="_locale">%framework.translator.locales%</requirement>
+
+	</route>
 
 </routes>

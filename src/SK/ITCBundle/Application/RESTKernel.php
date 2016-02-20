@@ -11,14 +11,11 @@ use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use FOS\RestBundle\FOSRestBundle;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
 use Symfony\Bundle\AsseticBundle\AsseticBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
-use Nelmio\ApiDocBundle\NelmioApiDocBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
-use Symfony\Bundle\DebugBundle\DebugBundle;
 use SK\ITCBundle\SKITCBundle;
 
 class RESTKernel extends Kernel
@@ -37,8 +34,6 @@ class RESTKernel extends Kernel
 			new DoctrineBundle(),
 			new MonologBundle(),
 			new JMSSerializerBundle(),
-			new NelmioApiDocBundle(),
-			new FOSRestBundle(),
 			new SwiftmailerBundle(),
 			new SecurityBundle(),
 			new TwigBundle(),

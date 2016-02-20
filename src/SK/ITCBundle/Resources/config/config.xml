@@ -85,9 +85,6 @@
 		<assetic:bundle>SwiftmailerBundle</assetic:bundle>
 		<assetic:bundle>DoctrineBundle</assetic:bundle>
 		<assetic:bundle>AsseticBundle</assetic:bundle>
-		<assetic:bundle>AsseticBundle</assetic:bundle>
-		<assetic:bundle>NelmioApiDocBundle</assetic:bundle>
-		<assetic:bundle>FOSRestBundle</assetic:bundle>
 		<assetic:bundle>SKITCBundle</assetic:bundle>
 
 		<assetic:filter name="cssrewrite" />

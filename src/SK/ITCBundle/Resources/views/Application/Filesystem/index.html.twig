@@ -1,0 +1,40 @@
+{% extends 'SKITCBundle::workspace.html.twig' %}
+
+{% block body %}
+	<body>
+		<form class="ui-layout perspectives filesystem ui-state-loading">
+
+			{% block toolbar %}
+			{% include "SKITCBundle::Filesystem/toolbar.html.twig" with {'model':model} %}
+			{% endblock %}
+
+			{% block westPane %}
+			{% include "SKITCBundle::Filesystem/westPane.html.twig" with {'model':model} %}
+			{% endblock %}
+
+			{% block workspace %}
+			{% include "SKITCBundle::Filesystem/workspace.html.twig" with {'model':model} %}
+			{% endblock %}
+	
+			{% block eastPane %}
+			{% include "SKITCBundle::Filesystem/eastPane.html.twig" with {'model':model} %}
+			{% endblock %}
+
+			{% block southPane %}
+			{% include "SKITCBundle::Filesystem/southPane.html.twig" with {'model':model} %}
+			{% endblock %}
+
+		</form>
+	</body>
+{% endblock %}
+
+{% block javaScriptHeaderCode %}
+
+	{{ parent() }}
+
+	<script type="text/javascript">
+		$(document).bind('ready', function(event) {
+			var filesystem=$('.perspectives').perspective_filesystem();
+		});
+	</script>
+{% endblock %}

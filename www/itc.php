@@ -30,7 +30,7 @@ $apcLoader->register(true);
 */
 //require_once __DIR__.'/../app/AppCache.php';
 $environment=isset($_SERVER['envi'])?$_SERVER['envi']:'dev';
-$kernel = new RESTKernel($environment, false);
+$kernel = new RESTKernel('dev', false);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
 

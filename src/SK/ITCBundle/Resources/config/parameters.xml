@@ -44,7 +44,7 @@
 
 		<!-- Framework Translator -->
 		<parameter key="framework.translator.fallback">%framework.default_locale%</parameter>
-		<parameter key="framework.translator.locales">cs|en|fr|de</parameter>
+		<parameter key="framework.translator.locales">cs_CZ|en_US|fr_FR|de_DE|sk_SK|pl_PL|hu_HU</parameter>
 
 		<!-- Framework Translator -->
 		<parameter key="framework.translator.fallback">en</parameter>

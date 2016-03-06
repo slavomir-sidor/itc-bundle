@@ -73,16 +73,9 @@ class FilesystemController extends Controller
 	{
 		// $model = new Model();
 		$model = array();
-		$request = $this->getRequest();
+		$request = $this->container->get('request_stack')->getCurrentRequest();
 		$model['request'] = $request;
 		$model['currentRoute'] = $request->get( '_route' );
-
-		foreach( array(
-			'cs_CZ',
-			'en_US',
-			'de_DE'
-		) as $locale )
-		{}
 
 		$path = $request->get( 'path', '' );
 		$rootDir = $this->get( 'kernel' )->getRootDir();
@@ -95,8 +88,6 @@ class FilesystemController extends Controller
 		$model['filesystemPath'] = $filesystemPath;
 		$model['filesystemPathInfo'] = $filesystemInfo;
 
-		$kernel = $this->get( 'kernel' );
-		// $model['environments']=$kernel->
 
 		if( is_dir( $filesystemPath ) )
 		{

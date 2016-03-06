@@ -1,5 +1,4 @@
 DirectoryIndex itc.php
-Options FollowSymlinks
 
 <IfModule mod_negotiation.c>
     Options -MultiViews

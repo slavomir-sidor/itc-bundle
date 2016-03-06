@@ -10,11 +10,10 @@
 namespace SK\ITCBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Finder\Finder;
 use SK\ITCBundle\Response\Model;
 
-class FilesystemController extends Controller
+class FilesystemController extends AbstractController
 {
 
 	protected $excludeDirs = array(
@@ -73,7 +72,7 @@ class FilesystemController extends Controller
 	{
 		// $model = new Model();
 		$model = array();
-		$request = $this->container->get('request_stack')->getCurrentRequest();
+		$request = $this->getRequest();
 		$model['request'] = $request;
 		$model['currentRoute'] = $request->get( '_route' );
 

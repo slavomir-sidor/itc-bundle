@@ -1,0 +1,75 @@
+{% extends 'SKITCBundle::Default/toolbar.html.twig' %}
+
+{% block toolbarButtonSet %}
+
+	{% set directoryTree = model.path|split('/') %}
+	{% set directoryPath='' %}
+
+	<div class="buttonset left">
+
+		<h2>
+			{% trans %}Filesystem{% endtrans %}
+		</h2>
+
+		{% for directory in directoryTree %}
+
+			{% set directoryPath=directoryPath~'/'~directory %}
+			<h3>
+				<a href="{{ path('itc_filesystem', {
+					'path': directoryPath
+					}) }}">
+					{% if directory=='' %}
+						{% trans %}Home{% endtrans %}
+					{% else %}
+						{{ directory }}
+					{% endif %}
+				</a>
+			</h3>
+		{% endfor %}
+
+		<h2>
+			{% trans %}Directory{% endtrans %}
+		</h2>
+	
+		<h3>
+			<a href="{{ path('itc_filesystem', {
+				'path': model.path
+				}) }}">
+				{% trans %}UP{% endtrans %}
+			</a>
+		</h3>
+	
+		<h3>
+			<a href="{{ path('itc_filesystem_create') }}">
+			{% trans %}Create{% endtrans %}
+			</a>
+		</h3>
+	
+		<h3>
+			<a href="{{ path('itc_filesystem_delete') }}">
+			{% trans %}Delete{% endtrans %}
+			</a>
+		</h3>
+	
+		<h2>
+			{% trans %}Display{% endtrans %}
+		</h2>
+	
+		<h3>
+			<a class="display grid">
+			{% trans %}Grid{% endtrans %}
+			</a>
+		</h3>
+	
+		<h3>
+			<a class="display table">
+			{% trans %}Table{% endtrans %}
+			</a>
+		</h3>
+
+	</div>
+
+{% endblock %}
+
+{% block locale %}
+{% endblock %}

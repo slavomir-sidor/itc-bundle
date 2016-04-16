@@ -27,7 +27,6 @@
 
 		</service>
 
-
 		<service
 			id="sk.itcbundle.assetic.content_filter"
 			class="%sk.itcbundle.assetic.content_filter.class%">
@@ -594,20 +593,35 @@
 
 		<!-- </service> -->
 
-		<!-- <service -->
-		<!-- id="sk.itcbundle.command.google.translator" -->
-		<!-- class="%sk.itcbundle.command.google.translator.class%"> -->
+		<service
+			id="sk.itcbundle.command.google.translator"
+			class="%sk.itcbundle.command.google.translator.class%">
 
-		<!-- <argument type="string">%sk.itcbundle.command.google.translator.name%</argument> -->
-		<!-- <argument type="string">%sk.itcbundle.command.google.translator.description%</argument> -->
+			<argument type="string">%sk.itcbundle.command.google.translator.name%</argument>
+			<argument type="string">%sk.itcbundle.command.google.translator.description%</argument>
 
-		<!-- <argument -->
-		<!-- type="service" -->
-		<!-- id="logger" /> -->
+			<argument
+				type="service"
+				id="logger" />
 
-		<!-- <tag name="console.command" /> -->
+			<tag name="console.command" />
 
-		<!-- </service> -->
+		</service>
+
+		<service
+			id="sk.itcbundle.command.google.spreadsheets"
+			class="%sk.itcbundle.command.google.spreadsheets.class%">
+
+			<argument type="string">%sk.itcbundle.command.google.spreadsheets.name%</argument>
+			<argument type="string">%sk.itcbundle.command.google.spreadsheets.description%</argument>
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<tag name="console.command" />
+
+		</service>
 
 		<!-- Generator Docblock Commands -->
 
@@ -980,6 +994,10 @@
 			id="sk.itcbundle.google.translator"
 			class="%sk.itcbundle.google.translator.class%" />
 
+		<service
+			id="sk.itcbundle.google.spreadsheet"
+			class="%sk.itcbundle.google.spreadsheet.class%" />
+
 		<!-- Menu -->
 		<!-- <service id="sk.itcbundle.menu.builder" class="%sk.itcbundle.menu.builder.class%"> <argument type="service" id="knp_menu.factory" /> </service> 
 			<service id="sk.itcbundle.menu.itc" class="Knp\Menu\MenuItem" factory-service="sk.itcbundle.menu.builder" factory-method="createMenu" scope="request"> 
@@ -1115,8 +1133,81 @@
 
 		<!-- OS -->
 		<service
-			id="sk.itcbundle.os.command"
-			class="%sk.itcbundle.os.command.class%" />
+			id="sk.itcbundle.os.command.uname"
+			class="%sk.itcbundle.os.command.class%">
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument type="string">uname</argument>
+
+			<argument type="collection">
+				<argument>a</argument>
+			</argument>
+
+		</service>
+
+		<service
+			id="sk.itcbundle.os.command.lsb_release"
+			class="%sk.itcbundle.os.command.class%">
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument type="string">lsb_release</argument>
+
+			<argument type="collection">
+				<argument>a</argument>
+			</argument>
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.os.name"
+			class="%sk.itcbundle.command.os.name.class%">
+
+			<argument type="string">%sk.itcbundle.command.os.name.name%</argument>
+			<argument type="string">%sk.itcbundle.command.os.name.description%</argument>
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.os.command.uname" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.os.release"
+			class="%sk.itcbundle.command.os.release.class%">
+
+			<argument type="string">%sk.itcbundle.command.os.release.name%</argument>
+			<argument type="string">%sk.itcbundle.command.os.release.description%</argument>
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.os.command" />
+
+
+			<argument type="string">lsb_release</argument>
+
+			<argument type="collection">
+				<argument>a</argument>
+			</argument>
+
+			<tag name="console.command" />
+
+		</service>
 
 	</services>
 

@@ -154,7 +154,6 @@
 		<!-- Code Reflection -->
 		<parameter key="sk.itcbundle.code.reflection.class">SK\ITCBundle\Code\Reflection</parameter>
 
-
 		<!-- PHPUnit -->
 		<parameter key="sk.itcbundle.command.code.generator.phpunit.functional.name">generator:phpunit:functional</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.phpunit.functional.description">ITCloud PHPUnit Functional Case</parameter>
@@ -285,6 +284,10 @@
 		<parameter key="sk.itcbundle.command.google.translator.description">ITCloud Google Trans</parameter>
 		<parameter key="sk.itcbundle.command.google.translator.class">SK\ITCBundle\Command\Google\Translator</parameter>
 
+		<parameter key="sk.itcbundle.command.google.spreadsheets.name">itc:google:spreadsheets</parameter>
+		<parameter key="sk.itcbundle.command.google.spreadsheets.description">ITCloud Google Spreadsheet</parameter>
+		<parameter key="sk.itcbundle.command.google.spreadsheets.class">SK\ITCBundle\Command\Google\Spreadsheet</parameter>
+
 		<!-- DocBlock -->
 		<parameter key="sk.itcbundle.command.code.generator.docblock.file.name">itc:doc:file</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.file.description">ITCloud Doc Block File Generator</parameter>
@@ -362,9 +365,13 @@
 
 		<!-- Google -->
 		<parameter key="sk.itcbundle.google.translator.class">SK\ITCBundle\Google\Translator</parameter>
+		<parameter key="sk.itcbundle.google.spreadsheet.class">SK\ITCBundle\Google\Spreadsheet</parameter>
+
+		<parameter key="sk.itcbundle.excel.class">SK\ITCBundle\Excel\Service</parameter>
 
 		<!-- Menu -->
 		<parameter key="sk.itcbundle.menu.builder.class">SK\ITCBundle\Menu\Builder</parameter>
+
 		<parameter
 			key="sk.itcbundle.menu.builder.items"
 			type="collection">

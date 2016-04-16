@@ -1069,7 +1069,6 @@
 			class="%sk.itcbundle.translation.translator.class%" />
 
 		<!-- WS -->
-
 		<service
 			id="sk.itcbundle.code.generator.wsdl.bundle"
 			class="%sk.itcbundle.code.generator.wsdl.bundle.class%" />
@@ -1113,6 +1112,11 @@
 		<service
 			id="sk.itcbundle.code.generator.wsdl.security"
 			class="%sk.itcbundle.code.generator.wsdl.security.class%" />
+
+		<!-- OS -->
+		<service
+			id="sk.itcbundle.os.command"
+			class="%sk.itcbundle.os.command.class%" />
 
 	</services>
 

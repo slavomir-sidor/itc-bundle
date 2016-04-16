@@ -602,6 +602,9 @@
 		<parameter key="sk.itcbundle.api.type.default">rest</parameter>
 		<parameter key="sk.itcbundle.api.version">0.0.1-SNAPSHOT</parameter>
 
+		<!-- OS Commands -->
+		<parameter key="sk.itcbundle.os.command.class">SK\ITCBundle\OS\Service</parameter>
+
 	</parameters>
 
 </container>

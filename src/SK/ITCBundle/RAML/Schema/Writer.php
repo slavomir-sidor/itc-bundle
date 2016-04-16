@@ -6,8 +6,9 @@ use Monolog\Logger;
 use JMS\Serializer\Serializer;
 use Raml\Resource;
 use Raml\Method;
+use SK\ITCBundle\Service\AbstractService;
 
-class Writer
+class Writer extends AbstractService
 {
 	/**
 	 *
@@ -33,7 +34,7 @@ class Writer
 	 */
 	public function write(ApiDefinition $apiDefinition, $filename)
 	{
-		return file_put_contents ( $filename, $this->serializer ( $apiDefinition ) );
+		return file_put_contents ( $filename, $this->serialize ( $apiDefinition ) );
 	}
 
 	/**

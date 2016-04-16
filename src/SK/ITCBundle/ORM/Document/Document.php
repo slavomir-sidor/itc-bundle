@@ -5,7 +5,7 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Document;
+namespace SK\ITCBundle\ORM\Document;
 
 abstract class Document extends \SplFileObject
 {

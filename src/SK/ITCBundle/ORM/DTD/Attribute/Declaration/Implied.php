@@ -5,7 +5,7 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\DTD\Attribute\Type;
+namespace SK\ITCBundle\ORM\DTD\Attribute\Type;
 
 class Implied
 {

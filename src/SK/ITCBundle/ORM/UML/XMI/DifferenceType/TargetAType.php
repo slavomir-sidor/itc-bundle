@@ -1,6 +1,6 @@
 <?php
 
-namespace SK\ITCBundle\UML\XMI\DifferenceType;
+namespace SK\ITCBundle\ORM\UML\XMI\DifferenceType;
 
 /**
  * Class representing TargetAType

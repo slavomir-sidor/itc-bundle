@@ -1,6 +1,6 @@
 <?php
 
-namespace SK\ITCBundle\UML\XMI;
+namespace SK\ITCBundle\ORM\UML\XMI;
 
 /**
  * Class representing Delete

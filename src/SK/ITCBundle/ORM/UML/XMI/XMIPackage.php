@@ -1,6 +1,6 @@
 <?php
 
-namespace SK\ITCBundle\UML\XMI;
+namespace SK\ITCBundle\ORM\UML\XMI;
 
 /**
  * Class representing XMIPackage
@@ -9,37 +9,37 @@ class XMIPackage
 {
 
     /**
-     * @property \SK\ITCBundle\UML\XMI\Difference[] $difference
+     * @property \SK\ITCBundle\ORM\UML\XMI\Difference[] $difference
      */
     private $difference = null;
 
     /**
-     * @property \SK\ITCBundle\UML\XMI\Add[] $add
+     * @property \SK\ITCBundle\ORM\UML\XMI\Add[] $add
      */
     private $add = null;
 
     /**
-     * @property \SK\ITCBundle\UML\XMI\Replace[] $replace
+     * @property \SK\ITCBundle\ORM\UML\XMI\Replace[] $replace
      */
     private $replace = null;
 
     /**
-     * @property \SK\ITCBundle\UML\XMI\Delete[] $delete
+     * @property \SK\ITCBundle\ORM\UML\XMI\Delete[] $delete
      */
     private $delete = null;
 
     /**
-     * @property \SK\ITCBundle\UML\XMI\XMI[] $xMI
+     * @property \SK\ITCBundle\ORM\UML\XMI\XMI[] $xMI
      */
     private $xMI = null;
 
     /**
-     * @property \SK\ITCBundle\UML\XMI\Documentation[] $documentation
+     * @property \SK\ITCBundle\ORM\UML\XMI\Documentation[] $documentation
      */
     private $documentation = null;
 
     /**
-     * @property \SK\ITCBundle\UML\XMI\Extension[] $extension
+     * @property \SK\ITCBundle\ORM\UML\XMI\Extension[] $extension
      */
     private $extension = null;
 
@@ -47,9 +47,9 @@ class XMIPackage
      * Adds as difference
      *
      * @return self
-     * @param \SK\ITCBundle\UML\XMI\Difference $difference
+     * @param \SK\ITCBundle\ORM\UML\XMI\Difference $difference
      */
-    public function addToDifference(\SK\ITCBundle\UML\XMI\Difference $difference)
+    public function addToDifference(\SK\ITCBundle\ORM\UML\XMI\Difference $difference)
     {
         $this->difference[] = $difference;
         return $this;
@@ -80,7 +80,7 @@ class XMIPackage
     /**
      * Gets as difference
      *
-     * @return \SK\ITCBundle\UML\XMI\Difference[]
+     * @return \SK\ITCBundle\ORM\UML\XMI\Difference[]
      */
     public function getDifference()
     {
@@ -90,7 +90,7 @@ class XMIPackage
     /**
      * Sets a new difference
      *
-     * @param \SK\ITCBundle\UML\XMI\Difference[] $difference
+     * @param \SK\ITCBundle\ORM\UML\XMI\Difference[] $difference
      * @return self
      */
     public function setDifference(array $difference)
@@ -103,9 +103,9 @@ class XMIPackage
      * Adds as add
      *
      * @return self
-     * @param \SK\ITCBundle\UML\XMI\Add $add
+     * @param \SK\ITCBundle\ORM\UML\XMI\Add $add
      */
-    public function addToAdd(\SK\ITCBundle\UML\XMI\Add $add)
+    public function addToAdd(\SK\ITCBundle\ORM\UML\XMI\Add $add)
     {
         $this->add[] = $add;
         return $this;
@@ -136,7 +136,7 @@ class XMIPackage
     /**
      * Gets as add
      *
-     * @return \SK\ITCBundle\UML\XMI\Add[]
+     * @return \SK\ITCBundle\ORM\UML\XMI\Add[]
      */
     public function getAdd()
     {
@@ -146,7 +146,7 @@ class XMIPackage
     /**
      * Sets a new add
      *
-     * @param \SK\ITCBundle\UML\XMI\Add[] $add
+     * @param \SK\ITCBundle\ORM\UML\XMI\Add[] $add
      * @return self
      */
     public function setAdd(array $add)
@@ -159,9 +159,9 @@ class XMIPackage
      * Adds as replace
      *
      * @return self
-     * @param \SK\ITCBundle\UML\XMI\Replace $replace
+     * @param \SK\ITCBundle\ORM\UML\XMI\Replace $replace
      */
-    public function addToReplace(\SK\ITCBundle\UML\XMI\Replace $replace)
+    public function addToReplace(\SK\ITCBundle\ORM\UML\XMI\Replace $replace)
     {
         $this->replace[] = $replace;
         return $this;
@@ -192,7 +192,7 @@ class XMIPackage
     /**
      * Gets as replace
      *
-     * @return \SK\ITCBundle\UML\XMI\Replace[]
+     * @return \SK\ITCBundle\ORM\UML\XMI\Replace[]
      */
     public function getReplace()
     {
@@ -202,7 +202,7 @@ class XMIPackage
     /**
      * Sets a new replace
      *
-     * @param \SK\ITCBundle\UML\XMI\Replace[] $replace
+     * @param \SK\ITCBundle\ORM\UML\XMI\Replace[] $replace
      * @return self
      */
     public function setReplace(array $replace)
@@ -215,9 +215,9 @@ class XMIPackage
      * Adds as delete
      *
      * @return self
-     * @param \SK\ITCBundle\UML\XMI\Delete $delete
+     * @param \SK\ITCBundle\ORM\UML\XMI\Delete $delete
      */
-    public function addToDelete(\SK\ITCBundle\UML\XMI\Delete $delete)
+    public function addToDelete(\SK\ITCBundle\ORM\UML\XMI\Delete $delete)
     {
         $this->delete[] = $delete;
         return $this;
@@ -248,7 +248,7 @@ class XMIPackage
     /**
      * Gets as delete
      *
-     * @return \SK\ITCBundle\UML\XMI\Delete[]
+     * @return \SK\ITCBundle\ORM\UML\XMI\Delete[]
      */
     public function getDelete()
     {
@@ -258,7 +258,7 @@ class XMIPackage
     /**
      * Sets a new delete
      *
-     * @param \SK\ITCBundle\UML\XMI\Delete[] $delete
+     * @param \SK\ITCBundle\ORM\UML\XMI\Delete[] $delete
      * @return self
      */
     public function setDelete(array $delete)
@@ -271,9 +271,9 @@ class XMIPackage
      * Adds as xMI
      *
      * @return self
-     * @param \SK\ITCBundle\UML\XMI\XMI $xMI
+     * @param \SK\ITCBundle\ORM\UML\XMI\XMI $xMI
      */
-    public function addToXMI(\SK\ITCBundle\UML\XMI\XMI $xMI)
+    public function addToXMI(\SK\ITCBundle\ORM\UML\XMI\XMI $xMI)
     {
         $this->xMI[] = $xMI;
         return $this;
@@ -304,7 +304,7 @@ class XMIPackage
     /**
      * Gets as xMI
      *
-     * @return \SK\ITCBundle\UML\XMI\XMI[]
+     * @return \SK\ITCBundle\ORM\UML\XMI\XMI[]
      */
     public function getXMI()
     {
@@ -314,7 +314,7 @@ class XMIPackage
     /**
      * Sets a new xMI
      *
-     * @param \SK\ITCBundle\UML\XMI\XMI[] $xMI
+     * @param \SK\ITCBundle\ORM\UML\XMI\XMI[] $xMI
      * @return self
      */
     public function setXMI(array $xMI)
@@ -327,9 +327,9 @@ class XMIPackage
      * Adds as documentation
      *
      * @return self
-     * @param \SK\ITCBundle\UML\XMI\Documentation $documentation
+     * @param \SK\ITCBundle\ORM\UML\XMI\Documentation $documentation
      */
-    public function addToDocumentation(\SK\ITCBundle\UML\XMI\Documentation $documentation)
+    public function addToDocumentation(\SK\ITCBundle\ORM\UML\XMI\Documentation $documentation)
     {
         $this->documentation[] = $documentation;
         return $this;
@@ -360,7 +360,7 @@ class XMIPackage
     /**
      * Gets as documentation
      *
-     * @return \SK\ITCBundle\UML\XMI\Documentation[]
+     * @return \SK\ITCBundle\ORM\UML\XMI\Documentation[]
      */
     public function getDocumentation()
     {
@@ -370,7 +370,7 @@ class XMIPackage
     /**
      * Sets a new documentation
      *
-     * @param \SK\ITCBundle\UML\XMI\Documentation[] $documentation
+     * @param \SK\ITCBundle\ORM\UML\XMI\Documentation[] $documentation
      * @return self
      */
     public function setDocumentation(array $documentation)
@@ -383,9 +383,9 @@ class XMIPackage
      * Adds as extension
      *
      * @return self
-     * @param \SK\ITCBundle\UML\XMI\Extension $extension
+     * @param \SK\ITCBundle\ORM\UML\XMI\Extension $extension
      */
-    public function addToExtension(\SK\ITCBundle\UML\XMI\Extension $extension)
+    public function addToExtension(\SK\ITCBundle\ORM\UML\XMI\Extension $extension)
     {
         $this->extension[] = $extension;
         return $this;
@@ -416,7 +416,7 @@ class XMIPackage
     /**
      * Gets as extension
      *
-     * @return \SK\ITCBundle\UML\XMI\Extension[]
+     * @return \SK\ITCBundle\ORM\UML\XMI\Extension[]
      */
     public function getExtension()
     {
@@ -426,7 +426,7 @@ class XMIPackage
     /**
      * Sets a new extension
      *
-     * @param \SK\ITCBundle\UML\XMI\Extension[] $extension
+     * @param \SK\ITCBundle\ORM\UML\XMI\Extension[] $extension
      * @return self
      */
     public function setExtension(array $extension)

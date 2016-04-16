@@ -5,7 +5,7 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Document;
+namespace SK\ITCBundle\ORM\Document;
 
 abstract class Source
 {
@@ -94,7 +94,7 @@ abstract class Source
 	 *
 	 * @param Document $document
 	 *        	SK ITC Bundle Document Source Document
-	 * @return \SK\ITCBundle\DTD\Source SK ITC Bundle Document Source
+	 * @return \SK\ITCBundle\ORM\DTD\Source SK ITC Bundle Document Source
 	 */
 	public function setDocument( 
 		Document $document )

@@ -15,8 +15,9 @@ use SK\ITCBundle\Service\Code\Generator\Collection\OperationCollection;
 use SK\ITCBundle\Service\Code\Generator\Collection\ParameterCollection;
 use SK\ITCBundle\Service\Code\Generator\Collection\AttributesCollection;
 use Monolog\Logger;
+use SK\ITCBundle\Service\Service\AbstractService;
 
-class Generator
+class Generator extends AbstractService
 {
 
 	/**

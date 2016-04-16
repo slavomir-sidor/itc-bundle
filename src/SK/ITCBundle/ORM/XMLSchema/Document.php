@@ -7,11 +7,11 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\XMLSchema;
+namespace SK\ITCBundle\ORM\XMLSchema;
 
-use SK\ITCBundle\XML\Document as XMLDocument;
-use SK\ITCBundle\XMLSchema\Entity\SchemaEntity;
-use SK\ITCBundle\XMLSchema\Entity;
+use SK\ITCBundle\ORM\XML\Document as XMLDocument;
+use SK\ITCBundle\ORM\XMLSchema\Entity\SchemaEntity;
+use SK\ITCBundle\ORM\XMLSchema\Entity;
 
 class Document extends XMLDocument
 {

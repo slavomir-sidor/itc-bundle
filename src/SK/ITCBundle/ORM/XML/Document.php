@@ -1,6 +1,6 @@
 <?php
 
-namespace SK\ITCBundle\XML;
+namespace SK\ITCBundle\ORM\XML;
 
 use \DOMDocument as PHPDOMDocument;
 use \DOMXPath as PHPDOMXpath;
@@ -54,7 +54,7 @@ class Document extends PHPDOMDocument
 	 * Sets SK ITCBundle XML Document XPath
 	 *
 	 * @param PHPDOMXpath $xpath        	
-	 * @return \SK\ITCBundle\SOAP\Document
+	 * @return \SK\ITCBundle\ORM\SOAP\Document
 	 */
 	protected function setXpath( 
 		PHPDOMXpath $xpath )

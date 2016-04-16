@@ -5,10 +5,10 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\DTD;
+namespace SK\ITCBundle\ORM\DTD;
 
-use SK\ITCBundle\Document\Document as ITCDocument;
-use SK\ITCBundle\DTD\Attribute\AttributeList;
+use SK\ITCBundle\ORM\Document\Document as ITCDocument;
+use SK\ITCBundle\ORM\DTD\Attribute\AttributeList;
 
 class Document extends ITCDocument
 {
@@ -80,7 +80,7 @@ class Document extends ITCDocument
 	/**
 	 * Gets SK ITC Bundle DTD Document Source
 	 *
-	 * @return \SK\ITCBundle\DTD\Source
+	 * @return \SK\ITCBundle\ORM\DTD\Source
 	 */
 	public function getSource()
 	{
@@ -115,7 +115,7 @@ class Document extends ITCDocument
 	 *
 	 * @param string $name
 	 *        	SK ITC Bundle DTD Document Element Name
-	 * @return \SK\ITCBundle\DTD\Element[]
+	 * @return \SK\ITCBundle\ORM\DTD\Element[]
 	 */
 	public function getElement( 
 		$name = null )
@@ -156,7 +156,7 @@ class Document extends ITCDocument
 	 *
 	 * @param Element $element
 	 *        	SK ITC Bundle DTD Document Element
-	 * @return \SK\ITCBundle\DTD\Document
+	 * @return \SK\ITCBundle\ORM\DTD\Document
 	 */
 	public function setElement( 
 		Element $element )
@@ -211,7 +211,7 @@ class Document extends ITCDocument
 	 *
 	 * @param AttributeList $attributeList
 	 *        	SK ITC Bundle DTD Document Attribute List
-	 * @return \SK\ITCBundle\DTD\Document
+	 * @return \SK\ITCBundle\ORM\DTD\Document
 	 */
 	public function setAttributeList( 
 		AttributeList $attributeList )
@@ -267,7 +267,7 @@ class Document extends ITCDocument
 	 *
 	 * @param Entity $entity
 	 *        	SK ITC Bundle DTD Document Entity
-	 * @return \SK\ITCBundle\DTD\Document
+	 * @return \SK\ITCBundle\ORM\DTD\Document
 	 */
 	public function setEntity( 
 		Entity $entity )
@@ -296,7 +296,7 @@ class Document extends ITCDocument
 	 *
 	 * @param Annotation $annotation
 	 *        	SK ITC Bundle DTD Document Annotation
-	 * @return \SK\ITCBundle\DTD\Document
+	 * @return \SK\ITCBundle\ORM\DTD\Document
 	 */
 	public function setAnnotation( 
 		Annotation $annotation )

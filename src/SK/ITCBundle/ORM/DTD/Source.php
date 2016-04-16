@@ -5,9 +5,9 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\DTD;
+namespace SK\ITCBundle\ORM\DTD;
 
-use SK\ITCBundle\Document\Source as ITCSource;
+use SK\ITCBundle\ORM\Document\Source as ITCSource;
 
 class Source extends ITCSource
 {
@@ -362,7 +362,7 @@ class Source extends ITCSource
 	 *
 	 * @param Document $document
 	 *        	SK ITC Bundle DTD Source Document
-	 * @return \SK\ITCBundle\DTD\Source SK ITC Bundle DTD Source Document Source
+	 * @return \SK\ITCBundle\ORM\DTD\Source SK ITC Bundle DTD Source Document Source
 	 */
 	public function setDocument( 
 		Document $document )

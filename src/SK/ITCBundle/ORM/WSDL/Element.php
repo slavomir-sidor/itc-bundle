@@ -7,9 +7,9 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\WSDL;
+namespace SK\ITCBundle\ORM\WSDL;
 
-use SK\ITCBundle\XML\Element as XMLElement;
+use SK\ITCBundle\ORM\XML\Element as XMLElement;
 
 class Element extends XMLElement
 {

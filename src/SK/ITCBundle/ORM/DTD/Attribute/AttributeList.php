@@ -5,7 +5,7 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\DTD\Attribute;
+namespace SK\ITCBundle\ORM\DTD\Attribute;
 
 class AttributeList
 {
@@ -92,7 +92,7 @@ class AttributeList
 	 *
 	 * @param string $source
 	 *        	SK ITC Bundle DTD Attribute List Source
-	 * @return \SK\ITCBundle\DTD\AttributeList
+	 * @return \SK\ITCBundle\ORM\DTD\AttributeList
 	 */
 	public static function create( 
 		$source, 
@@ -150,7 +150,7 @@ class AttributeList
 	/**
 	 * Gets SK ITC Bundle DTD Attribute List Annotation
 	 *
-	 * @return \SK\ITCBundle\DTD\Annotation
+	 * @return \SK\ITCBundle\ORM\DTD\Annotation
 	 */
 	public function getAnnotation()
 	{
@@ -164,7 +164,7 @@ class AttributeList
 	 *
 	 * @param Annotation $annotation
 	 *        	SK ITC Bundle DTD Attribute List Annotation
-	 * @return \SK\ITCBundle\DTD\AttributeList
+	 * @return \SK\ITCBundle\ORM\DTD\AttributeList
 	 */
 	public function setAnnotation( 
 		Annotation $annotation )
@@ -192,7 +192,7 @@ class AttributeList
 	 *
 	 * @param string $name
 	 *        	SK ITC Bundle DTD Document Attribute List Name
-	 * @return \SK\ITCBundle\DTD\AttributeList
+	 * @return \SK\ITCBundle\ORM\DTD\AttributeList
 	 */
 	public function setName( 
 		$name )
@@ -220,7 +220,7 @@ class AttributeList
 	 *
 	 * @param string $source
 	 *        	SK ITC Bundle DTD Attribute List Source
-	 * @return \SK\ITCBundle\DTD\AttributeList
+	 * @return \SK\ITCBundle\ORM\DTD\AttributeList
 	 */
 	public function setSource( 
 		$source )
@@ -248,7 +248,7 @@ class AttributeList
 	 *
 	 * @param Document $document
 	 *        	SK ITC Bundle DTD Attribute List Document
-	 * @return \SK\ITCBundle\DTD\AttributeList
+	 * @return \SK\ITCBundle\ORM\DTD\AttributeList
 	 */
 	public function setDocument( 
 		Document $document )
@@ -276,7 +276,7 @@ class AttributeList
 	 *
 	 * @param Element $element
 	 *        	SK ITC Bundle DTD Attribute List Element
-	 * @return \SK\ITCBundle\DTD\AttributeList
+	 * @return \SK\ITCBundle\ORM\DTD\AttributeList
 	 */
 	public function setElement( 
 		Element $element )
@@ -304,7 +304,7 @@ class AttributeList
 	 *
 	 * @param Attribute $attribute
 	 *        	SK ITC Bundle DTD Attribute List Attribute
-	 * @return \SK\ITCBundle\DTD\AttributeList
+	 * @return \SK\ITCBundle\ORM\DTD\AttributeList
 	 */
 	public function setAttribute( 
 		Attribute $attribute )
@@ -332,7 +332,7 @@ class AttributeList
 	 *
 	 * @param boolean $loaded
 	 *        	SK ITC Bundle DTD Attribute List Loaded Flag
-	 * @return \SK\ITCBundle\DTD\AttributeList
+	 * @return \SK\ITCBundle\ORM\DTD\AttributeList
 	 */
 	public function setLoaded( 
 		$loaded )

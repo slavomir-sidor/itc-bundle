@@ -1190,4 +1190,14 @@
 
 	</route>
 
+	<route
+		id="itc_api_model"
+		path="/api/{_version}/{_locale}/{_model}/{_operation}">
+
+		<default key="_controller">SKITCBundle:APIModel:index</default>
+		<default key="_locale">%framework.translator.fallback%</default>
+		<default key="_version">%sk.itcbundle.api.version%</default>
+
+	</route>
+
 </routes>

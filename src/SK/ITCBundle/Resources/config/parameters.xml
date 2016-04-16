@@ -598,6 +598,9 @@
 		<parameter key="sk.itcbundle.code.generator.wsdl.view.class">SK\ITCBundle\Code\Generator\WSDL\View</parameter>
 		<parameter key="sk.itcbundle.code.generator.wsdl.parameter.class">SK\ITCBundle\Code\Generator\WSDL\Parameter</parameter>
 
+		<!-- API -->
+		<parameter key="sk.itcbundle.api.type.default">rest</parameter>
+		<parameter key="sk.itcbundle.api.version">0.0.1-SNAPSHOT</parameter>
 
 	</parameters>
 

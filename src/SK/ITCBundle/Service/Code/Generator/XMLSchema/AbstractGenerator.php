@@ -7,11 +7,11 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator\XMLSchema;
+namespace SK\ITCBundle\Service\Code\Generator\XMLSchema;
 
-use SK\ITCBundle\XMLSchema\Document;
+use SK\ITCBundle\Service\XMLSchema\Document;
 use Symfony\Component\Console\Input\InputArgument;
-use SK\ITCBundle\Code\Generator\CodeGenerator;
+use SK\ITCBundle\Service\Code\Generator\CodeGenerator;
 
 abstract class AbstractGenerator extends CodeGenerator
 {

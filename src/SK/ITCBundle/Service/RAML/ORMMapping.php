@@ -1,5 +1,5 @@
 <?php
-namespace SK\ITCBundle\RAML;
+namespace SK\ITCBundle\Service\RAML;
 
 class ORMMapping
 {

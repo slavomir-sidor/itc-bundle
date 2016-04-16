@@ -7,7 +7,7 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator\DTD;
+namespace SK\ITCBundle\Service\Code\Generator\DTD;
 
 use Zend\Code\Reflection\ClassReflection;
 use Zend\Code\Reflection\FileReflection;
@@ -16,8 +16,8 @@ use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\PropertyGenerator;
 use Zend\Code\Generator\DocBlock\Tag;
-use SK\ITCBundle\DTD\Source;
-use SK\ITCBundle\DTD\Document as DTDDocument;
+use SK\ITCBundle\Service\DTD\Source;
+use SK\ITCBundle\Service\DTD\Document as DTDDocument;
 
 class Element extends AbstractGenerator
 {

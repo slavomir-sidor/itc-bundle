@@ -7,10 +7,10 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator\DTD;
+namespace SK\ITCBundle\Service\Code\Generator\DTD;
 
-use SK\ITCBundle\DTD\Source;
-use SK\ITCBundle\DTD\Document as DTDDocument;
+use SK\ITCBundle\Service\DTD\Source;
+use SK\ITCBundle\Service\DTD\Document as DTDDocument;
 
 class Route extends AbstractGenerator
 {

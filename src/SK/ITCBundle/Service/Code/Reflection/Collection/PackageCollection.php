@@ -1,7 +1,7 @@
 <?php
-namespace SK\ITCBundle\Code\Reflection\Collection;
+namespace SK\ITCBundle\Service\Code\Reflection\Collection;
 
-use SK\ITCBundle\Code\Collection;
+use SK\ITCBundle\Service\Code\Collection;
 use TokenReflection\ReflectionNamespace;
 
 class PackageCollection extends Collection

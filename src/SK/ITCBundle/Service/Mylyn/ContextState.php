@@ -4,7 +4,7 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Mylyn;
+namespace SK\ITCBundle\Service\Mylyn;
 
 use JMS\Serializer\Annotation\XmlRoot;
 use JMS\Serializer\Annotation\Type;
@@ -17,7 +17,7 @@ class ContextState
 {
 
 	/**
-	 * @Type("SK\ITCBundle\Mylyn\MylynEditors")
+	 * @Type("SK\ITCBundle\Service\Mylyn\MylynEditors")
 	 * @SerializedName("org.eclipse.mylyn.context.ui.editors")
 	 *
 	 * @var MylynEditors

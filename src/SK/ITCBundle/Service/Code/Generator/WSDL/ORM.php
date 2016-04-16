@@ -7,9 +7,9 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator\WSDL;
+namespace SK\ITCBundle\Service\Code\Generator\WSDL;
 
-use SK\ITCBundle\Code\Generator\WSDL\AbstractGenerator;
+use SK\ITCBundle\Service\Code\Generator\WSDL\AbstractGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,7 +20,7 @@ class ORM extends AbstractGenerator
 	/**
 	 * (non-PHPdoc)
 	 *
-	 * @see \SK\ITCBundle\Code\AbstractGenerator\Generator::configure()
+	 * @see \SK\ITCBundle\Service\Code\AbstractGenerator\Generator::configure()
 	 */
 	protected function configure()
 	{

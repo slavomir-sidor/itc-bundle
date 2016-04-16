@@ -1,8 +1,8 @@
 <?php
 
-namespace SK\ITCBundle\Google;
+namespace SK\ITCBundle\Service\Google;
 
-use SK\ITCBundle\Service\AbstractService;
+use SK\ITCBundle\Service\Service\AbstractService;
 use Monolog\Logger;
 
 class Spreadsheet extends AbstractService

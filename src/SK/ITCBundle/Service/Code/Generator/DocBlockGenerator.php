@@ -1,6 +1,6 @@
 <?php
 
-namespace SK\ITCBundle\Code\Generator;
+namespace SK\ITCBundle\Service\Code\Generator;
 
 use Zend\Code\Generator\DocBlockGenerator as ZendDocBlockGenerator;
 

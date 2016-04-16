@@ -1,5 +1,5 @@
 <?php
-namespace SK\ITCBundle\Code\Reflection;
+namespace SK\ITCBundle\Service\Code\Reflection;
 
 class Settings
 {
@@ -155,7 +155,7 @@ class Settings
 
 	/**
 	 *
-	 * @return \SK\ITCBundle\Code\Reflection\Settings
+	 * @return \SK\ITCBundle\Service\Code\Reflection\Settings
 	 */
 	public static function getInstance()
 	{

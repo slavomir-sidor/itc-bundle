@@ -1,5 +1,5 @@
 <?php
-namespace SK\ITCBundle\Code;
+namespace SK\ITCBundle\Service\Code;
 
 use Monolog\Logger;
 use TokenReflection\Broker;
@@ -11,13 +11,13 @@ use TokenReflection\Php\ReflectionClass;
 use TokenReflection\Php\ReflectionProperty;
 use TokenReflection\Php\ReflectionMethod;
 use TokenReflection\Php\ReflectionParameter;
-use SK\ITCBundle\Code\Reflection\Settings;
-use SK\ITCBundle\Code\Reflection\Collection\PackageCollection;
-use SK\ITCBundle\Code\Reflection\Collection\FileCollection;
-use SK\ITCBundle\Code\Reflection\Collection\ClassCollection;
-use SK\ITCBundle\Code\Reflection\Collection\OperationCollection;
-use SK\ITCBundle\Code\Reflection\Collection\ParameterCollection;
-use SK\ITCBundle\Code\Reflection\Collection\AttributesCollection;
+use SK\ITCBundle\Service\Code\Reflection\Settings;
+use SK\ITCBundle\Service\Code\Reflection\Collection\PackageCollection;
+use SK\ITCBundle\Service\Code\Reflection\Collection\FileCollection;
+use SK\ITCBundle\Service\Code\Reflection\Collection\ClassCollection;
+use SK\ITCBundle\Service\Code\Reflection\Collection\OperationCollection;
+use SK\ITCBundle\Service\Code\Reflection\Collection\ParameterCollection;
+use SK\ITCBundle\Service\Code\Reflection\Collection\AttributesCollection;
 
 class Reflection
 {

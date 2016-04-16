@@ -1,8 +1,8 @@
 <?php
-namespace SK\ITCBundle\Code\Reflection\Collection;
+namespace SK\ITCBundle\Service\Code\Reflection\Collection;
 
 use TokenReflection\ReflectionFile;
-use SK\ITCBundle\Code\Collection;
+use SK\ITCBundle\Service\Code\Collection;
 
 class FileCollection extends Collection
 {

@@ -1,7 +1,7 @@
 <?php
-namespace SK\ITCBundle\Code\Generator;
+namespace SK\ITCBundle\Service\Code\Generator;
 
-use SK\ITCBundle\Code\Reflection\Settings as ReflectionSettings;
+use SK\ITCBundle\Service\Code\Reflection\Settings as ReflectionSettings;
 
 class Settings extends ReflectionSettings
 {

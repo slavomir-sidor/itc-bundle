@@ -1,6 +1,6 @@
 <?php
 
-namespace SK\ITCBundle\Service\IService;
+namespace SK\ITCBundle\Service\Service\IService;
 
 interface IService
 {

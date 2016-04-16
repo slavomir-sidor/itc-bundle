@@ -5,11 +5,11 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\DTD\Attribute;
+namespace SK\ITCBundle\ORM\DTD\Attribute;
 
-use SK\ITCBundle\DTD\Entity;
-use SK\ITCBundle\DTD\Document;
-use SK\ITCBundle\DTD\Element;
+use SK\ITCBundle\ORM\DTD\Entity;
+use SK\ITCBundle\ORM\DTD\Document;
+use SK\ITCBundle\ORM\DTD\Element;
 
 class Attribute extends Entity
 {
@@ -97,7 +97,7 @@ class Attribute extends Entity
 	 *
 	 * @param string $source
 	 *        	SK ITC Bundle DTD Attribute Source
-	 * @return \SK\ITCBundle\DTD\Attribute
+	 * @return \SK\ITCBundle\ORM\DTD\Attribute
 	 */
 	public static function create( 
 		Document $document, 
@@ -112,7 +112,7 @@ class Attribute extends Entity
 	/**
 	 * Gets SK ITC Bundle DTD Attribute Annotation
 	 *
-	 * @return \SK\ITCBundle\DTD\Annotation
+	 * @return \SK\ITCBundle\ORM\DTD\Annotation
 	 */
 	public function getAnnotation()
 	{
@@ -126,7 +126,7 @@ class Attribute extends Entity
 	 *
 	 * @param Annotation $annotation
 	 *        	SK ITC Bundle DTD Attribute Annotation
-	 * @return \SK\ITCBundle\DTD\Attribute
+	 * @return \SK\ITCBundle\ORM\DTD\Attribute
 	 */
 	public function setAnnotation( 
 		Annotation $annotation )
@@ -154,7 +154,7 @@ class Attribute extends Entity
 	 *
 	 * @param string $name
 	 *        	SK ITC Bundle DTD Attribute Name
-	 * @return \SK\ITCBundle\DTD\Attribute
+	 * @return \SK\ITCBundle\ORM\DTD\Attribute
 	 */
 	public function setName( 
 		$name )
@@ -182,7 +182,7 @@ class Attribute extends Entity
 	 *
 	 * @param string $entity
 	 *        	SK ITC Bundle DTD Attribute Entity
-	 * @return \SK\ITCBundle\DTD\Attribute
+	 * @return \SK\ITCBundle\ORM\DTD\Attribute
 	 */
 	public function setEntity( 
 		$entity )
@@ -209,7 +209,7 @@ class Attribute extends Entity
 	 * Sets SK ITC Bundle DTD Attribute Value
 	 *
 	 * @param mixed $value        	
-	 * @return \SK\ITCBundle\DTD\Attribute
+	 * @return \SK\ITCBundle\ORM\DTD\Attribute
 	 */
 	public function setValue( 
 		$value )
@@ -236,7 +236,7 @@ class Attribute extends Entity
 	 * Sets SK ITC Bundle DTD Attribute Default Value
 	 *
 	 * @param mixed $defaultValue        	
-	 * @return \SK\ITCBundle\DTD\Attribute
+	 * @return \SK\ITCBundle\ORM\DTD\Attribute
 	 */
 	public function setDefaultValue( 
 		$defaultValue )
@@ -264,7 +264,7 @@ class Attribute extends Entity
 	 *
 	 * @param string $source
 	 *        	SK ITC Bundle DTD Attribute Source
-	 * @return \SK\ITCBundle\DTD\Attribute
+	 * @return \SK\ITCBundle\ORM\DTD\Attribute
 	 */
 	public function setSource( 
 		$source )
@@ -292,7 +292,7 @@ class Attribute extends Entity
 	 *
 	 * @param Document $document
 	 *        	SK ITC Bundle DTD Attribute Document
-	 * @return \SK\ITCBundle\DTD\Attribute
+	 * @return \SK\ITCBundle\ORM\DTD\Attribute
 	 */
 	public function setDocument( 
 		Document $document )
@@ -320,7 +320,7 @@ class Attribute extends Entity
 	 *
 	 * @param Element $element
 	 *        	SK ITC Bundle DTD Attribute Element
-	 * @return \SK\ITCBundle\DTD\Attribute
+	 * @return \SK\ITCBundle\ORM\DTD\Attribute
 	 */
 	public function setElement( 
 		Element $element )

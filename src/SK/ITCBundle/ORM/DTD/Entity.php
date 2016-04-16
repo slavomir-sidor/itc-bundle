@@ -5,13 +5,13 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\DTD;
+namespace SK\ITCBundle\ORM\DTD;
 
-use SK\ITCBundle\DTD\Entity\Character;
-use SK\ITCBundle\DTD\Entity\ExternalPublic;
-use SK\ITCBundle\DTD\Entity\ExternalSystem;
-use SK\ITCBundle\DTD\Entity\Internal;
-use SK\ITCBundle\DTD\Entity\Parameter;
+use SK\ITCBundle\ORM\DTD\Entity\Character;
+use SK\ITCBundle\ORM\DTD\Entity\ExternalPublic;
+use SK\ITCBundle\ORM\DTD\Entity\ExternalSystem;
+use SK\ITCBundle\ORM\DTD\Entity\Internal;
+use SK\ITCBundle\ORM\DTD\Entity\Parameter;
 
 abstract class Entity
 {
@@ -158,7 +158,7 @@ abstract class Entity
 	 *
 	 * @param string $name
 	 *        	SK ITC Bundle DTD Document Entity Name
-	 * @return \SK\ITCBundle\DTD\Entity
+	 * @return \SK\ITCBundle\ORM\DTD\Entity
 	 */
 	public function setName( 
 		$name )
@@ -186,7 +186,7 @@ abstract class Entity
 	 *
 	 * @param mixed $value
 	 *        	SK ITC Bundle DTD Entity Value
-	 * @return \SK\ITCBundle\DTD\Entity
+	 * @return \SK\ITCBundle\ORM\DTD\Entity
 	 */
 	public function setValue( 
 		$value )
@@ -200,7 +200,7 @@ abstract class Entity
 	/**
 	 * Gets SK ITC Bundle DTD Entity Annotation
 	 *
-	 * @return \SK\ITCBundle\DTD\Annotation
+	 * @return \SK\ITCBundle\ORM\DTD\Annotation
 	 */
 	public function getAnnotation()
 	{
@@ -213,7 +213,7 @@ abstract class Entity
 	 * Sets SK ITC Bundle DTD Entity Annotation
 	 *
 	 * @param Annotation $annotation        	
-	 * @return \SK\ITCBundle\DTD\Entity
+	 * @return \SK\ITCBundle\ORM\DTD\Entity
 	 */
 	public function setAnnotation( 
 		Annotation $annotation )
@@ -241,7 +241,7 @@ abstract class Entity
 	 *
 	 * @param string $source
 	 *        	SK ITC Bundle DTD Entity Source
-	 * @return \SK\ITCBundle\DTD\Entity
+	 * @return \SK\ITCBundle\ORM\DTD\Entity
 	 */
 	public function setSource( 
 		$source )
@@ -269,7 +269,7 @@ abstract class Entity
 	 *
 	 * @param Document $document
 	 *        	SK ITC Bundle DTD Entity Document
-	 * @return \SK\ITCBundle\DTD\Entity
+	 * @return \SK\ITCBundle\ORM\DTD\Entity
 	 */
 	public function setDocument( 
 		Document $document )

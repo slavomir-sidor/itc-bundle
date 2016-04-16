@@ -4,12 +4,12 @@
  * SK ITCBundle Google Translator
  *
  * @licence GNU GPL
- * 
+ *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
 namespace SK\ITCBundle\Service\Google;
 
-class Translator
+class Translator extends AbstractService
 {
 
 	/**
@@ -31,10 +31,10 @@ class Translator
 	 *        	If true function return transliteration of source text
 	 * @return string|bool Translated text or false if exists errors
 	 */
-	public function translateText( 
-		$text, 
-		$fromLanguage = "en", 
-		$toLanguage = "ru", 
+	public function translateText(
+		$text,
+		$fromLanguage = "en",
+		$toLanguage = "ru",
 		$translit = false )
 	{
 
@@ -44,8 +44,8 @@ class Translator
 			for( $i = 0; $i < strlen( $text ); $i += 1000 )
 			{
 				$subText = substr( $text, $i, 1000 );
-				
-				$response = $this->_curlToGoogle( 
+
+				$response = $this->_curlToGoogle(
 					"http://translate.google.com/translate_a/t?client=te&text=" . urlencode( $subText ) .
 					 "&hl=ru&sl=$fromLanguage&tl=i$toLanguage&multires=1&otf=1&ssel=0&tsel=0&uptl=ru&sc=1" );
 				$result .= $this->_parceGoogleResponse( $response, $translit );
@@ -55,7 +55,7 @@ class Translator
 		}
 		else
 			return false;
-	
+
 	}
 
 	/**
@@ -71,10 +71,10 @@ class Translator
 	 *        	If true function return transliteration of source text
 	 * @return array|bool Array with translated text or false if exists errors
 	 */
-	public function translateArray( 
-		$array, 
-		$fromLanguage = "en", 
-		$toLanguage = "ru", 
+	public function translateArray(
+		$array,
+		$fromLanguage = "en",
+		$toLanguage = "ru",
 		$translit = false )
 	{
 
@@ -86,7 +86,7 @@ class Translator
 		}
 		else
 			return false;
-	
+
 	}
 
 	public function getLanguages()
@@ -108,7 +108,7 @@ class Translator
 		{
 			return false;
 		}
-	
+
 	}
 
 	public function getLanguagesHTML()
@@ -122,26 +122,26 @@ class Translator
 		}
 		else
 			return false;
-	
+
 	}
 
 	public function getErrors()
 	{
 
 		return $this->_errors;
-	
+
 	}
 
-	private function _explode( 
+	private function _explode(
 		$text )
 	{
 
 		$text = preg_replace( "%\[\s*<\s*#\s*>\s*\]%", "[<#>]", $text );
 		return array_map( 'trim', explode( '[<#>]', $text ) );
-	
+
 	}
 
-	private function _curlToGoogle( 
+	private function _curlToGoogle(
 		$url )
 	{
 
@@ -152,9 +152,9 @@ class Translator
 		{
 			curl_setopt( $curl, CURLOPT_REFERER, $_SERVER[ 'HTTP_REFERER' ] );
 		}
-		curl_setopt( 
-			$curl, 
-			CURLOPT_USERAGENT, 
+		curl_setopt(
+			$curl,
+			CURLOPT_USERAGENT,
 			"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.71 Safari/534.24" );
 		$response = curl_exec( $curl );
 		// Check if any error occured
@@ -165,11 +165,11 @@ class Translator
 		}
 		curl_close( $curl );
 		return $response;
-	
+
 	}
 
-	private function _parceGoogleResponse( 
-		$response, 
+	private function _parceGoogleResponse(
+		$response,
 		$translit = false )
 	{
 
@@ -187,7 +187,7 @@ class Translator
 		{
 			return false;
 		}
-	
+
 	}
 
 }

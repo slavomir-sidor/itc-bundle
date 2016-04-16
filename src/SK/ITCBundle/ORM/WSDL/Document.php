@@ -7,9 +7,9 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\WSDL;
+namespace SK\ITCBundle\ORM\WSDL;
 
-use SK\ITCBundle\XMLSchema\Document as XMLSchemaDocument;
+use SK\ITCBundle\ORM\XMLSchema\Document as XMLSchemaDocument;
 use \DOMElement as PHPDOMElement;
 
 class Document extends XMLSchemaDocument

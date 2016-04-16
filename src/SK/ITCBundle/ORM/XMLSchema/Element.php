@@ -7,7 +7,7 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\XMLSchema;
+namespace SK\ITCBundle\ORM\XMLSchema;
 
 class Element
 {
@@ -187,7 +187,7 @@ class Element
 	 * Sets SK ITCBundle XML Element PHP DOM Element
 	 *
 	 * @param \DOMElement $element        	
-	 * @return \SK\ITCBundle\XML\Element
+	 * @return \SK\ITCBundle\ORM\XML\Element
 	 */
 	public function setDOMElement( 
 		\DOMElement $domElement )
@@ -215,7 +215,7 @@ class Element
 	 *
 	 * @param string $id
 	 *        	SK ITCBundle XML Element Id
-	 * @return \SK\ITCBundle\XMLSchema\Element
+	 * @return \SK\ITCBundle\ORM\XMLSchema\Element
 	 */
 	public function setId( 
 		$id )
@@ -270,7 +270,7 @@ class Element
 	 *
 	 * @param string $lang
 	 *        	SK ITCBundle XML Schema Lang
-	 * @return \SK\ITCBundle\XML\Element
+	 * @return \SK\ITCBundle\ORM\XML\Element
 	 */
 	public function setLang( 
 		$lang )
@@ -298,7 +298,7 @@ class Element
 	 *
 	 * @param string $targetNamespace
 	 *        	SK ITCBundle XML Element Target Namespace
-	 * @return \SK\ITCBundle\XML\Element
+	 * @return \SK\ITCBundle\ORM\XML\Element
 	 */
 	public function setTargetNamespace( 
 		$targetNamespace )
@@ -353,7 +353,7 @@ class Element
 	 *
 	 * @param string $source
 	 *        	SK ITCBundle XML Element Source
-	 * @return \SK\ITCBundle\XML\Element
+	 * @return \SK\ITCBundle\ORM\XML\Element
 	 */
 	public function setSource( 
 		$source )
@@ -407,7 +407,7 @@ class Element
 	 * Sets SK ITCBundle XML Element Schema Location
 	 *
 	 * @param string $schemaLocation        	
-	 * @return \SK\ITCBundle\XML\Element
+	 * @return \SK\ITCBundle\ORM\XML\Element
 	 */
 	public function setSchemaLocation( 
 		$schemaLocation )
@@ -435,7 +435,7 @@ class Element
 	 *
 	 * @param string $name
 	 *        	SK ITCBundle XML Schema Element Name
-	 * @return \SK\ITCBundle\XML\Element
+	 * @return \SK\ITCBundle\ORM\XML\Element
 	 */
 	public function setName( 
 		$name )
@@ -463,7 +463,7 @@ class Element
 	 *
 	 * @param string $abstract
 	 *        	SK ITCBundle XML Element Abstract
-	 * @return \SK\ITCBundle\XML\Element
+	 * @return \SK\ITCBundle\ORM\XML\Element
 	 */
 	public function setAbstract( 
 		$abstract )
@@ -491,7 +491,7 @@ class Element
 	 *
 	 * @param string $type
 	 *        	SK ITCBundle XML Element Type
-	 * @return \SK\ITCBundle\XML\Element
+	 * @return \SK\ITCBundle\ORM\XML\Element
 	 */
 	public function setType( 
 		$type )
@@ -519,7 +519,7 @@ class Element
 	 *
 	 * @param string $public
 	 *        	SK ITCBundle XML Element Public
-	 * @return \SK\ITCBundle\XML\Element
+	 * @return \SK\ITCBundle\ORM\XML\Element
 	 */
 	public function setPublic( 
 		$public )
@@ -547,7 +547,7 @@ class Element
 	 *
 	 * @param string $system
 	 *        	SK ITCBundle XML Element System
-	 * @return \SK\ITCBundle\XML\Element
+	 * @return \SK\ITCBundle\ORM\XML\Element
 	 */
 	public function setSystem( 
 		$system )
@@ -575,7 +575,7 @@ class Element
 	 *
 	 * @param string $mixed
 	 *        	SK ITCBundle XML Element Mixed
-	 * @return \SK\ITCBundle\XML\Element
+	 * @return \SK\ITCBundle\ORM\XML\Element
 	 */
 	public function setMixed( 
 		$mixed )
@@ -603,7 +603,7 @@ class Element
 	 *
 	 * @param string $substitutionGroup
 	 *        	SK ITCBundle XML Element Substitution Group
-	 * @return \SK\ITCBundle\XML\Element
+	 * @return \SK\ITCBundle\ORM\XML\Element
 	 */
 	public function setSubstitutionGroup( 
 		$substitutionGroup )

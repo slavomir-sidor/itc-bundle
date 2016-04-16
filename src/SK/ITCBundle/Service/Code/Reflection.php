@@ -18,8 +18,9 @@ use SK\ITCBundle\Service\Code\Reflection\Collection\ClassCollection;
 use SK\ITCBundle\Service\Code\Reflection\Collection\OperationCollection;
 use SK\ITCBundle\Service\Code\Reflection\Collection\ParameterCollection;
 use SK\ITCBundle\Service\Code\Reflection\Collection\AttributesCollection;
+use SK\ITCBundle\Service\Service\AbstractService;
 
-class Reflection
+class Reflection extends AbstractService
 {
 
 	/**

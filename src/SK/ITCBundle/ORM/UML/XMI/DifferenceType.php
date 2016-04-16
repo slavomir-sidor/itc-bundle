@@ -1,6 +1,6 @@
 <?php
 
-namespace SK\ITCBundle\UML\XMI;
+namespace SK\ITCBundle\ORM\UML\XMI;
 
 /**
  * Class representing DifferenceType
@@ -47,22 +47,22 @@ class DifferenceType
     private $type = null;
 
     /**
-     * @property \SK\ITCBundle\UML\XMI\DifferenceType\TargetAType[] $target
+     * @property \SK\ITCBundle\ORM\UML\XMI\DifferenceType\TargetAType[] $target
      */
     private $target = null;
 
     /**
-     * @property \SK\ITCBundle\UML\XMI\DifferenceType[] $container
+     * @property \SK\ITCBundle\ORM\UML\XMI\DifferenceType[] $container
      */
     private $container = null;
 
     /**
-     * @property \SK\ITCBundle\UML\XMI\DifferenceType[] $difference
+     * @property \SK\ITCBundle\ORM\UML\XMI\DifferenceType[] $difference
      */
     private $difference = null;
 
     /**
-     * @property \SK\ITCBundle\UML\XMI\Extension[] $extension
+     * @property \SK\ITCBundle\ORM\UML\XMI\Extension[] $extension
      */
     private $extension = null;
 
@@ -224,9 +224,9 @@ class DifferenceType
      * Adds as target
      *
      * @return self
-     * @param \SK\ITCBundle\UML\XMI\DifferenceType\TargetAType $target
+     * @param \SK\ITCBundle\ORM\UML\XMI\DifferenceType\TargetAType $target
      */
-    public function addToTarget(\SK\ITCBundle\UML\XMI\DifferenceType\TargetAType $target)
+    public function addToTarget(\SK\ITCBundle\ORM\UML\XMI\DifferenceType\TargetAType $target)
     {
         $this->target[] = $target;
         return $this;
@@ -257,7 +257,7 @@ class DifferenceType
     /**
      * Gets as target
      *
-     * @return \SK\ITCBundle\UML\XMI\DifferenceType\TargetAType[]
+     * @return \SK\ITCBundle\ORM\UML\XMI\DifferenceType\TargetAType[]
      */
     public function getTarget()
     {
@@ -267,7 +267,7 @@ class DifferenceType
     /**
      * Sets a new target
      *
-     * @param \SK\ITCBundle\UML\XMI\DifferenceType\TargetAType[] $target
+     * @param \SK\ITCBundle\ORM\UML\XMI\DifferenceType\TargetAType[] $target
      * @return self
      */
     public function setTarget(array $target)
@@ -280,9 +280,9 @@ class DifferenceType
      * Adds as container
      *
      * @return self
-     * @param \SK\ITCBundle\UML\XMI\DifferenceType $container
+     * @param \SK\ITCBundle\ORM\UML\XMI\DifferenceType $container
      */
-    public function addToContainer(\SK\ITCBundle\UML\XMI\DifferenceType $container)
+    public function addToContainer(\SK\ITCBundle\ORM\UML\XMI\DifferenceType $container)
     {
         $this->container[] = $container;
         return $this;
@@ -313,7 +313,7 @@ class DifferenceType
     /**
      * Gets as container
      *
-     * @return \SK\ITCBundle\UML\XMI\DifferenceType[]
+     * @return \SK\ITCBundle\ORM\UML\XMI\DifferenceType[]
      */
     public function getContainer()
     {
@@ -323,7 +323,7 @@ class DifferenceType
     /**
      * Sets a new container
      *
-     * @param \SK\ITCBundle\UML\XMI\DifferenceType[] $container
+     * @param \SK\ITCBundle\ORM\UML\XMI\DifferenceType[] $container
      * @return self
      */
     public function setContainer(array $container)
@@ -336,9 +336,9 @@ class DifferenceType
      * Adds as difference
      *
      * @return self
-     * @param \SK\ITCBundle\UML\XMI\DifferenceType $difference
+     * @param \SK\ITCBundle\ORM\UML\XMI\DifferenceType $difference
      */
-    public function addToDifference(\SK\ITCBundle\UML\XMI\DifferenceType $difference)
+    public function addToDifference(\SK\ITCBundle\ORM\UML\XMI\DifferenceType $difference)
     {
         $this->difference[] = $difference;
         return $this;
@@ -369,7 +369,7 @@ class DifferenceType
     /**
      * Gets as difference
      *
-     * @return \SK\ITCBundle\UML\XMI\DifferenceType[]
+     * @return \SK\ITCBundle\ORM\UML\XMI\DifferenceType[]
      */
     public function getDifference()
     {
@@ -379,7 +379,7 @@ class DifferenceType
     /**
      * Sets a new difference
      *
-     * @param \SK\ITCBundle\UML\XMI\DifferenceType[] $difference
+     * @param \SK\ITCBundle\ORM\UML\XMI\DifferenceType[] $difference
      * @return self
      */
     public function setDifference(array $difference)
@@ -392,9 +392,9 @@ class DifferenceType
      * Adds as extension
      *
      * @return self
-     * @param \SK\ITCBundle\UML\XMI\Extension $extension
+     * @param \SK\ITCBundle\ORM\UML\XMI\Extension $extension
      */
-    public function addToExtension(\SK\ITCBundle\UML\XMI\Extension $extension)
+    public function addToExtension(\SK\ITCBundle\ORM\UML\XMI\Extension $extension)
     {
         $this->extension[] = $extension;
         return $this;
@@ -425,7 +425,7 @@ class DifferenceType
     /**
      * Gets as extension
      *
-     * @return \SK\ITCBundle\UML\XMI\Extension[]
+     * @return \SK\ITCBundle\ORM\UML\XMI\Extension[]
      */
     public function getExtension()
     {
@@ -435,7 +435,7 @@ class DifferenceType
     /**
      * Sets a new extension
      *
-     * @param \SK\ITCBundle\UML\XMI\Extension[] $extension
+     * @param \SK\ITCBundle\ORM\UML\XMI\Extension[] $extension
      * @return self
      */
     public function setExtension(array $extension)

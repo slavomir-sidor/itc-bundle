@@ -1,6 +1,6 @@
 <?php
 
-namespace SK\ITCBundle\XML;
+namespace SK\ITCBundle\ORM\XML;
 
 /**
  * SK ITCBundle XML Schema Document

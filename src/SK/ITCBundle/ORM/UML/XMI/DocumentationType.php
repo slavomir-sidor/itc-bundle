@@ -1,6 +1,6 @@
 <?php
 
-namespace SK\ITCBundle\UML\XMI;
+namespace SK\ITCBundle\ORM\UML\XMI;
 
 /**
  * Class representing DocumentationType
@@ -87,7 +87,7 @@ class DocumentationType
     private $exporterID = null;
 
     /**
-     * @property \SK\ITCBundle\UML\XMI\Extension[] $extension
+     * @property \SK\ITCBundle\ORM\UML\XMI\Extension[] $extension
      */
     private $extension = null;
 
@@ -697,9 +697,9 @@ class DocumentationType
      * Adds as extension
      *
      * @return self
-     * @param \SK\ITCBundle\UML\XMI\Extension $extension
+     * @param \SK\ITCBundle\ORM\UML\XMI\Extension $extension
      */
-    public function addToExtension(\SK\ITCBundle\UML\XMI\Extension $extension)
+    public function addToExtension(\SK\ITCBundle\ORM\UML\XMI\Extension $extension)
     {
         $this->extension[] = $extension;
         return $this;
@@ -730,7 +730,7 @@ class DocumentationType
     /**
      * Gets as extension
      *
-     * @return \SK\ITCBundle\UML\XMI\Extension[]
+     * @return \SK\ITCBundle\ORM\UML\XMI\Extension[]
      */
     public function getExtension()
     {
@@ -740,7 +740,7 @@ class DocumentationType
     /**
      * Sets a new extension
      *
-     * @param \SK\ITCBundle\UML\XMI\Extension[] $extension
+     * @param \SK\ITCBundle\ORM\UML\XMI\Extension[] $extension
      * @return self
      */
     public function setExtension(array $extension)

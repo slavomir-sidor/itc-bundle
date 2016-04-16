@@ -5,7 +5,7 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\DTD;
+namespace SK\ITCBundle\ORM\DTD;
 
 class Annotation
 {
@@ -36,7 +36,7 @@ class Annotation
 	 *
 	 * @param string $content
 	 *        	SK ITC Bundle DTD Annotation Content
-	 * @return \SK\ITCBundle\DTD\Annotation
+	 * @return \SK\ITCBundle\ORM\DTD\Annotation
 	 */
 	public static function create( 
 		$content )
@@ -62,7 +62,7 @@ class Annotation
 	 * Sets SK ITC Bundle DTD Annotation Content
 	 *
 	 * @param string $content        	
-	 * @return \SK\ITCBundle\DTD\Annotation
+	 * @return \SK\ITCBundle\ORM\DTD\Annotation
 	 */
 	public function setContent( 
 		$content )

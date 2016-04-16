@@ -7,9 +7,9 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\XMLSchema\Entity;
+namespace SK\ITCBundle\ORM\XMLSchema\Entity;
 
-use SK\ITCBundle\XMLSchema\Entity;
+use SK\ITCBundle\ORM\XMLSchema\Entity;
 
 class WhiteSpaceAttrsEntity extends Entity
 {

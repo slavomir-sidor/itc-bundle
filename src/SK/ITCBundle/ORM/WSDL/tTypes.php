@@ -7,9 +7,9 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\WSDL;
+namespace SK\ITCBundle\ORM\WSDL;
 
-use SK\ITCBundle\XMLSchema\Schema;
+use SK\ITCBundle\ORM\XMLSchema\Schema;
 
 class tTypes extends tExtensibleDocumented
 {

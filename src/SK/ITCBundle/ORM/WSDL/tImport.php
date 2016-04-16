@@ -7,7 +7,7 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\WSDL;
+namespace SK\ITCBundle\ORM\WSDL;
 
 class tImport extends Element
 {

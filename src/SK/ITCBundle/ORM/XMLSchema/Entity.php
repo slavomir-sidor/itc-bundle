@@ -7,7 +7,7 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\XMLSchema;
+namespace SK\ITCBundle\ORM\XMLSchema;
 
 class Entity
 {

@@ -5,9 +5,9 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\DTD\Entity;
+namespace SK\ITCBundle\ORM\DTD\Entity;
 
-use SK\ITCBundle\DTD\Entity;
+use SK\ITCBundle\ORM\DTD\Entity;
 
 class ExternalPublic extends Entity
 {
@@ -43,7 +43,7 @@ class ExternalPublic extends Entity
 	 *
 	 * @param string $identifier
 	 *        	SK ITC Bundle DTD Entity External Public Identifier
-	 * @return \SK\ITCBundle\DTD\Entity\ExternalPublic
+	 * @return \SK\ITCBundle\ORM\DTD\Entity\ExternalPublic
 	 */
 	public function setIdentifier( 
 		$identifier )
@@ -71,7 +71,7 @@ class ExternalPublic extends Entity
 	 *
 	 * @param string $uri
 	 *        	SK ITC Bundle DTD Entity External Public Uri
-	 * @return \SK\ITCBundle\DTD\Entity\ExternalPublic
+	 * @return \SK\ITCBundle\ORM\DTD\Entity\ExternalPublic
 	 */
 	public function setUri( 
 		$uri )

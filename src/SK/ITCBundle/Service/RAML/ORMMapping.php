@@ -1,7 +1,9 @@
 <?php
 namespace SK\ITCBundle\Service\RAML;
 
-class ORMMapping
+use SK\ITCBundle\Service\Service\AbstractService;
+
+class ORMMapping extends AbstractService
 {
 
 }

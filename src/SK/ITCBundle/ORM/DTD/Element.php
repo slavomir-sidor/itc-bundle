@@ -5,7 +5,7 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\DTD;
+namespace SK\ITCBundle\ORM\DTD;
 
 class Element
 {
@@ -91,7 +91,7 @@ class Element
 	/**
 	 * Gets SK ITC Bundle DTD Element Annotation
 	 *
-	 * @return \SK\ITCBundle\DTD\Annotation
+	 * @return \SK\ITCBundle\ORM\DTD\Annotation
 	 */
 	public function getAnnotation()
 	{
@@ -105,7 +105,7 @@ class Element
 	 *
 	 * @param Annotation $annotation
 	 *        	SK ITC Bundle DTD Element Annotation
-	 * @return \SK\ITCBundle\DTD\Element
+	 * @return \SK\ITCBundle\ORM\DTD\Element
 	 */
 	public function setAnnotation( 
 		Annotation $annotation )
@@ -133,7 +133,7 @@ class Element
 	 *
 	 * @param string $name
 	 *        	SK ITC Bundle DTD Element Name
-	 * @return \SK\ITCBundle\DTD\Element
+	 * @return \SK\ITCBundle\ORM\DTD\Element
 	 */
 	public function setName( 
 		$name )
@@ -161,7 +161,7 @@ class Element
 	 *
 	 * @param string $entity
 	 *        	SK ITC Bundle DTD Element Entity
-	 * @return \SK\ITCBundle\DTD\Element
+	 * @return \SK\ITCBundle\ORM\DTD\Element
 	 */
 	public function setEntity( 
 		$entity )
@@ -189,7 +189,7 @@ class Element
 	 *
 	 * @param AttributeList $attributeList
 	 *        	SK ITC Bundle DTD Element Attribute List
-	 * @return \SK\ITCBundle\DTD\Element
+	 * @return \SK\ITCBundle\ORM\DTD\Element
 	 */
 	public function setAttributes( 
 		$attributeList )
@@ -217,7 +217,7 @@ class Element
 	 *
 	 * @param Element $children
 	 *        	SK ITC Bundle DTD Element Children Element
-	 * @return \SK\ITCBundle\DTD\Element
+	 * @return \SK\ITCBundle\ORM\DTD\Element
 	 */
 	public function setChildren( 
 		$children )
@@ -245,7 +245,7 @@ class Element
 	 *
 	 * @param string $source
 	 *        	SK ITC Bundle DTD Element Source
-	 * @return \SK\ITCBundle\DTD\Element
+	 * @return \SK\ITCBundle\ORM\DTD\Element
 	 */
 	public function setSource( 
 		$source )
@@ -273,7 +273,7 @@ class Element
 	 *
 	 * @param Document $document
 	 *        	SK ITC Bundle DTD Element Document
-	 * @return \SK\ITCBundle\DTD\Element
+	 * @return \SK\ITCBundle\ORM\DTD\Element
 	 */
 	public function setDocument( 
 		Document $document )
@@ -301,7 +301,7 @@ class Element
 	 *
 	 * @param mixed $value
 	 *        	SK ITC Bundle DTD Element Value
-	 * @return \SK\ITCBundle\DTD\Element
+	 * @return \SK\ITCBundle\ORM\DTD\Element
 	 */
 	public function setValue( 
 		$value )

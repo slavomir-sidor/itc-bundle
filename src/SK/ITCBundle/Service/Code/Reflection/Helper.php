@@ -1,5 +1,5 @@
 <?php
-namespace SK\ITCBundle\Code\Reflection;
+namespace SK\ITCBundle\Service\Code\Reflection;
 
 use TokenReflection\IReflection;
 use TokenReflection\ReflectionClass;

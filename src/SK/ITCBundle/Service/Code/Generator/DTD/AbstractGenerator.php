@@ -7,10 +7,10 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator\DTD;
+namespace SK\ITCBundle\Service\Code\Generator\DTD;
 
-use SK\ITCBundle\DTD\Document;
-use SK\ITCBundle\Code\Generator\CodeGenerator;
+use SK\ITCBundle\Service\DTD\Document;
+use SK\ITCBundle\Service\Code\Generator\CodeGenerator;
 
 abstract class AbstractGenerator extends CodeGenerator
 {

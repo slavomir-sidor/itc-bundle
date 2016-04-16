@@ -7,7 +7,7 @@
  *
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator\REST;
+namespace SK\ITCBundle\Service\Code\Generator\REST;
 
 use Doctrine\Bundle\DoctrineBundle\Mapping\DisconnectedMetadataFactory;
 

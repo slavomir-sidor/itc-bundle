@@ -1,7 +1,7 @@
 <?php
-namespace SK\ITCBundle\Code\Generator\Collection;
+namespace SK\ITCBundle\Service\Code\Generator\Collection;
 
-use SK\ITCBundle\Code\Reflection\Collection\ParameterCollection as ReflectionParameterCollection;
+use SK\ITCBundle\Service\Code\Reflection\Collection\ParameterCollection as ReflectionParameterCollection;
 use TokenReflection\Php\ReflectionParameter;
 
 class ParameterCollection extends ReflectionParameterCollection

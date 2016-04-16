@@ -7,10 +7,10 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator\WSDL;
+namespace SK\ITCBundle\Service\Code\Generator\WSDL;
 
-use SK\ITCBundle\WSDL\Document;
-use SK\ITCBundle\Code\Generator\CodeGenerator;
+use SK\ITCBundle\Service\WSDL\Document;
+use SK\ITCBundle\Service\Code\Generator\CodeGenerator;
 
 abstract class AbstractGenerator extends CodeGenerator
 {

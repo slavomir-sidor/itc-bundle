@@ -7,9 +7,9 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator\WSDL;
+namespace SK\ITCBundle\Service\Code\Generator\WSDL;
 
-use SK\ITCBundle\Code\Generator\WSDL\AbstractGenerator;
+use SK\ITCBundle\Service\Code\Generator\WSDL\AbstractGenerator;
 
 class View extends AbstractGenerator
 {

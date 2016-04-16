@@ -1,5 +1,5 @@
 <?php
-namespace SK\ITCBundle\Service;
+namespace SK\ITCBundle\Service\Service;
 
 use Symfony\Bridge\Monolog\Logger;
 

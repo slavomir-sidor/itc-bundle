@@ -1,8 +1,8 @@
 <?php
-namespace SK\ITCBundle\Code;
+namespace SK\ITCBundle\Service\Code;
 
 use PhpCollection\Map;
-use SK\ITCBundle\Code\Reflection\Helper;
+use SK\ITCBundle\Service\Code\Reflection\Helper;
 
 abstract class Collection extends Map
 {

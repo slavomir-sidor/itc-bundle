@@ -7,7 +7,7 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator\PHPUnit;
+namespace SK\ITCBundle\Service\Code\Generator\PHPUnit;
 
 use Exception as E;
 use Monolog\Handler\NullHandler;
@@ -26,7 +26,7 @@ use Zend\Code\Scanner\DirectoryScanner;
 use Zend\Code\Scanner\FileScanner;
 use Zend\Code\Reflection\FileReflection;
 use Zend\Code\Generator\ParameterGenerator;
-use SK\ITCBundle\Code\Generator\CodeGenerator;
+use SK\ITCBundle\Service\Code\Generator\CodeGenerator;
 
 abstract class PHPUnit extends CodeGenerator
 {
@@ -1502,7 +1502,7 @@ abstract class PHPUnit extends CodeGenerator
 	/**
 	 *
 	 * @param int $dataCount        	
-	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
+	 * @return \SK\ITCBundle\Service\Command\Tests\AbstractGenerator
 	 */
 	public function setDataCount( 
 		$dataCount )
@@ -1532,7 +1532,7 @@ abstract class PHPUnit extends CodeGenerator
 	/**
 	 *
 	 * @param string $rootDir        	
-	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
+	 * @return \SK\ITCBundle\Service\Command\Tests\AbstractGenerator
 	 */
 	public function setRootDir( 
 		$rootDir )
@@ -1637,7 +1637,7 @@ abstract class PHPUnit extends CodeGenerator
 	 * Sets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Class Reflections
 	 *
 	 * @param ClassReflection[] $classReflections        	
-	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
+	 * @return \SK\ITCBundle\Service\Command\Tests\AbstractGenerator
 	 */
 	public function setClassReflections( 
 		$classReflections )
@@ -1780,7 +1780,7 @@ abstract class PHPUnit extends CodeGenerator
 	 * Gets SK ITCBundle Code Generator PHPUnit Abstract Generator Generator Test Config
 	 *
 	 * @param Config $testConfig        	
-	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
+	 * @return \SK\ITCBundle\Service\Command\Tests\AbstractGenerator
 	 */
 	public function setTestConfig( 
 		Config $testConfig )
@@ -1807,7 +1807,7 @@ abstract class PHPUnit extends CodeGenerator
 	 * Sets SK ITCBundle Code Generator PHPUnit Abstract Generator Config File Name
 	 *
 	 * @param unknown $testConfigFilename        	
-	 * @return \SK\ITCBundle\Command\Tests\AbstractGenerator
+	 * @return \SK\ITCBundle\Service\Command\Tests\AbstractGenerator
 	 */
 	public function setTestConfigFilename( 
 		$testConfigFilename )

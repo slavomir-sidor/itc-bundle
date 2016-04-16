@@ -1,8 +1,8 @@
 <?php
-namespace SK\ITCBundle\Code\Generator\Collection;
+namespace SK\ITCBundle\Service\Code\Generator\Collection;
 
 use TokenReflection\Php\ReflectionClass;
-use SK\ITCBundle\Code\Reflection\Collection\ClassCollection as ReflectionClassCollection;
+use SK\ITCBundle\Service\Code\Reflection\Collection\ClassCollection as ReflectionClassCollection;
 
 class ClassCollection extends ReflectionClassCollection
 {

@@ -7,7 +7,7 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator;
+namespace SK\ITCBundle\Service\Code\Generator;
 
 abstract class CodeGenerator
 {

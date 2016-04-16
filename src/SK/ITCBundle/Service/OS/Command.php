@@ -1,9 +1,9 @@
 <?php
-namespace SK\ITCBundle\OS;
+namespace SK\ITCBundle\Service\OS;
 
 use Symfony\Component\Process\ProcessBuilder;
 use Symfony\Component\Process\Exception\ProcessFailedException;
-use SK\ITCBundle\Service\AbstractService;
+use SK\ITCBundle\Service\Service\AbstractService;
 use Symfony\Bridge\Monolog\Logger;
 
 class Command extends AbstractService

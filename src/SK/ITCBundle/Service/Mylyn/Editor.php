@@ -5,7 +5,7 @@
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  *
  */
-namespace SK\ITCBundle\Mylyn;
+namespace SK\ITCBundle\Service\Mylyn;
 
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\SerializedName;
@@ -15,7 +15,7 @@ class Editor
 {
 
 	/**
-	 * @Type("SK\ITCBundle\Mylyn\Input")
+	 * @Type("SK\ITCBundle\Service\Mylyn\Input")
 	 * @SerializedName("input")
 	 *
 	 * @var Input

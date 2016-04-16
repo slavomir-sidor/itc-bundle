@@ -7,12 +7,12 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator\XMI;
+namespace SK\ITCBundle\Service\Code\Generator\XMI;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use SK\ITCBundle\Code\Generator\CodeGenerator;
+use SK\ITCBundle\Service\Code\Generator\CodeGenerator;
 
 class Export extends CodeGenerator
 {

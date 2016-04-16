@@ -7,7 +7,7 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator\PHPUnit;
+namespace SK\ITCBundle\Service\Code\Generator\PHPUnit;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,7 +19,7 @@ class Config extends PHPUnit
 	/**
 	 * (non-PHPdoc)
 	 *
-	 * @see \SK\ITCBundle\Command\Tests\Generate::execute($input, $output)
+	 * @see \SK\ITCBundle\Service\Command\Tests\Generate::execute($input, $output)
 	 */
 	public function generate()
 	{

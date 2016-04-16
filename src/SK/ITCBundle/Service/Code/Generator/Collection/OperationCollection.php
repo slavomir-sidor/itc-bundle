@@ -1,8 +1,8 @@
 <?php
-namespace SK\ITCBundle\Code\Generator\Collection;
+namespace SK\ITCBundle\Service\Code\Generator\Collection;
 
 use TokenReflection\Php\ReflectionMethod;
-use SK\ITCBundle\Code\Reflection\Collection\OperationCollection as ReflectionOperationCollection;
+use SK\ITCBundle\Service\Code\Reflection\Collection\OperationCollection as ReflectionOperationCollection;
 
 class OperationCollection extends ReflectionOperationCollection
 {

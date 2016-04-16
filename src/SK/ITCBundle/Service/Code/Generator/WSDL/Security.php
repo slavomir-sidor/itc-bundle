@@ -7,9 +7,9 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Code\Generator\WSDL;
+namespace SK\ITCBundle\Service\Code\Generator\WSDL;
 
-use SK\ITCBundle\Code\Generator\WSDL\AbstractGenerator;
+use SK\ITCBundle\Service\Code\Generator\WSDL\AbstractGenerator;
 
 class Security extends AbstractGenerator
 {
@@ -17,7 +17,7 @@ class Security extends AbstractGenerator
 	/**
 	 * (non-PHPdoc)
 	 *
-	 * @see \SK\ITCBundle\Code\Generator\WSDL\AbstractGenerator::configure()
+	 * @see \SK\ITCBundle\Service\Code\Generator\WSDL\AbstractGenerator::configure()
 	 */
 	protected function configure()
 	{

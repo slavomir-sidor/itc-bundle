@@ -1,5 +1,5 @@
 <?php
-namespace SK\ITCBundle\Code;
+namespace SK\ITCBundle\Service\Code;
 
 use TokenReflection\ReflectionFile;
 use TokenReflection\ReflectionNamespace;
@@ -7,13 +7,13 @@ use TokenReflection\Php\ReflectionClass;
 use TokenReflection\Php\ReflectionProperty;
 use TokenReflection\Php\ReflectionMethod;
 use TokenReflection\Php\ReflectionParameter;
-use SK\ITCBundle\Code\Generator\Settings;
-use SK\ITCBundle\Code\Generator\Collection\PackageCollection;
-use SK\ITCBundle\Code\Generator\Collection\FileCollection;
-use SK\ITCBundle\Code\Generator\Collection\ClassCollection;
-use SK\ITCBundle\Code\Generator\Collection\OperationCollection;
-use SK\ITCBundle\Code\Generator\Collection\ParameterCollection;
-use SK\ITCBundle\Code\Generator\Collection\AttributesCollection;
+use SK\ITCBundle\Service\Code\Generator\Settings;
+use SK\ITCBundle\Service\Code\Generator\Collection\PackageCollection;
+use SK\ITCBundle\Service\Code\Generator\Collection\FileCollection;
+use SK\ITCBundle\Service\Code\Generator\Collection\ClassCollection;
+use SK\ITCBundle\Service\Code\Generator\Collection\OperationCollection;
+use SK\ITCBundle\Service\Code\Generator\Collection\ParameterCollection;
+use SK\ITCBundle\Service\Code\Generator\Collection\AttributesCollection;
 use Monolog\Logger;
 
 class Generator

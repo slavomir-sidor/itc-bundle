@@ -7,7 +7,7 @@
  * 
  * @author Slavomir Kuzma <slavomir.kuzma@gmail.com>
  */
-namespace SK\ITCBundle\Google;
+namespace SK\ITCBundle\Service\Google;
 
 class Translator
 {

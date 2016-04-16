@@ -1,12 +1,12 @@
 <?php
-namespace SK\ITCBundle\RAML\Schema;
+namespace SK\ITCBundle\Service\RAML\Schema;
 
 use Raml\ApiDefinition;
 use Monolog\Logger;
 use JMS\Serializer\Serializer;
 use Raml\Resource;
 use Raml\Method;
-use SK\ITCBundle\Service\AbstractService;
+use SK\ITCBundle\Service\Service\AbstractService;
 
 class Writer extends AbstractService
 {

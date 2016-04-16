@@ -598,7 +598,8 @@
 		<parameter key="sk.itcbundle.code.generator.wsdl.view.class">SK\ITCBundle\Code\Generator\WSDL\View</parameter>
 		<parameter key="sk.itcbundle.code.generator.wsdl.parameter.class">SK\ITCBundle\Code\Generator\WSDL\Parameter</parameter>
 
-
+		<!-- OS Commands -->
+		<parameter key="sk.itcbundle.os.command.class">SK\ITCBundle\OS\Service</parameter>
 	</parameters>
 
 </container>

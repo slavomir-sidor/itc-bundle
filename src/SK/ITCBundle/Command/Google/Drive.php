@@ -17,9 +17,14 @@ use Google\Spreadsheet\DefaultServiceRequest;
 use Google\Spreadsheet\ServiceRequestFactory;
 use Symfony\Bridge\Monolog\Logger;
 
-class Spreadsheet extends AbstractCommand
+class Drive extends AbstractCommand
 {
-
+    /**
+     *
+     * @param string $name
+     * @param string $description
+     * @param Logger $logger
+     */
     public function __construct($name, $description, Logger $logger)
     {
         parent::__construct ( $name, $description, $logger );
@@ -42,6 +47,5 @@ class Spreadsheet extends AbstractCommand
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-
     }
 }

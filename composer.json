@@ -60,7 +60,8 @@
 		"alecsammon/php-raml-parser" : "dev-master",
 		"sensio/generator-bundle" : "^3.0",
 		"creads/api2symfony" : "dev-master",
-		"creads/api2symfony-bundle" : "dev-master"
+		"creads/api2symfony-bundle" : "dev-master",
+		"google/apiclient":"dev-master"
 	},
 	"repositories" : [{
 			"type" : "vcs",

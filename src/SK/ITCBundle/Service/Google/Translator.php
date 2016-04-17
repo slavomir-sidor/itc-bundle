@@ -9,6 +9,8 @@
  */
 namespace SK\ITCBundle\Service\Google;
 
+use SK\ITCBundle\Service\AbstractService;
+
 class Translator extends AbstractService
 {
 

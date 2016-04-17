@@ -146,14 +146,6 @@
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.parameter.description">ITCloud WSDL Parameter Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.parameter.class">SK\ITCBundle\Command\Code\Generator\WSDL\Parameter</parameter>
 
-		<!-- Google Translator -->
-		<parameter key="sk.itcbundle.command.google.translator.name">google:trans</parameter>
-		<parameter key="sk.itcbundle.command.google.translator.description">ITCloud Google Trans</parameter>
-		<parameter key="sk.itcbundle.command.google.translator.class">SK\ITCBundle\Command\Google\Translator</parameter>
-
-		<parameter key="sk.itcbundle.command.google.spreadsheets.name">google:spreadsheets</parameter>
-		<parameter key="sk.itcbundle.command.google.spreadsheets.description">ITCloud Google Spreadsheet</parameter>
-		<parameter key="sk.itcbundle.command.google.spreadsheets.class">SK\ITCBundle\Command\Google\Spreadsheet</parameter>
 
 		<!-- DocBlock -->
 		<parameter key="sk.itcbundle.command.code.generator.docblock.file.name">doc:file</parameter>
@@ -298,11 +290,30 @@
 		<parameter key="sk.itcbundle.command.os.release.description">ITCloud OS Release</parameter>
 		<parameter key="sk.itcbundle.command.os.release.class">%sk.itcbundle.command.os.shellcommand.class%</parameter>
 
+
+		<!-- Google -->
+		<parameter key="sk.itcbundle.google.drive.class">SK\ITCBundle\Service\Google\Drive</parameter>
+		<parameter key="sk.itcbundle.google.spreadsheet.class">SK\ITCBundle\Service\Google\Spreadsheet</parameter>
+		<parameter key="sk.itcbundle.google.spreadsheet.provider.class">Google\Spreadsheet\DefaultServiceRequest</parameter>
+		<parameter key="sk.itcbundle.google.spreadsheet.factory.class">Google\Spreadsheet\ServiceRequestFactory</parameter>
+
+		<parameter key="sk.itcbundle.command.google.translator.name">google:trans</parameter>
+		<parameter key="sk.itcbundle.command.google.translator.description">ITCloud Google Trans</parameter>
+		<parameter key="sk.itcbundle.command.google.translator.class">SK\ITCBundle\Command\Google\Translator</parameter>
+
+		<parameter key="sk.itcbundle.command.google.drive.name">google:drive</parameter>
+		<parameter key="sk.itcbundle.command.google.drive.description">ITCloud Google Drive</parameter>
+		<parameter key="sk.itcbundle.command.google.drive.class">SK\ITCBundle\Command\Google\Drive</parameter>
+
+		<parameter key="sk.itcbundle.command.google.spreadsheet.name">google:spreadsheet</parameter>
+		<parameter key="sk.itcbundle.command.google.spreadsheet.description">ITCloud Google Spreadsheet</parameter>
+		<parameter key="sk.itcbundle.command.google.spreadsheet.class">SK\ITCBundle\Command\Google\Spreadsheet</parameter>
+		
+		<parameter key="sk.itcbundle.command.google.spreadsheet.class">SK\ITCBundle\Command\Google\Spreadsheet</parameter>
+
 	</parameters>
 
 	<services>
-		<!-- Application -->
-
 		<!-- RAML -->
 		<service
 			id="sk.itcbundle.raml.schema.parser"
@@ -889,36 +900,6 @@
 
 		<!-- </service> -->
 
-		<service
-			id="sk.itcbundle.command.google.translator"
-			class="%sk.itcbundle.command.google.translator.class%">
-
-			<argument type="string">%sk.itcbundle.command.google.translator.name%</argument>
-			<argument type="string">%sk.itcbundle.command.google.translator.description%</argument>
-
-			<argument
-				type="service"
-				id="logger" />
-
-			<tag name="console.command" />
-
-		</service>
-
-		<service
-			id="sk.itcbundle.command.google.spreadsheets"
-			class="%sk.itcbundle.command.google.spreadsheets.class%">
-
-			<argument type="string">%sk.itcbundle.command.google.spreadsheets.name%</argument>
-			<argument type="string">%sk.itcbundle.command.google.spreadsheets.description%</argument>
-
-			<argument
-				type="service"
-				id="logger" />
-
-			<tag name="console.command" />
-
-		</service>
-
 		<!-- Generator Docblock Commands -->
 
 		<service
@@ -1495,6 +1476,111 @@
 				id="sk.itcbundle.os.command.uname" />
 
 			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.google.drive"
+			class="%sk.itcbundle.google.drive.class%">
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument type="string">%sk.itcbundle.google.api.key%</argument>
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.google.drive"
+			class="%sk.itcbundle.command.google.drive.class%">
+
+			<argument type="string">%sk.itcbundle.command.google.drive.name%</argument>
+			<argument type="string">%sk.itcbundle.command.google.drive.description%</argument>
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.google.drive" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.google.spreadsheet"
+			class="%sk.itcbundle.google.spreadsheet.class%">
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument type="string">%sk.itcbundle.google.api.key%</argument>
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.google.spreadsheet"
+			class="%sk.itcbundle.command.google.spreadsheet.class%">
+
+			<argument type="string">%sk.itcbundle.command.google.spreadsheet.name%</argument>
+			<argument type="string">%sk.itcbundle.command.google.spreadsheet.description%</argument>
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.google.spreadsheet" />
+
+			<tag name="console.command" />
+
+		</service>
+
+		<service
+			id="sk.itcbundle.command.google.translator"
+			class="%sk.itcbundle.command.google.translator.class%">
+
+			<argument type="string">%sk.itcbundle.command.google.translator.name%</argument>
+			<argument type="string">%sk.itcbundle.command.google.translator.description%</argument>
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<tag name="console.command" />
+
+		</service>
+		
+		<service
+			id="sk.itcbundle.google.spreadsheet"
+			class="%sk.itcbundle.google.spreadsheet.class%">
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument type="string">%sk.itcbundle.google.api.key%</argument>
+
+		</service>
+		
+		<service
+			id="sk.itcbundle.google.spreadsheet.provider"
+			class="%sk.itcbundle.google.spreadsheet.provider.class%">
+
+			<argument type="string">%sk.itcbundle.google.api.key%</argument>
+
+		</service>
+
+		<service
+			id="sk.itcbundle.google.spreadsheet.provider"
+			class="%sk.itcbundle.google.spreadsheet.provider.class%">
+
+			<argument type="string">%sk.itcbundle.google.api.key%</argument>
 
 		</service>
 

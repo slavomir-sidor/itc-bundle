@@ -12,8 +12,8 @@ namespace SK\ITCBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Monolog\Logger;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Bridge\Monolog\Logger;
 
 abstract class AbstractCommand extends ContainerAwareCommand
 {

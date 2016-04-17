@@ -22,11 +22,9 @@ class Translator extends AbstractCommand
 	 */
 	protected function configure()
 	{
-
 		$this->addArgument( 'text', InputArgument::REQUIRED, 'Text' );
 		$this->addArgument( 'from', InputArgument::REQUIRED, 'Locale From' );
 		$this->addArgument( 'to', InputArgument::REQUIRED, 'Locale to' );
-
 	}
 
 	/**

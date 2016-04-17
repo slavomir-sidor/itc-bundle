@@ -12,6 +12,8 @@ namespace SK\ITCBundle\Command\OS;
 use SK\ITCBundle\Service\OS\Command;
 use SK\ITCBundle\Command\TableCommand;
 use Symfony\Bridge\Monolog\Logger;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputInterface;
 
 class ShellCommand extends TableCommand
 {
@@ -38,6 +40,17 @@ class ShellCommand extends TableCommand
     }
 
     /**
+     * (non-PHPdoc)
+     *
+     * @see \SK\ITCBundle\Code\Generator\PHPUnit\AbstractGenerator::execute($input, $output)
+     */
+    public function execute(InputInterface $input, OutputInterface $output)
+    {
+        parent::execute ( $input, $output );
+        $this->writeTable ( 120 );
+    }
+
+    /**
      *
      * {@inheritDoc}
      *
@@ -45,7 +58,9 @@ class ShellCommand extends TableCommand
      */
     protected function getColumns()
     {
-        return array ();
+        return array (
+            'command'=>$this->getCommand ()->getPrefix().' '.implode(' ', $this->getCommand()->getArguments())
+        );
     }
 
     /**
@@ -58,7 +73,16 @@ class ShellCommand extends TableCommand
     {
         if (null === $this->rows)
         {
-            $this->setRows ();
+            $this->getCommand ()->run ();
+            $process = $this->getCommand ()->getProcess ();
+
+            $rows = [
+                [
+                    'command' => $process->getOutput ()
+                ]
+
+            ];
+            $this->setRows ( $rows );
         }
 
         return $this->rows;
@@ -66,7 +90,7 @@ class ShellCommand extends TableCommand
 
     /**
      *
-     * @return the Command
+     * @return Command
      */
     protected function getCommand()
     {

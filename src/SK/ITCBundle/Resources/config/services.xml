@@ -147,93 +147,95 @@
 		<parameter key="sk.itcbundle.command.code.generator.wsdl.parameter.class">SK\ITCBundle\Command\Code\Generator\WSDL\Parameter</parameter>
 
 		<!-- Google Translator -->
-		<parameter key="sk.itcbundle.command.google.translator.name">itc:google:trans</parameter>
+		<parameter key="sk.itcbundle.command.google.translator.name">google:trans</parameter>
 		<parameter key="sk.itcbundle.command.google.translator.description">ITCloud Google Trans</parameter>
 		<parameter key="sk.itcbundle.command.google.translator.class">SK\ITCBundle\Command\Google\Translator</parameter>
 
-		<parameter key="sk.itcbundle.command.google.spreadsheets.name">itc:google:spreadsheets</parameter>
+		<parameter key="sk.itcbundle.command.google.spreadsheets.name">google:spreadsheets</parameter>
 		<parameter key="sk.itcbundle.command.google.spreadsheets.description">ITCloud Google Spreadsheet</parameter>
 		<parameter key="sk.itcbundle.command.google.spreadsheets.class">SK\ITCBundle\Command\Google\Spreadsheet</parameter>
 
 		<!-- DocBlock -->
-		<parameter key="sk.itcbundle.command.code.generator.docblock.file.name">itc:doc:file</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.docblock.file.name">doc:file</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.file.description">ITCloud Doc Block File Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.file.class">SK\ITCBundle\Command\Code\Generator\DocBlock\FileCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.docblock.package.name">itc:doc:package</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.docblock.package.name">doc:package</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.package.description">ITCloud Doc Block Package Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.package.class">SK\ITCBundle\Command\Code\Generator\DocBlock\PackageCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.docblock.class.name">itc:doc:class</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.docblock.class.name">doc:class</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.class.description">ITCloud Doc Block Class Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.class.class">SK\ITCBundle\Command\Code\Generator\DocBlock\ClassCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.docblock.attribute.name">itc:doc:attribute</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.docblock.attribute.name">doc:attribute</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.attribute.description">ITCloud Doc Block Class Attribute Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.attribute.class">SK\ITCBundle\Command\Code\Generator\DocBlock\AttributeCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.docblock.operation.name">itc:doc:operations</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.docblock.operation.name">doc:operations</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.operation.description">ITCloud Doc Block Class Operation Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.operation.class">SK\ITCBundle\Command\Code\Generator\DocBlock\OperationCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.docblock.parameter.name">itc:doc:parameter</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.docblock.parameter.name">doc:parameter</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.parameter.description">ITCloud Doc Block Class Operation Parameter Generator</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.docblock.parameter.class">SK\ITCBundle\Command\Code\Generator\DocBlock\ParameterCommand</parameter>
 
 		<!-- Code Reflection -->
-		<parameter key="sk.itcbundle.command.code.reflection.file.name">itc:uml:file</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.file.name">uml:file</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.file.description">ITCloud UML Classes Files</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.file.class">SK\ITCBundle\Command\Code\Reflection\FileCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.reflection.package.name">itc:uml:package</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.package.name">uml:package</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.package.description">ITCloud UML Classes Namespaces</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.package.class">SK\ITCBundle\Command\Code\Reflection\PackageCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.reflection.class.name">itc:uml:class</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.class.name">uml:class</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.class.description">ITCloud UML Classes</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.class.class">SK\ITCBundle\Command\Code\Reflection\ClassCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.reflection.attribute.name">itc:uml:attribute</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.attribute.name">uml:attribute</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.attribute.description">ITCloud UML Classes Attributes</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.attribute.class">SK\ITCBundle\Command\Code\Reflection\AttributeCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.reflection.operation.name">itc:uml:operation</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.operation.name">uml:operation</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.operation.description">ITCloud UML Classes Operations</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.operation.class">SK\ITCBundle\Command\Code\Reflection\OperationCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.reflection.parameter.name">itc:uml:parameter</parameter>
+		<parameter key="sk.itcbundle.command.code.reflection.parameter.name">uml:parameter</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.parameter.description">ITCloud UML Classes Parameters</parameter>
 		<parameter key="sk.itcbundle.command.code.reflection.parameter.class">SK\ITCBundle\Command\Code\Reflection\ParameterCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.mylyn.report.name">itc:mylyn:report</parameter>
+		<parameter key="sk.itcbundle.command.mylyn.report.name">mylyn:report</parameter>
 		<parameter key="sk.itcbundle.command.mylyn.report.description">ITCloud Mylyn Report Repository</parameter>
 		<parameter key="sk.itcbundle.command.mylyn.report.class">SK\ITCBundle\Command\Mylyn\ReportCommand</parameter>
 
 		<!-- REST -->
-		<parameter key="sk.itcbundle.command.code.generator.rest.command.name">itc:rest:command</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.command.name">rest:command</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.rest.command.description">ITCloud REST Generator Command</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.rest.command.class">SK\ITCBundle\Command\Code\Generator\REST\CommandCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.rest.controller.name">itc:rest:controller</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.controller.name">rest:controller</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.rest.controller.description">ITCloud REST Generator Controller</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.rest.controller.class">SK\ITCBundle\Command\Code\Generator\REST\ControllerCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.rest.entity.name">itc:rest:entity</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.entity.name">rest:entity</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.rest.entity.description">ITCloud REST Generator Entity</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.rest.entity.class">SK\ITCBundle\Command\Code\Generator\REST\EntityCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.rest.form.name">itc:rest:form</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.form.name">rest:form</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.rest.form.description">ITCloud REST Generator Form</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.rest.form.class">SK\ITCBundle\Command\Code\Generator\REST\FormCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.code.generator.rest.service.name">itc:rest:service</parameter>
+		<parameter key="sk.itcbundle.command.code.generator.rest.service.name">rest:service</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.rest.service.description">ITCloud REST Generator Service</parameter>
 		<parameter key="sk.itcbundle.command.code.generator.rest.service.class">SK\ITCBundle\Command\Code\Generator\REST\ServiceCommand</parameter>
+
 
 		<!-- Google -->
 		<parameter key="sk.itcbundle.google.translator.class">SK\ITCBundle\Service\Google\Translator</parameter>
 		<parameter key="sk.itcbundle.google.spreadsheet.class">SK\ITCBundle\Service\Google\Spreadsheet</parameter>
 		<parameter key="sk.itcbundle.excel.class">SK\ITCBundle\Service\Excel</parameter>
+
 
 		<!-- Menu -->
 		<parameter key="sk.itcbundle.menu.builder.class">SK\ITCBundle\Menu\Builder</parameter>
@@ -245,6 +247,7 @@
 		<parameter key="sk.itcbundle.code.generator.phpunit.config.class">SK\ITCBundle\Service\Code\Generator\PHPUnit\Config</parameter>
 		<parameter key="sk.itcbundle.code.generator.phpunit.equal.class">SK\ITCBundle\Service\Code\Generator\PHPUnit\Equal</parameter>
 		<parameter key="sk.itcbundle.code.generator.phpunit.run.class">SK\ITCBundle\Service\Code\Generator\PHPUnit\Run</parameter>
+
 
 		<!-- Schema -->
 		<parameter key="sk.itcbundle.code.generator.xmlschema.orm.class">SK\ITCBundle\Service\Code\Generator\XMLSchema\ORM</parameter>
@@ -263,8 +266,10 @@
 
 		<parameter key="sk.itcbundle.code.generator.xmi.export.class">SK\ITCBundle\Service\Code\Generator\XMI\Export</parameter>
 
+
 		<!-- Translation -->
 		<parameter key="sk.itcbundle.translation.translator.class">SK\ITCBundle\Service\Translation\Translator</parameter>
+
 
 		<!-- WS -->
 		<parameter key="sk.itcbundle.code.generator.wsdl.bundle.class">SK\ITCBundle\Service\Code\Generator\WSDL\Bundle</parameter>
@@ -280,30 +285,18 @@
 		<parameter key="sk.itcbundle.code.generator.wsdl.view.class">SK\ITCBundle\Service\Code\Generator\WSDL\View</parameter>
 		<parameter key="sk.itcbundle.code.generator.wsdl.parameter.class">SK\ITCBundle\Service\Code\Generator\WSDL\Parameter</parameter>
 
-		<!-- OS -->
 
+		<!-- OS -->
 		<parameter key="sk.itcbundle.os.command.class">SK\ITCBundle\Service\OS\Command</parameter>
 		<parameter key="sk.itcbundle.command.os.shellcommand.class">SK\ITCBundle\Command\OS\ShellCommand</parameter>
 
-		<parameter key="sk.itcbundle.command.os.shell.class">SK\ITCBundle\Command\OS\ShellCommand</parameter>
-		<parameter key="sk.itcbundle.os.info.command">lsb_release</parameter>
-		<parameter
-			key="sk.itcbundle.os.info.arguments"
-			type="collection">
-			<parameter>-a</parameter>
-		</parameter>
-
-		<parameter key="sk.itcbundle.command.os.name.name">itc:os:info</parameter>
+		<parameter key="sk.itcbundle.command.os.name.name">os:info</parameter>
 		<parameter key="sk.itcbundle.command.os.name.description">ITCloud OS Info</parameter>
-		<parameter key="sk.itcbundle.command.os.name.class">%sk.itcbundle.command.os.shell.class%</parameter>
-		
-		<parameter key="sk.itcbundle.command.os.release.name">itc:os:release</parameter>
-		<parameter key="sk.itcbundle.command.os.release.description">ITCloud OS Release</parameter>
-		<parameter key="sk.itcbundle.command.os.release.class">%sk.itcbundle.command.os.shell.class%</parameter>
+		<parameter key="sk.itcbundle.command.os.name.class">%sk.itcbundle.command.os.shellcommand.class%</parameter>
 
-		<parameter key="sk.itcbundle.command.os.packages.name">itc:os:</parameter>
-		<parameter key="sk.itcbundle.command.os.packages.description">ITCloud OS Info</parameter>
-		<parameter key="sk.itcbundle.command.os.packages.class">%sk.itcbundle.command.os.shell.class%</parameter>
+		<parameter key="sk.itcbundle.command.os.release.name">os:release</parameter>
+		<parameter key="sk.itcbundle.command.os.release.description">ITCloud OS Release</parameter>
+		<parameter key="sk.itcbundle.command.os.release.class">%sk.itcbundle.command.os.shellcommand.class%</parameter>
 
 	</parameters>
 
@@ -1446,7 +1439,7 @@
 			<argument type="string">uname</argument>
 
 			<argument type="collection">
-				<argument>a</argument>
+				<argument>-a</argument>
 			</argument>
 
 		</service>
@@ -1462,7 +1455,7 @@
 			<argument type="string">lsb_release</argument>
 
 			<argument type="collection">
-				<argument>a</argument>
+				<argument>-a</argument>
 			</argument>
 
 		</service>
@@ -1485,7 +1478,7 @@
 			<tag name="console.command" />
 
 		</service>
-		
+
 		<service
 			id="sk.itcbundle.command.os.name"
 			class="%sk.itcbundle.command.os.shellcommand.class%">

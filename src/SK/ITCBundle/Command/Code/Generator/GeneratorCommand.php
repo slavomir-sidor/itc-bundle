@@ -10,9 +10,9 @@
 namespace SK\ITCBundle\Command\Code\Generator;
 
 use SK\ITCBundle\Command\Code\Reflection\ReflectionCommand;
-use SK\ITCBundle\Code\Generator;
-use SK\ITCBundle\Code\Reflection;
-use Monolog\Logger;
+use SK\ITCBundle\Service\Code\Generator;
+use SK\ITCBundle\Service\Code\Reflection;
+use Symfony\Bridge\Monolog\Logger;
 
 abstract class GeneratorCommand extends ReflectionCommand
 {

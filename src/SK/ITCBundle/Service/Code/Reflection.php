@@ -1,7 +1,6 @@
 <?php
 namespace SK\ITCBundle\Service\Code;
 
-use Monolog\Logger;
 use TokenReflection\Broker;
 use Symfony\Component\Finder\Finder;
 use TokenReflection\Broker\Backend;
@@ -18,7 +17,7 @@ use SK\ITCBundle\Service\Code\Reflection\Collection\ClassCollection;
 use SK\ITCBundle\Service\Code\Reflection\Collection\OperationCollection;
 use SK\ITCBundle\Service\Code\Reflection\Collection\ParameterCollection;
 use SK\ITCBundle\Service\Code\Reflection\Collection\AttributesCollection;
-use SK\ITCBundle\Service\Service\AbstractService;
+use SK\ITCBundle\Service\AbstractService;
 
 class Reflection extends AbstractService
 {
@@ -73,26 +72,9 @@ class Reflection extends AbstractService
 
 	/**
 	 *
-	 * @var Logger
-	 */
-	protected $logger;
-
-	/**
-	 *
 	 * @var Settings
 	 */
 	protected $settings;
-
-	/**
-	 * Constructs SK ITCBundle Code Generator
-	 *
-	 * @param Logger $logger
-	 *        	SK ITCBundle Abstract Command Logger
-	 */
-	public function __construct( Logger $logger )
-	{
-		$this->setLogger( $logger );
-	}
 
 	/**
 	 *
@@ -473,26 +455,6 @@ class Reflection extends AbstractService
 	protected function setBroker( Broker $broker )
 	{
 		$this->broker = $broker;
-		return $this;
-	}
-
-	/**
-	 *
-	 * @return Logger
-	 */
-	protected function getLogger()
-	{
-		return $this->logger;
-	}
-
-	/**
-	 *
-	 * @param Logger $logger
-	 * @return Reflection
-	 */
-	protected function setLogger( Logger $logger )
-	{
-		$this->logger = $logger;
 		return $this;
 	}
 

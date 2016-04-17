@@ -6,7 +6,7 @@ use Monolog\Logger;
 use JMS\Serializer\Serializer;
 use Raml\Resource;
 use Raml\Method;
-use SK\ITCBundle\Service\Service\AbstractService;
+use SK\ITCBundle\Service\AbstractService;
 
 class Writer extends AbstractService
 {

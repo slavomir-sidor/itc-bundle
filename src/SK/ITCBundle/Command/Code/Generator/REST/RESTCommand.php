@@ -11,13 +11,12 @@ namespace SK\ITCBundle\Command\Code\Generator\REST;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
-use Monolog\Logger;
-use SK\ITCBundle\Code\Reflection;
+use SK\ITCBundle\Service\Code\Reflection;
 use Raml\Parser;
 use Raml\ApiDefinition;
 use Symfony\Component\Console\Input\InputOption;
-use Sensio\Bundle\GeneratorBundle\Command\GeneratorCommand;
 use SK\ITCBundle\Command\TableCommand;
+use Symfony\Bridge\Monolog\Logger;
 
 abstract class RESTCommand extends TableCommand
 {

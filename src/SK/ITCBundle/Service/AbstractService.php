@@ -1,5 +1,5 @@
 <?php
-namespace SK\ITCBundle\Service\Service;
+namespace SK\ITCBundle\Service;
 
 use Symfony\Bridge\Monolog\Logger;
 
@@ -24,7 +24,7 @@ abstract class AbstractService
 	 *
 	 * @return the Logger
 	 */
-	public function getLogger()
+	protected function getLogger()
 	{
 		return $this->logger;
 	}
@@ -33,7 +33,7 @@ abstract class AbstractService
 	 *
 	 * @param Logger $logger
 	 */
-	public function setLogger( Logger $logger )
+	protected function setLogger( Logger $logger )
 	{
 		$this->logger = $logger;
 		return $this;

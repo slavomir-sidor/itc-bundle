@@ -41,6 +41,16 @@ abstract class TableCommand extends AbstractCommand
 	protected $table;
 
 	/**
+	 * (non-PHPdoc)
+	 *
+	 * @see \Symfony\Component\Console\Command\Command::configure()
+	 */
+	protected function configure()
+	{
+	    parent::configure ();
+	}
+
+	/**
 	 * Writes SK ITCBundle Abstract Command Table
 	 *
 	 * @param int $maxColWidth

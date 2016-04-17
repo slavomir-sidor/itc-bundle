@@ -9,13 +9,12 @@
 namespace SK\ITCBundle\Command\Mylyn;
 
 use SK\ITCBundle\Command\Code\Reflection\ReflectionCommand;
-use SK\ITCBundle\Code\Reflection;
-use SK\ITCBundle\Mylyn\Task;
+use SK\ITCBundle\Service\Code\Reflection;
 use Symfony\Component\Console\Input\InputOption;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\Annotation\XmlRoot;
 use JMS\Serializer\Serializer;
-use Monolog\Logger;
+use Symfony\Bridge\Monolog\Logger;
 
 class ReportCommand extends ReflectionCommand
 {

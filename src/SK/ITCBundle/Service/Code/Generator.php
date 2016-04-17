@@ -14,8 +14,8 @@ use SK\ITCBundle\Service\Code\Generator\Collection\ClassCollection;
 use SK\ITCBundle\Service\Code\Generator\Collection\OperationCollection;
 use SK\ITCBundle\Service\Code\Generator\Collection\ParameterCollection;
 use SK\ITCBundle\Service\Code\Generator\Collection\AttributesCollection;
-use Monolog\Logger;
-use SK\ITCBundle\Service\Service\AbstractService;
+use SK\ITCBundle\Service\AbstractService;
+use Symfony\Bridge\Monolog\Logger;
 
 class Generator extends AbstractService
 {
@@ -68,11 +68,6 @@ class Generator extends AbstractService
 	 */
 	protected $reflection;
 
-	/**
-	 *
-	 * @var Logger
-	 */
-	protected $logger;
 
 	/**
 	 * Constructs SK ITCBundle Code Generator
@@ -594,24 +589,4 @@ class Generator extends AbstractService
 		$this->reflection = $reflection;
 		return $this;
 	}
-
-	/**
-	 *
-	 * @return the Logger
-	 */
-	protected function getLogger()
-	{
-		return $this->logger;
-	}
-
-	/**
-	 *
-	 * @param Logger $logger
-	 */
-	protected function setLogger( Logger $logger )
-	{
-		$this->logger = $logger;
-		return $this;
-	}
-
 }

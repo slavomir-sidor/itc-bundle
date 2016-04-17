@@ -9,7 +9,7 @@
  */
 namespace SK\ITCBundle\Service\Code\Generator;
 
-use SK\ITCBundle\Service\Service\AbstractService;
+use SK\ITCBundle\Service\AbstractService;
 
 abstract class CodeGenerator extends AbstractService
 {

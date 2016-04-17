@@ -15,12 +15,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Assetic\Exception\Exception;
-use Monolog\Logger;
-use SK\ITCBundle\Code\Reflection;
+use SK\ITCBundle\Service\Code\Reflection;
 use SK\ITCBundle\Command\TableCommand;
-use SK\ITCBundle\Code\Reflection\Settings;
-use TokenReflection\IReflection;
+use SK\ITCBundle\Service\Code\Reflection\Settings;
+use Symfony\Bridge\Monolog\Logger;
 
 class ReflectionCommand extends TableCommand
 {

@@ -263,7 +263,6 @@
 
 		<parameter key="sk.itcbundle.code.generator.xmi.export.class">SK\ITCBundle\Service\Code\Generator\XMI\Export</parameter>
 
-
 		<!-- Translation -->
 		<parameter key="sk.itcbundle.translation.translator.class">SK\ITCBundle\Service\Translation\Translator</parameter>
 
@@ -294,15 +293,13 @@
 			<parameter>-a</parameter>
 		</parameter>
 
-		<parameter key="sk.itcbundle.command.os.info.name">itc:os:info</parameter>
-		<parameter key="sk.itcbundle.command.os.info.description">ITCloud OS Info</parameter>
-		<parameter key="sk.itcbundle.command.os.info.class">%sk.itcbundle.command.os.shell.class%</parameter>
-		<parameter key="sk.itcbundle.command.os.info.class"></parameter>
+		<parameter key="sk.itcbundle.command.os.name.name">itc:os:info</parameter>
+		<parameter key="sk.itcbundle.command.os.name.description">ITCloud OS Info</parameter>
+		<parameter key="sk.itcbundle.command.os.name.class">%sk.itcbundle.command.os.shell.class%</parameter>
 		
 		<parameter key="sk.itcbundle.command.os.release.name">itc:os:release</parameter>
 		<parameter key="sk.itcbundle.command.os.release.description">ITCloud OS Release</parameter>
 		<parameter key="sk.itcbundle.command.os.release.class">%sk.itcbundle.command.os.shell.class%</parameter>
-		<parameter key="sk.itcbundle.command.os.release.class"></parameter>
 
 		<parameter key="sk.itcbundle.command.os.packages.name">itc:os:</parameter>
 		<parameter key="sk.itcbundle.command.os.packages.description">ITCloud OS Info</parameter>
@@ -1484,6 +1481,25 @@
 			<argument
 				type="service"
 				id="sk.itcbundle.os.command.lsb_release" />
+
+			<tag name="console.command" />
+
+		</service>
+		
+		<service
+			id="sk.itcbundle.command.os.name"
+			class="%sk.itcbundle.command.os.shellcommand.class%">
+
+			<argument type="string">%sk.itcbundle.command.os.name.name%</argument>
+			<argument type="string">%sk.itcbundle.command.os.name.description%</argument>
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.os.command.uname" />
 
 			<tag name="console.command" />
 

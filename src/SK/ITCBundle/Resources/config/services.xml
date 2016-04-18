@@ -296,6 +296,7 @@
 		<parameter key="sk.itcbundle.google.spreadsheet.class">SK\ITCBundle\Service\Google\Spreadsheet</parameter>
 		<parameter key="sk.itcbundle.google.spreadsheet.provider.class">Google\Spreadsheet\DefaultServiceRequest</parameter>
 		<parameter key="sk.itcbundle.google.spreadsheet.factory.class">Google\Spreadsheet\ServiceRequestFactory</parameter>
+		<parameter key="sk.itcbundle.google.api.client.class">Google_Client</parameter>
 
 		<parameter key="sk.itcbundle.command.google.translator.name">google:trans</parameter>
 		<parameter key="sk.itcbundle.command.google.translator.description">ITCloud Google Trans</parameter>
@@ -308,12 +309,17 @@
 		<parameter key="sk.itcbundle.command.google.spreadsheet.name">google:spreadsheet</parameter>
 		<parameter key="sk.itcbundle.command.google.spreadsheet.description">ITCloud Google Spreadsheet</parameter>
 		<parameter key="sk.itcbundle.command.google.spreadsheet.class">SK\ITCBundle\Command\Google\Spreadsheet</parameter>
-		
+
 		<parameter key="sk.itcbundle.command.google.spreadsheet.class">SK\ITCBundle\Command\Google\Spreadsheet</parameter>
+
+		<parameter key="google.application.name">ITCloud</parameter>
+		<parameter key="google.application.configFile">ITCloud</parameter>
+		<parameter key="google.application.offline">offline</parameter>
 
 	</parameters>
 
 	<services>
+
 		<!-- RAML -->
 		<service
 			id="sk.itcbundle.raml.schema.parser"
@@ -1555,7 +1561,7 @@
 			<tag name="console.command" />
 
 		</service>
-		
+<!--
 		<service
 			id="sk.itcbundle.google.spreadsheet"
 			class="%sk.itcbundle.google.spreadsheet.class%">
@@ -1567,14 +1573,6 @@
 			<argument type="string">%sk.itcbundle.google.api.key%</argument>
 
 		</service>
-		
-		<service
-			id="sk.itcbundle.google.spreadsheet.provider"
-			class="%sk.itcbundle.google.spreadsheet.provider.class%">
-
-			<argument type="string">%sk.itcbundle.google.api.key%</argument>
-
-		</service>
 
 		<service
 			id="sk.itcbundle.google.spreadsheet.provider"
@@ -1583,6 +1581,38 @@
 			<argument type="string">%sk.itcbundle.google.api.key%</argument>
 
 		</service>
+
+		<service
+			id="sk.itcbundle.google.spreadsheet.provider"
+			class="%sk.itcbundle.google.spreadsheet.provider.class%">
+
+			<argument type="string">%sk.itcbundle.google.api.key%</argument>
+
+		</service>
+
+		 <service
+			id="sk.itcbundle.google.api.client"
+			class="%sk.itcbundle.google.api.client.class%">
+
+			<argument type="string">%sk.itcbundle.google.api.key%</argument>
+
+			<call method="setApplicationName">
+				<argument type="string">%application.name%</argument>
+			</call>
+
+			<call method="setScopes">
+				<argument type="string">%application.name%</argument>
+			</call>
+
+			<call method="setAuthConfigFile">
+				<argument type="string">%application.name%</argument>
+			</call>
+
+			<call method="setAccessType">
+				<argument type="string">%application.name%</argument>
+			</call>
+
+		</service> -->
 
 	</services>
 

@@ -31,7 +31,7 @@ class Spreadsheet extends AbstractService
     {
         parent::__construct ( $logger );
 
-        $serviceRequest = new DefaultServiceRequest($token);
+        /* $serviceRequest = new DefaultServiceRequest($token);
         ServiceRequestFactory::setInstance($serviceRequest);
 
         $spreadsheetService = new SpreadsheetService();
@@ -41,7 +41,7 @@ class Spreadsheet extends AbstractService
         ServiceRequestFactory::setInstance ( $serviceRequest );
 
         $service = $this->getContainer ()->get ( 'sk.itcbundle.google.spreadsheet' );
-
+ */
         $this->setToken ( $token );
     }
 

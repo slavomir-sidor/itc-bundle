@@ -11,13 +11,11 @@ namespace SK\ITCBundle\Command\Google;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputArgument;
-use SK\ITCBundle\Command\AbstractCommand;
-use Google\Spreadsheet\DefaultServiceRequest;
-use Google\Spreadsheet\ServiceRequestFactory;
 use Symfony\Bridge\Monolog\Logger;
+use SK\ITCBundle\Command\TableCommand;
+use SK\ITCBundle\Service\Table\Table;
 
-class Drive extends AbstractCommand
+class Drive extends TableCommand
 {
     /**
      *
@@ -25,9 +23,9 @@ class Drive extends AbstractCommand
      * @param string $description
      * @param Logger $logger
      */
-    public function __construct($name, $description, Logger $logger)
+    public function __construct($name, $description, Logger $logger, Table $table)
     {
-        parent::__construct ( $name, $description, $logger );
+        parent::__construct ( $name, $description, $logger, $table );
     }
 
     /**

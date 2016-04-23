@@ -2,15 +2,21 @@
 namespace SK\ITCBundle\Service\Table;
 
 use SK\ITCBundle\Service\AbstractService;
-use Symfony\Component\Console\Helper\STable;
-use Symfony\Component\Console\Helper\TableStyle;
-use Symfony\Component\Console\Helper\TableCell;
-use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Helper\TableCell;
+use SK\ITCBundle\Service\Table\Adapter\TXT;
+use SK\ITCBundle\Service\Table\Adapter\SpreedSheet;
+use SK\ITCBundle\Service\Table\Adapter\Excel;
 
 class Table extends AbstractService
 {
+
+	/**
+	 *
+	 * @var string
+	 */
+	protected $description;
 
 	/**
 	 *
@@ -40,19 +46,22 @@ class Table extends AbstractService
 	 *
 	 * @param Logger $logger
 	 */
-	public function __construct( Logger $logger )
+	public function __construct( Logger $logger, $maxColWidth )
 	{
 		parent::__construct( $logger );
+
+		$this->setMaxColWidth( $maxColWidth );
 	}
 
 	/**
 	 *
 	 * @param string $format
 	 */
-	public function write( $format = 'TXT', OutputInterface $output )
+	public function write( $format = TXT::name, OutputInterface $output )
 	{
-		$adapter = new $format();
-		$adapter->write( $this->getHeaders(), $this->getRows() );
+		$name = 'SK\\ITCBundle\\Service\\Table\\Adapter\\' . $format;
+		$adapter = new $name();
+		$adapter->write( $this, $output );
 	}
 
 	/**
@@ -106,11 +115,9 @@ class Table extends AbstractService
 			$headers = [];
 
 			$headers[] = array(
-				new TableCell(
-					sprintf( "%s", $this->getDescription() ),
-					array(
-						'colspan' => $colspan
-					) )
+				new TableCell( sprintf( "%s", $this->getDescription() ), array(
+					'colspan' => $colspan
+				) )
 			);
 
 			if( $columns )
@@ -130,6 +137,44 @@ class Table extends AbstractService
 	public function setHeaders( array $headers )
 	{
 		$this->headers = $headers;
+		return $this;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getDescription()
+	{
+		return $this->description;
+	}
+
+	/**
+	 *
+	 * @param string $description
+	 */
+	public function setDescription( $description )
+	{
+		$this->description = $description;
+		return $this;
+	}
+
+	/**
+	 *
+	 * @return int
+	 */
+	public function getMaxColWidth()
+	{
+		return $this->maxColWidth;
+	}
+
+	/**
+	 *
+	 * @param int $maxColWidth
+	 */
+	public function setMaxColWidth( $maxColWidth )
+	{
+		$this->maxColWidth = ( int ) $maxColWidth;
 		return $this;
 	}
 }

@@ -318,19 +318,29 @@
 
 		<!-- Console Table Output -->
 		<parameter key="sk.itcbundle.table.class">SK\ITCBundle\Service\Table\Table</parameter>
-		<parameter key="sk.itcbundle.table.spreedsheet.class">SK\ITCBundle\Service\Table\Adapter\Console</parameter>
-		<parameter key="sk.itcbundle.table.console.class">SK\ITCBundle\Service\Table\Adapter\SpreedSheet</parameter>
-		<parameter key="sk.itcbundle.table.excel.class">SK\ITCBundle\Service\Table\Adapter\Excel</parameter>
+		<parameter key="sk.itcbundle.table.maxColWidth">120</parameter>
 
 	</parameters>
 
 	<services>
 
 		<!-- RAML -->
+
+		<service
+			id="sk.itcbundle.table"
+			class="%sk.itcbundle.table.class%">
+
+			<argument
+				type="service"
+				id="logger" />
+
+			<argument type="string">%sk.itcbundle.table.maxColWidth%</argument>
+
+		</service>
+
 		<service
 			id="sk.itcbundle.raml.schema.parser"
-			class="%sk.itcbundle.raml.schema.parser.class%">
-		</service>
+			class="%sk.itcbundle.raml.schema.parser.class%" />
 
 		<service
 			id="sk.itcbundle.raml.schema.writer"
@@ -437,26 +447,6 @@
 		</service>
 
 		<service
-			id="sk.itcbundle.table.adapter.excel"
-			class="%sk.itcbundle.table.adapter.excel.class%">
-
-			<argument
-				type="service"
-				id="logger" />
-
-		</service>
-
-		<service
-			id="sk.itcbundle.table.adapter.spreedsheet"
-			class="%sk.itcbundle.table.adapter.spreedsheet.class%">
-
-			<argument
-				type="service"
-				id="logger" />
-
-		</service>
-
-		<service
 			id="sk.itcbundle.command.code.generator.docblock.file"
 			class="%sk.itcbundle.command.code.generator.docblock.file.class%">
 
@@ -465,6 +455,9 @@
 			<argument
 				type="service"
 				id="logger" />
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
@@ -482,12 +475,19 @@
 
 			<argument type="string">%sk.itcbundle.command.code.generator.docblock.package.name%</argument>
 			<argument type="string">%sk.itcbundle.command.code.generator.docblock.package.description%</argument>
+
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.generator" />
@@ -502,12 +502,19 @@
 
 			<argument type="string">%sk.itcbundle.command.code.generator.docblock.class.name%</argument>
 			<argument type="string">%sk.itcbundle.command.code.generator.docblock.class.description%</argument>
+
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.generator" />
@@ -522,12 +529,19 @@
 
 			<argument type="string">%sk.itcbundle.command.code.generator.docblock.attribute.name%</argument>
 			<argument type="string">%sk.itcbundle.command.code.generator.docblock.attribute.description%</argument>
+
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.generator" />
@@ -542,12 +556,19 @@
 
 			<argument type="string">%sk.itcbundle.command.code.generator.docblock.operation.name%</argument>
 			<argument type="string">%sk.itcbundle.command.code.generator.docblock.operation.description%</argument>
+
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.generator" />
@@ -562,12 +583,19 @@
 
 			<argument type="string">%sk.itcbundle.command.code.generator.docblock.parameter.name%</argument>
 			<argument type="string">%sk.itcbundle.command.code.generator.docblock.parameter.description%</argument>
+
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.generator" />
@@ -591,6 +619,10 @@
 
 			<argument
 				type="service"
+				id="sk.itcbundle.table" />
+
+			<argument
+				type="service"
 				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
@@ -603,9 +635,15 @@
 
 			<argument type="string">%sk.itcbundle.command.code.reflection.package.name%</argument>
 			<argument type="string">%sk.itcbundle.command.code.reflection.package.description%</argument>
+
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
@@ -620,9 +658,15 @@
 
 			<argument type="string">%sk.itcbundle.command.code.reflection.class.name%</argument>
 			<argument type="string">%sk.itcbundle.command.code.reflection.class.description%</argument>
+
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
@@ -637,9 +681,15 @@
 
 			<argument type="string">%sk.itcbundle.command.code.reflection.attribute.name%</argument>
 			<argument type="string">%sk.itcbundle.command.code.reflection.attribute.description%</argument>
+
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
@@ -654,9 +704,15 @@
 
 			<argument type="string">%sk.itcbundle.command.code.reflection.operation.name%</argument>
 			<argument type="string">%sk.itcbundle.command.code.reflection.operation.description%</argument>
+
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
+
 			<argument
 				type="service"
 				id="sk.itcbundle.code.reflection" />
@@ -678,6 +734,10 @@
 
 			<argument
 				type="service"
+				id="sk.itcbundle.table" />
+
+			<argument
+				type="service"
 				id="sk.itcbundle.code.reflection" />
 
 			<tag name="console.command" />
@@ -694,6 +754,10 @@
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
 
 			<argument
 				type="service"
@@ -721,6 +785,10 @@
 
 			<argument
 				type="service"
+				id="sk.itcbundle.table" />
+
+			<argument
+				type="service"
 				id="sk.itcbundle.code.reflection" />
 
 			<argument
@@ -741,6 +809,10 @@
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
 
 			<argument
 				type="service"
@@ -767,6 +839,10 @@
 
 			<argument
 				type="service"
+				id="sk.itcbundle.table" />
+
+			<argument
+				type="service"
 				id="sk.itcbundle.code.reflection" />
 
 			<argument
@@ -790,6 +866,10 @@
 
 			<argument
 				type="service"
+				id="sk.itcbundle.table" />
+
+			<argument
+				type="service"
 				id="sk.itcbundle.code.reflection" />
 
 			<argument
@@ -810,6 +890,10 @@
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
 
 			<argument
 				type="service"
@@ -973,6 +1057,10 @@
 				type="service"
 				id="logger" />
 
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
+
 			<argument type="string">uname</argument>
 
 			<argument type="collection">
@@ -989,6 +1077,10 @@
 				type="service"
 				id="logger" />
 
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
+
 			<argument type="string">lsb_release</argument>
 
 			<argument type="collection">
@@ -998,12 +1090,16 @@
 		</service>
 
 		<service
-			id="sk.itcbundle."
+			id="sk.itcbundle.os.command"
 			class="%sk.itcbundle.os.command.class%">
 
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument
+				type="service"
+				id="sk.itcbundle.table" />
 
 			<argument type="string">uname</argument>
 
@@ -1026,6 +1122,10 @@
 
 			<argument
 				type="service"
+				id="sk.itcbundle.table" />
+
+			<argument
+				type="service"
 				id="sk.itcbundle.os.command.lsb_release" />
 
 			<tag name="console.command" />
@@ -1045,59 +1145,13 @@
 
 			<argument
 				type="service"
+				id="sk.itcbundle.table" />
+
+			<argument
+				type="service"
 				id="sk.itcbundle.os.command.uname" />
 
 			<tag name="console.command" />
-
-		</service>
-
-		<service
-			id="sk.itcbundle.table"
-			class="%sk.itcbundle.table.class%">
-
-			<argument
-				type="service"
-				id="logger" />
-
-		</service>
-
-		<service
-			id="sk.itcbundle.table.spreedsheet"
-			class="%sk.itcbundle.table.spreedsheet.class%">
-
-			<argument
-				type="service"
-				id="logger" />
-
-		</service>
-
-		<service
-			id="sk.itcbundle.table.console"
-			class="%sk.itcbundle.table.console.class%">
-
-			<argument
-				type="service"
-				id="logger" />
-
-		</service>
-
-		<service
-			id="sk.itcbundle.table.spreedsheet"
-			class="%sk.itcbundle.table.spreedsheet.class%">
-
-			<argument
-				type="service"
-				id="logger" />
-
-		</service>
-
-		<service
-			id="sk.itcbundle.table.excel"
-			class="%sk.itcbundle.table.excel.class%">
-
-			<argument
-				type="service"
-				id="logger" />
 
 		</service>
 

@@ -11,10 +11,9 @@ namespace SK\ITCBundle\Command\Mylyn;
 use SK\ITCBundle\Command\Code\Reflection\ReflectionCommand;
 use SK\ITCBundle\Service\Code\Reflection;
 use Symfony\Component\Console\Input\InputOption;
-use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\Annotation\XmlRoot;
 use JMS\Serializer\Serializer;
 use Symfony\Bridge\Monolog\Logger;
+use SK\ITCBundle\Service\Table\Table;
 
 class ReportCommand extends ReflectionCommand
 {
@@ -34,9 +33,9 @@ class ReportCommand extends ReflectionCommand
 	 * @param Reflection $reflection
 	 * @param Serializer $serializer
 	 */
-	public function __construct( $name, $description, Logger $logger, Reflection $reflection, Serializer $serializer )
+	public function __construct( $name, $description, Logger $logger, Table $table, Reflection $reflection, Serializer $serializer )
 	{
-		parent::__construct( $name, $description, $logger, $reflection );
+		parent::__construct( $name, $description, $logger, $table, $reflection );
 
 		$this->setSerializer( $serializer );
 	}

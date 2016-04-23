@@ -13,6 +13,7 @@ use SK\ITCBundle\Command\Code\Reflection\ReflectionCommand;
 use SK\ITCBundle\Service\Code\Generator;
 use SK\ITCBundle\Service\Code\Reflection;
 use Symfony\Bridge\Monolog\Logger;
+use SK\ITCBundle\Service\Table\Table;
 
 abstract class GeneratorCommand extends ReflectionCommand
 {
@@ -35,9 +36,9 @@ abstract class GeneratorCommand extends ReflectionCommand
 	 * @param Reflection $reflection
 	 *        	SK ITCBundle Abstract Command Reflection
 	 */
-	public function __construct( $name, $description, Logger $logger, Reflection $reflection, Generator $generator )
+	public function __construct( $name, $description, Logger $logger, Table $table, Reflection $reflection, Generator $generator )
 	{
-		parent::__construct( $name, $description, $logger, $reflection );
+		parent::__construct( $name, $description, $logger, $table, $reflection );
 
 		$this->setGenerator( $generator );
 	}

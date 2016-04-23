@@ -318,6 +318,7 @@
 
 		<!-- Console Table Output -->
 		<parameter key="sk.itcbundle.table.class">SK\ITCBundle\Service\Table\Table</parameter>
+		<parameter key="sk.itcbundle.table.maxColWidth">120</parameter>
 
 	</parameters>
 
@@ -332,6 +333,8 @@
 			<argument
 				type="service"
 				id="logger" />
+
+			<argument type="string">%sk.itcbundle.table.maxColWidth%</argument>
 
 		</service>
 

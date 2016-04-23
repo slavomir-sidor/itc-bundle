@@ -30,15 +30,14 @@ class TXT implements IAdapter
 			->setVerticalBorderChar( '<fg=magenta>|</>' )
 			->setCrossingChar( '<fg=magenta>+</>' );
 
-		$stable = new STable(
-			$this->getOutput() );
+		$stable = new STable( $output );
 		$stable->setStyle( 'default' );
-		$table->setHeaders( $table->getHeaders() );
+		$stable->setHeaders( $table->getHeaders() );
 
 		$columns = $table->getColumns();
 		$colspan = count( $columns );
 
-		$rows = $this->getRows();
+		$rows = $table->getRows();
 
 		foreach( $rows as $row )
 		{
@@ -53,7 +52,7 @@ class TXT implements IAdapter
 
 				if( array_key_exists( $iCol, $row ) )
 				{
-					$rowModificated[$iCol] = wordwrap( $row[$iCol], $table->maxColWidth, "\n", true );
+					$rowModificated[$iCol] = wordwrap( $row[$iCol], $table->getMaxColWidth(), "\n", true );
 				}
 				else
 				{
@@ -61,29 +60,26 @@ class TXT implements IAdapter
 				}
 			}
 
-			$table->addRow( $rowModificated );
-			$table->addRow( array(
-				new TableSeparator(
-					array(
-						'colspan' => $colspan
-					) )
+			$stable->addRow( $rowModificated );
+			$stable->addRow( array(
+				new TableSeparator( array(
+					'colspan' => $colspan
+				) )
 			) );
 		}
 
-		$table->addRow( array(
-			new TableCell(
-				"",
-				array(
-					'colspan' => $colspan
-				) )
+		$stable->addRow( array(
+			new TableCell( "", array(
+				'colspan' => $colspan
+			) )
 		) );
 
-		$table->addRow( array(
-			new TableCell(
-				sprintf( "Found %s results.", count( $rows ) ),
-				array(
+		$stable->addRow(
+			array(
+				new TableCell( sprintf( "Found %s results.", count( $rows ) ), array(
 					'colspan' => $colspan
 				) )
-		) );
+			) );
+		$stable->render();
 	}
 }

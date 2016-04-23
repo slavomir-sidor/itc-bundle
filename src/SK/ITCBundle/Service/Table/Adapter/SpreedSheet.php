@@ -19,6 +19,5 @@ class SpreedSheet implements IAdapter
 	 */
 	public function write( Table $table, OutputInterface $output )
 	{
-
 	}
 }

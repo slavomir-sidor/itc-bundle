@@ -66,7 +66,11 @@ abstract class TableCommand extends AbstractCommand
 	 */
 	protected function writeTable()
 	{
-		$format = $this->getInput()->getOption( 'output' );
+		if( $this->getInput()->hasOption( 'format' ) )
+		{
+			$format = $this->getInput()->getOption( 'format' );
+		}
+
 		$this->getTable()->write( $format, $this->getOutput() );
 
 		return $this;
@@ -99,6 +103,9 @@ abstract class TableCommand extends AbstractCommand
 	 */
 	protected function getTable()
 	{
+		$this->table->setColumns( $this->getColumns() );
+		$this->table->setRows( $this->getRows() );
+
 		return $this->table;
 	}
 
@@ -123,6 +130,7 @@ abstract class TableCommand extends AbstractCommand
 			$columns = [];
 			$this->setColumns( $columns );
 		}
+
 		return $this->columns;
 	}
 

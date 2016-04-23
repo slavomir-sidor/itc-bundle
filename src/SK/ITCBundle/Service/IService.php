@@ -1,6 +1,8 @@
 <?php
 
-namespace SK\ITCBundle\Service\Service\IService;
+namespace SK\ITCBundle\Service\IService;
+
+use Symfony\Bridge\Monolog\Logger;
 
 interface IService
 {

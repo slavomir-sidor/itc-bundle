@@ -17,6 +17,7 @@ use Raml\ApiDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use SK\ITCBundle\Command\TableCommand;
 use Symfony\Bridge\Monolog\Logger;
+use SK\ITCBundle\Service\Table\Table;
 
 abstract class RESTCommand extends TableCommand
 {
@@ -46,9 +47,9 @@ abstract class RESTCommand extends TableCommand
 	 *        	SK ITCBundle Abstract Command Reflection
 	 * @param Parser $apiParser
 	 */
-	public function __construct( $name, $description, Logger $logger, Reflection $reflection, Parser $apiParser )
+	public function __construct( $name, $description, Logger $logger, Table $table, Reflection $reflection, Parser $apiParser )
 	{
-		parent::__construct( $name, $description, $logger, $reflection );
+		parent::__construct( $name, $description, $logger, $table, $reflection );
 
 		$this->setApiParser( $apiParser );
 	}
@@ -153,7 +154,9 @@ abstract class RESTCommand extends TableCommand
 	 */
 	protected function getTwigEnvironment()
 	{
-		return new \Twig_Environment( new \Twig_Loader_Filesystem( $this->skeletonDirs ),
+		return new \Twig_Environment(
+			new \Twig_Loader_Filesystem(
+				$this->skeletonDirs ),
 			array(
 				'debug' => true,
 				'cache' => false,

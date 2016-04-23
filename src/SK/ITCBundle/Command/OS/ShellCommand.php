@@ -14,6 +14,7 @@ use SK\ITCBundle\Command\TableCommand;
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
+use SK\ITCBundle\Service\Table\Table;
 
 class ShellCommand extends TableCommand
 {
@@ -32,9 +33,9 @@ class ShellCommand extends TableCommand
      * @param Logger $logger
      * @param Command $commad
      */
-    public function __construct($name, $description, Logger $logger, Command $command)
+    public function __construct($name, $description, Logger $logger,Table $table, Command $command)
     {
-        parent::__construct ( $name, $description, $logger );
+        parent::__construct ( $name, $description, $logger, $table );
 
         $this->setCommand ( $command );
     }

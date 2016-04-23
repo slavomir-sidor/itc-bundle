@@ -30,7 +30,7 @@ class ShellCommand extends TableCommand
      * @param string $name
      * @param string $description
      * @param Logger $logger
-     * @param Command $command
+     * @param Command $commad
      */
     public function __construct($name, $description, Logger $logger, Command $command)
     {
@@ -47,6 +47,7 @@ class ShellCommand extends TableCommand
     public function execute(InputInterface $input, OutputInterface $output)
     {
         parent::execute ( $input, $output );
+
         $this->writeTable ( 120 );
     }
 
@@ -59,7 +60,8 @@ class ShellCommand extends TableCommand
     protected function getColumns()
     {
         return array (
-            'command'=>$this->getCommand ()->getPrefix().' '.implode(' ', $this->getCommand()->getArguments())
+            'command' => $this->getCommand ()->getPrefix () . ' ' .
+                 implode ( ' ', $this->getCommand ()->getArguments () )
         );
     }
 
@@ -80,8 +82,8 @@ class ShellCommand extends TableCommand
                 [
                     'command' => $process->getOutput ()
                 ]
-
-            ];
+            ]
+            ;
             $this->setRows ( $rows );
         }
 

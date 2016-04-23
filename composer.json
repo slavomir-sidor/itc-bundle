@@ -34,7 +34,6 @@
 		"symfony/swiftmailer-bundle" : "^2.3",
 		"symfony/assetic-bundle" : "2.7.1",
 		"twig/twig" : "1.23.3",
-		"asimlqt/php-google-spreadsheet-client" : "3.0.*",
 		"doctrine/orm" : "2.5.2",
 		"doctrine/doctrine-bundle" : "1.6.1",
 		"doctrine/doctrine-cache-bundle" : "1.2.2",
@@ -60,8 +59,7 @@
 		"alecsammon/php-raml-parser" : "dev-master",
 		"sensio/generator-bundle" : "^3.0",
 		"creads/api2symfony" : "dev-master",
-		"creads/api2symfony-bundle" : "dev-master",
-		"google/apiclient":"dev-master"
+		"creads/api2symfony-bundle" : "dev-master"
 	},
 	"repositories" : [{
 			"type" : "vcs",

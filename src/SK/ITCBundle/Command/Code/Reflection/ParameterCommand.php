@@ -11,7 +11,6 @@ namespace SK\ITCBundle\Command\Code\Reflection;
 
 class ParameterCommand extends ReflectionCommand
 {
-
 	/**
 	 *
 	 * {@inheritDoc}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SK ITCBundle Table Abstract Command
  *
@@ -8,10 +9,9 @@
  */
 namespace SK\ITCBundle\Command;
 
-use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Helper\TableStyle;
-use Symfony\Component\Console\Helper\TableCell;
-use Symfony\Component\Console\Helper\TableSeparator;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Bridge\Monolog\Logger;
+use SK\ITCBundle\Service\Table\Table;
 
 abstract class TableCommand extends AbstractCommand
 {
@@ -26,12 +26,6 @@ abstract class TableCommand extends AbstractCommand
 	 *
 	 * @var array
 	 */
-	protected $headers;
-
-	/**
-	 *
-	 * @var array
-	 */
 	protected $rows;
 
 	/**
@@ -41,13 +35,27 @@ abstract class TableCommand extends AbstractCommand
 	protected $table;
 
 	/**
+	 *
+	 * @param string $name
+	 * @param string $description
+	 * @param Logger $logger
+	 * @param Table $table
+	 */
+	public function __construct( $name, $description, Logger $logger, Table $table )
+	{
+		parent::__construct( $name, $description, $logger );
+
+		$this->setTable( $table );
+	}
+
+	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Symfony\Component\Console\Command\Command::configure()
 	 */
 	protected function configure()
 	{
-	    parent::configure ();
+		parent::configure();
 	}
 
 	/**
@@ -56,88 +64,12 @@ abstract class TableCommand extends AbstractCommand
 	 * @param int $maxColWidth
 	 * @return \SK\ITCBundle\Command\AbstractCommand SK ITCBundle Abstract Command
 	 */
-	protected function writeTable( $maxColWidth = 120 )
+	protected function writeTable()
 	{
-		$columns = $this->getColumns();
-		$colspan = count( $columns );
-		$table = $this->getTable();
-		$table->setHeaders( $this->getHeaders() );
-
-		$rows = $this->getRows();
-
-		foreach( $rows as $iRow => $row )
-		{
-			$rowModificated = [];
-
-			foreach( $columns as $iCol => $col )
-			{
-				if( is_int( $iCol ) )
-				{
-					$iCol = $col;
-
-				}
-
-				if( array_key_exists( $iCol, $row ) )
-				{
-					$rowModificated[$iCol] = wordwrap( $row[$iCol], $maxColWidth, "\n", true );
-				}
-				else
-				{
-					$rowModificated[$iCol] = "";
-				}
-			}
-
-			$table->addRow( $rowModificated );
-			$table->addRow( array(
-				new TableSeparator( array(
-					'colspan' => $colspan
-				) )
-			) );
-		}
-
-		$table->addRow( array(
-			new TableCell( "", array(
-				'colspan' => $colspan
-			) )
-		) );
-
-		$table->addRow( array(
-			new TableCell( sprintf( "Found %s results.", count( $rows ) ), array(
-				'colspan' => $colspan
-			) )
-		) );
-
-		$table->render();
+		$format = $this->getInput()->getOption( 'output' );
+		$this->getTable()->write( $format, $this->getOutput() );
 
 		return $this;
-	}
-
-	/**
-	 *
-	 * @return array
-	 */
-	protected function getHeaders()
-	{
-		if( null === $this->headers )
-		{
-			$columns = $this->getColumns();
-			$colspan = count( $columns );
-			$headers = [];
-
-			$headers[] = array(
-				new TableCell( sprintf( "%s", $this->getDescription() ), array(
-					'colspan' => $colspan
-				) )
-			);
-
-			if( $columns )
-			{
-				$headers[] = array_values( $columns );
-			}
-
-			$this->setHeaders( $headers );
-		}
-		return $this->headers;
 	}
 
 	/**
@@ -155,16 +87,6 @@ abstract class TableCommand extends AbstractCommand
 
 	/**
 	 *
-	 * @param array $headers
-	 */
-	protected function setHeaders( array $headers )
-	{
-		$this->headers = $headers;
-		return $this;
-	}
-
-	/**
-	 *
 	 * @param array $rows
 	 */
 	protected function setRows( array $rows )
@@ -177,17 +99,6 @@ abstract class TableCommand extends AbstractCommand
 	 */
 	protected function getTable()
 	{
-		if( null === $this->table )
-		{
-			$style = new TableStyle();
-			$style->setHorizontalBorderChar( '<fg=magenta>-</>' )
-				->setVerticalBorderChar( '<fg=magenta>|</>' )
-				->setCrossingChar( '<fg=magenta>+</>' );
-
-			$table = new Table( $this->getOutput() );
-			$table->setStyle( 'default' );
-			$this->setTable( $table );
-		}
 		return $this->table;
 	}
 

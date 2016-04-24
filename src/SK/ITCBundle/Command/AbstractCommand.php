@@ -15,6 +15,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Bridge\Monolog\Logger;
 use SK\ITCBundle\Service\Table\Adapter\TXT;
+use SK\ITCBundle\Service\Table\Adapter\SpreedSheet;
+use SK\ITCBundle\Service\Table\Adapter\Excel;
 
 abstract class AbstractCommand extends ContainerAwareCommand
 {
@@ -77,8 +79,6 @@ abstract class AbstractCommand extends ContainerAwareCommand
 	protected function configure()
 	{
 		parent::configure();
-
-		$this->addOption( "format", "f", InputOption::VALUE_OPTIONAL, "Output format (txt,xml,json)", TXT::name );
 	}
 
 	/**

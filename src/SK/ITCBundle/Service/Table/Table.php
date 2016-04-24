@@ -16,6 +16,12 @@ class Table extends AbstractService
 	 *
 	 * @var string
 	 */
+	protected $title;
+
+	/**
+	 *
+	 * @var string
+	 */
 	protected $description;
 
 	/**
@@ -41,6 +47,24 @@ class Table extends AbstractService
 	 * @var int
 	 */
 	protected $maxColWidth;
+
+	protected $author;
+
+	/**
+	 *
+	 * @var array
+	 */
+	protected static $outputFormat = array(
+		TXT::name,
+		Excel::name,
+		SpreedSheet::name
+	);
+
+	/**
+	 *
+	 * @var string
+	 */
+	protected static $defaultOutputFormat = TXT::name;
 
 	/**
 	 *
@@ -122,7 +146,13 @@ class Table extends AbstractService
 
 			if( $columns )
 			{
-				$headers[] = array_values( $columns );
+				$headerRow = [];
+				foreach( $columns as $column )
+				{
+					$headerRow[] = new TableCell( $column );
+				}
+
+				$headers[] = $headerRow;
 			}
 
 			$this->setHeaders( $headers );
@@ -176,5 +206,60 @@ class Table extends AbstractService
 	{
 		$this->maxColWidth = ( int ) $maxColWidth;
 		return $this;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getTitle()
+	{
+		return $this->title;
+	}
+
+	/**
+	 *
+	 * @param string $title
+	 */
+	public function setTitle( $title )
+	{
+		$this->title = $title;
+		return $this;
+	}
+
+	/**
+	 *
+	 * @return array
+	 */
+	public static function getOutputFormat()
+	{
+		return self::$outputFormat;
+	}
+
+	/**
+	 *
+	 * @param array $outputFormat
+	 */
+	public static function setOutputFormat( array $outputFormat )
+	{
+		self::$outputFormat = $outputFormat;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public static function getDefaultOutputFormat()
+	{
+		return self::$defaultOutputFormat;
+	}
+
+	/**
+	 *
+	 * @param string $defaultOutputFormat
+	 */
+	public static function setDefaultOutputFormat( $defaultOutputFormat )
+	{
+		self::$defaultOutputFormat = $defaultOutputFormat;
 	}
 }

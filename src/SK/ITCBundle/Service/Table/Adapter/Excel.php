@@ -3,12 +3,13 @@ namespace SK\ITCBundle\Service\Table\Adapter;
 
 use SK\ITCBundle\Service\Table\Table;
 use Symfony\Component\Console\Output\OutputInterface;
+use PHPExcel\Writer\OpenDocument;
 use PHPExcel\Writer\OpenDocument\Content;
 use PHPExcel\Spreadsheet;
 use PHPExcel\IOFactory;
 use Symfony\Component\Console\Helper\TableCell;
 
-class Excel implements IAdapter
+class Excel extends AbstractPHPExcel implements IAdapter
 {
 
 	/**
@@ -16,24 +17,6 @@ class Excel implements IAdapter
 	 * @var string
 	 */
 	const name = 'Excel';
-
-	/**
-	 *
-	 * @var Spreadsheet
-	 */
-	protected $spreadsheet;
-
-	/**
-	 *
-	 * @var string
-	 */
-	protected $creator;
-
-	/**
-	 *
-	 * @var string
-	 */
-	protected $lastModifiedBy;
 
 	/**
 	 *
@@ -90,30 +73,5 @@ class Excel implements IAdapter
 
 			++ $iRow;
 		}
-	}
-
-	/**
-	 *
-	 * @return the Spreadsheet
-	 */
-	public function getSpreadsheet()
-	{
-		if( null === $this->spreadsheet )
-		{
-			$spreedsheeet = new Spreadsheet();
-			$this->setSpreadsheet( $spreedsheeet );
-		}
-
-		return $this->spreadsheet;
-	}
-
-	/**
-	 *
-	 * @param Spreadsheet $spreadsheet
-	 */
-	public function setSpreadsheet( Spreadsheet $spreadsheet )
-	{
-		$this->spreadsheet = $spreadsheet;
-		return $this;
 	}
 }

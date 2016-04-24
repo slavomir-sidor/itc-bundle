@@ -3,17 +3,30 @@ namespace SK\ITCBundle\Service\Table\Adapter;
 
 use SK\ITCBundle\Service\Table\Table;
 use Symfony\Component\Console\Output\OutputInterface;
+use PHPExcel\Spreadsheet;
 use PHPExcel\IOFactory;
 use Symfony\Component\Console\Helper\TableCell;
 
-class CSV extends AbstractPHPExcel implements IAdapter
+class AbstractPHPExcel implements IAdapter
 {
+
+	/**
+	 *
+	 * @var Spreadsheet
+	 */
+	protected $spreadsheet;
 
 	/**
 	 *
 	 * @var string
 	 */
-	const name = 'CSV';
+	protected $creator;
+
+	/**
+	 *
+	 * @var string
+	 */
+	protected $lastModifiedBy;
 
 	/**
 	 *
@@ -31,7 +44,7 @@ class CSV extends AbstractPHPExcel implements IAdapter
 		$this->writeHeaders( $table->getHeaders() );
 		$this->writeRows( $table->getRows() );
 
-		$writer = IOFactory::createWriter( $this->getSpreadsheet(), 'CSV' );
+		$writer = IOFactory::createWriter( $this->getSpreadsheet(), 'OpenDocument' );
 		$writer->save( 'php://output' );
 	}
 
@@ -70,5 +83,68 @@ class CSV extends AbstractPHPExcel implements IAdapter
 
 			++ $iRow;
 		}
+	}
+
+	/**
+	 *
+	 * @return the Spreadsheet
+	 */
+	public function getSpreadsheet()
+	{
+		if( null === $this->spreadsheet )
+		{
+			$spreedsheeet = new Spreadsheet();
+			$this->setSpreadsheet( $spreedsheeet );
+		}
+
+		return $this->spreadsheet;
+	}
+
+	/**
+	 *
+	 * @param Spreadsheet $spreadsheet
+	 */
+	public function setSpreadsheet( Spreadsheet $spreadsheet )
+	{
+		$this->spreadsheet = $spreadsheet;
+		return $this;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getCreator()
+	{
+		return $this->creator;
+	}
+
+	/**
+	 *
+	 * @param string $creator
+	 */
+	public function setCreator( $creator )
+	{
+		$this->creator = $creator;
+		return $this;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getLastModifiedBy()
+	{
+		return $this->lastModifiedBy;
+	}
+
+	/**
+	 *
+	 * @param string $lastModifiedBy
+	 */
+	public function setLastModifiedBy( $lastModifiedBy )
+	{
+		$this->lastModifiedBy = $lastModifiedBy;
+		return $this;
 	}
 }

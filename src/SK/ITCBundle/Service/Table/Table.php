@@ -6,6 +6,7 @@ use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\TableCell;
 use SK\ITCBundle\Service\Table\Adapter\TXT;
+use SK\ITCBundle\Service\Table\Adapter\CSV;
 use SK\ITCBundle\Service\Table\Adapter\SpreedSheet;
 use SK\ITCBundle\Service\Table\Adapter\Excel;
 
@@ -48,8 +49,6 @@ class Table extends AbstractService
 	 */
 	protected $maxColWidth;
 
-	protected $author;
-
 	/**
 	 *
 	 * @var array
@@ -57,7 +56,8 @@ class Table extends AbstractService
 	protected static $outputFormat = array(
 		TXT::name,
 		Excel::name,
-		SpreedSheet::name
+		SpreedSheet::name,
+		CSV::name
 	);
 
 	/**

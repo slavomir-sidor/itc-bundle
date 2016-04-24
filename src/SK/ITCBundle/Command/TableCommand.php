@@ -88,6 +88,10 @@ abstract class TableCommand extends AbstractCommand
 		{
 			file_put_contents( $outputFileName, $content );
 		}
+		else
+		{
+			print $content;
+		}
 
 		return $this;
 	}

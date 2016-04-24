@@ -78,6 +78,9 @@
 		}, {
 			"type" : "vcs",
 			"url" : "git@github.com:slavomirkuzma/log-subscriber.git"
+		}, {
+			"type" : "vcs",
+			"url" : "git@github.com:slavomirkuzma/PHPExcel.git"
 		}
 	]
 }

@@ -7,8 +7,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\TableCell;
 use SK\ITCBundle\Service\Table\Adapter\TXT;
 use SK\ITCBundle\Service\Table\Adapter\CSV;
-use SK\ITCBundle\Service\Table\Adapter\SpreedSheet;
+use SK\ITCBundle\Service\Table\Adapter\GoogleSpreedSheet;
 use SK\ITCBundle\Service\Table\Adapter\Excel;
+use SK\ITCBundle\Service\Table\Adapter\ODS;
+use SK\ITCBundle\Service\Table\Adapter\PDF;
 
 class Table extends AbstractService
 {
@@ -56,8 +58,10 @@ class Table extends AbstractService
 	protected static $outputFormat = array(
 		TXT::name,
 		Excel::name,
-		SpreedSheet::name,
-		CSV::name
+		GoogleSpreedSheet::name,
+		CSV::name,
+		ODS::name,
+		PDF::name
 	);
 
 	/**

@@ -3,20 +3,17 @@ namespace SK\ITCBundle\Service\Table\Adapter;
 
 use SK\ITCBundle\Service\Table\Table;
 use Symfony\Component\Console\Output\OutputInterface;
-use PHPExcel\Writer\OpenDocument;
-use PHPExcel\Writer\OpenDocument\Content;
-use PHPExcel\Spreadsheet;
 use PHPExcel\IOFactory;
 use Symfony\Component\Console\Helper\TableCell;
 
-class Excel extends AbstractPHPExcel implements IAdapter
+class PDF extends AbstractPHPExcel implements IAdapter
 {
 
 	/**
 	 *
 	 * @var string
 	 */
-	const name = 'Excel';
+	const name = 'PDF';
 
 	/**
 	 *
@@ -34,7 +31,7 @@ class Excel extends AbstractPHPExcel implements IAdapter
 		$this->writeHeaders( $table->getHeaders() );
 		$this->writeRows( $table->getRows() );
 
-		$writer = IOFactory::createWriter( $this->getSpreadsheet(), 'Excel' );
+		$writer = IOFactory::createWriter( $this->getSpreadsheet(), 'PDF' );
 		$writer->save( 'php://output' );
 	}
 

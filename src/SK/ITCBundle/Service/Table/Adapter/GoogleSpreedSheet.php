@@ -7,14 +7,14 @@ use Google\Spreadsheet\DefaultServiceRequest;
 use Google\Spreadsheet\ServiceRequestFactory;
 use Google\Spreadsheet\SpreadsheetService;
 
-class SpreedSheet implements IAdapter
+class GoogleSpreedSheet implements IAdapter
 {
 
 	/**
 	 *
 	 * @var string
 	 */
-	const name = 'SpreedSheet';
+	const name = 'GoogleSpreedSheet';
 
 	/**
 	 *

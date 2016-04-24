@@ -8,14 +8,14 @@ use PHPExcel\Spreadsheet;
 use PHPExcel\IOFactory;
 use Symfony\Component\Console\Helper\TableCell;
 
-class Excel implements IAdapter
+class CSV implements IAdapter
 {
 
 	/**
 	 *
 	 * @var string
 	 */
-	const name = 'Excel';
+	const name = 'CSV';
 
 	/**
 	 *
@@ -51,7 +51,7 @@ class Excel implements IAdapter
 		$this->writeHeaders( $table->getHeaders() );
 		$this->writeRows( $table->getRows() );
 
-		$writer = IOFactory::createWriter( $this->getSpreadsheet(), 'OpenDocument' );
+		$writer = IOFactory::createWriter( $this->getSpreadsheet(), 'CSV' );
 		$writer->save( 'php://output' );
 	}
 

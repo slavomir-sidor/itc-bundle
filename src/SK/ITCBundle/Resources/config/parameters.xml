@@ -142,7 +142,7 @@
 		<parameter key="sk.itcbundle.api.version">0.0.1-SNAPSHOT</parameter>
 
 		<!-- Google -->
-		<parameter key="sk.itcbundle.google.api.key">AIzaSyBYU9CJAxfXzFgKJjHbry0IHOOLLz6Lhc0</parameter>
+		<parameter key="sk.itcbundle.google.api.key">AIzaSyBcdV710Tni62PWn2ct5hTaRUTcIVCj3PA</parameter>
 
 		<!--  -->
 		<parameter key="twig.strict_variables">TRUE</parameter>

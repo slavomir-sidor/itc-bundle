@@ -18,6 +18,7 @@ use SK\ITCBundle\Service\Code\Reflection\Collection\OperationCollection;
 use SK\ITCBundle\Service\Code\Reflection\Collection\ParameterCollection;
 use SK\ITCBundle\Service\Code\Reflection\Collection\AttributesCollection;
 use SK\ITCBundle\Service\AbstractService;
+use Symfony\Bridge\Monolog\Logger;
 
 class Reflection extends AbstractService
 {

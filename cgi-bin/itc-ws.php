@@ -1,8 +1,9 @@
 <?php
 /**
+ *
  * @var Composer\Autoload\ClassLoader
  */
-$loader = require __DIR__.'/../vendor/autoload.php';
+$loader = require __DIR__ . '/../vendor/autoload.php';
 
 $i = 0;
 $app = function ( $request, $response ) use ($i )
@@ -11,7 +12,7 @@ $app = function ( $request, $response ) use ($i )
 		'Content-Type' => 'text/plain'
 	) );
 
-	$response->end( "Hello World ".get_class($response)."\n" );
+	$response->end( "Hello World " . get_class( $response ) . "\n" );
 	$i ++;
 };
 

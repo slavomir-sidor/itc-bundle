@@ -41,10 +41,13 @@ class Export extends GeneratorCommand
 		$source = $input->getArgument( 'input' );
 		$dest = $input->getArgument( 'dest' );
 		$name = $input->getArgument( 'name' );
+
 		try
 		{
 			require_once 'PHP/UML.php';
+
 			$uml = new \PHP_UML();
+
 			$uml->setInput( $source );
 			$uml->parse( $name );
 			$uml->export( 'xmi', $dest );

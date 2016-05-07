@@ -26,6 +26,7 @@
 		<import resource="parameters.xml" />
 		<import resource="menu.xml" />
 		<import resource="services.xml" />
+		<import resource="security.xml" />
 	</imports>
 
 	<framework:config

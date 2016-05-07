@@ -17,6 +17,7 @@ use Symfony\Bundle\AsseticBundle\AsseticBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use SK\ITCBundle\SKITCBundle;
+use Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle;
 
 class RESTKernel extends Kernel
 {
@@ -39,10 +40,9 @@ class RESTKernel extends Kernel
 			new TwigBundle(),
 			new FrameworkBundle(),
 			new AsseticBundle(),
-			new SKITCBundle()
-		)
-		// new SensioFrameworkExtraBundle(),
-		;
+			new SKITCBundle(),
+			new SensioFrameworkExtraBundle(),
+		);
 
 		if( in_array( $this->getEnvironment(), array(
 			'dev',

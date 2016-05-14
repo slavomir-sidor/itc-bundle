@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container
+	xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+
+		<!-- Kernel -->
+		<parameter key="kernel.debug">true</parameter>
+
+		<parameter key="monolog.logger.main.level">DEBUG</parameter>
+		<parameter key="monolog.logger.main.max_files">256</parameter>
+		<parameter key="monolog.logger.main.handler">nested</parameter>
+
+		<parameter key="monolog.logger.console.name">console</parameter>
+		<parameter key="monolog.logger.console.type">console</parameter>
+		<parameter key="monolog.logger.console.level">DEBUG</parameter>
+
+		<!-- Doctrine DBAL: Connection Default -->
+		<parameter key="doctrine.dbal.connection.default.dbname">itc_dev</parameter>
+		<parameter key="doctrine.dbal.connection.default.host">127.0.0.1</parameter>
+		<parameter key="doctrine.dbal.connection.default.user">root</parameter>
+		<parameter key="doctrine.dbal.connection.default.password"></parameter>
+
+	</parameters>
+
+</container>

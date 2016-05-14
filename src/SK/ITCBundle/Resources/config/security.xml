@@ -8,6 +8,19 @@
 
 	<config>
 
+		<provider name="in_memory">
+			<memory />
+		</provider>
+
+		<firewall
+			name="dev"
+			pattern="^/(_(profiler|wdt)|css|images|js)/"
+			security="false" />
+
+		<firewall name="default">
+			<anonymous />
+		</firewall>
+
 		<acl connection="default" />
 
 	</config>

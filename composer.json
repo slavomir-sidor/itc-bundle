@@ -61,16 +61,14 @@
 		"creads/api2symfony" : "dev-master",
 		"creads/api2symfony-bundle" : "dev-master",
 		"phpoffice/phpexcel" : "1.9.x-dev",
-		"asimlqt/php-google-spreadsheet-client" : "3.0.*",
-		"mef/socket-bundle" : "dev-master",
-		"gos/web-socket-bundle" : "dev-master"
+		"asimlqt/php-google-spreadsheet-client" : "3.0.*"
 	},
 	"repositories" : [{
 			"type" : "vcs",
-			"url" : "git@github.com:slavomirkuzma/php-raml-parser.git"
+			"url" : "git@github.com:slavomirkuzma/itc-bundle.git"
 		}, {
 			"type" : "vcs",
-			"url" : "git@github.com:slavomirkuzma/itc-bundle.git"
+			"url" : "git@github.com:slavomirkuzma/php-raml-parser.git"
 		}, {
 			"type" : "vcs",
 			"url" : "git@github.com:slavomirkuzma/api2symfony.git"

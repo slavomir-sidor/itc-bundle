@@ -61,7 +61,8 @@
 		"creads/api2symfony" : "dev-master",
 		"creads/api2symfony-bundle" : "dev-master",
 		"phpoffice/phpexcel" : "1.9.x-dev",
-		"asimlqt/php-google-spreadsheet-client" : "3.0.*"
+		"asimlqt/php-google-spreadsheet-client" : "3.0.*",
+		"symfony/security-acl" : "3.0.0"
 	},
 	"repositories" : [{
 			"type" : "vcs",

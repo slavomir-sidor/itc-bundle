@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container
+	xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:framework="http://symfony.com/schema/dic/symfony"
+	xmlns:doctrine="http://symfony.com/schema/dic/doctrine"
+	xmlns:mongo="http://symfony.com/schema/dic/doctrine/odm/mongodb"
+	xmlns:assetic="http://symfony.com/schema/dic/assetic"
+	xmlns:swiftmailer="http://symfony.com/schema/dic/swiftmailer"
+	xmlns:monolog="http://symfony.com/schema/dic/monolog"
+	xmlns:twig="http://symfony.com/schema/dic/twig"
+	xmlns:security="http://symfony.com/schema/dic/security"
+	xmlns:routing="http://symfony.com/schema/routing"
+	xsi:schemaLocation="
+		http://symfony.com/schema/dic/services               http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/services-1.0.xsd
+		http://symfony.com/schema/dic/assetic                http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/assetic-1.0.xsd
+		http://symfony.com/schema/dic/symfony                http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/symfony-1.0.xsd
+		http://symfony.com/schema/dic/doctrine               http://localhost/sk.itcloud.itc.facade/src/XSD/Doctrine/doctrine-1.0.xsd
+		http://symfony.com/schema/dic/doctrine/odm/mongodb   http://localhost/sk.itcloud.itc.facade/src/XSD/Doctrine/mongodb-1.0.xsd
+		http://symfony.com/schema/dic/swiftmailer            http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/swiftmailer-1.0.xsd
+		http://symfony.com/schema/dic/monolog                http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/monolog-1.0.xsd
+		http://symfony.com/schema/dic/twig                   http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/twig-1.0.xsd
+		http://symfony.com/schema/routing                    http://localhost/sk.itcloud.itc.facade/src/XSD/Symfony/routing-1.0.xsd">
+
+	<imports>
+		<import resource="../config.xml" />
+		<import resource="parameters.xml" />
+	</imports>
+
+</container>

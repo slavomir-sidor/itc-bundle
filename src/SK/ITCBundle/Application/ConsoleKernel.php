@@ -41,7 +41,7 @@ class ConsoleKernel extends Kernel
 			new AsseticBundle(),
 			new SensioFrameworkExtraBundle(),
 			new JMSSerializerBundle(),
-			new SKITCBundle()
+			new SKITCBundle(),
 		);
 
 		if( in_array( $this->getEnvironment(), array(

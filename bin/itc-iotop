@@ -1,0 +1,1 @@
+sudo iotop -botqqqk --iter=60 | grep -P "\d\d\.\d\d K/s"

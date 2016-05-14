@@ -33,6 +33,9 @@
 		"symfony/monolog-bundle" : "^2.8",
 		"symfony/swiftmailer-bundle" : "^2.3",
 		"symfony/assetic-bundle" : "2.7.1",
+		"symfony/console" : "^3.0.1",
+		"symfony/finder" : "^3.0.1",
+		"symfony/debug" : "^3.0.1",
 		"twig/twig" : "1.23.3",
 		"doctrine/orm" : "2.5.2",
 		"doctrine/doctrine-bundle" : "1.6.1",
@@ -42,11 +45,9 @@
 		"doctrine/annotations" : "1.2.7",
 		"doctrine/dbal" : "2.5.2",
 		"doctrine/migrations" : "1.2.1",
-		"symfony/console" : "^3.0.1",
-		"symfony/finder" : "^3.0.1",
-		"symfony/debug" : "^3.0.1",
 		"packagist/yuicompressor-bin" : "2.4.8",
 		"sensio/framework-extra-bundle" : "3.0.12",
+		"sensio/generator-bundle" : "^3.0",
 		"behat/behat" : "dev-master",
 		"andrewsville/php-token-reflection" : "^1.4",
 		"sonata-project/formatter-bundle" : "^2.3",
@@ -57,12 +58,12 @@
 		"sauce/sausage" : "*",
 		"jms/serializer-bundle" : "^1.1",
 		"alecsammon/php-raml-parser" : "dev-master",
-		"sensio/generator-bundle" : "^3.0",
 		"creads/api2symfony" : "dev-master",
 		"creads/api2symfony-bundle" : "dev-master",
 		"phpoffice/phpexcel" : "1.9.x-dev",
 		"asimlqt/php-google-spreadsheet-client" : "3.0.*",
-		"mef/socket-bundle" : "dev-master"
+		"mef/socket-bundle" : "dev-master",
+		"gos/web-socket-bundle" : "dev-master"
 	},
 	"repositories" : [{
 			"type" : "vcs",
@@ -82,6 +83,9 @@
 		}, {
 			"type" : "vcs",
 			"url" : "git@github.com:slavomirkuzma/PHPExcel.git"
+		}, {
+			"type" : "vcs",
+			"url" : "git@github.com:slavomirkuzma/WebSocketBundle.git"
 		}
 	]
 }

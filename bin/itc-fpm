@@ -2,7 +2,7 @@
 
 SCRIPT=$(realpath "$0")
 DIR=$(dirname "$SCRIPT")
-CMD="${DIR}/../cgi-bin/itc-rest.php"
+CMD="${DIR}/../cgi-bin/itc-fpm.php"
 NAME="itc-rest"
 RUNAS=root
 DESCRIPTION="ITC PHP Fast Process Management REST"

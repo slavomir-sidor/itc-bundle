@@ -101,7 +101,7 @@ class ConsoleKernel extends Kernel
 		{
 			$config = dirname( __DIR__ ) . sprintf( '/Resources/config/config.xml' );
 		}
-//exit($config);
+
 		if( file_exists( $config ) )
 		{
 			$loader->load( $config );

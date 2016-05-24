@@ -110,7 +110,7 @@
 		<doctrine:dbal default-connection="%doctrine.dbal.default_connection%">
 
 			<doctrine:connection
-				name="%doctrine.dbal.connection.default.name%"
+				name="%doctrine.dbal.default_connection%"
 				driver="%doctrine.dbal.connection.default.driver%"
 				dbname="%doctrine.dbal.connection.default.dbname%"
 				host="%doctrine.dbal.connection.default.host%"
@@ -134,7 +134,6 @@
 			proxy-dir="%doctrine.orm.proxy_dir%" />
 
 	</doctrine:config>
-
 
 	<monolog:config>
 

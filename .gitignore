@@ -13,3 +13,5 @@
 /bin/doctrine-migrations
 /bin/sql-formatter
 /bin/sauce_config
+/bin/itc-monitor
+/bin/itc-monitor.sh

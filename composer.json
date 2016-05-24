@@ -1,6 +1,6 @@
 {
 	"name" : "sk.itcloud.symfony/itc-bundle",
-	"license" : "ITCloud Symfony Bundle ITC",
+	"license" : "ITCloud Symfony ITC Bundle",
 	"type" : "bundle",
 	"description" : "Symfony ITC Bundle",
 	"minimum-stability" : "dev",
@@ -50,7 +50,7 @@
 		"sensio/generator-bundle" : "^3.0",
 		"behat/behat" : "dev-master",
 		"andrewsville/php-token-reflection" : "^1.4",
-		"sonata-project/formatter-bundle" : "^2.3",
+		"sonata-project/formatter-bundle" : "3.0.1",
 		"cboden/ratchet" : "^0.3.4",
 		"react/zmq" : "0.2.*|0.3.*",
 		"jenner/react-multi-process" : "^0.1.0",
@@ -67,6 +67,12 @@
 	"repositories" : [{
 			"type" : "vcs",
 			"url" : "git@github.com:slavomirkuzma/itc-bundle.git"
+		}, {
+			"type" : "vcs",
+			"url" : "git@github.com:slavomirkuzma/itc-monitor-bundle.git"
+		}, {
+			"type" : "vcs",
+			"url" : "git@github.com:slavomirkuzma/itc-dokuwiki-bundle.git"
 		}, {
 			"type" : "vcs",
 			"url" : "git@github.com:slavomirkuzma/php-raml-parser.git"

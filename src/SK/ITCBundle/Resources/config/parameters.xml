@@ -97,7 +97,7 @@
 		<!-- Doctrine DBAL: Connection Default -->
 		<parameter key="doctrine.dbal.connection.default.name">default</parameter>
 		<parameter key="doctrine.dbal.connection.default.driver">pdo_mysql</parameter>
-		<parameter key="doctrine.dbal.connection.default.dbname">actionplanner_console</parameter>
+		<parameter key="doctrine.dbal.connection.default.dbname">actionplanner_dev</parameter>
 		<parameter key="doctrine.dbal.connection.default.host">127.0.0.1</parameter>
 		<parameter key="doctrine.dbal.connection.default.port">3306</parameter>
 		<parameter key="doctrine.dbal.connection.default.user">root</parameter>
@@ -105,6 +105,19 @@
 		<parameter key="doctrine.dbal.connection.default.logging">%kernel.debug%</parameter>
 		<parameter key="doctrine.dbal.connection.default.profiling">%kernel.debug%</parameter>
 		<parameter key="doctrine.dbal.connection.default.charset">UTF8</parameter>
+
+		<!-- 
+		<parameter key="doctrine.dbal.connection.auth.name">default</parameter>
+		<parameter key="doctrine.dbal.connection.auth.driver">pdo_mysql</parameter>
+		<parameter key="doctrine.dbal.connection.auth.dbname">auth</parameter>
+		<parameter key="doctrine.dbal.connection.auth.host">127.0.0.1</parameter>
+		<parameter key="doctrine.dbal.connection.auth.port">3306</parameter>
+		<parameter key="doctrine.dbal.connection.auth.user">root</parameter>
+		<parameter key="doctrine.dbal.connection.auth.password"></parameter>
+		<parameter key="doctrine.dbal.connection.auth.logging">%kernel.debug%</parameter>
+		<parameter key="doctrine.dbal.connection.auth.profiling">%kernel.debug%</parameter>
+		<parameter key="doctrine.dbal.connection.auth.charset">UTF8</parameter>
+ 		-->
 
 		<!-- Doctrine ORM -->
 		<parameter key="doctrine.orm.auto_mapping">true</parameter>

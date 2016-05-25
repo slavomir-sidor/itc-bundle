@@ -6,6 +6,7 @@
 /doc/
 /bin/yuicompressor.jar
 /bin/phpuml
+/bin/doctrine-module
 /bin/phpunit
 /bin/paratest
 /bin/behat

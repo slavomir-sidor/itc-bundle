@@ -1,0 +1,1 @@
+../vendor/sk.itcloud.symfony/itc-monitor-bundle/bin/info.sh

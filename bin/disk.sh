@@ -1,0 +1,1 @@
+../vendor/sk.itcloud.symfony/itc-monitor-bundle/bin/monitor/disk.sh

@@ -1,0 +1,12 @@
+#!/bin/bash
+# ITC Libary XSD
+# Creates Bundle XSD Symlinks TO the Model Resources
+# Slavomir 
+
+find $1 -name '*.xsd' -print0 | while read -d '' -r TARGET; do
+	FILENAME=`basename "$TARGET"`
+	LINKDIR=`dir $2`
+	LINKNAME=$2"/"$FILENAME
+	COMMAND="ln -s -f "$TARGET" "$LINKNAME
+	$COMMAND
+done

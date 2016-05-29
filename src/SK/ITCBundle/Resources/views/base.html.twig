@@ -10,16 +10,16 @@
 
 			{% block stylesheets %}
 
-				{% stylesheets
+				{#% stylesheets
 					'bundles/skitc/css/theme/blue/layout.css'
 
 					filter="cssrewrite, yui_css, content"
 					output="css/compiled/style.css"
-				%}
+				%#}
 
 				<link
 					href="{{ asset_url }}"
-					media="screen" 
+					media="screen"
 					rel="stylesheet"
 					type="text/css" />
 
@@ -39,7 +39,7 @@
 				{% block javaScriptHeaderCode %}
 					<script type="text/javascript">
 						$(document).bind('ready', function(e) {
-							
+
 						});
 					</script>
 				{% endblock %}

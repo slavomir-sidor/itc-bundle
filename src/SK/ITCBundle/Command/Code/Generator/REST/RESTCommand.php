@@ -76,7 +76,7 @@ abstract class RESTCommand extends TableCommand
 	{
 		parent::configure();
 
-		$outputDirectory = $_SERVER['PWD'] . DIRECTORY_SEPARATOR . 'src';
+		$outputDirectory = getcwd() . DIRECTORY_SEPARATOR . 'src';
 
 		$this->addOption( "namespace", "ns", InputOption::VALUE_OPTIONAL, "REST API Target namespace.", "\\" );
 		$this->addOption( "outputDirectory", "o", InputOption::VALUE_OPTIONAL, "REST API Target namespace.", $outputDirectory );

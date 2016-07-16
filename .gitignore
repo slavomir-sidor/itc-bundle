@@ -2,6 +2,7 @@
 !.gitignore
 /composer.lock
 /target/
+/cache/
 /vendor/
 /doc/
 /bin/yuicompressor.jar

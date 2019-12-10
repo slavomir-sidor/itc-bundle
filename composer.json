@@ -70,31 +70,31 @@
 	},
 	"repositories" : [{
 			"type" : "vcs",
-			"url" : "git@github.com:slavomirkuzma/itc-bundle.git"
+			"url" : "git@github.com:slavomirsidorhuljak/itc-bundle.git"
 		}, {
 			"type" : "vcs",
-			"url" : "git@github.com:slavomirkuzma/itc-monitor-bundle.git"
+			"url" : "git@github.com:slavomirsidorhuljak/itc-monitor-bundle.git"
 		}, {
 			"type" : "vcs",
-			"url" : "git@github.com:slavomirkuzma/itc-dokuwiki-bundle.git"
+			"url" : "git@github.com:slavomirsidorhuljak/itc-dokuwiki-bundle.git"
 		}, {
 			"type" : "vcs",
-			"url" : "git@github.com:slavomirkuzma/php-raml-parser.git"
+			"url" : "git@github.com:slavomirsidorhuljak/php-raml-parser.git"
 		}, {
 			"type" : "vcs",
-			"url" : "git@github.com:slavomirkuzma/api2symfony.git"
+			"url" : "git@github.com:slavomirsidorhuljak/api2symfony.git"
 		}, {
 			"type" : "vcs",
-			"url" : "git@github.com:slavomirkuzma/api2symfony-bundle.git"
+			"url" : "git@github.com:slavomirsidorhuljak/api2symfony-bundle.git"
 		}, {
 			"type" : "vcs",
-			"url" : "git@github.com:slavomirkuzma/log-subscriber.git"
+			"url" : "git@github.com:slavomirsidorhuljak/log-subscriber.git"
 		}, {
 			"type" : "vcs",
-			"url" : "git@github.com:slavomirkuzma/PHPExcel.git"
+			"url" : "git@github.com:slavomirsidorhuljak/PHPExcel.git"
 		}, {
 			"type" : "vcs",
-			"url" : "git@github.com:slavomirkuzma/WebSocketBundle.git"
+			"url" : "git@github.com:slavomirsidorhuljak/WebSocketBundle.git"
 		}
 	]
 }

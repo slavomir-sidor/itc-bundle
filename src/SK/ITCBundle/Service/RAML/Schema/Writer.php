@@ -8,6 +8,11 @@ use Raml\Resource;
 use Raml\Method;
 use SK\ITCBundle\Service\AbstractService;
 
+/**
+ * api do raml modelu parser raml je opacny smer potreboval som writer raml 
+ * @author jahman
+ *
+ */
 class Writer extends AbstractService
 {
 	/**

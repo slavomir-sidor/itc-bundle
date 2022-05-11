@@ -17,3 +17,10 @@
 /bin/sauce_config
 /bin/itc-monitor
 /bin/itc-monitor.sh
+bin/doctrine-dbal.bat
+bin/doctrine-migrations.bat
+bin/paratest.bat
+bin/phpuml.bat
+bin/phpunit.bat
+bin/sql-formatter.bat
+bin/yuicompressor.jar.bat

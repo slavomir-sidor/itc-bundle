@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  console:
+    container_name: cpnp20-dev-container
+    image: fpfis/httpd-php-oci-dev:7.4
+    working_dir: /var/www
+    ports:
+      - 8081:8080
+    volumes:
+      - ./:/var/www/
+      - ./../cpnp20:/var/cpnp20
